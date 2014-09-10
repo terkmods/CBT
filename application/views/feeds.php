@@ -13,12 +13,9 @@
                                                           echo ' 
                             <div class="item">
                                 <div class="caption">
-                                    <img src="/domains/backeyefinder.in.th/public_html/cbt/asset/images/stadiumpic/1.jpg" alt="..." style="width: 320px;height: 200px" >
+                                    <img src="'?><?php echo base_url()?><?php echo '/asset/images/stadiumpic/'.$row->stadium_path.'" alt="..." style="width: 320px;height: 200px" >
                                     <hr>
-                                    
-                                    <h5>ชื่อสนาม</h5><form action="#"><input type="checkbox" name="compare" value="co"> Compare</form>
-                                    
-<h4>'.$row->stadium_name.'</h4> 
+                                    <h5>ชื่อสนาม</h5> <h4>'.$row->stadium_name.'</h4>
                                     <div class="line1">
                                         คะแนน :  <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div> 
                                     <div class="line1">  <a href="#"><span class="glyphicon glyphicon-map-marker"></span></a>ที่อยู่ ซอยสุขุมวิท 93 แขวงบางจาก เขตพระโขนง กทม 10260 </div>

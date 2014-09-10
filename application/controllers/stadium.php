@@ -10,7 +10,7 @@ class stadium extends CI_Controller {
         $this->load->model('stadium_model', 'mystadium');
         $this->load->library('session');
     }
-    
+
     function index() {
         if ($this->session->userdata('logged')) {
 
