@@ -41,6 +41,10 @@ class User_model extends CI_Model {
         $query = $this->db->get_where('User', array('email' => $email, 'password' => $password));
         return $query->result();
     }
+    function getOwner(){
+        $sql = $this->db->query('select * from User join owner where User.user_id = owner.user_id')->result();
+        return $sql;
+    }
 
 	
 }
