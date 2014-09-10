@@ -19,7 +19,7 @@
     <title>CBT Online Admin</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="<?= base_url() ?>asset/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= base_url() ?>asset/css/bootstrap1.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
     <link href="<?= base_url() ?>asset/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
