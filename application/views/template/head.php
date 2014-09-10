@@ -54,9 +54,9 @@
                                     <ul class="dropdown-menu">
                                         <li><a href="#">Black List</a></li>
                                         <li><a href="#">Privacy</a></li>
-                                        <li><a href="setting.html">Settings</a></li>
+                                        <li><a href="<?= base_url() ?>stadium">Settings</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="#">Logout</a></li>
+                                        <li><a href="<?= base_url() ?>users/logout">Logout</a></li>
                                     </ul>
                                 </li>
                             </ul>

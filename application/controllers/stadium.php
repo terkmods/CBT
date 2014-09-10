@@ -4,11 +4,12 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class stadium extends CI_Controller {
-
+    
     function __construct() {
         parent::__construct();
         $this->load->model('stadium_model', 'mystadium');
         $this->load->library('session');
+      
     }
 
     function index() {
@@ -107,7 +108,7 @@ class stadium extends CI_Controller {
        $this->load->view("editstadium", $data);
     }
     function editstadium($stId){
-         $config['upload_path'] = "./asset/images/stadiumpic";
+        $config['upload_path'] = "./asset/images/stadiumpic";
         $config['allowed_types'] = '*';
         $config['max_size'] = '10000';
         
@@ -146,7 +147,7 @@ class stadium extends CI_Controller {
                 'stadium_path' => $upload['file_name']
             
             );
-            echo $this->db->update('stadium',$data,array('stadium_id'=>$stId));
+             $this->db->update('stadium',$data,array('stadium_id'=>$stId));
            // $this->load->view('stadium_view');
         
         
@@ -165,7 +166,7 @@ class stadium extends CI_Controller {
         }  else {
              
             $this->session->set_flashdata('msg', 'กรุณาเลือกสนาม');
-            redirect('index.php/stadium');
+            redirect('stadium');
         }
     }
 
@@ -173,6 +174,38 @@ class stadium extends CI_Controller {
         $facility = $this->input->post('facility');
         $this->mystadium->addfacility($facility, 3);
         print_r($facility);
+    }
+    function profile($stId){
+        $st = array(
+               'data'=> $this->mystadium->getstadiumprofile($stId)
+                );
+        
+        $this->load->view('stadium_view', $st);
+    }
+    function uploadcoverphoto($stId){
+        $config['upload_path'] = "./asset/images/stadiumpic";
+        $config['allowed_types'] = '*';
+        $config['max_size'] = '10000';
+        
+        //$userid = $this->session->userdata('id');
+        $this->load->library('upload', $config) ;
+          if (!$this->upload->do_upload()) {
+            $error = array('error' => $this->upload->display_errors());
+
+            $this->load->view('upload_form', $error);
+        } else {
+            
+            $upload = $this->upload->data();
+
+          
+        }
+          $data = array(
+             
+                'cover_path' => $upload['file_name']
+            
+            );
+         $this->db->update('stadium',$data,array('stadium_id'=>$stId));
+        redirect('stadium/profile/'.$stId);
     }
 
 }
