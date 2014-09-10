@@ -58,7 +58,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">CBT Admin</a>
+                <a class="navbar-brand" href="<?php echo base_url() ?>admin">CBT Admin</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -287,28 +287,19 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a class="active" href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a class="active" href="<?php echo base_url() ?>admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="stadium.html"><i class="fa fa-table fa-fw"></i> Stadium</a>   
+                            <a href="<?php echo base_url() ?>admin/stadium"><i class="fa fa-table fa-fw"></i> Stadium</a>   
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-user fa-fw"></i> User<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="user.html"> All User </a>
-                                </li>
-                                <li>
-                                    <a href="#"> Approve User</a>
-                                </li>                                
-                            </ul>
-                            <!-- /.nav-second-level -->
+                            <a href="<?php echo base_url() ?>admin/user"><i class="fa fa-user fa-fw"></i> User</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-user fa-fw"></i> Owner<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="owner.html"> All Owner </a>
+                                    <a href="<?php echo base_url() ?>admin/owner"> All Owner </a>
                                 </li>
                                 <li>
                                     <a href="#"> Approve Owner</a>
