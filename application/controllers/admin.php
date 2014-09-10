@@ -8,8 +8,15 @@ class Admin extends CI_Controller {
     public function index(){
         $this->load->view('admin_index');
     }
-    public function test(){
-        echo 'hello';
+    public function stadium(){
+        $this->load->view('admin_stadium');
     }
+     public function user(){
+        $this->load->view('admin_user');
+    }
+    public function owner(){
+        $this->load->view('admin_owner');
+    }
+    
 }
 ?>
