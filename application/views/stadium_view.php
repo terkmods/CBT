@@ -1,12 +1,15 @@
 <?php include 'template/head.php';
  ?>
-<div id="cover">  
-            <img src="<?= base_url() ?>/asset/images/cover.jpg">
-        </div>  
+<div class="container">
+<div id="cover" >  
+    
+    <a role="button" data-toggle="modal" data-target="#uploadimg" class="btn"><img src="<?= base_url() ?>/asset/images/stadiumpic/<?= $data['0']->cover_path ; ?>" width="1280"></a>
+     
+</div>  
         <div class="container upper-profile">
             <div class="row">
-                <div class="col-md-3 profile-pic"><img src="<?= base_url() ?>/asset/images/g.png" class="img-thumbnail"></div>
-                <div class="col-md-3 info"><h3>PY badminton</h3>
+                <div class="col-md-3 profile-pic"><img src="<?= base_url() ?>/asset/images/stadiumpic/<?= $data['0']->stadium_path ; ?>" width="200" class="img-thumbnail"></div>
+                <div class="col-md-3 info"><h3><?= $data['0']->stadium_name ; ?></h3>
                     <p>เจ้าของ
                         <span class="glyphicon glyphicon-map-marker"></span>&nbsp<a href="">Bangkok</a>, <a href="#">Thailand</a></p> <p>
                         โทรศัพท์: xx-xxx-xxx
@@ -300,5 +303,6 @@
             </div>
         </div>
     </div>
+</div>
     <?php include 'template/modal.php'; ?>
 <?php include 'template/footer.php'; ?>

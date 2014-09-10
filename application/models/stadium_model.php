@@ -21,6 +21,12 @@ class Stadium_model extends CI_Model {
 
         return $query;
     }
+        function getstadiumprofile($stId) {
+        $query = $this->db->query('select * from stadium where stadium_id = ' . $stId)->result();
+        ;
+
+        return $query;
+    }
 
     function getallstadium() {
         $query = $this->db->query('SELECT * FROM `stadium` ORDER BY stadium_id DESC  ')->result();

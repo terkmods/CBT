@@ -152,6 +152,7 @@ body{
 #cover{
 	width: 100%;
 	margin: 0px;
+        text-align: center;
 }
 #cover img{
 	width: 100%;
