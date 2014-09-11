@@ -70,8 +70,8 @@ $num = 1;
                             <ul class="nav nav-tabs" id="myTab">
 
                                 <li class="active"><a href="#p1">ข้อมูลทั่วไป</a></li>
-                                <li ><a href="#addcourt">เพิ่มคอร์ด</a></li>
-                                <li ><a href="#mycourt">คอร์ดของฉัน</a></li> 
+                                <li ><a href="#addcourt">คอร์ด</a></li>
+                                <li ><a href="#mycourt">ตารางจอง</a></li> 
                                 <li><a href="#p2">เพิ่มโค้ชประจำสนาม</a></li>
                                 <li><a href="#p3">Blacklist</a></li>
                                 <li><a href="#">เพิ่มข่าวประกาศ</a></li>
@@ -83,7 +83,7 @@ $num = 1;
                                 <?php include 'Tabeditstadium/blacklist.php'; ?> <!--tab P2-->
                                  <?php include 'Tabeditstadium/coachfav.php'; ?> <!--tab P3-->
                                  <?php include 'Tabeditstadium/addcourt.php'; ?> <!--tab P3-->
-                                 <?php include 'Tabeditstadium/mycourt.php'; ?>
+                                 <?php include 'Tabeditstadium/mycourt.php'; ?> <!--tab P3-->
                             </div>
 
                             <div style="clear:both; margin-top:20px;"></div>

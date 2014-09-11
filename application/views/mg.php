@@ -104,7 +104,7 @@ $status = $ow->authenowner_status; ?>
 
                                                             <td></td>
                                                             <td>'.$row->start_time.'-'.$row->end_time.'</td>
-                                                            <td>' . $row->stadium_url . '</td>
+                                                            <td><a href="'?> <?php echo base_url() ?><?php echo 'stadium/profile/'.$row->stadium_id.'" class="btn ">' . $row->stadium_url . '</a></td>
                                                             <td> '
                                                 ?>
 
