@@ -309,7 +309,7 @@
                         </li>
                         
                         <li>
-                            <a href="showBlacklist.html"><i class="fa fa-user fa-fw"></i> Blacklist</a>
+                            <a href="<?php echo base_url() ?>admin/blacklist"><i class="fa fa-user fa-fw"></i> Blacklist</a>
                         </li>
                         
                         <li>
