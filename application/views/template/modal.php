@@ -1,6 +1,6 @@
 <!-- Modal -->
-<div class="modal fade" id="addstadium" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade bs-example-modal-lg" id="addstadium" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
 
         <div class="modal-content">
             <form action="<?= base_url() ?>stadium/addstadium" method="post" >
@@ -14,8 +14,8 @@
                     <small style="color: gray">ชื่อสนาม</small>
                     <input type="text"  class="form-control input-lg " placeholder="NAME" name="name" required="">
                 </div>
-                  <div class="col-xs-4">
-                      <p class="form-control-static input-lg" style="margin-top:20px">www.cbtonline.com/</p>
+                <div class="col-xs-4">
+                    <p class="form-control-static input-lg" style="margin-top:20px">www.cbtonline.com/</p>
                 </div>
                 <div class="col-xs-8">
                     <small style="color: gray">URL สำหรับเข้าชมหน้าสนามของคุณ</small>
@@ -52,94 +52,116 @@
 
                     </div>
                     <div class="col-md-offset-5">
+                        <div class="col-md-12">
+                            <fieldset>
+                                <legend>Rule</legend>
 
-                        <fieldset>
-                            <legend>Rule</legend>
-
-                            <textarea class="form-control" rows="5" name="rule"></textarea>
-
-
+                                <textarea class="form-control" rows="5" name="rule"></textarea>
 
 
-                        </fieldset>
-                        Start-time
-                                                    <select class="form-control" name="opentime">
-                                                        <option disabled="">เวลาเปิด</option>
-                                                        <?php  $time="0"; 
-                                                        for($time;$time <="24.00" ; $time++){ ?>
-                                                        <option value="<?= $time ?>:00"><?= $time ?>:00</option>
-                                                        
-                                                        <?php } ?>
-                                                    </select>
-                                                    End-time
-                                                    <select class="form-control" name="endtime" >
-                                                        <option disabled="">เวลาปิด</option>
-                                                      <?php  $time="0"; 
-                                                        for($time;$time <="24.00" ; $time++){ ?>
-                                                        <option><?= $time ?>:00</option>
-                                                        
-                                                        <?php } ?>
-                                                    </select>     
-                                                    <!--<div class="radio">
-                                                        <label>
-                                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                                                            Per-hour <small>(example 8.00-9.00 )</small>
-                                                        </label>
 
-                                                    </div>
-                                                    <div class="radio">
 
-                                                        <label>
-                                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                                                            Per-half-hour <small>(example 8.30-9.00) </small>
-                                                        </label>
-                                                    </div> -->
+                            </fieldset>
+                        </div>
+                        <div class="col-md-12" id="time">
+                            <div id="showtime">
+                            <div class="col-md-6">
+                                เลือกวันเวลาเปิด-ปิดสนาม
+                                <select class="form-control" name="typedate">
+                                    <option value="1">ทุกวัน</option>
+                                    <option value="2">เสาร์-อาทิตย์</option>
+                                    <option value="3">จันทร์-ศุกร์</option>
 
-                                                   
-                        <fieldset>
-                            <legend>Facility</legend>
-                            <div class="col-md-5">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="facility[]" value="ห้องอาบน้ำ"> ห้องอาบน้ำ
-                                    </label>
+                                </select>
 
-                                </div>
-                                 <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="facility[]" value="อาหาร"> อาหาร
-                                    </label>
 
-                            </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="facility[]" value="ร้านค้า"> ร้านค้า
-                                    </label>
+                                Start-time
+                                <select class="form-control" name="opentime">
+                                    <option disabled="">เวลาเปิด</option>
+                                    <?php
+                                    $time = "0";
+                                    for ($time; $time <= "24.00"; $time++) {
+                                        ?>
+                                        <option value="<?= $time ?>:00"><?= $time ?>:00</option>
 
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="facility[]" value="ที่จอดรถ"> ที่จอดรถ
-                                    </label>
+<?php } ?>
+                                </select>
+                                End-time
+                                <select class="form-control" name="endtime" >
+                                    <option disabled="">เวลาปิด</option>
+                                    <?php
+                                    $time = "0";
+                                    for ($time; $time <= "24.00"; $time++) {
+                                        ?>
+                                        <option><?= $time ?>:00</option>
 
-                                </div>
-                                
+<?php } ?>
+                                </select>
+
+                          
                             </div>
-                            <div class="col-md-7 form-group" id="add">
-                                
-                                    <label><button type="button" class="btn btn-default btn-sm" id="btn1">
-  <span class="glyphicon glyphicon-plus-sign"></span> Add other Facility 
-                                        </button>             </label> <input class="form-control" type="text" name="facility[]" >           
-                             
-                                
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <label><button type="button" class="btn btn-default btn-sm add_field_button" >
+                                        <span class="glyphicon glyphicon-plus-sign"></span> เพิ่มเวลาเปิด-ปิดสนาม 
+                                    </button>             </label> 
+                                    
+                            </div>
+                            <div class=" input_fields_wrap">
+                            <div class="col-md-12">
+                            </div>
+                            </div>
+                        </div>
+                        
+                        
+
+
+
+                        <legend>Facility</legend>
+                        <div class="col-md-5">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="facility[]" value="ห้องอาบน้ำ"> ห้องอาบน้ำ
+                                </label>
+
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="facility[]" value="อาหาร"> อาหาร
+                                </label>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="facility[]" value="ร้านค้า"> ร้านค้า
+                                </label>
+
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="facility[]" value="ที่จอดรถ"> ที่จอดรถ
+                                </label>
+
                             </div>
 
+                        </div>
+                        <div class="col-md-7 form-group" id="add">
+
+                            <label><button type="button" class="btn btn-default btn-sm" id="btn1">
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Add other Facility 
+                                </button>             </label> <input class="form-control" type="text" name="facility[]" >           
+
+
+                        </div>
 
 
 
-                        </fieldset>
+
 
 
 
@@ -148,7 +170,7 @@
 
 
 
-               
+
 
 
                 <div class="modal-footer">
@@ -158,7 +180,7 @@
 
                 </div>
             </form>
-    
+
 
 
         </div>

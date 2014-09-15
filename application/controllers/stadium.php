@@ -79,10 +79,16 @@ class stadium extends CI_Controller {
                 'zipcode' => $this->input->post('zip'),
                 'rule' => $this->input->post('rule'),
                 'stadium_display' => 1,
+                
+            );
+            $data2 = array(
+                'stadium_id' => $maxstadium,
                 'start_time'=>$this->input->post('opentime'),
                 'end_time'=> $this->input->post('endtime')
             );
+            
             $this->db->insert("stadium", $data);
+            $this->db->insert("stadium_time", $data2);
             $this->mystadium->addfacility($facility, $data['stadium_id']);
             $this->session->set_flashdata('msg', 'เพิ่มสนามเรียบร้อย');
             redirect('stadium');
@@ -179,7 +185,7 @@ class stadium extends CI_Controller {
         $st = array(
                'data'=> $this->mystadium->getstadiumprofile($stId)
                 );
-        
+               // print_r($st);
         $this->load->view('stadium_view', $st);
     }
     function uploadcoverphoto($stId){

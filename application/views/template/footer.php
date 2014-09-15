@@ -197,9 +197,36 @@ $(document).ready(function(){
    $(document).on('click','#btn3',function(){ // ตรวจสอบตลอดเวลา เป็น dynamic 
     $(this).parent().parent().remove();
   });
+  
+  $("#btn4").click(function(){
+    $("#time").append($('#showtime').html()); // แสดง ทั้ง div
+  });
+  
+     $(document).on('click','#btn5',function(){ // ตรวจสอบตลอดเวลา เป็น dynamic 
+    $(this).next().remove();
+  });
 });
 </script>
-
+<script>
+    $(document).ready(function() {
+    var max_fields      = 20; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+    var add_button      = $(".add_field_button"); //Add button ID
+    
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<div class="delja">'+$('#showtime').html()+'<a   class="remove_field">Remove</a></div>'+'</div>'); //add input box
+        }
+    });
+    
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent(".delja").remove(); x--;// อ้างอิงถึง class delja2
+    })
+});
+</script>
 
 <script>
 function del() {
