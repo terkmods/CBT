@@ -30,7 +30,7 @@
                         <a class="active" href="<?php echo base_url() ?>admin/owner"> All Owner </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url() ?>admin/owner"> Approve Owner</a>
+                        <a href="<?php echo base_url() ?>admin/owner_ap"> Approve Owner</a>
                     </li>                                
                 </ul>
                 <!-- /.nav-second-level -->
@@ -98,7 +98,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Approve Owner
+                    All Owner
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">

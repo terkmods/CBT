@@ -46,6 +46,11 @@ class User_model extends CI_Model {
         $sql = $this->db->query('select * from User join owner where User.user_id = owner.user_id')->result();
         return $sql;
     }
+    
+    function getBlacklist(){
+        $sql = $this->db->query('select * from User where status = "Blacklist"')->result();
+        return $sql;
+    }
 
     function getUser() {
         $sql = $this->db->query('select * from User where type = "user" ')->result();

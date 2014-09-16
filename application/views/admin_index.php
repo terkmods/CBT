@@ -302,7 +302,7 @@
                                     <a href="<?php echo base_url() ?>admin/owner"> All Owner </a>
                                 </li>
                                 <li>
-                                    <a href="#"> Approve Owner</a>
+                                    <a href="<?php echo base_url() ?>admin/owner_ap"> Approve Owner</a>
                                 </li>                                
                             </ul>
                             <!-- /.nav-second-level -->

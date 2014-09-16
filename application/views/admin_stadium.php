@@ -30,7 +30,7 @@
                         <a href="<?php echo base_url() ?>admin/owner"> All Owner </a>
                     </li>
                     <li>
-                        <a href="#"> Approve Owner</a>
+                        <a href="<?php echo base_url() ?>admin/owner_ap"> Approve Owner</a>
                     </li>                                
                 </ul>
                 <!-- /.nav-second-level -->
@@ -109,8 +109,8 @@
                                     <th>Stadium Id</th>
                                     <th>Stadium Name</th>
                                     <th>Owner</th>
-                                    <th>Owner Authen</th>
-                                    <th>Status</th>
+                                    <th>Owner Authentication</th>
+                                    <th>Detail</th>
 
                                 </tr>
                             </thead>
@@ -120,8 +120,9 @@
                                     <td><?= $row->stadium_id ?></td>
                                     <td><?= $row->stadium_name ?></td>
                                     <td><?= $row->fname ?>   <?= $row->lname ?></td>
-                                    <td class="center">Pass</td>
-                                    <td class="center">Active</td>
+                                    <td>Pass</td>
+                                    
+                                    <td><a href="<?= base_url() ?>stadium/profile/<?= $row->stadium_id ?>" class="btn ">View</a></td>
                                 </tr>
                                    <?php } ?>
 

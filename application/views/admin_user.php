@@ -30,7 +30,7 @@
                         <a href="<?php echo base_url() ?>admin/owner"> All Owner </a>
                     </li>
                     <li>
-                        <a href="#"> Approve Owner</a>
+                        <a href="<?php echo base_url() ?>admin/owner_ap"> Approve Owner</a>
                     </li>                                
                 </ul>
                 <!-- /.nav-second-level -->
@@ -109,8 +109,10 @@
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Email confirm</th>
+                                    <th>Gender</th>
+                                    <th>Join Date</th>
                                     <th>Status</th>
+                                    <th>Detail</th>
 
                                 </tr>
                             </thead>
@@ -120,8 +122,10 @@
                                     <td><?= $row->user_id ?></td>
                                     <td><?= $row->fname ?>   <?= $row->lname ?></td>
                                     <td><?= $row->email ?></td>
-                                    <td class="center"><?= $row->emailconirm ?></td>
+                                    <td><?= $row->gender ?></td>
+                                    <td class="center"><?= $row->date ?></td>
                                     <td class="center"><?= $row->status ?></td>
+                                    <td class="center"><button type="button" class="btn btn-info">View</button></td>
 
                                 </tr>
                                <?php } ?>

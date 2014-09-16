@@ -145,9 +145,9 @@
                         <h3 class="panel-title">ที่ตั้ง</h3>
                     </div>
                     <div class="panel-body">
-                        ที่อยู่ : <br>
+                        ที่อยู่ :  <br>
                         เมือง : <br>
-                        จังหวัด : <br>
+                        จังหวัด :<?= $data['0']->province ; ?> <br>
                         รหัสไปรษณีย์ : 
                     </div>
                 </div>

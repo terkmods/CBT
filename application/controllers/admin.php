@@ -31,8 +31,19 @@ class Admin extends CI_Controller {
        $this->load->view('admin_owner',$owner);
     }
     
+    public function owner_ap(){
+         $owner = array(
+               'data'=> $this->myusers->getOwner()
+                );
+               
+       $this->load->view('admin_owner_ap',$owner);
+    }
+    
      public function blacklist(){
-        $this->load->view('admin_blacklist');
+         $blacklist = array(
+               'data'=> $this->myusers->getBlacklist()
+                );
+        $this->load->view('admin_blacklist',$blacklist);
     }
     
 }
