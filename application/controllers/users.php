@@ -125,6 +125,15 @@ class Users extends CI_Controller {
            redirect('index.php');
         }
     }
+    
+     public function profile(){
+         $profile = array(
+               'data'=> $this->myusers->getUser()
+                );
+         
+       
+        $this->load->view('User_view',$profile);
+    }
 
 }
 

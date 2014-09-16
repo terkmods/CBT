@@ -63,6 +63,7 @@ FROM stadium join owner join User
 where stadium.owner_id = owner.owner_id and owner.user_id = User.user_id  ')->result();
         return $sql;
     }
+    
 
 }
 
