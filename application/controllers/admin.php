@@ -3,7 +3,7 @@
 class Admin extends CI_Controller {
     function __construct() {
     parent::__construct();
-            $this->load->model('user_model', 'myusers');
+            $this->load->model('user_model', 'myusers');           
         $this->load->model('stadium_model', 'mystadium');
     }
     
@@ -11,17 +11,28 @@ class Admin extends CI_Controller {
         $this->load->view('admin_index');
     }
     public function stadium(){
-        $this->load->view('admin_stadium');
+        $stadium = array(
+                'data'=> $this->myusers->getStadium()
+                );
+        $this->load->view('admin_stadium',$stadium);
     }
      public function user(){
-        $this->load->view('admin_user');
+         $user = array(
+                'data'=> $this->myusers->getUser()
+                );
+        $this->load->view('admin_user',$user);
     }
-    public function owner(){
+ 
+       public function owner(){
          $owner = array(
                'data'=> $this->myusers->getOwner()
                 );
-                //print_r($owner);
+               
        $this->load->view('admin_owner',$owner);
+    }
+    
+     public function blacklist(){
+        $this->load->view('admin_blacklist');
     }
     
 }

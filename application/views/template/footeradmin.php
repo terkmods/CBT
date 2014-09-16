@@ -1,5 +1,4 @@
-</div>
-        <!-- /#page-wrapper -->
+
 
 <!-- jQuery Version 1.11.0 -->
     <script src="<?= base_url() ?>asset/js/jquery-1.11.0.js"></script>
