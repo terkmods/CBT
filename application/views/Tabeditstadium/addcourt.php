@@ -55,11 +55,11 @@
 
     </div>   
     <div class="col-md-7" style="padding-top: 2px;margin-top: 10px">
-        <form class="form-horizontal" role="form" action="#">
+        <form class="form-horizontal" method="post" role="form" action="<?=  base_url()  ?>stadium/addcourt/<?= $this->uri->segment(3)?>">
             <div class="form-group">
                 <label for="inputEmail1" class="col-lg-2 control-label">Court</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputEmail1" placeholder="Court Name">
+                    <input type="text" class="form-control" name="courtname" placeholder="Court Name">
                 </div>
             </div>
 
@@ -72,30 +72,16 @@
                         
                  
                         
-                    <div class="col-md-3" style="margin-top:10px ;padding: 0; "> <select class="form-control">
-                            <option>จันทร์</option>
-                            <option>อังคาร</option>
-                            <option>พุธ</option>
-                            <option>พฤหัสบดี</option>
-                            <option>ศุกร์</option>
-                            <option>เสาร์</option>
-                            <option>อาทิตย์</option>
-                        </select> </div>
-                    <div class="col-md-1" style="margin-top:15px ;">
-                         ถึง
-                    </div>
-                    <div class="col-md-3" style="margin-top:10px ;padding: 0; "> <select class="form-control">
-                                <option>จันทร์</option>
-                            <option>อังคาร</option>
-                            <option>พุธ</option>
-                            <option>พฤหัสบดี</option>
-                            <option>ศุกร์</option>
-                            <option>เสาร์</option>
-                            <option>อาทิตย์</option>      
-                        </select></div>
+                    <div class="col-md-6" style="margin-top:10px ;padding: 0; ">  <select class="form-control" name="typedate[]">
+                                    <option value="ทุกวัน">ทุกวัน</option>
+                                    <option value="เสาร์-อาทิตย์">เสาร์-อาทิตย์</option>
+                                    <option value="จันทร์-ศุกร์">จันทร์-ศุกร์</option>
+
+                                </select> </div>
+                 
 
                     <div class="col-md-3" style="margin-top:10px ;padding:  0; ">
-                        <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชม. "></div>
+                        <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชม. " name="price[]"></div>
                            <div class="col-md-1" style="margin-top:15px ;">
                          <button type="button" class="btn btn-success btn-sm" id="btn2">
   <span class="glyphicon glyphicon-plus-sign"></span>    
@@ -109,7 +95,7 @@
                 <label for="inputPassword1" class="col-lg-2 control-label">ชนิดพื้น </label>
 
                 <div class="col-lg-10">
-                    <select class="form-control">
+                    <select class="form-control" name="type">
                         <option>พื้นปาเก้ </option>
                         <option>พื้นปูน </option>
                         <option>พื้นยาง </option>

@@ -164,29 +164,16 @@ $(document).ready(function(){
     $("#add").append('<input class="form-control" name="facility[]"  type="text" style="margin-top : 10px;"> ');
   });
   $("#btn2").click(function(){
-    $("#add").append('<div id="delja"><div class="col-lg-10 col-md-offset-2" ><div class="col-md-3" style="margin-top:10px ;padding: 0; "> <select class="form-control"><option>จันทร์</option>'+
-                            '<option>อังคาร</option>' +
-                            '<option>พุธ</option>'+
-                            '<option>พฤหัสบดี</option>'+
-                            '<option>ศุกร์</option>'+
-                            '<option>เสาร์</option>'+
-                            '<option>อาทิตย์</option>'+
+    $("#add").append('<div id="delja"><div class="col-lg-10 col-md-offset-2" ><div class="col-md-6" style="margin-top:10px ;padding: 0; "> <select class="form-control" name="typedate[]">'+
+                          '<option value="ทุกวัน">ทุกวัน</option>'+
+                           '         <option value="เสาร์-อาทิตย์">เสาร์-อาทิตย์</option>'+
+                            '        <option value="จันทร์-ศุกร์">จันทร์-ศุกร์</option>'+
                         '</select> </div>'+
-                    '<div class="col-md-1" style="margin-top:15px ;">'+
-                    '     ถึง'+
-                    '</div>'+
-                    '<div class="col-md-3" style="margin-top:10px ;padding: 0; "> <select class="form-control">'+
-                     '           <option>จันทร์</option>'+
-                     '       <option>อังคาร</option>'+
-                     '       <option>พุธ</option>'+
-                     '       <option>พฤหัสบดี</option>'+
-                     '       <option>ศุกร์</option>'+
-                     '       <option>เสาร์</option>'+
-                     '       <option>อาทิตย์</option>   '+   
-                     '   </select></div>'+
+                    
+                    
 
                     '<div class="col-md-3" style="margin-top:10px ;padding:  0; ">'+
-                     '   <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชม. "></div>'+
+                     '   <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชม. " name="price[]"></div>'+
                      '      <div class="col-md-1" style="margin-top:15px ;">'+
                      '    <button type="button" class="btn btn-danger btn-sm" id="btn3">'+
                      '   <span class="glyphicon glyphicon-remove-circle"></span>  ' + 
@@ -197,9 +184,36 @@ $(document).ready(function(){
    $(document).on('click','#btn3',function(){ // ตรวจสอบตลอดเวลา เป็น dynamic 
     $(this).parent().parent().remove();
   });
+  
+  $("#btn4").click(function(){
+    $("#time").append($('#showtime').html()); // แสดง ทั้ง div
+  });
+  
+     $(document).on('click','#btn5',function(){ // ตรวจสอบตลอดเวลา เป็น dynamic 
+    $(this).next().remove();
+  });
 });
 </script>
-
+<script>
+    $(document).ready(function() {
+    var max_fields      = 20; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+    var add_button      = $(".add_field_button"); //Add button ID
+    
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<div class="delja">'+$('#showtime').html()+'<a   class="remove_field">Remove</a></div>'+'</div>'); //add input box
+        }
+    });
+    
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent(".delja").remove(); x--;// อ้างอิงถึง class delja2
+    })
+});
+</script>
 
 <script>
 function del() {

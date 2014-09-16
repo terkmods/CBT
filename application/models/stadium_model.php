@@ -21,7 +21,13 @@ class Stadium_model extends CI_Model {
 
         return $query;
     }
-        function getstadiumprofile($stId) {
+    function getcourt($stId){
+           $query = $this->db->query('select * from court where stadium_id = ' . $stId)->row();
+        ;
+
+        return $query;
+    }
+                function getstadiumprofile($stId) {
         $query = $this->db->query('select * from stadium where stadium_id = ' . $stId)->result();
         ;
 
@@ -42,13 +48,21 @@ class Stadium_model extends CI_Model {
             return $rs->result_array();
         }
     }
+        public function showIdCourtMax() {
+        $rs = $this->db->select_max('court_id')->get('court');
+        if ($rs->num_rows() == 0) {
+            return array();
+        } else {
+            return $rs->result_array();
+        }
+    }
 
     public function addfacility($data, $stId) {
         $datar = array(
             'facility' => $data['0'],
         );
-        print_r($datar);
-        print_r($data);
+        //print_r($datar);
+        //print_r($data);
         foreach ($data as $r) {
 
 
@@ -61,28 +75,78 @@ class Stadium_model extends CI_Model {
         }
     }
 
-    function setstadium($stId) {
-        
-
-
-            $query = $this->db->query('select * from stadium where stadium_id = ' . $stId)->row();
-            
+    public function addcourt($data, $stId) {
+        foreach ($data as $r){
+            $sql = 'INSERT INTO `backeyefin_cbt`.`court` (`court_id`, `stadium_id`, `court_name`, `type`) 
+                VALUES (`0`' . $stId . ',  "' . $r['court_name'] . '",  "' . $r['type'] . '")';
+        }
+        $this->db->query($sql);
        
-        
+    }
+
+    public function addtime($data, $stId) {
+
+
+        // echo $data['open_time']['0'];
+        //printf($datar['type']['0']);
+        // print_r($datar);
+        $n = 0;
+        for ($n; $n < sizeof($data['type']); $n++) {
+
+            $sql = 'INSERT INTO `backeyefin_cbt`.`stadium_time` (`stadium_id`, `open_time`, `end_time`, `type`)
+                   VALUES ("' . $stId . '",  "' . $data['open_time'][$n] . '",  "' . $data['end_time'][$n] . '",  "' . $data['type'][$n] . '")';
+            $this->db->query($sql);
+
+            //$sql = 'INSERT INTO  `backeyefin_cbt`.`stadium_time` (`stadium_id` ,`facility`)
+            //    VALUES (' . $stId . ',  "' . $r['0'] . ',  "' . $r['end_time']['1'] . ',  "' . $r['2'] . '")';
+            //  $this->db->query($sql);
+        }
+    }
+      public function addcourttime($data, $stId) {
+
+
+        // echo $data['open_time']['0'];
+        //printf($datar['type']['0']);
+        // print_r($datar);
+        $n = 0;
+        for ($n; $n < sizeof($data['price']); $n++) {
+
+            $sql = 'INSERT INTO `backeyefin_cbt`.`court_price` (`courtprice_id`, `court_id`, `court_day`, `court_price`)
+                   VALUES ("0","' . $data['court_id'] . '","' . $data['court_day'][$n] . '",  "' . $data['price'][$n] . '")';
+            $this->db->query($sql);
+
+            //$sql = 'INSERT INTO  `backeyefin_cbt`.`stadium_time` (`stadium_id` ,`facility`)
+            //    VALUES (' . $stId . ',  "' . $r['0'] . ',  "' . $r['end_time']['1'] . ',  "' . $r['2'] . '")';
+            //  $this->db->query($sql);
+        }
+    }
+
+    function setstadium($stId) {
+
+
+
+        $query = $this->db->query('select * from stadium  where stadium_id = ' . $stId)->row();
+
+
+
 
         return $query;
     }
-    function showfacility($stId){
-        $query = $this->db->query('select facility from stadium join facility where facility.stadium_id = ' . $stId.' and stadium.stadium_id = '.$stId)->result_array();
+    function setTime($stId){
+        
+    }
+                function showfacility($stId) {
+        $query = $this->db->query('select facility from stadium join facility where facility.stadium_id = ' . $stId . ' and stadium.stadium_id = ' . $stId)->result_array();
         return $query;
     }
 
     public function delstadium($stId) {
         foreach ($stId as $r) {
-        $query = $this->db->query('DELETE FROM `backeyefin_cbt`.`stadium` WHERE `stadium`.`stadium_id` = "' . $r . '"');
-        $this->db->query('DELETE FROM `backeyefin_cbt`.`facility` WHERE `facility`.`stadium_id` = "' . $r . '"');
-         }
-         return $query;
+            $query = $this->db->query('DELETE FROM `backeyefin_cbt`.`stadium` WHERE `stadium`.`stadium_id` = "' . $r . '"');
+            $this->db->query('DELETE FROM `backeyefin_cbt`.`facility` WHERE `facility`.`stadium_id` = "' . $r . '"');
+            $this->db->query('DELETE FROM `backeyefin_cbt`.`stadium_time` WHERE `stadium_time`.`stadium_id` = "' . $r . '"');
+        }
+        return $query;
     }
     
     
