@@ -133,7 +133,9 @@ class Stadium_model extends CI_Model {
         return $query;
     }
     function setTime($stId){
-        
+        $query = $this->db->query('select * from stadium  where stadium_id = ' . $stId)->row();
+
+        return $query;
     }
                 function showfacility($stId) {
         $query = $this->db->query('select facility from stadium join facility where facility.stadium_id = ' . $stId . ' and stadium.stadium_id = ' . $stId)->result_array();
