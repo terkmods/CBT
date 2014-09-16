@@ -39,6 +39,12 @@ class Stadium_model extends CI_Model {
         ;
         return $query;
     }
+    function gettableCourt($cId){
+        $query = $this->db->query('SELECT court.court_id,court_name,court_day,court_price,type FROM `court_price` join court '
+                . 'WHERE court_price.court_id = court.court_id and court.stadium_id= '.$cId)->result_array();
+        ;
+        return $query;
+    }
 
     public function showIdMax() {
         $rs = $this->db->select_max('stadium_id')->get('stadium');
@@ -133,7 +139,7 @@ class Stadium_model extends CI_Model {
         return $query;
     }
     function setTime($stId){
-        $query = $this->db->query('select * from stadium  where stadium_id = ' . $stId)->row();
+        $query = $this->db->query('select * from  stadium_time  where stadium_time.stadium_id = ' . $stId)->result_array();
 
         return $query;
     }

@@ -1,7 +1,12 @@
 <div class="tab-pane" id="addcourt">
 
     <div class="col-md-5 pull-left " style="padding-top: 2px;margin-top: 10px">
-
+       <?php  foreach ($showtime as $r) { ?>
+        <div class="col-md-4">
+        
+       
+        <h6><?=$r['type'] ?></h6>
+         
         Start-time
         <select class="form-control" name="opentime">
             <option disabled="">เวลาเปิด</option>
@@ -9,7 +14,7 @@
             for ($time; $time <= "24.00"; $time++) {
                 ?>
                 <option <?php
-                if ($data->start_time == $time) {
+                if ($r['open_time'] == $time) {
                     echo 'selected';
                 }
                 ?> 
@@ -26,7 +31,7 @@
             for ($time; $time <= "24.00"; $time++) {
                 ?>
                 <option <?php
-                if ($data->end_time == $time) {
+                if ($r['end_time'] == $time) {
                     echo 'selected';
                 }
                 ?> 
@@ -35,7 +40,9 @@
                     value=" <?= $time ?>" ><?= $time ?>:00</option>
 
 <?php } ?>
-        </select>        
+        </select>    
+                </div>
+<?php }?>
       <!-- <div class="radio">
             <label>
                 <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
@@ -50,9 +57,12 @@
                 Per-half-hour <small>(example 8.30-9.00) </small>
             </label>
         </div>-->
+     
 
+      <div class="col-md-12 form-group">
+          <hr>
         <button type="submit" class="btn btn-default">แก้ไข</button>
-
+      </div>
     </div>   
     <div class="col-md-7" style="padding-top: 2px;margin-top: 10px">
         <form class="form-horizontal" method="post" role="form" action="<?=  base_url()  ?>stadium/addcourt/<?= $this->uri->segment(3)?>">
@@ -116,65 +126,36 @@
     </div>
     <div class="row">
         <div class="col-md-12" style="margin-top: 17px">
-
-                      <h5>เวลาเปิด-ปิด  : <small>8.00-24.00 น.</small></h5>
+                        
+                     
                                                 <h5>จำนวนคอร์ดทั้งหมด : <small>5  คอร์ด</small></h5>
+                        
                                                 <table class="table tablecompare">
                                                 <thead style="text-align: center">
+                                                    
                                                     <tr>
+                                                        
                                                         <th style="text-align: center">สนามที่</th>
-                                                        <th style="text-align: center">ราคาสำหรับทุกวัน</th>
-                                                        <th>ราคาพิเศษเสาร์อาทิตย์</th>
-                                                        <th>ประเภทพื้น</th>
-                                                     
+                                                      <th style="text-align: center">ทุกวัน</th>
+                                                      <th style="text-align: center">จันทร์-ศุกร์</th>
+                                                       <th style="text-align: center">เสาร์-อาทิตย์</th> 
+                                                     <th style="text-align: center">ลักษณะ</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                   
+                                                    <?php foreach ($court as $ct) { ?>
                                                     <tr >
-                                                        <td>คอร์ด 1 </td>
+                                                        <td><?=$ct['court_name'] ?></td>
+                                                           <td></td>
+                                                        <td></td>
+                                                        <td><?=$ct['court_price'] ?></td>
                                                        
-                                                        <td>160</td>
-                                                        <td>150</td>
-                                                        <td>ปาร์เก้</td>
+                                                        <td><?=$ct['type'] ?></td>
                                                         
                                                     </tr>
-                                                    <tr>
-                                                      <td>คอร์ด  2 </td>
-                                                       
-                                                        <td>160</td>
-                                                        <td>150</td>
-                                                        <td>ปาร์เก้</td>
-                                                         
-                                                    </tr>
-                                                    <tr>
-                                                       <td>คอร์ด  3 </td>
-                                                       
-                                                        <td>140</td>
-                                                        <td>130</td>
-                                                        <td>ปูน</td>
-                                                    </tr>
-                                                     <tr>
-                                                       <td>คอร์ด  4 </td>
-                                                       
-                                                        <td>180</td>
-                                                        <td>150</td>
-                                                        <td>ยาง</td>
-                                                    </tr>
-                                                     <tr>
-                                                       <td>คอร์ด  5 </td>
-                                                       
-                                                        <td>200</td>
-                                                        <td>100</td>
-                                                        <td>ปาร์เก้</td>
-                                                    </tr>
-                                                     <tr>
-                                                       <td>คอร์ด  6 </td>
-                                                       
-                                                        <td>100</td>
-                                                        <td>50</td>
-                                                        <td>ยาง</td>
-                                                    </tr>
-                                                      
+                                                    
+                                                     <?php } ?> 
                                                 </tbody>
                                             </table>
                                                 

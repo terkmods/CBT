@@ -100,14 +100,15 @@ class stadium extends CI_Controller {
 
     function updatestadium($id) {
      
-        //echo $this->input->post('id');
+       // echo $id;
         $data = array(
         'data' => $this->mystadium->setstadium($id), //row
-        'facility'=>$this->mystadium->showfacility($id) //result_array
-               
+        'facility'=>$this->mystadium->showfacility($id), //result_array
+         'showtime'   =>$this->mystadium->setTime($id), //result_array  
+                'court'=> $this->mystadium->gettableCourt($id) //result_array  
         );
-     
-        //print_r($data);
+        
+        print_r($data['court']);
      
         
          
