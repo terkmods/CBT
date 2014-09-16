@@ -50,6 +50,7 @@ class User_model extends CI_Model {
     function getBlacklist(){
         $sql = $this->db->query('select * from User where status = "Blacklist"')->result();
         return $sql;
+        
     }
 
     function getUser() {
