@@ -12,7 +12,7 @@ $num = 1;
 ?>
 
 <div class="container">
-    <h4> <a href="#">หน้าหลัก</a> /Manage Stadium </h4>
+    <h4> <a href="#">หน้าหลัก</a> /Manage Stadium /<font style="color: green"><?php echo $this->session->flashdata('msg'); ?></font></h4> 
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">Account Settings</div>
@@ -79,6 +79,7 @@ $num = 1;
                                 <li><a href="#">เพิ่มกฎ</a></li>
                             </ul>
                             <div class="tab-content">
+                                
                                 <?php include 'Tabeditstadium/setting.php'; ?> <!--tab P1-->
                                 <?php include 'Tabeditstadium/blacklist.php'; ?> <!--tab P2-->
                                  <?php include 'Tabeditstadium/coachfav.php'; ?> <!--tab P3-->

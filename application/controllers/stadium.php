@@ -83,12 +83,13 @@ class stadium extends CI_Controller {
             );
             $data2 = array(
                 'stadium_id' => $maxstadium,
-                'start_time'=>$this->input->post('opentime'),
-                'end_time'=> $this->input->post('endtime')
+                'open_time'=>$this->input->post('opentime'),
+                'end_time'=> $this->input->post('endtime'),
+                    'type' => $this->input->post('typedate')
             );
-            
+            //print_r($data2);
             $this->db->insert("stadium", $data);
-            $this->db->insert("stadium_time", $data2);
+            $this->mystadium->addtime($data2, $data['stadium_id']);
             $this->mystadium->addfacility($facility, $data['stadium_id']);
             $this->session->set_flashdata('msg', 'เพิ่มสนามเรียบร้อย');
             redirect('stadium');
@@ -103,6 +104,7 @@ class stadium extends CI_Controller {
         $data = array(
         'data' => $this->mystadium->setstadium($id), //row
         'facility'=>$this->mystadium->showfacility($id) //result_array
+               
         );
      
         //print_r($data);
@@ -212,6 +214,34 @@ class stadium extends CI_Controller {
             );
          $this->db->update('stadium',$data,array('stadium_id'=>$stId));
         redirect('stadium/profile/'.$stId);
+    }
+    function addcourt($id){
+        
+        $rs = $this->mystadium->showIdCourtMax();
+        foreach ($rs as $r) {
+            $maxstadium = $r['court_id'] + "1";
+        }
+        //$courtid = $this->mystadium->getcourt($id);
+       // echo $id;
+         $data = array(
+             'court_id' => $maxstadium,
+             'stadium_id'=> $id,
+            'court_name' => $this->input->post('courtname'),
+             
+            'type'=> $this->input->post('type')
+              
+        );
+        $this->db->insert("court", $data);
+         $dataprice = array(
+             'court_id' => $maxstadium,
+             'price' => $this->input->post('price'),
+             'court_day'=> $this->input->post('typedate')
+                 
+         );
+        // print_r($dataprice);
+         $this->mystadium->addcourttime($dataprice, $data['stadium_id']);
+         $this->session->set_flashdata('msg', 'เพิ่มคอร์ดเรียบร้อย');
+         redirect('stadium/updatestadium/'.$id.'#addcourt');
     }
 
 }

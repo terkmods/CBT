@@ -67,10 +67,10 @@
                             <div id="showtime">
                             <div class="col-md-6">
                                 เลือกวันเวลาเปิด-ปิดสนาม
-                                <select class="form-control" name="typedate">
-                                    <option value="1">ทุกวัน</option>
-                                    <option value="2">เสาร์-อาทิตย์</option>
-                                    <option value="3">จันทร์-ศุกร์</option>
+                                <select class="form-control" name="typedate[]">
+                                    <option value="ทุกวัน">ทุกวัน</option>
+                                    <option value="เสาร์-อาทิตย์">เสาร์-อาทิตย์</option>
+                                    <option value="จันทร์-ศุกร์">จันทร์-ศุกร์</option>
 
                                 </select>
 
@@ -78,7 +78,7 @@
                             </div>
                             <div class="col-md-6">
                                 Start-time
-                                <select class="form-control" name="opentime">
+                                <select class="form-control" name="opentime[]">
                                     <option disabled="">เวลาเปิด</option>
                                     <?php
                                     $time = "0";
@@ -89,7 +89,7 @@
 <?php } ?>
                                 </select>
                                 End-time
-                                <select class="form-control" name="endtime" >
+                                <select class="form-control" name="endtime[]" >
                                     <option disabled="">เวลาปิด</option>
                                     <?php
                                     $time = "0";
