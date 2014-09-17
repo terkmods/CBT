@@ -12,8 +12,8 @@
                 <div class="col-md-3 info"><h3><?= $data['0']->stadium_name ; ?></h3>
                     <p>เจ้าของ
                         <span class="glyphicon glyphicon-map-marker"></span>&nbsp<a href="">Bangkok</a>, <a href="#">Thailand</a></p> <p>
-                        โทรศัพท์: xx-xxx-xxx
-                    </p>
+                         โทรศัพท์:<h5><?= $data['0']->tel ; ?></h5>
+                    
                     
                 </div>
                 <div class="col-md-4 info">
@@ -145,10 +145,9 @@
                         <h3 class="panel-title">ที่ตั้ง</h3>
                     </div>
                     <div class="panel-body">
-                        ที่อยู่ :  <br>
-                        เมือง : <br>
-                        จังหวัด :<?= $data['0']->province  ?> <br>
-                        รหัสไปรษณีย์ : 
+                        ที่อยู่ :&nbsp;<?= $data['0']->address_no ; ?><br>
+                        จังหวัด :&nbsp;<?= $data['0']->province ; ?> <br>
+                        รหัสไปรษณีย์ :&nbsp;<?= $data['0']->zipcode ; ?> 
                     </div>
                 </div>
 
@@ -157,7 +156,7 @@
                         <h3 class="panel-title">รายละเอียดสนาม</h3>
                     </div>
                     <div class="panel-body">
-                        ชนิดของพื้น : <br>
+                        ชนิดของพื้น :<?= $data['0']-> ; ?>  <br>
                         จำนวน คอร์ท :<br>
                         ราคา คอร์ด : <br> 
                         เวลาเปิด-ปิด สนาม :
