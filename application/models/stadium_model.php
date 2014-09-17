@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
@@ -21,13 +21,15 @@ class Stadium_model extends CI_Model {
 
         return $query;
     }
-    function getcourt($stId){
-           $query = $this->db->query('select * from court where stadium_id = ' . $stId)->row();
+
+    function getcourt($stId) {
+        $query = $this->db->query('select * from court where stadium_id = ' . $stId)->row();
         ;
 
         return $query;
     }
-                function getstadiumprofile($stId) {
+
+    function getstadiumprofile($stId) {
         $query = $this->db->query('select * from stadium where stadium_id = ' . $stId)->result();
         ;
 
@@ -39,6 +41,7 @@ class Stadium_model extends CI_Model {
         ;
         return $query;
     }
+    
     function getprovince(){
         $query = $this->db->query('SELECT distinct province FROM `stadium`')->result();
         ;
@@ -50,9 +53,16 @@ class Stadium_model extends CI_Model {
         ;
         return $query;
     }
-    function gettableCourt($cId){
-        $query = $this->db->query('SELECT court.court_id,court_name,court_day,court_price,type FROM `court_price` join court '
-                . 'WHERE court_price.court_id = court.court_id and court.stadium_id= '.$cId)->result_array();
+
+    function gettableCourt($cId) {
+        $query = $this->db->query('SELECT * FROM court '
+                        . 'WHERE  court.stadium_id= ' . $cId)->result_array();
+        ;
+        return $query;
+    }
+    function getTotalcourt($cId){
+         $query = $this->db->query('SELECT count(court_id) as "courtnum" FROM court '
+                        . 'WHERE  court.stadium_id= ' . $cId)->row();
         ;
         return $query;
     }
@@ -65,7 +75,8 @@ class Stadium_model extends CI_Model {
             return $rs->result_array();
         }
     }
-        public function showIdCourtMax() {
+
+    public function showIdCourtMax() {
         $rs = $this->db->select_max('court_id')->get('court');
         if ($rs->num_rows() == 0) {
             return array();
@@ -93,12 +104,28 @@ class Stadium_model extends CI_Model {
     }
 
     public function addcourt($data, $stId) {
-        foreach ($data as $r){
-            $sql = 'INSERT INTO `backeyefin_cbt`.`court` (`court_id`, `stadium_id`, `court_name`, `type`) 
-                VALUES (`0`' . $stId . ',  "' . $r['court_name'] . '",  "' . $r['type'] . '")';
+        foreach ($data as $r) {
+            $sql = 'INSERT INTO  `backeyefin_cbt`.`court` (
+                                                    `court_id` ,
+                                                    `stadium_id` ,
+                                                    `court_name` ,
+                                                    `type` ,
+                                                    `m_f` ,
+                                                    `st_sun` ,
+                                                    `m_f_price` ,
+                                                    `st_sun_price`
+                                                    )
+                VALUES (`0`' . $stId . ','
+                    . '  "' . $r['court_name'] . '", '
+                     . '  "' . $r['type'] . '", '
+                     . '  " ", '
+                     . '  " ", '
+                    . '  " ", '
+                    . ' " ")'
+                
+                ;
         }
         $this->db->query($sql);
-       
     }
 
     public function addtime($data, $stId) {
@@ -119,7 +146,8 @@ class Stadium_model extends CI_Model {
             //  $this->db->query($sql);
         }
     }
-      public function addcourttime($data, $stId) {
+
+    public function addcourttime($data, $stId) {
 
 
         // echo $data['open_time']['0'];
@@ -128,13 +156,13 @@ class Stadium_model extends CI_Model {
         $n = 0;
         for ($n; $n < sizeof($data['price']); $n++) {
 
-            $sql = 'INSERT INTO `backeyefin_cbt`.`court_price` (`courtprice_id`, `court_id`, `court_day`, `court_price`)
-                   VALUES ("0","' . $data['court_id'] . '","' . $data['court_day'][$n] . '",  "' . $data['price'][$n] . '")';
+            $sql = 'UPDATE  `backeyefin_cbt`.`court`
+                   set "0","' . $data['court_id'] . '","' . $data['court_day'][$n] . '",  "' . $data['price'][$n] . '"';
             $this->db->query($sql);
 
             //$sql = 'INSERT INTO  `backeyefin_cbt`.`stadium_time` (`stadium_id` ,`facility`)
             //    VALUES (' . $stId . ',  "' . $r['0'] . ',  "' . $r['end_time']['1'] . ',  "' . $r['2'] . '")';
-            //  $this->db->query($sql);
+            //  $this->db->query($sql);x`
         }
     }
 
@@ -149,12 +177,14 @@ class Stadium_model extends CI_Model {
 
         return $query;
     }
-    function setTime($stId){
+
+    function setTime($stId) {
         $query = $this->db->query('select * from  stadium_time  where stadium_time.stadium_id = ' . $stId)->result_array();
 
         return $query;
     }
-                function showfacility($stId) {
+
+    function showfacility($stId) {
         $query = $this->db->query('select facility from stadium join facility where facility.stadium_id = ' . $stId . ' and stadium.stadium_id = ' . $stId)->result_array();
         return $query;
     }
@@ -167,7 +197,5 @@ class Stadium_model extends CI_Model {
         }
         return $query;
     }
-    
-    
 
 }

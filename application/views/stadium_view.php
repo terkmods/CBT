@@ -8,11 +8,11 @@
 </div>  
         <div class="container upper-profile">
             <div class="row">
-                <div class="col-md-3 profile-pic"><img src="<?= base_url() ?>/asset/images/stadiumpic/<?= $data['0']->stadium_path ; ?>" width="200" class="img-thumbnail"></div>
-                <div class="col-md-3 info"><h3><?= $data['0']->stadium_name ; ?></h3>
+                <div class="col-md-3 profile-pic"><img src="<?= base_url() ?>/asset/images/stadiumpic/<?= $data['0']->stadium_path  ?>" width="200" class="img-thumbnail"></div>
+                <div class="col-md-3 info"><h3><?= $data['0']->stadium_name  ?></h3>
                     <p>เจ้าของ
                         <span class="glyphicon glyphicon-map-marker"></span>&nbsp<a href="">Bangkok</a>, <a href="#">Thailand</a></p> <p>
-                         โทรศัพท์:<h5><?= $data['0']->tel ; ?></h5>
+                         โทรศัพท์:<h5><?= $data['0']->tel  ?></h5>
                     
                     
                 </div>
@@ -156,7 +156,7 @@
                         <h3 class="panel-title">รายละเอียดสนาม</h3>
                     </div>
                     <div class="panel-body">
-                        ชนิดของพื้น :<?= $data['0']-> ; ?>  <br>
+                        ชนิดของพื้น :  <br>
                         จำนวน คอร์ท :<br>
                         ราคา คอร์ด : <br> 
                         เวลาเปิด-ปิด สนาม :
