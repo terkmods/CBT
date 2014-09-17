@@ -147,7 +147,7 @@
                     <div class="panel-body">
                         ที่อยู่ :  <br>
                         เมือง : <br>
-                        จังหวัด :<?= $data['0']->province ; ?> <br>
+                        จังหวัด :<?= $data['0']->province  ?> <br>
                         รหัสไปรษณีย์ : 
                     </div>
                 </div>
