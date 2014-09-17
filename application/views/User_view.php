@@ -1,4 +1,5 @@
 <?php include 'template/head.php'; ?>
+
     <div style="clear:both;"></div>
     <div id="cover">  
         <img src="<?= base_url() ?>/asset/images/imagetest/cover-profile.jpg">

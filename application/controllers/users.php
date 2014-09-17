@@ -117,22 +117,50 @@ class Users extends CI_Controller {
 
     function feed() {
         if ($this->session->userdata('logged')) {
-            $datasend  ['stadium'] = $this->mystadium->getallstadium();
-            
+            $datasend = array(
+                'stadium' => $this->mystadium->getallstadium(),
+                'province'  => $this->mystadium->getprovince(),
+                'district' => $this->mystadium->getdistrict()
+            );
+
 
             $this->load->view('feeds', $datasend);
         } else {
-           redirect('index.php');
+            redirect('index.php');
         }
     }
-    
-     public function profile(){
-         $profile = array(
-               'data'=> $this->myusers->getUser()
-                );
-         
-       
-        $this->load->view('User_view',$profile);
+
+    public function profile($id) {
+        //echo $id;
+        $profile = array(
+            'data' => $this->myusers->getUser($id)
+        );
+
+        //print_r($profile['data']);
+        $this->load->view('User_view', $profile);
+    }
+
+    public function edituser() {
+        $this->load->view("edit_user");
+    }
+
+    public function updateuser($userId) {
+        $data = array(
+            'user_id' => $this->myusers->getUser($userId),
+            'fname' => $this->input->post('fname'),
+            'lname' => $this->input->post('lname'),
+            'gender' => $this->input->post('gender'),
+            'age' => $this->input->post('age'),
+            'birthdate' => $this->input->post('birthdate'),
+            'Style' => $this->input->post('style'),
+            'club' => $this->input->post('club'),
+            'address' => $this->input->post('address'),
+            'phone' => $this->input->post('phone'),
+            'aboutme' => $this->input->post('about'),
+            'profile_url' => $upload['file_name']
+        );
+        $this->db->update('User', $data, array('user_id' => $userId));
+        $this->load->view('edit_user');
     }
 
 }
