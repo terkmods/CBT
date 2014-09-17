@@ -37,18 +37,52 @@
 <script src="<?= base_url() ?>asset/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
     $(function () {
-        $('.form_date').datetimepicker({
-            language: 'en',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            forceParse: 0
+        $(".date-picker").datepicker();
+
+        $(".date-picker").on("change", function () {
+            var id = $(this).attr("id");
+            var val = $("label[for='" + id + "']").text();
+            $("#msg").text(val + " changed");
         });
     });
-</script>    
+</script>
+<script type="text/javascript">
+   
+    
+    $(function () {
+        $(".date-picker").datepicker();
+
+        $(".date-picker").on("change", function () {
+            var val = $('.date-picker').datepicker('getDate');
+        
+            $.ajax({
+                type: "POST",
+                url: "<?= base_url() ?>booking/showTablebook",
+                data: {date: val}
+            }).done(function(msg) {
+                alert(msg);
+                //aTable.fnDraw();
+            });
+        });
+        
+//        
+//        $(".date-picker").click(function() {
+//            $.ajax({
+//                type: "POST",
+//                url: "booking/showTablebook",
+//                data: {date: $(this).val()}
+//            }).done(function(msg) {
+//                alert(msg);
+//                //aTable.fnDraw();
+//            });
+//        });
+        
+    });
+       
+       
+       
+   
+</script>
 <script type="text/javascript">
     /* pagination */
     $.fn.pageMe = function (opts) {

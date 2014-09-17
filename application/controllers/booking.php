@@ -13,7 +13,20 @@ class booking extends CI_Controller {
     
     function showTablebook(){
         $date = $this->input->post('date');
-        echo $date;
+        
+        $day = substr($date,0,3);
+        if($day == "Sat"){
+            $cause = array('type'=>"เสาร์-อาทิตย์");
+            $time = $this->db->get_where('stadium_time',$cause)->row();
+            echo $time;
+        }else if ($day == "Sun"){
+            
+        }
+        else{
+            
+        }
+        
+        
     }
 
 }

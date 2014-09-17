@@ -53,7 +53,7 @@ class stadium extends CI_Controller {
     }
 
     function addstadium() {
-        $userid = $this->session->userdata('id');
+        $userid = $this->session->userdata('id'); // เรียก user_id จาก session 
         $rs = $this->mystadium->showIdMax();
         $facility = $this->input->post('facility');
         $fullurl = 'www.cbtonline.com/' . $this->input->post('url') . '';
@@ -98,7 +98,7 @@ class stadium extends CI_Controller {
 
     function updatestadium($id) {
 
-        // echo $id;
+         //echo $id;
         $data = array(
             'data' => $this->mystadium->setstadium($id), //row
             'facility' => $this->mystadium->showfacility($id), //result_array
@@ -108,7 +108,8 @@ class stadium extends CI_Controller {
         );
 
         //print_r($data['total']);
-        //print_r($data['facility']);
+       // echo $this->mystadium->gettableCourt($id);
+        //print_r($data['court']);
         $this->load->view("editstadium", $data);
     }
 
