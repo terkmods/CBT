@@ -34,8 +34,8 @@ class booking extends CI_Controller {
                 echo '<tr>';
                 echo '<td>'.$st.':00</td>';
                 for ($i=0;$i<$n;$i++){
-                echo '<td><input type="checkbox" name="time[]" value="'.$st.'">'
-                        . ' <span class="badge-badge-success"> ว่าง</span></td>';
+                echo '<td><input type="hidden" name="time[]" value="'.$st.'">'
+                        . ' <button class="badge-badge-success"> ว่าง</button></td>';
                 }
                 echo '</tr>';
                 //echo 'in loop';
@@ -51,7 +51,7 @@ class booking extends CI_Controller {
             $et = $time2->end_time;
             //echo $st;
             $st = substr($st, 0,1);
-            for ($st; $st <= $et; $st++){
+            for ($st; $st <= $et; $st = $st+30){
                 echo '<tr>';
                 echo '<td>'.$st.':00</td>';
                 echo '</tr>';

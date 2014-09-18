@@ -52,8 +52,8 @@ class User_model extends CI_Model {
         return $sql;        
     }
 
-    function getUser() {
-        $sql = $this->db->query('select * from User where type = "user" ')->result();
+    function getUser($id) {
+        $sql = $this->db->query('select * from User where type = "user" and user_id = '.$id.'')->result();
         return $sql;
     }
 

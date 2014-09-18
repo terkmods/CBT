@@ -91,7 +91,7 @@ class Users extends CI_Controller {
     }
 
     public function register() {
-        $this->load->view('register');
+
 
         $rs = $this->myusers->showIdMax();
 
@@ -110,29 +110,30 @@ class Users extends CI_Controller {
             'date' => $this->myusers->getdate()
         );
 
-
+        $this->session->set_userdata($data);
         $this->db->insert("User", $data);
         echo "success";
+        $this->load->view('register');
     }
 
     function feed() {
         if ($this->session->userdata('logged')) {
-            $datasend  ['stadium'] = $this->mystadium->getallstadium();
-            
-
+            $datasend ['stadium'] = $this->mystadium->getallstadium();
+            $datasend ['province'] = $this->mystadium->getprovince();
+            $datasend ['district'] = $this->mystadium->getdistrict();
             $this->load->view('feeds', $datasend);
         } else {
-           redirect('index.php');
+            redirect('index.php');
         }
     }
-    
-     public function profile(){
-         $profile = array(
-               'data'=> $this->myusers->getUser()
-                );
-         
-       
-        $this->load->view('User_view',$profile);
+
+    public function profile($id) {
+        $profile = array(
+            'data' => $this->myusers->getUser($id)
+        );
+
+
+        $this->load->view('User_view', $profile);
     }
 
 }
