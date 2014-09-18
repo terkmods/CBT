@@ -18,7 +18,7 @@ class Admin extends CI_Controller {
     }
      public function user(){
          $user = array(
-                'data'=> $this->myusers->getUser()
+                'data'=> $this->myusers->getUserAdmin()
                 );
         $this->load->view('admin_user',$user);
     }

@@ -57,6 +57,11 @@ class User_model extends CI_Model {
         $sql = $this->db->query('select * from User where user_id='.$id)->result();
         return $sql;
     }
+    
+    function getUserAdmin(){
+        $sql = $this->db->query('select * from User where type = "user"')->result();
+        return $sql;
+    }
 
     function getStadium() {
         $sql = $this->db->query('SELECT * 

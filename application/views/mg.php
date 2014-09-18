@@ -57,8 +57,8 @@ $status = $ow->authenowner_status; ?>
 
                     <div class="col-md-3">
                         <ul class="nav nav-pills nav-stacked">
-                            <li><a href="setting.html">Basic Setting</a></li>
-                            <li class="active"><a href="mg.html">Manage stadium </a></li>
+                            <li><a href="<?php echo base_url() ?>users/edituser/<?php echo $this->session->userdata('id'); ?>">Basic Setting</a></li>
+                            <li class="active"><a href="<?= base_url() ?>stadium">Manage stadium </a></li>
                             <li><a href="hsre.html">History Reserve</a></li>
 
                         </ul>

@@ -131,7 +131,6 @@ class Users extends CI_Controller {
     }
 
     public function profile($id) {
-        //echo $id;
         $profile = array(
             'data' => $this->myusers->getUser($id)
         );
@@ -140,28 +139,57 @@ class Users extends CI_Controller {
         $this->load->view('User_view', $profile);
     }
 
-    public function edituser() {
-        $this->load->view("edit_user");
+    public function edituser($id) {
+        $profile = array(
+            'data' => $this->myusers->getUser($id)
+        );
+        
+        $this->load->view("edit_user",$profile);
     }
 
     public function updateuser($userId) {
+         $config['upload_path'] = "./asset/images/profilepic";
+        $config['allowed_types'] = '*';
+        $config['max_size'] = '10000';
+        $this->load->library('upload', $config);
+        
+        if (!$this->upload->do_upload()) {
+            echo '3444';
+            $error = array('error' => $this->upload->display_errors());
+            print_r($error);
+            //$this->load->view('edituser', $error);
+        } else {
+
+            $upload = $this->upload->data();
+        }
         $data = array(
-            'user_id' => $this->myusers->getUser($userId),
+            'user_id' => $userId,
+            
+            'email' => $this->input->post('email'),
+            'status' => $this->input->post('status'),
+            'profile_url' => $this->input->post('profile_url'),
+            'profilepic_path' => $upload['file_name'],
             'fname' => $this->input->post('fname'),
             'lname' => $this->input->post('lname'),
-            'gender' => $this->input->post('gender'),
-            'age' => $this->input->post('age'),
+            'gender' => $this->input->post('gender'),            
             'birthdate' => $this->input->post('birthdate'),
             'Style' => $this->input->post('style'),
             'club' => $this->input->post('club'),
             'address' => $this->input->post('address'),
             'phone' => $this->input->post('phone'),
+            'facebook' => $this->input->post('facebook'),
+            'twitter' => $this->input->post('twitter'),
+            'googleplus' => $this->input->post('googleplus'),
+            'instagram' => $this->input->post('instagram'),
             'aboutme' => $this->input->post('about'),
-            'profile_url' => $upload['file_name']
+            'type' => $this->input->post('type')
         );
         $this->db->update('User', $data, array('user_id' => $userId));
-        $this->load->view('edit_user');
+        $this->edituser($userId);
+        
     }
+    
+    
 
 }
 

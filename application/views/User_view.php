@@ -8,8 +8,8 @@
       <div class="row">
         <div class="col-md-3 profile-pic"><img src="<?= base_url() ?>/asset/images/imagetest/sporter.jpg" class="img-thumbnail"></div>
         <div class="col-md-3 info"><h3><?= $data['0']->fname; ?>&nbsp;<?= $data['0']->lname; ?></h3>
-        <p>Owner
-        <span class="glyphicon glyphicon-map-marker"></span>&nbsp<a href="">Thungkru, Bangkok</a>, <a href="#">Thailand</a></p>
+        <p><?= $data['0']->type ; ?>
+        <span class="glyphicon glyphicon-map-marker"></span>&nbsp<a href=""><?= $data['0']->address ; ?> </a></p>
         </div>
         <div class="col-md-4 info">
        
@@ -39,7 +39,7 @@
   </div>
   <div class="panel-body">
     <ul class="nav nav-pills">
-  <li><a href="#"><img src="<?= base_url() ?>/asset/images/imagetest/fb.png"></a></li>
+  <li><a href="www.facebook.com/<?= $data['0']->facebook ; ?>"><img src="<?= base_url() ?>/asset/images/imagetest/fb.png"></a></li>
   <li><a href="#"><img src="<?= base_url() ?>/asset/images/imagetest/twitter.png"></a></li>
   <li><a href="#"><img src="<?= base_url() ?>/asset/images/imagetest/google+.png"></a></li>
   <li><a href="#"><img src="<?= base_url() ?>/asset/images/imagetest/linkedin.png"></a></li>
