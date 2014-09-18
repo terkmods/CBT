@@ -25,7 +25,7 @@ class Users extends CI_Controller {
                 'role' => $this->session->userdata('role'),
             );
 
-            $this->load->view('index');
+            $this->load->view('index',$data);
         } else {
 
             redirect(base_url());
@@ -57,6 +57,7 @@ class Users extends CI_Controller {
         $check = $this->myusers->login($email, $password);
 
         if ($check != null) {
+            print_r($check);
             foreach ($check as $row) {
 
                 $data = array(
