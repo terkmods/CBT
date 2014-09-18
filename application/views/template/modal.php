@@ -84,7 +84,7 @@
                                     $time = "0";
                                     for ($time; $time <= "24.00"; $time++) {
                                         ?>
-                                        <option value="<?= $time ?>:00"><?= $time ?>:00</option>
+                                        <option value="<?= $time ?>.0"><?= $time ?>:00</option>
 
 <?php } ?>
                                 </select>

@@ -3,13 +3,7 @@
 
     <hr>
     <h5>ตารางจองคอร์ดของฉัน</h5>
-    <select class="form-control" name="court">
-        <?php foreach ($court as $r) { ?>
-        <option><?=$r['court_name'] ?></option>
-        
-        <?php } ?>
-
-    </select>
+    
 <div class="control-group">
         
         <div class="controls">
@@ -25,30 +19,18 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>court 1</th>
-                <th>court 2</th>
-                <th>court 3</th>
+                  <?php $i=0; foreach ($court as $r) { ?>
+        <th><?=$r['court_name'] ?></th>
+        
+        <?php $i++;} ?>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="runtime">
             <tr>
-                <td>8.00-9.00</td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>No select</td>
+        
             </tr>
-            <tr>
-                <td>9.00-10.00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>10.00-11.00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            
         </tbody>
     </table>
 </div>

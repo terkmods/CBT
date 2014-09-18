@@ -35,8 +35,10 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="<?= base_url() ?>asset/js/bootstrap.min.js"></script>
 <script src="<?= base_url() ?>asset/js/bootstrap-datepicker.js"></script>
+<script src="<?= base_url() ?>asset/js/bootstrap-switch.js"></script>
 <script type="text/javascript">
     $(function () {
+        
         $(".date-picker").datepicker();
 
         $(".date-picker").on("change", function () {
@@ -54,14 +56,14 @@
 
         $(".date-picker").on("change", function () {
             var val = $('.date-picker').datepicker('getDate');
-        
+            var id = <?php echo $this->uri->segment(3)?> ;
             $.ajax({
                 type: "POST",
                 url: "<?= base_url() ?>booking/showTablebook",
-                data: {date: val}
+                data: {date: val,stId: id,i: <?=$i?> }
             }).done(function(msg) {
-                alert(msg);
-                //aTable.fnDraw();
+                $("#runtime").html(msg);
+                //alert(msg)
             });
         });
         

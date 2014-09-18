@@ -41,6 +41,16 @@ class Stadium_model extends CI_Model {
         ;
         return $query;
     }
+    function getprovince(){
+        $query = $this->db->query('SELECT distinct province FROM `stadium`')->result();
+        ;
+        return $query;
+    }
+    function getdistrict(){
+        $query = $this->db->query('SELECT distinct district FROM `stadium` ')->result();
+        ;
+        return $query;
+    }
 
     function gettableCourt($cId) {
         $query = $this->db->query('SELECT * FROM court '
@@ -166,7 +176,7 @@ class Stadium_model extends CI_Model {
         return $query;
     }
 
-    function setTime($stId) {
+    function getTime($stId) {
         $query = $this->db->query('select * from  stadium_time  where stadium_time.stadium_id = ' . $stId)->result_array();
 
         return $query;
