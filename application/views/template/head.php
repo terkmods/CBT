@@ -10,7 +10,10 @@
         <link href="<?= base_url() ?>asset/css/bootstrap.css" rel="stylesheet">
         <link href="<?= base_url() ?>asset/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>asset/css/style.css">
+  
+        <link href="<?= base_url() ?>asset/css/bootstrap-switch.css" rel="stylesheet">
 
+        
 
         <style type="text/css">
             .top-minus{
@@ -35,7 +38,7 @@
                               <span class="icon-bar"></span>
                               <span class="icon-bar"></span>
                             </button>-->
-                            <a class="navbar-brand" href="<?php echo base_url() ?>users/feed"><img src="../../../asset/images/logo-white.png"></a>
+                            <a class="navbar-brand" href="#"><img src="../../../asset/images/logo-white.png"></a>
 
                         </div>
 
@@ -43,7 +46,7 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="#">Notifications <span class="badge"> 10</span></a></li>
-                                <li><a href="<?php echo base_url() ?>users/profile/<?php echo $this->session->userdata('id');  ?>"><?php echo $this->session->userdata('profile_url'); ?></a></li>
+                                <li><a><?php echo $this->session->userdata('profile_url'); ?></a></li>
 
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>

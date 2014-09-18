@@ -1,3 +1,6 @@
+<?php include 'template/head.php';
+ ?>
+
 <div class="tab-pane" id="mycourt">
 
 
@@ -35,3 +38,6 @@
     </table>
 </div>
 
+
+    <?php include 'template/modal.php'; ?>
+<?php include 'template/footer.php'; ?>

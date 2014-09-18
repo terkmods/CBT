@@ -102,14 +102,14 @@ class stadium extends CI_Controller {
         $data = array(
             'data' => $this->mystadium->setstadium($id), //row
             'facility' => $this->mystadium->showfacility($id), //result_array
-            'showtime' => $this->mystadium->setTime($id), //result_array  
+            'showtime' => $this->mystadium->getTime($id), //result_array  
             'court' => $this->mystadium->gettableCourt($id), //result_array  getTotalcourt
             'total' => $this->mystadium->getTotalcourt($id) //result_array  getTotalcourt
         );
 
         //print_r($data['total']);
-       // echo $this->mystadium->gettableCourt($id);
-        //print_r($data['court']);
+        //echo $this->mystadium->settime($id);
+       // print_r($data['showtime']);
         $this->load->view("editstadium", $data);
     }
 
@@ -149,8 +149,9 @@ class stadium extends CI_Controller {
             'stadium_display' => 1,
             'stadium_path' => $upload['file_name']
         );
+        
         $this->db->update('stadium', $data, array('stadium_id' => $stId));
-        // $this->load->view('stadium_view');
+        $this->updatestadium($stId);
     }
 
     function deletestadium() {
@@ -241,7 +242,7 @@ class stadium extends CI_Controller {
         $this->db->update("court", $dataprice, array('court_id' => $maxstadium));
         // $this->mystadium->addcourttime($dataprice, $data['stadium_id']);
         $this->session->set_flashdata('msg', 'เพิ่มคอร์ดเรียบร้อย');
-        redirect('stadium/updatestadium/' . $id . '#addcourt');
+        redirect('stadium/updatestadium/' . $id );
     }
 
 }

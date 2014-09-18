@@ -91,7 +91,7 @@ class Users extends CI_Controller {
     }
 
     public function register() {
-        $this->load->view('register');
+
 
         $rs = $this->myusers->showIdMax();
 
@@ -110,20 +110,17 @@ class Users extends CI_Controller {
             'date' => $this->myusers->getdate()
         );
 
-
+        $this->session->set_userdata($data);
         $this->db->insert("User", $data);
         echo "success";
+        $this->load->view('register');
     }
 
     function feed() {
         if ($this->session->userdata('logged')) {
-            $datasend = array(
-                'stadium' => $this->mystadium->getallstadium(),
-                'province'  => $this->mystadium->getprovince(),
-                'district' => $this->mystadium->getdistrict()
-            );
-
-
+            $datasend ['stadium'] = $this->mystadium->getallstadium();
+            $datasend ['province'] = $this->mystadium->getprovince();
+            $datasend ['district'] = $this->mystadium->getdistrict();
             $this->load->view('feeds', $datasend);
         } else {
             redirect('index.php');
@@ -135,61 +132,9 @@ class Users extends CI_Controller {
             'data' => $this->myusers->getUser($id)
         );
 
-        //print_r($profile['data']);
+
         $this->load->view('User_view', $profile);
     }
-
-    public function edituser($id) {
-        $profile = array(
-            'data' => $this->myusers->getUser($id)
-        );
-        
-        $this->load->view("edit_user",$profile);
-    }
-
-    public function updateuser($userId) {
-         $config['upload_path'] = "./asset/images/profilepic";
-        $config['allowed_types'] = '*';
-        $config['max_size'] = '10000';
-        $this->load->library('upload', $config);
-        
-        if (!$this->upload->do_upload()) {
-            echo '3444';
-            $error = array('error' => $this->upload->display_errors());
-            print_r($error);
-            //$this->load->view('edituser', $error);
-        } else {
-
-            $upload = $this->upload->data();
-        }
-        $data = array(
-            'user_id' => $userId,
-            
-            'email' => $this->input->post('email'),
-            'status' => $this->input->post('status'),
-            'profile_url' => $this->input->post('profile_url'),
-            'profilepic_path' => $upload['file_name'],
-            'fname' => $this->input->post('fname'),
-            'lname' => $this->input->post('lname'),
-            'gender' => $this->input->post('gender'),            
-            'birthdate' => $this->input->post('birthdate'),
-            'Style' => $this->input->post('style'),
-            'club' => $this->input->post('club'),
-            'address' => $this->input->post('address'),
-            'phone' => $this->input->post('phone'),
-            'facebook' => $this->input->post('facebook'),
-            'twitter' => $this->input->post('twitter'),
-            'googleplus' => $this->input->post('googleplus'),
-            'instagram' => $this->input->post('instagram'),
-            'aboutme' => $this->input->post('about'),
-            'type' => $this->input->post('type')
-        );
-        $this->db->update('User', $data, array('user_id' => $userId));
-        $this->edituser($userId);
-        
-    }
-    
-    
 
 }
 

@@ -80,12 +80,26 @@ class reg extends CI_Controller {
             $this->db->insert("owner", $dataowner);
             $this->session->set_userdata($datasend);
             
-            $this->load->view('index.php');
+            $this->load->view('index');
+            
         } else if ($typereg == "user") {
+              $datasend = array(
+                
+                'id' => $max,
+                'type' => $this->input->post('typeuser'),
+                'email' => $this->input->post('email'),
+                'password' => $this->input->post('pass'),
+                'phone' => $this->input->post('tel'),
+                'status' => 'ok',
+                'profile_url' => $this->input->post('url'),
+                'authenowner_status' => 'no',
+                'path_pic'=> $this->input->post('path'), // แก้ตอนอัพโหลดรูปด้วยจ้าา เปลี่ยน path นะ
+                'logged'=> TRUE
+            );
           
             $this->db->insert("User", $data);
-            $this->session->set_userdata($data);
-            $this->load->view('index.php');
+            $this->session->set_userdata($datasend);
+            $this->load->view('index');
         }
     }
 
