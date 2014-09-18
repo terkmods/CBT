@@ -12,7 +12,9 @@
                             <li class="active">
                                 <a href="<?php echo base_url() ?>users/edituser">Basic Setting</a>                
                             </li>
+                            
                             <li><a href="<?= base_url() ?>stadium">Manage stadium </a></li>
+                            
                             <li><a href="#">History Reserve</a></li>
 
                         </ul>
