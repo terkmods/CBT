@@ -85,7 +85,7 @@
                                     <td><?= $row->gender ?></td>
                                     <td class="center"><?= $row->date ?></td>
                                     <td class="center"><?= $row->status ?></td>
-                                    <td class="center"><button type="button" class="btn btn-info">View</button></td>
+                                    <td><a href="<?= base_url() ?>users/profile/<?= $row->user_id ?>" class="btn ">View</a></td>
 
                                 </tr>
                                <?php } ?>

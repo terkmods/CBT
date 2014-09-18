@@ -84,7 +84,7 @@
                                         <td><?= $row->email ?></td>
                                         <td><?= $row->type ?></td>
                                         <td><?= $row->status ?></td>
-                                        <td><button type="button" class="btn btn-info">View</button></td>
+                                         <td><a href="<?= base_url() ?>users/profile/<?= $row->user_id ?>" class="btn ">View</a></td>
                                     </tr>
                                 <?php } ?>
 
