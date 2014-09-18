@@ -1,20 +1,21 @@
 <?php include 'template/head.php';
  ?>
-
+<div class="container">
 <div class="tab-pane" id="mycourt">
 
 
     <hr>
-    <h5>ตารางจองคอร์ดของฉัน</h5>
+    
     
 <div class="control-group">
         
         <div class="controls">
             <div class="input-group">
-                <input  type="text" id="date-pik" class="date-picker form-control" />
-                <label for="date-picker-2" class="input-group-addon btn"><span class="glyphicon glyphicon-calendar"></span>
-
+                <label for="date-pik" class="input-group-addon btn">
+<span class="glyphicon glyphicon-calendar"></span> เลือกวัน
                 </label>
+                <input  type="text" id="date-pik" class="date-picker form-control" />
+                
             </div>
         </div>
     </div>
@@ -37,7 +38,7 @@
         </tbody>
     </table>
 </div>
-
+</div>
 
     <?php include 'template/modal.php'; ?>
 <?php include 'template/footer.php'; ?>

@@ -79,9 +79,13 @@ class booking extends CI_Controller {
         
         
     }
-    function reserve(){
-        $this->showTablebook();
-        $this->load->view('booking_view');
+    function reserve($stId){
+        $st = array(
+            'data' => $this->mystadium->getstadiumprofile($stId),
+            'court' => $this->mystadium->gettableCourt($stId)
+        );
+        //print_r($st['court']);
+        $this->load->view('booking_view',$st);
     }
 
 }

@@ -67,7 +67,7 @@ class reg extends CI_Controller {
             $datasend = array(
                 'owner_id' => $maxowner,
                 'id' => $max,
-                'type' => $this->input->post('typeuser'),
+                'role' => $this->input->post('typeuser'),
                 'email' => $this->input->post('email'),
                 'password' => $this->input->post('pass'),
                 'phone' => $this->input->post('tel'),
