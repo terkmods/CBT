@@ -1,4 +1,4 @@
-<?php ?>
+
 <?php include 'template/head.php'; ?>
 <div class="container">
     <h4> <a href="#">หน้าหลัก</a> /Basic Setting </h4>
@@ -7,23 +7,11 @@
             <div class="panel-heading">Account Settings</div>
             <div class="panel-body">
                 <div class="container">
-                    <div class="col-md-3">
-                        <ul class="nav nav-pills nav-stacked">
-                            <li class="active">
-                                <a href="<?php echo base_url() ?>users/edituser">Basic Setting</a>                
-                            </li>
-                            
-                            <li><a href="<?= base_url() ?>stadium">Manage stadium </a></li>
-                            
-                            <li><a href="#">History Reserve</a></li>
-
-                        </ul>
-                    </div>
+                    <?php include 'template/sideSetting.php'; ?>
                     <div class="col-md-9">
                         <div class="row">
                             <ul class="nav nav-tabs" id="myTab">
                                 <li class="active"><a href="#addStium">Edit Profile</a></li>
-
                             </ul>
                             <div class="col-md-11">
                                 <br>

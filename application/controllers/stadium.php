@@ -9,6 +9,8 @@ class stadium extends CI_Controller {
         parent::__construct();
         $this->load->model('stadium_model', 'mystadium');
         $this->load->library('session');
+    
+        
     }
 
     function index() {
@@ -16,6 +18,7 @@ class stadium extends CI_Controller {
 
             $userid = $this->session->userdata('id');
             $ownerid = $this->getOwnerid($userid);
+            
 
             $datasend = array(
                 'ow' => $this->getOwner($userid),
