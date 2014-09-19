@@ -32,9 +32,9 @@ class booking extends CI_Controller {
             $st = substr($st, 0,1);
             for ($st; $st <= $et; $st++){
                 echo '<tr>';
-                echo '<td>'.$st.':00</td>';
+                echo '<td style="width: 10%; text-align: center">'.$st.':00</td>';
                 for ($i=0;$i<$n;$i++){
-                echo '<td><input type="hidden" name="time[]" value="'.$st.'">'
+                echo '<td style="width: 20%; text-align: center" class="span6"><input type="hidden" name="time[]" value="'.$st.'">'
                         . ' <button class="badge-badge-success"> ว่าง</button></td>';
                 }
                 echo '</tr>';

@@ -49,25 +49,66 @@
     });
 </script>
 <script type="text/javascript">
+    var time1 = ['00:00 - 00:30', '00:30 - 01:00', '01:00 - 01:30', '01:30 - 02:00', '02:00 - 02:30', '02:30 - 03:00', '03:00 - 03:30', '03:30 - 04:00', '04:00 - 04:30', '04:30 - 05:00', '05:00 - 05:30', '05:30 - 06:00', '06:00 - 06:30', '06:30 - 07:00', '07:00 - 07:30', '07:30 - 08:00', '08:00 - 08:30', '08:30 - 09:00', '09:00 - 09:30', '09:30 - 10:00', '10:00 - 10:30', '10:30 - 11:00', '11:00 - 11:30', '11:30 - 12:00'];
+    var time2 = ['12:00 - 12:30', '12:30 - 13:00', '13:00 - 13:30', '13:30 - 14:00', '14:00 - 14:30', '14:30 - 15:00', '15:00 - 15:30', '15:30 - 16:00', '16:00 - 16:30', '16:30 - 17:00', '17:00 - 17:30', '17:30 - 18:00', '18:00 - 18:30', '18:30 - 19:00', '19:00 - 19:30', '19:30 - 20:00', '20:00 - 20:30', '20:30 - 21:00', '21:00 - 21:30', '21:30 - 22:00', '22:00 - 22:30', '22:30 - 23:00', '23:00 - 23:30', '23:30 - 24:00'];
+    var html = '';
+
+    $.event.special.rightclick = {
+        bindType: "contextmenu",
+        delegateType: "contextmenu"
+    };
+
+    $(document).ready(function(e) {
+    for ($i = 0; $i < time1.length; $i++) {
+    //Note// ลบ onclick="loadRequestForm();" ออกจาก td ไป
+
+    html = '<tr id="t' + ($i + 1) + '" onmousedown="RowClick(this,false);"><td style="width: 110px; text-align: center">' + time1[$i] + '</td><td id="select" class="span6" ></td></tr>';
+            $("#morning table tbody").append(html);
+    }
+    for ($j = 0; $j < time2.length; $j++) {
+    html = '<tr id="t' + ($j + 1 + 24) + '" onmousedown="RowClick(this,false);"><td style="width: 110px; text-align: center">' + time2[$j] + '</td><td id="select" class="span6"></td></tr>';
+            $("#evening table tbody").append(html);
+    }
+    
+     $('#morning, #evening').on('mouseover', 'td', function(e) {
+                                    if ($(this).text() == '') {
+                                        $(this).addClass('hover-bg');
+                                        $(this).html('คลิกเพื่อจอง');
+                                    }
+                                }).on('mouseout', 'td', function(e) {
+                                    if ($(this).text() == 'คลิกเพื่อจอง' || $(this).text() == '') {
+                                        $(this).removeClass('hover-bg');
+                                        $(this).text('');
+                                    }
+                                });
+                                });
+                                
+</script>
+<script type="text/javascript">
    
 
     $(function () {
-        $(".date-picker").datepicker();
+        //$(".date-picker").datepicker();
 
         $(".date-picker").on("change", function () {
             var val = $('.date-picker').datepicker('getDate');
-            var id = <?php echo $this->uri->segment(3)?> ;
+            var id = <?php echo $this->uri->segment(3); ?> ;
+            document.getElementById("demo").innerHTML = val;
+            console.log(val);
+             console.log(id);
+             console.log(Date.parse(val).setDate);
             $.ajax({
                 type: "POST",
                 url: "<?= base_url() ?>booking/showTablebook",
-                data: {date: val,stId: id,i: <?=$i?> }
+                data: {date: val,stId: id}
             }).done(function(msg) {
                 $("#runtime").html(msg);
+                $("#today").html(msg);
                 //alert(msg)
             });
         });
         
-//        
+        
 //        $(".date-picker").click(function() {
 //            $.ajax({
 //                type: "POST",

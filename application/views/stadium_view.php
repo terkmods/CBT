@@ -20,116 +20,11 @@
                     <br>
                     <p><a class="btn btn-primary btn-lg pull-right" role="button" data-toggle="modal" data-target="#myModal">Book Now</a></p>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title" id="myModalLabel">Booking</h4>
-                                </div>
-                                <div class="modal-body" style="text-align: center">
-                                    <div >
-                                        Booking Calendar
-
-
-                                        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-                                            <li class="active"><a href="#red" data-toggle="tab">Booking Calendar</a></li>
-                                            <li><a href="#step2" data-toggle="tab">Step2</a></li>
-                                            <li><a href="#yellow" data-toggle="tab">Not sign up</a></li>
-                                           
-                                        </ul>
-                                        <div id="my-tab-content" class="tab-content">
-                                            <div class="tab-pane active" id="red">
-                                                <h1>Booking Calendar</h1>
-                                                <div class="input-group date col-sm-4" style="text-align: center"></div>
-                                                <table class="table" style="text-align: center">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th style="text-align: center">court 1</th>
-                                                            <th style="text-align: center">court 2</th>
-                                                            <th style="text-align: center">court 3</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>8.00-9.00</td>
-                                                            <td><span class="label label-danger">ไม่ว่าง</span></td>
-                                                            <td><a href="#step2" data-toggle="tab" class="btn-success btn-sm" role="button" >ว่าง</a></td>
-                                                            <td><span class="label label-success">ว่าง</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>9.00-10.00</td>
-                                                            <td><span class="label label-danger">ไม่ว่าง</span></td>
-                                                            <td><span class="label label-success">ว่าง</span></td>
-                                                            <td><span class="label label-success">ว่าง</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>10.00-11.00</td>
-                                                            <td><span class="label label-danger">ไม่ว่าง</span></td>
-                                                            <td><span class="label label-success">ว่าง</span></td>
-                                                            <td><span class="label label-success">ว่าง</span></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="tab-pane" id="step2">
-                                                <p> จองโดย : </p>
-                                               <p> วันที่จอง :</p>
-                                               <p> เวลาที่จอง  :</p>
-                                              <p>  สนามที่จอง :</p>
-                                              <p>  คอร์ด : </p>
-                                              <p>  <input type="checkbox"> ได้อ่านข้อตกลงและระเบียบการจองของสนามแล้ว</p>
-                                                
-                                            </div>
-                                            <div class="tab-pane" id="yellow">
-                                                <h1>ยังไม่เป็นสมาชิก?</h1>
-                                                <p>กรุณา <img src="<?= base_url() ?>/asset/images/loginfacebook.png" width="250"></p><h2>or</h2>
-                                                <a href="register.html" class="btn-success btn-sm" role="button">สมัครสมาชิก</a>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                     <br> 
+                  
                      
                     <p><a class="btn btn-danger btn-lg pull-right" role="button" data-toggle="modal" data-target="#myrule">Rules</a></p>
                       <!-- Modal -->
-                    <div class="modal fade" id="myrule" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title" id="myModalLabel">Rules</h4>
-                                </div>
-                                <div class="modal-body" style="text-align: center">
-                                    กฏของสนามของฉันมีระเบียบดังนี้<br>
-                                    1.<br>
-                                    2.<br>
-                                    3.<br>
-                                    4.<br>
-                                    5.<br>
-                                    
-
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save</button>
-                            </div>
-                        </div>
-                    </div>
+             
                 </div>
 
             </div>
