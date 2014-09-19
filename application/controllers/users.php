@@ -140,32 +140,14 @@ public function edituser($id) {
         $profile = array(
             'data' => $this->myusers->getUser($id)
         );
-        
+        //print_r($profile['data']);
         $this->load->view("edit_user",$profile);
+        
     }
 
-    public function updateuser($userId) {
-         $config['upload_path'] = "./asset/images/profilepic";
-        $config['allowed_types'] = '*';
-        $config['max_size'] = '10000';
-        $this->load->library('upload', $config);
-        
-        if (!$this->upload->do_upload()) {
-            echo '3444';
-            $error = array('error' => $this->upload->display_errors());
-            print_r($error);
-            //$this->load->view('edituser', $error);
-        } else {
-
-            $upload = $this->upload->data();
-        }
+    public function updateuser($userId) {      
         $data = array(
-            'user_id' => $userId,
-            
-            'email' => $this->input->post('email'),
-            'status' => $this->input->post('status'),
-            'profile_url' => $this->input->post('profile_url'),
-            'profilepic_path' => $upload['file_name'],
+            'user_id' => $userId,          
             'fname' => $this->input->post('fname'),
             'lname' => $this->input->post('lname'),
             'gender' => $this->input->post('gender'),            
@@ -177,13 +159,34 @@ public function edituser($id) {
             'facebook' => $this->input->post('facebook'),
             'twitter' => $this->input->post('twitter'),
             'googleplus' => $this->input->post('googleplus'),
-            'instagram' => $this->input->post('instagram'),
-            'aboutme' => $this->input->post('about'),
-            'type' => $this->input->post('type')
+            'instagram' => $this->input->post('instargram'),
+            'aboutme' => $this->input->post('aboutme')          
         );
         $this->db->update('User', $data, array('user_id' => $userId));
         $this->edituser($userId);
         
+    }
+    
+    function uploaduserprofile($Id) {
+        $config['upload_path'] = "./asset/images/profilepic";
+        $config['allowed_types'] = '*';
+        $config['max_size'] = '10000';
+
+        //$userid = $this->session->userdata('id');
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload()) {
+            $error = array('error' => $this->upload->display_errors());
+
+            $this->load->view('upload_form', $error);
+        } else {
+
+            $upload = $this->upload->data();
+        }
+        $data = array(
+            'profilepic_path' => $upload['file_name']
+        );
+        $this->db->update('User', $data, array('user_id' => $Id));
+        redirect('users/edituser/' . $Id);
     }
     
     
