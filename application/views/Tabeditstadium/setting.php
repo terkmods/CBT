@@ -13,9 +13,12 @@
         <div class="col-md-10">
             <p>
                 <img src="<?= base_url() ?>asset/images/stadiumpic/<?= $data->stadium_path ?>" width="200" alt="..." class="img-thumbnail top-mar">
-                <input type="file" title="Search for a file to add" class="top-mar " name="userfile" >
+<!--                <input type="file" title="Search for a file to add" class="top-mar " name="userfile" >-->
+                
             </p>
+            <a class="btn btn-primary btn-lg pull-left" role="button" data-toggle="modal" data-target="#upload">Upload Now</a>
         </div>
+        <hr>
         <div class="col-md-2 pull-left text-right" style="padding-top: 2px">
             <h5>URL</h5>
         </div>   

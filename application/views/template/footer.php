@@ -38,14 +38,14 @@
 <script src="<?= base_url() ?>asset/js/bootstrap-switch.js"></script>
 <script type="text/javascript">
     $(function () {
-        
-        $(".date-picker").datepicker();
 
-        $(".date-picker").on("change", function () {
-            var id = $(this).attr("id");
-            var val = $("label[for='" + id + "']").text();
-            $("#msg").text(val + " changed");
-        });
+
+
+//        $(".date-picker").on("change", function () {
+//            var id = $(this).attr("id");
+//            var val = $("label[for='" + id + "']").text();
+//            $("#msg").text(val + " changed");
+//        });
     });
 </script>
 <script type="text/javascript">
@@ -58,57 +58,81 @@
         delegateType: "contextmenu"
     };
 
-    $(document).ready(function(e) {
-    for ($i = 0; $i < time1.length; $i++) {
-    //Note// ลบ onclick="loadRequestForm();" ออกจาก td ไป
+    $(document).ready(function (e) {
+        for ($i = 0; $i < time1.length; $i++) {
+            //Note// ลบ onclick="loadRequestForm();" ออกจาก td ไป
 
-    html = '<tr id="t' + ($i + 1) + '" onmousedown="RowClick(this,false);"><td style="width: 110px; text-align: center">' + time1[$i] + '</td><td id="select" class="span6" ></td></tr>';
+            html = '<tr id="t' + ($i + 1) + '" onmousedown="RowClick(this,false);"><td style="width: 110px; text-align: center">' + time1[$i] + '</td><td id="select" class="span6" ></td></tr>';
             $("#morning table tbody").append(html);
-    }
-    for ($j = 0; $j < time2.length; $j++) {
-    html = '<tr id="t' + ($j + 1 + 24) + '" onmousedown="RowClick(this,false);"><td style="width: 110px; text-align: center">' + time2[$j] + '</td><td id="select" class="span6"></td></tr>';
+        }
+        for ($j = 0; $j < time2.length; $j++) {
+            html = '<tr id="t' + ($j + 1 + 24) + '" onmousedown="RowClick(this,false);"><td style="width: 110px; text-align: center">' + time2[$j] + '</td><td id="select" class="span6"></td></tr>';
             $("#evening table tbody").append(html);
-    }
-    
-     $('#morning, #evening').on('mouseover', 'td', function(e) {
-                                    if ($(this).text() == '') {
-                                        $(this).addClass('hover-bg');
-                                        $(this).html('คลิกเพื่อจอง');
-                                    }
-                                }).on('mouseout', 'td', function(e) {
-                                    if ($(this).text() == 'คลิกเพื่อจอง' || $(this).text() == '') {
-                                        $(this).removeClass('hover-bg');
-                                        $(this).text('');
-                                    }
-                                });
-                                });
-                                
+        }
+
+        $('#morning, #evening').on('mouseover', 'td', function (e) {
+            if ($(this).text() == '') {
+                $(this).addClass('hover-bg');
+                $(this).html('คลิกเพื่อจอง');
+            }
+        }).on('mouseout', 'td', function (e) {
+            if ($(this).text() == 'คลิกเพื่อจอง' || $(this).text() == '') {
+                $(this).removeClass('hover-bg');
+                $(this).text('');
+            }
+        });
+    });
+
 </script>
 <script type="text/javascript">
-   
+function courtchange() {
+    var x = document.getElementById("courtselect").selectedIndex;
+    var data = document.getElementsByTagName("option")[x].value;
+        data = data.split(',');
+   console.log(data);
+    document.getElementById("court").innerHTML = data[0];
+}
+</script>
+<script type="text/javascript">
+
 
     $(function () {
-        //$(".date-picker").datepicker();
+        $(".date-picker").datepicker();
 
         $(".date-picker").on("change", function () {
-            var val = $('.date-picker').datepicker('getDate');
-            var id = <?php echo $this->uri->segment(3); ?> ;
-            document.getElementById("demo").innerHTML = val;
+
+            var val = $('.date-picker').datepicker('getDate').toDateString();
+            var id = <?php echo $this->uri->segment(3); ?>;
+
+            val = val.split(' ');
+            var weekday = new Array();
+            weekday['Mon'] = "จันทร์";
+            weekday['Tue'] = "อังคาร";
+            weekday['Wed'] = "พุธ";
+            weekday['Thu'] = "พฤหัสบดี";
+            weekday['Fri'] = "ศุกร์";
+            weekday['Sat'] = "เสาร์";
+            weekday['Sun'] = "อาทิตย์";
+            var dayOfWeek = weekday[val[0]];
+
+            document.getElementById("dayOfWeek").innerHTML =  dayOfWeek + ' ที่ ' + val[2] + ' พ.ศ. ' + val[3];
+
             console.log(val);
-             console.log(id);
-             console.log(Date.parse(val).setDate);
+
+            console.log(id);
+
             $.ajax({
                 type: "POST",
                 url: "<?= base_url() ?>booking/showTablebook",
-                data: {date: val,stId: id}
-            }).done(function(msg) {
+                data: {date: val, stId: id}
+            }).done(function (msg) {
                 $("#runtime").html(msg);
                 $("#today").html(msg);
                 //alert(msg)
             });
         });
-        
-        
+
+
 //        $(".date-picker").click(function() {
 //            $.ajax({
 //                type: "POST",
@@ -119,12 +143,12 @@
 //                //aTable.fnDraw();
 //            });
 //        });
-        
+
     });
-       
-       
-       
-   
+
+
+
+
 </script>
 <script type="text/javascript">
     /* pagination */

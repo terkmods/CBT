@@ -117,23 +117,14 @@ class stadium extends CI_Controller {
     }
 
     function editstadium($stId) {
-        $config['upload_path'] = "./asset/images/stadiumpic";
-        $config['allowed_types'] = '*';
-        $config['max_size'] = '10000';
+     
 
         $userid = $this->session->userdata('id');
-        $this->load->library('upload', $config);
+   
         $facility = $this->input->post('facility');
         $fullurl = 'www.cbtonline.com/' . $this->input->post('url') . '';
 
-        if (!$this->upload->do_upload()) {
-            $error = array('error' => $this->upload->display_errors());
-
-            $this->load->view('upload_form', $error);
-        } else {
-
-            $upload = $this->upload->data();
-        }
+    
 
 
         $data = array(
@@ -149,8 +140,8 @@ class stadium extends CI_Controller {
             'province' => $this->input->post('province'),
             'zipcode' => $this->input->post('zip'),
             'rule' => $this->input->post('rule'),
-            'stadium_display' => 1,
-            'stadium_path' => $upload['file_name']
+            'stadium_display' => 1
+            
         );
         
         $this->db->update('stadium', $data, array('stadium_id' => $stId));
@@ -217,6 +208,28 @@ class stadium extends CI_Controller {
         );
         $this->db->update('stadium', $data, array('stadium_id' => $stId));
         redirect('stadium/profile/' . $stId);
+    }
+    
+        function uploadstadiumprofile($stId) {
+        $config['upload_path'] = "./asset/images/stadiumpic";
+        $config['allowed_types'] = '*';
+        $config['max_size'] = '10000';
+
+        //$userid = $this->session->userdata('id');
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload()) {
+            $error = array('error' => $this->upload->display_errors());
+
+            $this->load->view('upload_form', $error);
+        } else {
+
+            $upload = $this->upload->data();
+        }
+        $data = array(
+            'stadium_path' => $upload['file_name']
+        );
+        $this->db->update('stadium', $data, array('stadium_id' => $stId));
+        redirect('stadium/updatestadium/' . $stId);
     }
 
     function addcourt($id) {
