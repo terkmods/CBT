@@ -47,7 +47,7 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="#">Notifications <span class="badge"> 10</span></a></li>
-                                <li><a><?php echo $this->session->userdata('profile_url')  ?> <?=$this->session->userdata('role')?></a></li>
+                                <li><a><?php echo $this->session->userdata('profile_url') ?> <?=$this->session->userdata('role')?></a></li>
 
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
