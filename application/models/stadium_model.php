@@ -35,6 +35,10 @@ class Stadium_model extends CI_Model {
 
         return $query;
     }
+    function getsumcourt($stId){
+         $query = $this->db->query('SELECT count(stadium_id) from court where stadium_id = '. $stId)->result();
+         return $query;
+    }
 
     function getallstadium() {
         $query = $this->db->query('SELECT * FROM `stadium` ORDER BY stadium_id DESC  ')->result();
@@ -51,6 +55,8 @@ class Stadium_model extends CI_Model {
         ;
         return $query;
     }
+    
+    
 
     function gettableCourt($cId) {
         $query = $this->db->query('SELECT * FROM court '
