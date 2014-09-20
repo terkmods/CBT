@@ -66,10 +66,10 @@
                         <label for="date-pik" class="input-group-addon btn">
                            เลือกคอร์ด
                         </label>
-                        <select class="form-control">
+                        <select class="form-control" id="courtselect" onchange="courtchange()">
                             <option value="default">เลือกคอร์ด </option> 
                             <?php  foreach ($court as $ct) { ?>        
-                            <option value="<?=$ct['court_name']?>"><?=$ct['court_name']?></option>
+                            <option value="<?=$ct['court_name']?>,<?=$ct['court_id']?>" id="courtoption"><?=$ct['court_name']?></option>
                             <?php } ?>
                         </select>
 
@@ -79,7 +79,7 @@
         </div>
         <div class="row">
             <div class="today col-md-5 col-md-offset-5 ">
-                <h4> วันที่ </h4> <span id="demo"></span>
+                <h4>วัน : <span id="dayOfWeek" style="font-size: 15px"></span></h4> <h4> คอร์ด : <span id="court"></span></h4>
             </div>
         </div>
         <div class="col-md-5 col-md-offset-1">
