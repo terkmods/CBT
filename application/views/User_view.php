@@ -6,7 +6,7 @@
         </div>  
     <div class="container upper-profile">
       <div class="row">
-        <div class="col-md-3 profile-pic"><img src="<?= base_url() ?>/asset/images/imagetest/sporter.jpg" class="img-thumbnail"></div>
+        <div class="col-md-3 profile-pic"><img src="<?= base_url() ?>/asset/images/profilepic/<?= $data['0']->profilepic_path ; ?>" class="img-thumbnail"></div>
         <div class="col-md-3 info"><h3><?= $data['0']->fname; ?>&nbsp;<?= $data['0']->lname; ?></h3>
         <p><?= $data['0']->type ; ?>
         <span class="glyphicon glyphicon-map-marker"></span>&nbsp<a href=""><?= $data['0']->address ; ?> </a></p>

@@ -16,14 +16,14 @@
                             <div class="col-md-11">
                                 <br>
 
-                                <form class="form-horizontal" method="post" role="form" action="<?= base_url()?>users/updateuser/<?=$this->uri->segment(3)?>" enctype="multipart/form-data">
+                                <form class="form-horizontal" method="post" role="form" action="<?= base_url() ?>users/updateuser/<?= $this->uri->segment(3) ?>" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-2 control-label">Profile picture</label>
                                         <div class ="col-md-5">
-
                                             <img src="<?= base_url() ?>asset/images/profilepic/<?= $data['0']->profilepic_path; ?>" width="200" alt="" class="img-thumbnail top-mar">
-                                            <input type="file" title="Search for a file to add" class="top-mar " name="userfile">
-
+                                         
+                                            <br>
+                                            <a class="btn btn-default pull-left" role="button" data-toggle="modal" data-target="#uploadprofileuser">Upload Now</a>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -52,24 +52,33 @@
                                         </div>
                                     </div>
                                     <hr>
+
+
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-2 control-label">First Name</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="fname" value="<?= $data['0']->fname; ?>" disabled>
+                                            <input type="text" class="form-control" name="fname" value="<?= $data['0']->fname; ?>" >
                                         </div>
                                         <label for="inputPassword3" class="col-sm-2 control-label">Last Name</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="lname" value="<?= $data['0']->lname; ?>" disabled>
+                                            <input type="text" class="form-control" name="lname" value="<?= $data['0']->lname; ?>" >
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-2 control-label">Gender</label>
                                         <div class="col-sm-2">
-                                            <input type="text" class="form-control" name="gender" value="<?= $data['0']->gender; ?>" disabled>
+                                          
+                                        <select class="form-control" name="gender"  >                                                                                   
+                                            <option>male</option>
+                                            <option>female</option>                                                                                                                                   
+                                        </select>
                                         </div>
+                                        
+                                           
+                                       
                                         <label for="inputPassword3" class="col-sm-2 control-label">Birth Date</label>
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control" name="birthdate" value="<?= $data['0']->birthdate; ?>" disabled>
+                                            <input type="text" class="form-control" name="birthdate" value="<?= $data['0']->birthdate; ?>" >
                                         </div>                             
                                     </div>
 
@@ -118,13 +127,13 @@
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-2 control-label">Instagram</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="instargram" <?= $data['0']->instagram; ?> >
+                                            <input type="text" class="form-control" name="instargram" value=' <?= $data['0']->instagram; ?>' >
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-2 control-label">About Me</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="aboutme" <?= $data['0']->aboutme; ?> >
+                                            <input type="text" class="form-control" name="aboutme" value=' <?= $data['0']->aboutme; ?> '>
                                         </div>
                                     </div>
 
@@ -142,5 +151,5 @@
         </div>        
     </div>
 </div>
-
+<?php include 'template/modal.php'; ?>
 <?php include 'template/footer.php'; ?>

@@ -4,7 +4,7 @@
     <div class="row">
          <?php include 'template/sidefeed.php'; ?>
         
-             <a href="compare.html" class="compare"> <span class="glyphicon glyphicon-tasks"></span> &nbsp;Compare</a>
+             <a href="#" class="compare"> <span class="glyphicon glyphicon-tasks"></span> &nbsp;Compare</a>
          <div class="col-md-8 pull-right">
                     <div id="pin">
                         <div id="list">
@@ -19,10 +19,8 @@
                                     
                                     <div class="line1">
                                         คะแนน :  <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div> 
-                                    <div class="line1">  <a href="#"><span class="glyphicon glyphicon-map-marker"></span></a>ที่อยู่ : เขต'.$row->district.' แขวง'.$row->subdistrict.' '.$row->province.' </div>
-                                    <div class="line1">จำนวนคอร์ด  คอร์ด 
-                                        | ประเภทพิ้น  ไม้ปาร์เก้ และ พื้นยาง </div>
-                                    <div class="line1"> <span class="glyphicon glyphicon-earphone"> </span>&nbsp; 09-2302000 &nbsp;  <span class="glyphicon glyphicon-dashboard"></span> &nbsp; จ.- ศ. &nbsp;&nbsp;เวลา 9.00-22.00</div>
+                                    <div class="line1">  <a href="#"><span class="glyphicon glyphicon-map-marker"></span></a>ที่อยู่ : เขต'.$row->district.' แขวง'.$row->subdistrict.' '.$row->province.' </div>            
+                                    <div class="line1"> <span class="glyphicon glyphicon-earphone"> </span>&nbsp; '.$row->tel.' &nbsp;  <span class="glyphicon glyphicon-dashboard"></span> &nbsp; จ.- ศ. &nbsp;&nbsp;เวลา 9.00-22.00</div>
                                     <div class="line1">  สิ่งอำนวยความสะดวก <img src="images/bath.png" width="20" alt="มีห้องอาบน้ำ" title="มีห้องอาบน้ำ">|
                                         <img src="images/iconbad.png" width="20" alt="มีครูสอน" title="มีครูสอน">|
                                         <img src="images/f1.png" width="20" alt="มีก๊วนตี" title="มีก๊วนตี">|
@@ -32,7 +30,7 @@
                                         ราคา 150/ชม. สำหรับ คอร์ดที่ 1-6 ทุกวัน ทุกเวลา 
                                     </div>
                                     <div>
-                                 <a href='?> <?php echo base_url() ?><?php echo 'stadium/profile/'.$row->stadium_id.' class="btn ">View</a>
+                                 <a href= ' ?><?php echo base_url() ?><?php echo 'stadium/profile/'.$row->stadium_id.' class="btn ">View</a> 
                                     </div>
                                 </div>
                             </div>'
