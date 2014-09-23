@@ -9,6 +9,7 @@ class booking extends CI_Controller {
         parent::__construct();
         $this->load->model('user_model', 'users');
         $this->load->model('stadium_model', 'mystadium');
+        $this->load->model('booking_model', 'booking');
         $this->load->library('session');
     }
 
@@ -171,25 +172,45 @@ class booking extends CI_Controller {
     }
 
     function doBooking() {
-       $d =  $this->input->post('dateid');
-       $date_elements = explode("/", $d);
-       $date_inverse = $date_elements[2] . '-' . $date_elements[0] . '-' . $date_elements[1];
+        $d = $this->input->post('dateid');
+        $date_elements = explode("/", $d);
+        $date_inverse = $date_elements[2] . '-' . $date_elements[0] . '-' . $date_elements[1];
         $data = array(
-            'reserve_id'=> 0,
-            'stadium_id'=> $this->input->post('stadiumid'),
-            'court_id'=> $this->input->post('courtid'),
-            'user_id'=> $this->input->post('userid'),
-            'notification_user'=> NULL,
-            'notification_owner'=> null, 
-            'start_time'=> $date_inverse.' '.$this->input->post('start_time').':00', 
-            'end_time' => $date_inverse.' '.$this->input->post('end_time').':00'
-          
+            'reserve_id' => 0,
+            'stadium_id' => $this->input->post('stadiumid'),
+            'court_id' => $this->input->post('courtid'),
+            'user_id' => $this->input->post('userid'),
+            'notification_user' => NULL,
+            'notification_owner' => null,
+            'start_time' => $date_inverse . ' ' . $this->input->post('start_time') . ':00',
+            'end_time' => $date_inverse . ' ' . $this->input->post('end_time') . ':00',
+            'sumprice' => $this->input->post('allprice'),
         );
-       // print_r($data);
-            $this->db->insert("reserve", $data);
+        //print_r($data);
+        $this->db->insert("reserve", $data);
+        $this->load->view("confrim_booking");
     }
-    function historyBooking(){
+
+    function historyBooking() {
+        $userId = $this->session->userdata('id');
+        $datasend['allbooking'] = $this->booking->getAllBooking($userId);
+        //print_r($datasend);
+        $this->load->view("history_booking", $datasend);
+    }
+
+    function cancelbooking($id) {
+
+        $this->db->delete('reserve', array('reserve_id' => $id));
+        $this->historyBooking();
+    }
+
+    public function get_bookings($c_id, $date) {
+
+        $data = $this->booking->get_bookings($c_id, $date);
+       // print_r($data);
         
+        echo json_encode($data);
+       // echo 'eeeeee';
     }
 
 }

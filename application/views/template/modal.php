@@ -412,9 +412,10 @@
                     <input type="hidden" name="stadiumid" value="<?=$data['0']->stadium_id?>">
 <!--                    <input type="hidden" id="courtid" value="<?=$user['0']->court_id?>">-->
                     <input type="hidden" id="tr_id">
-                    <input type="hidden" id="courtid" name="courtid">
+                    <input type="hidden" id="courtid" name="courtid" >
                     <input type="hidden" id="error_count" value="0">
                     <input type="hidden" id="dateid" name="dateid">
+                    <input type="hidden" id="sumpricesend" name="allprice">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

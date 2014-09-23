@@ -66,6 +66,9 @@
     var price;
     var st_sun_price;
     var m_f_price;
+    var date_inverse =null;
+    var date_elements =null;
+
     ///////////////////////
     //////////////////////
     function addZero(str) {
@@ -85,6 +88,7 @@
 
         document.getElementById("priceja").innerHTML = price;
         document.getElementById("sumprice").innerHTML = price / 2 + "(30 นาที )";
+        $("#sumpricesend").val(price/2);
       
         $("#courtid").val(court[1]);
         $("#dateid").val($('.date-picker').val());
@@ -148,8 +152,11 @@
         console.log(sumprice);
         console.log(price);
         console.log(dayOfWeek);
+        
         document.getElementById("sumprice").innerHTML = sumprice + " ( " + hour + " ชม. " + halftime + " นาที)";
         // console.log(parseInt(endtime[0]) - parseInt(starttime[0]));
+        $("#sumpricesend").val(sumprice);
+        //console.log(allprice);
     }
     function clearAll() {
         for (var i = 0; i < trs.length; i++) {
@@ -161,9 +168,9 @@
         var x = document.getElementById("courtselect").selectedIndex;
         court = document.getElementsByTagName("option")[x].value;
         court = court.split(',');
-        console.log(court);
-        console.log(court[0]);
-        console.log(court[1]);
+//        console.log(court);
+//        console.log(court[0]);
+//        console.log(court[1]);
         //document.getElementById("court").innerHTML = court[0];
         $.ajax({
             type: "POST",
@@ -177,8 +184,8 @@
 //                endtimeja = obj.endtime;
             m_f_price = obj.m_f_price;
             st_sun_price = obj.st_sun_price;
-            console.log(obj);
-             console.log(obj.court_id);
+           // console.log(obj);
+             //console.log(obj.court_id);
             show = ' ';
             show = ' <tr>' +
                     '<td style="width: 110px; text-align: center">ชื่อคอร์ด</td>' +
@@ -204,7 +211,33 @@
             }
             // alert(price);
         });
+
+
+        
+         $.get('/booking/get_bookings/'+court[1]+'/'+date_inverse+'', function(data) {
+//            for (var i = 0; i < data.length; i++) {
+//            var start = data[i].start.substring(0, 5);
+//                    for ($i = 0; $i < time1.length; $i++) {
+//            //Note// ลบ onclick="loadRequestForm();" ออกจาก td ไป
+//            var time = time1[$i].substring(0, 5);
+//                    if (time == start) {
+//            $('#t' + ($i + 1)).find('td:eq(1)').html(time == start ? (data[i].description == '' ? '<b>จองโดย:</b> ' + data[i].firstname : '<b>จองโดย:</b> ' + data[i].firstname + ' (' + data[i].description
+//                    + ')') : '').addClass('bookline');
+//            }
+//            }
+//            }
+            //var obj = JSON.parse(data);
+            console.log(court[1]);
+            console.log(datesendnaja);
+            alert(json_decode(data));
+            
+            }, 'json');
+         
+        
+        
     }
+   
+    
     $(function () {
         $(".date-picker").datepicker();
         var time1 = ['00:00 - 00:30', '00:30 - 01:00', '01:00 - 01:30', '01:30 - 02:00', '02:00 - 02:30', '02:30 - 03:00', '03:00 - 03:30', '03:30 - 04:00', '04:00 - 04:30', '04:30 - 05:00', '05:00 - 05:30', '05:30 - 06:00', '06:00 - 06:30', '06:30 - 07:00', '07:00 - 07:30', '07:30 - 08:00', '08:00 - 08:30', '08:30 - 09:00', '09:00 - 09:30', '09:30 - 10:00', '10:00 - 10:30', '10:30 - 11:00', '11:00 - 11:30', '11:30 - 12:00'
@@ -214,6 +247,10 @@
         $(".date-picker").on("change", function () {
 
             var val = $('.date-picker').datepicker('getDate').toDateString();
+            datesendnaja = $('.date-picker').val();
+            
+          var date_elements = datesendnaja.split('/');
+           date_inverse = date_elements[2] + '-' + date_elements[0] + '-' + date_elements[1];
             var id = <?php echo $this->uri->segment(3); ?>;
             console.log($('.date-picker').val());
             val = val.split(' ');
