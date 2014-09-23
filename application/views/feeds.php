@@ -3,8 +3,9 @@
 <div class="container " style="margin-top: 20px;">
     <div class="row">
          <?php include 'template/sidefeed.php'; ?>
-        
-             <a href="#" class="compare"> <span class="glyphicon glyphicon-tasks"></span> &nbsp;Compare</a>
+        <form action="<?php echo base_url()?>stadium/compare" method="post">
+             <button type='submit' class="compare" ><span class="glyphicon glyphicon-tasks"></span> &nbsp;Compare</button>
+              
          <div class="col-md-8 pull-right">
                     <div id="pin">
                         <div id="list">
@@ -29,21 +30,26 @@
                                     <div class="line1">
                                         ราคา 150/ชม. สำหรับ คอร์ดที่ 1-6 ทุกวัน ทุกเวลา 
                                     </div>
-                                    <div>
-                                 <a href= ' ?><?php echo base_url() ?><?php echo 'stadium/profile/'.$row->stadium_id.' class="btn ">View</a> 
+                                    <div class="inline">
+                                    <a href= ' ?><?php echo base_url() ?><?php echo 'stadium/profile/'.$row->stadium_id.' class="btn ">View</a> 
+                                   
+                                        <lable class="pull-right">
+                                            <input type="checkbox" value="'.$row->stadium_id.'" name="compare[]">compare
+                                        </lable>
+                                   
                                     </div>
                                 </div>
                             </div>'
                            ; }?>
                             <!-- ... -->
-                             
+                          
                            
                         </div>
                     </div>
                     <div style="clear:both;"></div>
                 </div>
-
-        
+             
+        </form> 
     </div>
 </div>
 

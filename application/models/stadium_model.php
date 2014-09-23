@@ -201,5 +201,39 @@ class Stadium_model extends CI_Model {
         }
         return $query;
     }
+    
+    public function showcompare($data){
+        $stringsql = ' ';
+        for($i=1;$i<sizeof($data);$i++){          
+               $stringsql = $stringsql." or stadium_id = ".$data[$i];              
+       }
+        
+        $sql = "select * from stadium where stadium_id =".$data[0].$stringsql;
+        
+    $query =   $this->db->query($sql)->result();// row = แถวเดียว result = หลายแถว
+    return $query;   
+    }
+    
+    public function showtime($data){
+        $stringsql = ' ';
+        for($i=1;$i<sizeof($data);$i++){          
+               $stringsql = $stringsql." or stadium_id = ".$data[$i];              
+       }       
+        $sql = "select * from stadium_time where stadium_id =".$data[0].$stringsql;
+        
+    $query =   $this->db->query($sql)->result();// row = แถวเดียว result = หลายแถว
+    return $query;   
+    }
+    
+    public function showprice($data){
+        
+          $rs = $this->db->select_min('m_f_price')->get('court')->where('stadium_id','');
+          $rs = $this->db->select_min('st_sun_price')->get('court')->where('stadium_id','');
+          
+        
+        
+    $query =   $this->db->query($sql)->result();
+    return $query;   
+    }
 
 }

@@ -101,6 +101,7 @@ class reg extends CI_Controller {
             $this->session->set_userdata($datasend);
             $this->load->view('index');
         }
+        
     }
 
 }

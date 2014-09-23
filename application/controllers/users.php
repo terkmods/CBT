@@ -193,6 +193,9 @@ public function edituser($id) {
         redirect('users/edituser/' . $Id);
     }
     
+    function coach(){
+         $this->load->view('coach_view');
+    }
     
 
 

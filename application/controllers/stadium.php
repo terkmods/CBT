@@ -122,17 +122,15 @@ class stadium extends CI_Controller {
             'end_time' => $this->input->post('endtime'),
             'type' => $this->input->post('type')
         );
-       
+
         //echo $data['type']['0'];
         for ($r = 0; $r < 2; $r++) {
-            $sql = 'UPDATE  `backeyefin_cbt`.`stadium_time` SET  `open_time` =  '.$data['open_time'][$r].',
-                `end_time` =  '.$data['end_time'][$r].'
-                 WHERE `stadium_time`.`stadium_id` = '.$stId.' And type ="'.$data['type'][$r].'"';
-                 $this->db->query($sql);
-        
-        
+            $sql = 'UPDATE  `backeyefin_cbt`.`stadium_time` SET  `open_time` =  ' . $data['open_time'][$r] . ',
+                `end_time` =  ' . $data['end_time'][$r] . '
+                 WHERE `stadium_time`.`stadium_id` = ' . $stId . ' And type ="' . $data['type'][$r] . '"';
+            $this->db->query($sql);
         }
-       $this->updatestadium($stId);
+        $this->updatestadium($stId);
     }
 
     function editstadium($stId) {
@@ -174,121 +172,127 @@ class stadium extends CI_Controller {
 
             if ($check != null) {
                 $this->session->set_flashdata('msg', 'ลบสนามเรียบร้อย');
-                    redirect('index.php/stadium');
-                    }
-                    } else {
+                redirect('index.php/stadium');
+            }
+        } else {
 
-                    $this->session->set_flashdata('msg', 'กรุณาเลือกสนาม');
-                    redirect('stadium');
-                    }
-                    }
+            $this->session->set_flashdata('msg', 'กรุณาเลือกสนาม');
+            redirect('stadium');
+        }
+    }
 
-                    function delcourt() {
-                    $id = $this->uri->segment(3);
-                    $stId = $this->uri->segment(4);
-                    $this->db->delete('court', array(  'court_id' => $id));
-                    $this->session->set_flashdata('msg', 'ลบสนามเรียบร้อย');
+    function delcourt() {
+        $id = $this->uri->segment(3);
+        $stId = $this->uri->segment(4);
+        $this->db->delete('court', array('court_id' => $id));
+        $this->session->set_flashdata('msg', 'ลบสนามเรียบร้อย');
 
-                    redirect('stadium/updatestadium/' . $stId . '#addcourt');
-                    }
+        redirect('stadium/updatestadium/' . $stId . '#addcourt');
+    }
 
-                    function test() {
-                    $facility = $this->input->post('facility');
-                    $this->mystadium->addfacility($facility, 3);
-                    print_r($facility);
-                    }
+    function test() {
+        $facility = $this->input->post('facility');
+        $this->mystadium->addfacility($facility, 3);
+        print_r($facility);
+    }
 
-                    function profile($stId) {
-                    $st = array(  'data' => $this->mystadium->getstadiumprofile($stId)
-                    );
-                    // print_r($st);
-                    $this->load->view('stadium_view', $st);
-                    }
+    function profile($stId) {
+        $st = array('data' => $this->mystadium->getstadiumprofile($stId)
+        );
+        // print_r($st);
+        $this->load->view('stadium_view', $st);
+    }
 
-                    function uploadcoverphoto($stId) {
-                    $config['upload_path'
+    function uploadcoverphoto($stId) {
+        $config['upload_path'
+                ] = "./asset/images/stadiumpic";
+        $config['allowed_types'] = '*';
+        $config['max_size'] = '10000';
 
-] = "./asset/images/stadiumpic";
-            $config['allowed_types'] = '*';
-            $config['max_size'] = '10000';
+        //$userid = $this->session->userdata('id');
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload()) {
+            $error = array('error' => $this->upload->display_errors());
 
-            //$userid = $this->session->userdata('id');
-            $this->load->library('upload',  $config);
-                    if(!$this->upload->do_upload()) {
-                    $error = array           (  'error' => $this->upload->display_errors());
+            $this->load->view('upload_form', $error);
+        } else {
 
-                    $this->load->view('upload_form', $error);
-                    } else {
-
-                    $upload = $this->upload->data();
-                    }
-                    $data = array(
-
+            $upload = $this->upload->data();
+        }
+        $data = array(
             'cover_path' => $upload['file_name']
-            );
-            $this->db->update('stadium', $data, 
+        );
+        $this->db->update('stadium', $data, array('stadium_id' => $stId));
+        redirect('stadium/profile/' . $stId);
+    }
 
-            array('stadium_id' => $stId));
-            redirect('stadium/profile/' . $stId);
-                    }
+    function uploadstadiumprofile($stId) {
+        $config['upload_path'] = "./asset/images/stadiumpic";
+        $config['allowed_types'] = '*';
+        $config['max_size'] = '10000';
 
-                    function uploadstadiumprofile($stId) {
-                    $config['upload_path' ]  = "./asset/images/stadiumpic";
-            $config['allowed_types'] = '*';
-            $config['max_size'] = '10000';
+        //$userid = $this->session->userdata('id');
+        $this->load->library
+                ('upload', $config);
+        if (!$this->upload->do_upload()) {
+            $error = array(
+                'error' => $this->upload->display_errors());
 
-            //$userid = $this->session->userdata('id');
-            $this->load->library 
+            $this->load->view('upload_form', $error);
+        } else {
 
-('upload', $config);
-            if(!$this->upload->do_upload()) {
-                    $error = array( 
+            $upload = $this->upload->data();
+        }
 
-            'error' => $this->upload->display_errors() );
-
-                    $this->load->view('upload_form', $error);
-                    } else {
-
-                    $upload = $this->upload->data();
-                    }
-
-                    $data = array( 'stadium_path' => $upload['file_name'  ]
-                    );
-                    $this->db->update('stadium', $data, array ( 
-
+        $data = array('stadium_path' => $upload['file_name']
+        );
+        $this->db->update('stadium', $data, array(
             'stadium_id' => $stId));
-            redirect('stadium/updatestadium/'.  $stId);
-                    }
+        redirect('stadium/updatestadium/' . $stId);
+    }
 
-                    function addcourt($id) {
+    function addcourt($id) {
 
-                    $rs = $this->mystadium->showIdCourtMax();
-                    foreach($rs as $r) {
-                    $maxstadium = $r['court_id' ]+ "1";
-                    }
-                    //$courtid = $this->mystadium->getcourt($id);
-                    // echo $id;
-                    $data = array(  'court_id' => $maxstadium,
-                    'stadium_id' => $id,
-                    'court_name' => $this->input->post('courtname'),
-                    'type' => $this->input->post('type')
-                    );
-                    $this->db->insert("court", $data);
-                    $dataprice = array ( 
-
+        $rs = $this->mystadium->showIdCourtMax();
+        foreach ($rs as $r) {
+            $maxstadium = $r['court_id'] + "1";
+        }
+        //$courtid = $this->mystadium->getcourt($id);
+        // echo $id;
+        $data = array('court_id' => $maxstadium,
+            'stadium_id' => $id,
+            'court_name' => $this->input->post('courtname'),
+            'type' => $this->input->post('type')
+        );
+        $this->db->insert("court", $data);
+        $dataprice = array(
             'court_id' => $maxstadium,
-            'm_f_price' => $this->input-> post('price1'),
-                    'm_f' => $this->input->post('typedate1'),
-                    'st_sun_price' => $this->input->post('price2'),
-                    'st_sun' => $this->input->post('typedate2')
-                    );
-                    // print_r($dataprice);
-                    $this->db->update("court", $dataprice, array  ( 'court_id' => $maxstadium));
-                    // $this->mystadium->addcourttime($dataprice, $data['stadium_id']);
-                    $this->session->set_flashdata('msg', 'เพิ่มคอร์ดเรียบร้อย');
-                    redirect('stadium/updatestadium/' . $id);
-                    }
+            'm_f_price' => $this->input->post('price1'),
+            'm_f' => $this->input->post('typedate1'),
+            'st_sun_price' => $this->input->post('price2'),
+            'st_sun' => $this->input->post('typedate2')
+        );
+        // print_r($dataprice);
+        $this->db->update("court", $dataprice, array('court_id' => $maxstadium));
+        // $this->mystadium->addcourttime($dataprice, $data['stadium_id']);
+        $this->session->set_flashdata('msg', 'เพิ่มคอร์ดเรียบร้อย');
+        redirect('stadium/updatestadium/' . $id);
+    }
+    
+    function compare(){
+        $data = $this->input->post('compare');
+       // print_r($data);
+//        $sql = "select * form stadium where stadium_id =" $data
+      
+        $detail['comparedata'] = $this->mystadium->showcompare($data);
+        $detail['time'] = $this->mystadium->showtime($data);
+        //$detail['price'] = $this->mystadium->showprice($data);
+        
+        //print_r($detail['time']);
+        $this->load->view("compare",$detail);        
+    }
 
-                    }
+}
+
 ?>
        
