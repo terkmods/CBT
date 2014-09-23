@@ -50,60 +50,172 @@
 </script>
 <script type="text/javascript">
     var time1 = ['00:00 - 00:30', '00:30 - 01:00', '01:00 - 01:30', '01:30 - 02:00', '02:00 - 02:30', '02:30 - 03:00', '03:00 - 03:30', '03:30 - 04:00', '04:00 - 04:30', '04:30 - 05:00', '05:00 - 05:30', '05:30 - 06:00', '06:00 - 06:30', '06:30 - 07:00', '07:00 - 07:30', '07:30 - 08:00', '08:00 - 08:30', '08:30 - 09:00', '09:00 - 09:30', '09:30 - 10:00', '10:00 - 10:30', '10:30 - 11:00', '11:00 - 11:30', '11:30 - 12:00'];
-    var time2 = ['12:00 - 12:30', '12:30 - 13:00', '13:00 - 13:30', '13:30 - 14:00', '14:00 - 14:30', '14:30 - 15:00', '15:00 - 15:30', '15:30 - 16:00', '16:00 - 16:30', '16:30 - 17:00', '17:00 - 17:30', '17:30 - 18:00', '18:00 - 18:30', '18:30 - 19:00', '19:00 - 19:30', '19:30 - 20:00', '20:00 - 20:30', '20:30 - 21:00', '21:00 - 21:30', '21:30 - 22:00', '22:00 - 22:30', '22:30 - 23:00', '23:00 - 23:30', '23:30 - 24:00'];
+    var time2 = ['12:00 - 12:30', '12:30 - 13:00', '13:00 - 13:30', '13:30 - 14:00', '14:00 - 14:30', '14:30 - 15:00', '15:00 - 15:30', '15:30 - 16:00', '16:00 - 16:30', '16:30 - 17:00', '17:00 - 17:30', '17:30 - 18:00', '18:00 - 18:30', '18:30 - 19:00', '19:00 - 19:30', '19:30 - 20:00', '20:00 - 20:30', '20:30 - 21:00', '21:00 - 21:30', '21:30 - 22:00', '22:00 - 22:30', '22:30 - 23:00', '23:00 - 23:30', '23:30 - 24:00', '24:00 - 0:00'];
     var html = '';
 
-    $.event.special.rightclick = {
-        bindType: "contextmenu",
-        delegateType: "contextmenu"
-    };
-
     $(document).ready(function (e) {
-        for ($i = 0; $i < time1.length; $i++) {
-            //Note// ลบ onclick="loadRequestForm();" ออกจาก td ไป
 
-            html = '<tr id="t' + ($i + 1) + '" onmousedown="RowClick(this,false);"><td style="width: 110px; text-align: center">' + time1[$i] + '</td><td id="select" class="span6" ></td></tr>';
-            $("#morning table tbody").append(html);
-        }
-        for ($j = 0; $j < time2.length; $j++) {
-            html = '<tr id="t' + ($j + 1 + 24) + '" onmousedown="RowClick(this,false);"><td style="width: 110px; text-align: center">' + time2[$j] + '</td><td id="select" class="span6"></td></tr>';
-            $("#evening table tbody").append(html);
-        }
-
-        $('#morning, #evening').on('mouseover', 'td', function (e) {
-            if ($(this).text() == '') {
-                $(this).addClass('hover-bg');
-                $(this).html('คลิกเพื่อจอง');
-            }
-        }).on('mouseout', 'td', function (e) {
-            if ($(this).text() == 'คลิกเพื่อจอง' || $(this).text() == '') {
-                $(this).removeClass('hover-bg');
-                $(this).text('');
-            }
-        });
     });
 
 </script>
-<script type="text/javascript">
-function courtchange() {
-    var x = document.getElementById("courtselect").selectedIndex;
-    var data = document.getElementsByTagName("option")[x].value;
-        data = data.split(',');
-   console.log(data);
-    document.getElementById("court").innerHTML = data[0];
-}
-</script>
-<script type="text/javascript">
 
+<script type="text/javascript">
+    var court;
+    var trs = document.getElementById('runtime1').getElementsByTagName('tr');
+    var dayOfWeek = null;
+    var price;
+    var st_sun_price;
+    var m_f_price;
+    ///////////////////////
+    //////////////////////
+    function addZero(str) {
+        var a = str;
+        if (str < 10) {
+            a = "0" + str;
+        }
+        return a;
+    }
+    ////////////////
+    function RowClick(currenttr, lock) {
+        if (window.event.ctrlKey) {
+            if ($(currenttr).find('td:last').text() != '' && $(currenttr).find('td:last').text() != 'คลิกเพื่อจอง') {
+                toggleRow(currenttr);
+            }
+        }
 
+        document.getElementById("priceja").innerHTML = price;
+        document.getElementById("sumprice").innerHTML = price / 2 + "(30 นาที )";
+      
+        $("#courtid").val(court[1]);
+        $("#dateid").val($('.date-picker').val());
+        console.log(court[1]);
+        if (window.event.button === 0) {
+            if (!window.event.ctrlKey && !window.event.shiftKey) {
+                clearAll();
+                if ($(currenttr).find('td:last').text().indexOf('จองโดย') != -1) {
+                    cancel($(currenttr).find('td:last'), false);
+                    return false;
+                }
+                if ($(currenttr).find('td:last').attr('onClick') == 'loadRequestForm();') {
+                    loadRequestForm();
+                    return false;
+                }
+
+                var d = new Date('2013-01-01 00:00');
+                var id = parseInt($(currenttr).attr('id').substr(1), 10);
+
+                for (var i = 0; i < id - 1; i++) {
+                    d = new Date(d.getTime() + 30 * 60000);
+                }
+
+                var d2 = new Date(d.getTime() + 30 * 60000);
+
+                var start = addZero(d.getHours()) + ':' + addZero(d.getMinutes());
+                var end = addZero(d2.getHours()) + ':' + addZero(d2.getMinutes());
+
+                $('#time_start').val(addZero(d.getHours()) + ':' + addZero(d.getMinutes()));
+                $('#time_end').val(addZero(d2.getHours()) + ':' + addZero(d2.getMinutes()));
+
+                $('#booking').modal('show');
+
+                return false;
+            }
+
+//                                if (window.event.shiftKey) {
+//                                    selectRowsBetweenIndexes([lastSelectedRow.rowIndex, currenttr.rowIndex])
+//                                }
+        }
+    }
+    function totalpricechange() {
+        var starttime = $("#time_start").val();
+        var endtime = $("#time_end").val();
+        var s = starttime.split(':');
+        var e = endtime.split(':');
+        console.log(starttime.split(':'));
+        console.log(endtime.split(':'));
+        console.log(parseInt(e[0]));
+        console.log(parseInt(s[0]));
+        console.log(parseInt(e[0]) - parseInt(s[0]));
+        var hour = parseInt(e[0]) - parseInt(s[0]);
+        console.log(parseInt(e[1]) - parseInt(s[1]));
+        var halftime = 0;
+        var halfprice = 0;
+        if ((parseInt(e[1]) - parseInt(s[1])) == 30 || (parseInt(e[1]) - parseInt(s[1])) == -30) {
+            halfprice = price / 2;
+            halftime = 30;
+        }
+        sumprice = ((parseInt(e[0]) - parseInt(s[0])) * price) + halfprice;
+        console.log(sumprice);
+        console.log(price);
+        console.log(dayOfWeek);
+        document.getElementById("sumprice").innerHTML = sumprice + " ( " + hour + " ชม. " + halftime + " นาที)";
+        // console.log(parseInt(endtime[0]) - parseInt(starttime[0]));
+    }
+    function clearAll() {
+        for (var i = 0; i < trs.length; i++) {
+            $(trs[i]).find('td:last').removeClass('selected');
+
+        }
+    }
+    function courtchange() {
+        var x = document.getElementById("courtselect").selectedIndex;
+        court = document.getElementsByTagName("option")[x].value;
+        court = court.split(',');
+        console.log(court);
+        console.log(court[0]);
+        console.log(court[1]);
+        //document.getElementById("court").innerHTML = court[0];
+        $.ajax({
+            type: "POST",
+            url: "<?= base_url() ?>booking/showcourtbook",
+            data: {courtsend: court}
+        }).done(function (msg) {
+            var obj = JSON.parse(msg);
+            // alert(msg);
+//                $("#runtime").html(obj.mor);
+//                starttime = obj.starttime1;
+//                endtimeja = obj.endtime;
+            m_f_price = obj.m_f_price;
+            st_sun_price = obj.st_sun_price;
+            console.log(obj);
+             console.log(obj.court_id);
+            show = ' ';
+            show = ' <tr>' +
+                    '<td style="width: 110px; text-align: center">ชื่อคอร์ด</td>' +
+                    '<td class="span6">' + obj.court_name + '</td>' +
+                    ' </tr>' +
+                    ' <tr>' +
+                    '     <td style="width: 110px; text-align: center">ราคา จันทร์ - ศุกร์ </td>' +
+                    '     <td class="span6">' + obj.m_f_price + ' บาท</td>' +
+                    ' </tr><tr>' +
+                    '     <td style="width: 110px; text-align: center">ราคา เสาร์ - อาทิตย์</td>' +
+                    '     <td class="span6"> ' + obj.st_sun_price + ' บาท</td>' +
+                    ' </tr>' +
+                    '  <tr>' +
+                    '    <td style="width: 110px; text-align: center">ลักษณะพื้น</td>' +
+                    '    <td class="span6"> ' + obj.type + '</td>' +
+                    '  </tr> '
+            $("#runtime").html(show);
+            document.getElementById("courtja").innerHTML = obj.court_name;
+            if (dayOfWeek == "เสาร์" || dayOfWeek == "อาทิตย์") {
+                price = st_sun_price;
+            } else {
+                price = m_f_price;
+            }
+            // alert(price);
+        });
+    }
     $(function () {
         $(".date-picker").datepicker();
-
+        var time1 = ['00:00 - 00:30', '00:30 - 01:00', '01:00 - 01:30', '01:30 - 02:00', '02:00 - 02:30', '02:30 - 03:00', '03:00 - 03:30', '03:30 - 04:00', '04:00 - 04:30', '04:30 - 05:00', '05:00 - 05:30', '05:30 - 06:00', '06:00 - 06:30', '06:30 - 07:00', '07:00 - 07:30', '07:30 - 08:00', '08:00 - 08:30', '08:30 - 09:00', '09:00 - 09:30', '09:30 - 10:00', '10:00 - 10:30', '10:30 - 11:00', '11:00 - 11:30', '11:30 - 12:00'
+                    , '12:00 - 12:30', '12:30 - 13:00', '13:00 - 13:30', '13:30 - 14:00', '14:00 - 14:30', '14:30 - 15:00', '15:00 - 15:30', '15:30 - 16:00', '16:00 - 16:30', '16:30 - 17:00', '17:00 - 17:30', '17:30 - 18:00', '18:00 - 18:30', '18:30 - 19:00', '19:00 - 19:30', '19:30 - 20:00', '20:00 - 20:30', '20:30 - 21:00', '21:00 - 21:30', '21:30 - 22:00', '22:00 - 22:30', '22:30 - 23:00', '23:00 - 23:30', '23:30 - 24:00', '24:00 - 0:00'];
+        var starttime = null;
+        var show = ' ';
         $(".date-picker").on("change", function () {
 
             var val = $('.date-picker').datepicker('getDate').toDateString();
             var id = <?php echo $this->uri->segment(3); ?>;
-
+            console.log($('.date-picker').val());
             val = val.split(' ');
             var weekday = new Array();
             weekday['Mon'] = "จันทร์";
@@ -113,10 +225,10 @@ function courtchange() {
             weekday['Fri'] = "ศุกร์";
             weekday['Sat'] = "เสาร์";
             weekday['Sun'] = "อาทิตย์";
-            var dayOfWeek = weekday[val[0]];
+            dayOfWeek = weekday[val[0]];
 
-            document.getElementById("dayOfWeek").innerHTML =  dayOfWeek + ' ที่ ' + val[2] + ' พ.ศ. ' + val[3];
-
+            document.getElementById("dayOfWeek").innerHTML = dayOfWeek + ' ที่ ' + val[2] + ' พ.ศ. ' + val[3];
+            document.getElementById("datenaja").innerHTML = dayOfWeek + ' ที่ ' + val[2] + ' พ.ศ. ' + val[3];
             console.log(val);
 
             console.log(id);
@@ -124,25 +236,89 @@ function courtchange() {
             $.ajax({
                 type: "POST",
                 url: "<?= base_url() ?>booking/showTablebook",
-                data: {date: val, stId: id}
+                data: {date: dayOfWeek, stId: id}
             }).done(function (msg) {
-                $("#runtime").html(msg);
-                $("#today").html(msg);
-                //alert(msg)
+//                $("#runtime").html(msg);
+
+                var obj = JSON.parse(msg);
+
+//                $("#runtime").html(obj.mor);
+                starttime = obj.starttime1;
+                endtimeja = obj.endtime;
+                console.log(obj);
+                timeopennaja = time1[obj.starttime1] + ' ถึง ' + time1[obj.endtime];
+                $("#court").html(timeopennaja);
+                //alert(msg);
+                show = ' ';
+                selectja = ' ';
+                for (starttime; starttime < endtimeja; starttime++) {
+
+
+                    show = show + '<tr id="t' + (parseInt(starttime) + 1) + '" onmousedown="RowClick(this,false);"><td style="width: 110px; text-align: center">' + time1[starttime] + '</td><td id="select" class="span6" ></td></tr>';
+                    selectja = selectja + '<option>' + time1[starttime] + '</option>'
+                }
+
+                $("#runtime1").html(show);
+                $("#selecttime").html(selectja);
+                console.log(st_sun_price);
+                console.log(m_f_price);
+                if (dayOfWeek == "เสาร์" || dayOfWeek == "อาทิตย์") {
+                    price = st_sun_price;
+                } else {
+                    price = m_f_price;
+                }
+                console.log(price);
+
+            });
+
+
+
+
+            $('#morning, #evening').on('mouseover', 'td', function (e) {
+                if ($(this).text() == '') {
+                    $(this).addClass('hover-bg');
+                    $(this).html('คลิกเพื่อจอง');
+                }
+            }).on('mouseout', 'td', function (e) {
+                if ($(this).text() == 'คลิกเพื่อจอง' || $(this).text() == '') {
+                    $(this).removeClass('hover-bg');
+                    $(this).text('');
+                }
             });
         });
 
+////////////////////////////////
+//////////////////////////////
+        $('td').on("click", function () {
+            if ($(this).text().indexOf('จองโดย') != -1) {
+                cancel($(this));
+                return false;
+            }
 
-//        $(".date-picker").click(function() {
-//            $.ajax({
-//                type: "POST",
-//                url: "booking/showTablebook",
-//                data: {date: $(this).val()}
-//            }).done(function(msg) {
-//                alert(msg);
-//                //aTable.fnDraw();
-//            });
-//        });
+
+            var d = new Date('2013-01-01 00:00');
+            var id = parseInt($(this).parents('tr').attr('id').substr(1), 10);
+
+            for (var i = 0; i < id - 1; i++) {
+                d = new Date(d.getTime() + 30 * 60000);
+            }
+
+            var d2 = new Date(d.getTime() + 30 * 60000);
+
+            var start = addZero(d.getHours()) + ':' + addZero(d.getMinutes());
+            var end = addZero(d2.getHours()) + ':' + addZero(d2.getMinutes());
+
+            $('#time_start').val(addZero(d.getHours()) + ':' + addZero(d.getMinutes()));
+            $('#time_end').val(addZero(d2.getHours()) + ':' + addZero(d2.getMinutes()));
+
+            $('#booking').modal('show');
+
+            return false;
+        });
+
+
+
+
 
     });
 

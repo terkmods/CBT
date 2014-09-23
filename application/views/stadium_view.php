@@ -1,11 +1,15 @@
 <?php include 'template/head.php';
  ?>
 <div class="container">
-<div id="cover" >  
-    
-    <a role="button" data-toggle="modal" data-target="#uploadimg" class="btn"><img src="<?= base_url() ?>/asset/images/stadiumpic/<?= $data['0']->cover_path ; ?>" width="1280"></a>
-     
-</div>  
+    <div id="cover">
+<a role="button" data-toggle="modal" data-target="#uploadimgcover" class="btn"><img src="<?= base_url() ?>/asset/images/<?php
+            if ($data['0']->cover_path != "") {
+                echo 'stadiumpic/' . $data['0']->cover_path;
+            } else {
+                echo 'cover_new.jpg';
+            }
+            ?>" width="1280"></a>
+    </div>
         <div class="container upper-profile">
             <div class="row">
                 <div class="col-md-3 profile-pic"><img src="<?= base_url() ?>/asset/images/stadiumpic/<?= $data['0']->stadium_path  ?>" width="200" class="img-thumbnail"></div>
@@ -17,14 +21,15 @@
                     
                 </div>
                 <div class="col-md-4 info">
-                    <br>
-                    <p><a class="btn btn-primary btn-lg pull-right" role="button" data-toggle="modal" data-target="#myModal">Book Now</a></p>
+                    <div class="row">
+                        <p><a class="btn btn-primary btn-lg pull-right" role="button" href="<?= base_url() ?>/booking/reserve/<?php echo $this->uri->segment(3); ?>">Book Now</a></p>
 
-                  
-                     
+                    </div>
+                                         <div class="row">
+
                     <p><a class="btn btn-danger btn-lg pull-right" role="button" data-toggle="modal" data-target="#myrule">Rules</a></p>
                       <!-- Modal -->
-             
+                                         </div>
                 </div>
 
             </div>

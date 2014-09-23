@@ -31,6 +31,10 @@ class Users extends CI_Controller {
             redirect(base_url());
         }
     }
+        public function get_bookings($equipment_id, $date) {
+        $data = $this->booking->get_bookings($equipment_id, $date);
+        echo json_encode($data);
+    }
 
     function login() {
         $this->load->view('login');

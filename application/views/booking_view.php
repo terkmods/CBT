@@ -6,7 +6,7 @@
     }
     tr:hover{
         cursor:pointer;
-        
+
     }
     #select:hover{
         cursor:pointer;
@@ -64,12 +64,12 @@
                 <div class="controls">
                     <div class="input-group">
                         <label for="date-pik" class="input-group-addon btn">
-                           เลือกคอร์ด
+                            เลือกคอร์ด
                         </label>
                         <select class="form-control" id="courtselect" onchange="courtchange()">
                             <option value="default">เลือกคอร์ด </option> 
-                            <?php  foreach ($court as $ct) { ?>        
-                            <option value="<?=$ct['court_name']?>,<?=$ct['court_id']?>" id="courtoption"><?=$ct['court_name']?></option>
+                            <?php foreach ($court as $ct) { ?>        
+                                <option value="<?= $ct['court_name'] ?>,<?= $ct['court_id'] ?>" id="courtoption"><?= $ct['court_name'] ?></option>
                             <?php } ?>
                         </select>
 
@@ -79,7 +79,7 @@
         </div>
         <div class="row">
             <div class="today col-md-5 col-md-offset-5 ">
-                <h4>วัน : <span id="dayOfWeek" style="font-size: 15px"></span></h4> <h4> คอร์ด : <span id="court"></span></h4>
+                <h4 style="font-size: 15px">วัน : <span id="dayOfWeek" ></span></h4> <h5> เวลาให้บริการ : <span id="court"></span></h5>
             </div>
         </div>
         <div class="col-md-5 col-md-offset-1">
@@ -94,11 +94,7 @@
                     <table class="table table-bordered  table-condensedy" id="tableMorning">
                         <thead><tr><th>เวลา</th><th>#</th></tr></thead>
                         <tbody id="runtime">
-                            <tr>
-                                <td style="width: 110px; text-align: center">No select</td>
-                                <td class="span6"></td>
-                            </tr>
-
+                           
                         </tbody>
                     </table>
                 </div>
@@ -114,7 +110,7 @@
                 <div id="evening">
                     <table class="table table-bordered  table-condensedy" id="tableEvening">
                         <thead><tr><th>เวลา</th><th>#</th></tr></thead>
-                        <tbody id="runtime">
+                        <tbody id="runtime1">
                             <tr>
                                 <td style="width: 110px; text-align: center">No select</td>
                                 <td class="span6"></td>

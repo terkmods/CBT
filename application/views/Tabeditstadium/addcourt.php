@@ -1,16 +1,68 @@
 <div class="tab-pane" id="addcourt">
-
     <div class="col-md-5 pull-left " style="padding-top: 2px;margin-top: 10px">
+        <form  method="post" role="form" action="<?=  base_url()  ?>stadium/updatetime/<?= $this->uri->segment(3)?>">
+
        <?php  foreach ($showtime as $r) { ?>
         <div class="col-md-4">
         
        
-        <h6><?=$r['type'] ?></h6>
+            <h6><?=$r['type'] ?> <input type="hidden" value="<?=$r['type'] ?>" name="type[]"></h6>
          
         Start-time
-        <select class="form-control" name="opentime">
+        <select class="form-control" name="opentime[]">
             <option disabled="">เวลาเปิด</option>
-             <?php $time = "0";
+               
+                                      <option <?php
+                if ($r['open_time'] == '00.00') {
+                    echo 'selected';
+                }
+                ?> value="00.00">00:00</option>
+                                        <option <?php
+                if ($r['open_time'] == '01.00') {
+                    echo 'selected';
+                }
+                ?> value="01.00">01:00</option>
+                                        <option <?php
+                if ($r['open_time'] == '02.00') {
+                    echo 'selected';
+                }
+                ?> value="02.00">02:00</option>
+                                        <option <?php
+                if ($r['open_time'] == '03.00') {
+                    echo 'selected';
+                }
+                ?> value="03.00">03:00</option>
+                                        <option <?php
+                if ($r['open_time'] == '04.00') {
+                    echo 'selected';
+                }
+                ?> value="04.00">04:00</option>
+                                        <option <?php
+                if ($r['open_time'] == '05.00') {
+                    echo 'selected';
+                }
+                ?> value="05.00">05:00</option>
+                                        <option <?php
+                if ($r['open_time'] == '06.00') {
+                    echo 'selected';
+                }
+                ?> value="06.00">06:00</option>
+                                        <option <?php
+                if ($r['open_time'] == '07.00') {
+                    echo 'selected';
+                }
+                ?> value="07.00">07:00</option>
+                                        <option <?php
+                if ($r['open_time'] == '08.00') {
+                    echo 'selected';
+                }
+                ?> value="08.00">08:00</option>
+                                        <option <?php
+                if ($r['open_time'] == '09.00') {
+                    echo 'selected';
+                }
+                ?> value="09.00">09:00</option>
+             <?php $time = "10";
             for ($time; $time <= "24.00"; $time++) {
                 ?>
                 <option <?php
@@ -20,14 +72,66 @@
                 ?> 
 
 
-                    value=" <?= $time ?>" ><?= $time ?>:00</option>
+                    value=" <?= $time ?>.00" ><?= $time ?>:00</option>
 
 <?php } ?>
         </select>
         End-time
-        <select class="form-control" name="endtime" >
+        <select class="form-control" name="endtime[]" >
             <option disabled="">เวลาปิด</option>
-            <?php $time = "0";
+           
+               
+                                      <option <?php
+                if ($r['end_time'] == '00.00') {
+                    echo 'selected';
+                }
+                ?> value="00.00">00:00</option>
+                                        <option <?php
+                if ($r['end_time'] == '01.00') {
+                    echo 'selected';
+                }
+                ?> value="01.00">01:00</option>
+                                        <option <?php
+                if ($r['end_time'] == '02.00') {
+                    echo 'selected';
+                }
+                ?> value="02.00">02:00</option>
+                                        <option <?php
+                if ($r['end_time'] == '03.00') {
+                    echo 'selected';
+                }
+                ?> value="03.00">03:00</option>
+                                        <option <?php
+                if ($r['end_time'] == '04.00') {
+                    echo 'selected';
+                }
+                ?> value="04.00">04:00</option>
+                                        <option <?php
+                if ($r['end_time'] == '05.00') {
+                    echo 'selected';
+                }
+                ?> value="05.00">05:00</option>
+                                        <option <?php
+                if ($r['end_time'] == '06.00') {
+                    echo 'selected';
+                }
+                ?> value="06.00">06:00</option>
+                                        <option <?php
+                if ($r['end_time'] == '07.00') {
+                    echo 'selected';
+                }
+                ?> value="07.00">07:00</option>
+                                        <option <?php
+                if ($r['end_time'] == '08.00') {
+                    echo 'selected';
+                }
+                ?> value="08.00">08:00</option>
+                                        <option <?php
+                if ($r['end_time'] == '09.00') {
+                    echo 'selected';
+                }
+                ?> value="09.00">09:00</option>
+             <?php $time = "10";
             for ($time; $time <= "24.00"; $time++) {
                 ?>
                 <option <?php
@@ -37,7 +141,7 @@
                 ?> 
 
 
-                    value=" <?= $time ?>" ><?= $time ?>:00</option>
+                    value=" <?= $time ?>.00" ><?= $time ?>:00</option>
 
 <?php } ?>
         </select>    
@@ -63,6 +167,7 @@
           <hr>
         <button type="submit" class="btn btn-default">แก้ไข</button>
       </div>
+    </form>
     </div>   
     <div class="col-md-7" style="padding-top: 2px;margin-top: 10px">
         <form class="form-horizontal" method="post" role="form" action="<?=  base_url()  ?>stadium/addcourt/<?= $this->uri->segment(3)?>">
