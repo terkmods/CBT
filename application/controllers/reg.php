@@ -9,6 +9,8 @@ class reg extends CI_Controller {
         parent::__construct();
         $this->load->model('user_model', 'users');
         $this->load->model('owner_model', 'owners');
+        $this->load->model('coach_model', 'coach');
+        
         $this->load->library('session');
     }
 
@@ -100,6 +102,38 @@ class reg extends CI_Controller {
             $this->db->insert("User", $data);
             $this->session->set_userdata($datasend);
             $this->load->view('index');
+        }else if ($typereg == "coach") {
+            $this->db->insert("User", $data);
+
+            $rs = $this->coach->showIdCoachMax();
+
+            foreach ($rs as $r) {
+                $maxcoach = $r['coach_id'] + "1";
+            }
+
+            $datacoach = array(
+                'user_id' => $max,
+                'coach_id' => $maxcoach
+                
+            );
+            $datasend = array(
+                'coach_id' => $maxcoach,
+                'id' => $max,
+                'role' => $this->input->post('typeuser'),
+                'email' => $this->input->post('email'),
+                'password' => $this->input->post('pass'),
+                'phone' => $this->input->post('tel'),
+                'status' => 'ok',
+                'profile_url' => $this->input->post('url'),
+                'authenowner_status' => 'no',
+                'path_pic'=> $this->input->post('path'), // แก้ตอนอัพโหลดรูปด้วยจ้าา เปลี่ยน path นะ
+                'logged'=> TRUE
+            );
+            $this->db->insert("coach", $datacoach);
+            $this->session->set_userdata($datasend);
+            
+            $this->load->view('index');
+        
         }
         
     }

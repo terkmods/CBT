@@ -7,11 +7,11 @@
 </div>  
 <div class="container upper-profile">
     <div class="row">
-        <div class="col-md-3 profile-pic"><img src="images/coach.jpg" class="img-thumbnail"></div>
-        <div class="col-md-3 info"><h3>Mark Jacob</h3>
+        <div class="col-md-3 profile-pic"><img src="<?= base_url() ?>/asset/images/profilepic/<?= $data['0']->profilepic_path; ?>" class="img-thumbnail"></div>
+        <div class="col-md-3 info"><h3><?= $data['0']->fname; ?>  <?= $data['0']->lname; ?></h3>
             <p>โค้ชสอน
-                <span class="glyphicon glyphicon-map-marker"></span>&nbsp<a href="">Bangkok</a>, <a href="#">Thailand</a>
-                <br><span class="glyphicon glyphicon-earphone"></span> +66 2 666 6666
+                <span class="glyphicon glyphicon-map-marker"></span>&nbsp<a href=""><?= $data['0']->address; ?></a>
+                <br><span class="glyphicon glyphicon-earphone"></span> <?= $data['0']->phone; ?>
             </p>
         </div>
     </div>
@@ -26,6 +26,7 @@
                     <h3 class="panel-title">ข้อมูลทั่วไป</h3>
                 </div>
                 <div class="panel-body">
+                    <?= $data['0']->coach_type; ?>
                     <p class="btn btn-success btn-xs">
                         <span class="glyphicon glyphicon-ok"></span> Freelance 
                     </p>
@@ -33,8 +34,8 @@
                         <span class="glyphicon glyphicon-bookmark"></span> Employee 
                     </p>
                     <p><b>สถานที่สอนประจำ</b> </p>
-                    เพศ : <br>
-                    อายุที่รับสอน : <b>10-15 ปี</b> <br>
+                    เพศ : <?= $data['0']->gender; ?><br>
+                    อายุที่รับสอน : <b><?= $data['0']->age_require; ?></b> <br>
                 </div>
             </div>
 
@@ -43,8 +44,7 @@
                     <h3 class="panel-title">อัตราค่าสอน</h3>
                 </div>
                 <div class="panel-body">
-                    ค่าสอนกลุ่ม : <br>
-                    ค่าสอนเดี่ยว : <br>
+                    <?= $data['0']->coach_rate; ?>
 
                 </div>
             </div>
@@ -55,11 +55,11 @@
                 </div>
                 <div class="panel-body">
                     <ul class="nav nav-pills">
-                        <li><a href="#"><img src="images/fb.png"></a></li>
-                        <li><a href="#"><img src="images/twitter.png"></a></li>
-                        <li><a href="#"><img src="images/g1.png"></a></li>
-                        <li><a href="#"><img src="images/linkedin.png"></a></li>
-                        <li><a href="#"><img src="images/email.png"></a></li>
+                        <li><a href="www.facebook.com/<?= $data['0']->facebook; ?>"><img src="<?= base_url() ?>/asset/images/imagetest/fb.png"></a></li>
+                        <li><a href="#"><img src="<?= base_url() ?>/asset/images/imagetest/twitter.png"></a></li>
+                        <li><a href="#"><img src="<?= base_url() ?>/asset/images/imagetest/google+.png"></a></li>
+                        <li><a href="#"><img src="<?= base_url() ?>/asset/images/imagetest/linkedin.png"></a></li>
+                        <li><a href="#"><img src="<?= base_url() ?>/asset/images/imagetest/email.png"></a></li>
                     </ul>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3>เกี่ยวกับฉัน</h3>
-                        ฉันเป็นคุณครูสอนแบดมินตัน
+                        <?= $data['0']->aboutme; ?>
                         <hr>
 
                     </div>
@@ -79,7 +79,7 @@
                     <div class="panel-body">
                         <h3>รางวัลที่ได้รับ</h3>
                         <ul>
-                            <li><a href="#">รางวัลที่ 1</a></li>
+                            <li><a href="#"><?= $data['0']->achievement; ?></a></li>
                         </ul>
                         <hr>
 

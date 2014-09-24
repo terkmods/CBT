@@ -58,6 +58,12 @@ class User_model extends CI_Model {
         return $sql;
     }
     
+    function getCoach($id) {
+       
+        $sql = $this->db->query('select * from User join coach where User.user_id = coach.user_id and User.user_id='.$id)->result();
+        return $sql;
+    }
+    
     function getUserAdmin(){
         $sql = $this->db->query('select * from User where type = "user"')->result();
         return $sql;

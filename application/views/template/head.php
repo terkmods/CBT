@@ -48,8 +48,12 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="#">Notifications <span class="badge"> 10</span></a></li>
                                 
-                                <li><a href="<?=base_url()?>users/profile/<?php echo $this->session->userdata('id') ?>"> <?php echo $this->session->userdata('profile_url') ?></a></li>
-
+                                <?php if($this->session->userdata('role') == "coach"){?>
+                                <li><a href="<?=base_url()?>users/coachProfile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
+                                <?php } else { ?> 
+                                <li><a href="<?=base_url()?>users/profile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
+                                <?php } ?>
+                                
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
                                     <ul class="dropdown-menu">

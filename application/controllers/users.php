@@ -131,6 +131,15 @@ class Users extends CI_Controller {
             redirect('index.php');
         }
     }
+    
+     public function coachProfile($id) {
+        $profile = array(
+            'data' => $this->myusers->getCoach($id)
+        );
+
+
+        $this->load->view('coach_view', $profile);
+    }
 
     public function profile($id) {
         $profile = array(
