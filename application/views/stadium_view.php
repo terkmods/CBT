@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-md-4 info">
                     <div class="row">
-                        <p><a class="btn btn-primary btn-lg pull-right" role="button" href="<?= base_url() ?>/booking/reserve/<?php echo $this->uri->segment(3); ?>">Book Now</a></p>
+                        <p><a class="btn btn-primary btn-lg pull-right" role="button" href="<?= base_url() ?>booking/reserve/<?php echo $this->uri->segment(3); ?>">Book Now</a></p>
 
                     </div>
                                          <div class="row">

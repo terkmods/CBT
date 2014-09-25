@@ -213,3 +213,9 @@ footer a:hover{
 .tablecompare th{
     text-align: center;
 }
+.bookline{
+	background-color:rgba(255,135,38,0.5);
+} 
+.hover-bg {
+	background-color: #B8E2EF;
+}

@@ -36,7 +36,7 @@ WHERE reserve.user_id =' . $userId)->result();
         $this->db->where('reserve.court_id', $c_id);
         $this->db->like('start_time', $date, 'after');
         $query = $this->db->get();
-        return $query->row();
+        return $query->result();
     }
 
 }

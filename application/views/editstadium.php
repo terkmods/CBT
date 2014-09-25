@@ -97,7 +97,7 @@ $num = 1;
         </div>
     </div>
 </div>
-<?php include 'template/modal.php'; ?>
-<?php include 'template/footer.php'; ?>
-        
 
+<?php include 'template/modal.php'; ?>
+
+<?php include 'template/footer.php'; ?>

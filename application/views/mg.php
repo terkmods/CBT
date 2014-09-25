@@ -96,7 +96,7 @@ $status = $ow->authenowner_status; ?>
                                                             <td>' . $row->stadium_name . '<input type="hidden" name=id value="' . $row->stadium_id . '"</td>
 
                                                             <td></td>
-                                                            <td>'.$row->start_time.'-'.$row->end_time.'</td>
+                                                            <td></td>
                                                             <td><a href="'?> <?php echo base_url() ?><?php echo 'stadium/profile/'.$row->stadium_id.'" class="btn ">' . $row->stadium_url . '</a></td>
                                                             <td> '
                                                 ?>
