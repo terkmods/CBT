@@ -212,5 +212,11 @@ class booking extends CI_Controller {
         echo json_encode($data);
        // echo 'eeeeee';
     }
+    function showstadiumbook(){
+        $stId = $this->input->post("stadiumsend");
+//        echo json_encode($stId);
+        $query =  $this->booking->get_bookings_stadium($stId);
+        echo json_encode($query);
+    }
 
 }

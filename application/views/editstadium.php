@@ -57,14 +57,7 @@ $num = 1;
                 <div class="container">
 
 
-                    <div class="col-md-3">
-                        <ul class="nav nav-pills nav-stacked">
-                            <li><a href="setting.html">Basic Setting</a></li>
-                            <li class="active"><a href="mg.html">Manage stadium </a></li>
-                            <li><a href="hsre.html">History Reserve</a></li>
-
-                        </ul>
-                    </div>
+                        <?php include 'template/sideSetting.php'; ?>
                     <div class="col-md-9">
                         <div class="row">
                             <ul class="nav nav-tabs" id="myTab">

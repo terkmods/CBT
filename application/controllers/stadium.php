@@ -292,7 +292,19 @@ class stadium extends CI_Controller {
         $this->load->view("compare",$detail);        
     }
 
-}
 
+function historyBooking(){
+     $userid = $this->session->userdata('id');
+            $ownerid = $this->getOwnerid($userid);
+
+
+            $datasend = array(
+                'ow' => $this->getOwner($userid),
+                'stadium' => $this->mystadium->getstadium($ownerid)
+            );
+           // print_r($datasend);
+    $this->load->view('history_stadium_booking',$datasend);
+}
+}
 ?>
        

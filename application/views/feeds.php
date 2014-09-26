@@ -21,10 +21,10 @@
                                     <div class="line1">
                                         คะแนน :  <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div> 
                                     <div class="line1">  <a href="#"><span class="glyphicon glyphicon-map-marker"></span></a>ที่อยู่ : เขต'.$row->district.' แขวง'.$row->subdistrict.' '.$row->province.' </div>            
-                                    <div class="line1"> <span class="glyphicon glyphicon-earphone"> </span>&nbsp; '.$row->tel.' &nbsp;  <span class="glyphicon glyphicon-dashboard"></span> &nbsp; จ.- ศ. &nbsp;&nbsp;เวลา 9.00-22.00</div>
-                                    <div class="line1">  สิ่งอำนวยความสะดวก <img src="images/bath.png" width="20" alt="มีห้องอาบน้ำ" title="มีห้องอาบน้ำ">|
-                                        <img src="images/iconbad.png" width="20" alt="มีครูสอน" title="มีครูสอน">|
-                                        <img src="images/f1.png" width="20" alt="มีก๊วนตี" title="มีก๊วนตี">|
+                                    <div class="line1"> <span class="glyphicon glyphicon-earphone"> </span>&nbsp; '.$row->tel.' &nbsp;  <span class="glyphicon glyphicon-dashboard"></span> &nbsp; จ.- ศ. &nbsp;&nbsp;เวลา 9.00-22.00</div>' ?>
+                             <?php echo '       <div class="line1">  สิ่งอำนวยความสะดวก <img src="'?><?php echo base_url()?><?='asset/images/bath.png" width="20" alt="มีห้องอาบน้ำ" title="มีห้องอาบน้ำ">| ' ?>
+                               <?php  echo '          <img src="images/iconbad.png" width="20" alt="มีครูสอน" title="มีครูสอน">| '?>
+                               <?php  echo '         <img src="images/f1.png" width="20" alt="มีก๊วนตี" title="มีก๊วนตี">| 
                                         <img src="images/parking_car.svg" width="20" alt="มีที่จอดรถ" title="มีที่จอดรถ">|
                                         <img src="images/food.gif" width="20" alt="มีที่จอดรถ" title="มีที่จอดรถ"></div>
                                     <div class="line1">

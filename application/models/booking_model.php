@@ -29,13 +29,23 @@ WHERE reserve.user_id =' . $userId)->result();
 
         return $query;
     }
-        function get_bookings($c_id, $date) {
+
+    function get_bookings($c_id, $date) {
         $this->db->select('court_id, cast(start_time as time) as start, cast(end_time as time) as end, start_time');
         $this->db->from('reserve');
 //        $this->db->join('member', 'booking.member_id = member.id');
         $this->db->where('reserve.court_id', $c_id);
         $this->db->like('start_time', $date, 'after');
         $query = $this->db->get();
+        return $query->result();
+    }
+
+    function get_bookings_stadium($stId) {
+        $this->db->select('*');
+        $this->db->from('reserve');
+//        $this->db->join('member', 'booking.member_id = member.id');
+        $this->db->where('reserve.stadium_id', $stId);
+                $query = $this->db->get();
         return $query->result();
     }
 

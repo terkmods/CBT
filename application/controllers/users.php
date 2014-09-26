@@ -61,7 +61,7 @@ class Users extends CI_Controller {
         $check = $this->myusers->login($email, $password);
 
         if ($check != null) {
-            print_r($check);
+           // print_r($check);
             foreach ($check as $row) {
 
                 $data = array(
@@ -75,10 +75,12 @@ class Users extends CI_Controller {
                 );
                 $this->session->set_userdata($data);
             }
+            echo $data['role'];
+            if($data['role'] == "owner"){
+                redirect('stadium');
+            }
 
-
-
-            redirect('users');
+            redirect('users/feed');
         } else {
             $this->session->set_flashdata('msg_error', 'รหัสผ่านหรืออีเมลไม่ถูกต้องกรุณาตรวจสอบ');
             redirect('users');
@@ -204,6 +206,9 @@ public function edituser($id) {
     
     function coach(){
          $this->load->view('coach_view');
+    }
+    function  test(){
+        $this->load->view('home');
     }
     
 
