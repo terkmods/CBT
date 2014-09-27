@@ -65,25 +65,7 @@ $num = 1;
                                 <thead><tr><th>ชื่อคอร์ด</th><th>วัน</th><th>เวลาจอง</th><th>จองโดย</th><th>เบอร์โทร</th><th>รวมเป็นเงิน</th><th>สถานะ</th></tr></thead>
                                 <tbody id="runtime">
                                     <tr>
-                                        <td>1</td>
-                                        <td>19-02-2014 </td>
-                                        <td>19.00-20.00</td>
-                                        <td>ครับโผมมมม</td>
-                                        <td>08555555</td>  
-                                        <td>1000</td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown">
-                                                    ปกติ <span class="caret"></span>
-                                                </button>
-                                                <ul class="dropdown-menu" role="menu" id="eventselect">
-                                                    <li ><a href="<?= base_url() ?>user/addblacklist" class="btn " role="button" onclick="blacklist()">Warning</a></li>
-                                                    <li ><a data-toggle="modal" data-target="#blacklist" class="btn " role="button">BLACK LIST</a></li>
-
-                                                    <!--<li class="divider"></li>-->
-
-                                                </ul>
-                                            </div></td>
+                                        
                                     </tr>
                                 </tbody>
                             </table>
@@ -138,7 +120,7 @@ when the page first loads -->
     index 0 and "advanced-template" is index 1.
     -->
     <div id="basic-template">
-        <a class="ui-notify-cross ui-notify-close" href="#">x</a>
+        <a class="ui-notify-cross ui-notify-close " href="#">x</a>
         <h1>#{title}</h1>
         <p>#{text}</p>
     </div>
@@ -158,7 +140,7 @@ when the page first loads -->
 <script src="<?= base_url() ?>asset/js/jquery.notify.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-
+var stadium_id = null;
                                                   
                                                         function stadiumchange() {
                                                             
@@ -169,6 +151,7 @@ when the page first loads -->
                                                             stadium = stadium.split(',');
                                                             console.log(stadium);
                                                             //        console.log(court[0]);
+                                                            stadium_id = stadium[1];
                                                             console.log(stadium[1]);
                                                             //document.getElementById("court").innerHTML = court[0];
                                                             var fullpart = "http://cbt.backeyefinder.in.th/booking/showstadiumbook";
@@ -185,7 +168,41 @@ when the page first loads -->
                                                                 show = ' ';
                                                                 
                                                                 for (i = 0; i < obj.length; i++) {
-                                                                  
+                                                                  var w = [];
+                                                                    if(obj[i].STATUS== 'warning'){
+                                                                        w[i] = '<div class="btn-group ">' +
+                                                                            ' <button  type="button" class="btn btn-warning dropdown-toggle btn-sm" data-toggle="dropdown">' +
+                                                                            '   Warning <span class="caret"></span>' +
+                                                                            ' </button>' +
+                                                                            '  <ul class="dropdown-menu" role="menu" id="eventselect">' +
+                                                                            '   <li ><a  class="btn " role="button" onclick="okja(' + obj[i].user_id + ',this)">Active</a></li>' +
+                                                                            '  <li ><a  class="btn " role="button" onclick="blacklist(' + obj[i].user_id + ',this,'+stadium_id+')">BLACK LIST</a></li>' +
+                                                                            '   <!--<li class="divider"></li>-->' +
+                                                                            '</ul>' +
+                                                                            ' </div></td>' ;
+                                                                    } if(obj[i].STATUS== 'ok'){
+                                                                        w[i] = '<div class="btn-group ">' +
+                                                                            ' <button  type="button" class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown">' +
+                                                                            '   Active <span class="caret"></span>' +
+                                                                            ' </button>' +
+                                                                            '  <ul class="dropdown-menu" role="menu" id="eventselect">' +
+                                                                            '   <li ><a  class="btn " role="button" onclick="warning(' + obj[i].user_id+ ',this)">Warning</a></li>' +
+                                                                            '  <li ><a  class="btn " role="button" onclick="blacklist(' + obj[i].user_id + ',this,'+stadium_id+')">BLACK LIST</a></li>' +
+                                                                            '   <!--<li class="divider"></li>-->' +
+                                                                            '</ul>' +
+                                                                            ' </div></td>' ;
+                                                                    }if(obj[i].STATUS== 'blacklist'){
+                                                                        w[i] = '<div class="btn-group ">' +
+                                                                            ' <button  type="button" class="btn btn-danger dropdown-toggle btn-sm" data-toggle="dropdown">' +
+                                                                            '   Danger <span class="caret"></span>' +
+                                                                            ' </button>' +
+                                                                            '  <ul class="dropdown-menu" role="menu" id="eventselect">' +
+                                                                            '   <li ><a  class="btn " role="button" onclick="okja(' + obj[i].user_id + ',this)">Active</a></li>' +
+                                                                            '  <li ><a  class="btn " role="button" onclick="warning(' + obj[i].user_id + ',this)">Warning</a></li>' +
+                                                                            '   <!--<li class="divider"></li>-->' +
+                                                                            '</ul>' +
+                                                                            ' </div>' ;
+                                                                    }
                                                                     show = show + '  <tr>' +
                                                                             ' <td>' + obj[i].court_name + '</td>' +
                                                                             '<td>' + obj[i].start_time.substr(0, 10) + '</td>' +
@@ -193,16 +210,7 @@ when the page first loads -->
                                                                             '<td>' + obj[i].fname + ' ' + obj[i].lname + '</td>' +
                                                                             '<td>' + obj[i].phone + '</td>  ' +
                                                                             '<td>' + obj[i].sumprice + '</td>' +
-                                                                            '<td><div class="btn-group t'+i+'">' +
-                                                                            ' <button  type="button" class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown">' +
-                                                                            '   ปกติ <span class="caret"></span>' +
-                                                                            ' </button>' +
-                                                                            '  <ul class="dropdown-menu" role="menu" id="eventselect">' +
-                                                                            '   <li ><a  class="btn " role="button" onclick="blacklist(' + obj[i].user_id + ',this)">Warning</a></li>' +
-                                                                            '  <li ><a data-toggle="modal" data-target="#blacklist" class="btn " role="button">BLACK LIST</a></li>' +
-                                                                            '   <!--<li class="divider"></li>-->' +
-                                                                            '</ul>' +
-                                                                            ' </div></td>' +
+                                                                            '<td>'+w[i]; +'</td>' +
                                                                             '</tr>';
                                                                 }
 
@@ -221,9 +229,11 @@ when the page first loads -->
 
 
                                                         }
-                                                        function blacklist(id,t) {
+                                                        function okja(id,t) {
                                                             reason = prompt("Please enter Reason", "");
-                                                            var fullpart = "http://cbt.backeyefinder.in.th/users/addBlacklist";
+                                                                if (reason != null) {
+      
+                                                            var fullpart = "http://cbt.backeyefinder.in.th/users/addActive";
                                                             console.log(id);
                                                             console.log(reason);
 
@@ -232,7 +242,18 @@ when the page first loads -->
                                                                 url: fullpart,
                                                                 data: {idsend: id, reasonsend: reason}
                                                             }).done(function (msg) {
-                                                                        $(t).parent().html('gelll');
+                                                               // show = ' ';
+                                                                        show = '<div class="btn-group ">' +
+                                                                            ' <button  type="button" class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown">' +
+                                                                            '   Active <span class="caret"></span>' +
+                                                                            ' </button>' +
+                                                                            '  <ul class="dropdown-menu" role="menu" id="eventselect">' +
+                                                                            '   <li ><a  class="btn " role="button" onclick="warning(' + id + ',this)">Warning</a></li>' +
+                                                                            '  <li ><a  class="btn " role="button" onclick="blacklist(' + id + ',this,'+stadium_id+')">BLACK LIST</a></li>' +
+                                                                            '   <!--<li class="divider"></li>-->' +
+                                                                            '</ul>' +
+                                                                            ' </div>' ;
+                                                                        $(t).parent().parent().parent().html(show);
                                                                       function create(template, vars, opts) {
                                                             return $container.notify("create", template, vars, opts);
                                                         }
@@ -253,6 +274,98 @@ when the page first loads -->
 //                                                    document.getElementById("demo").innerHTML =
 //                                                            "Hello " + person + "! How are you today?";
 //                                                }
+}
+                                                        }
+                                                           function warning(id,t) {
+                                                            reason = prompt("Please enter Reason", "");
+                                                             if (reason != null) {
+                                                            var fullpart = "http://cbt.backeyefinder.in.th/users/addWarning";
+                                                            console.log(id);
+                                                            console.log(reason);
+
+                                                            $.ajax({
+                                                                type: "POST",
+                                                                url: fullpart,
+                                                                data: {idsend: id, reasonsend: reason}
+                                                            }).done(function (msg) {
+                                                               // show = ' ';
+                                                                        show = '<div class="btn-group ">' +
+                                                                            ' <button  type="button" class="btn btn-warning dropdown-toggle btn-sm" data-toggle="dropdown">' +
+                                                                            '   Warning <span class="caret"></span>' +
+                                                                            ' </button>' +
+                                                                            '  <ul class="dropdown-menu" role="menu" id="eventselect">' +
+                                                                            '   <li ><a  class="btn " role="button" onclick="okja(' + id + ',this)">Active</a></li>' +
+                                                                            '  <li ><a  class="btn " role="button" onclick="blacklist(' + id + ',this,'+stadium_id+')">BLACK LIST</a></li>' +
+                                                                            '   <!--<li class="divider"></li>-->' +
+                                                                            '</ul>' +
+                                                                            ' </div>' ;
+                                                                        $(t).parent().parent().parent().html(show);
+                                                                      function create(template, vars, opts) {
+                                                            return $container.notify("create", template, vars, opts);
+                                                        }
+                                                                console.log(msg);
+                                                                
+                                                                $("#notija").notify({
+                                                                speed: 500,
+                                                               
+                                                            });
+                                                            $("#notija").notify("create", {
+                                                                title: 'Add Complete',
+                                                                text: 'Status this user is Change '
+                                                            });
+
+
+                                                            });
+//                                                if (reason != null) {
+//                                                    document.getElementById("demo").innerHTML =
+//                                                            "Hello " + person + "! How are you today?";
+//                                                }
+                                                        }
+                                                        }
+                                                        function blacklist(id,t,stid) {
+                                                            reason = prompt("Please enter Reason", "");
+                                                             if (reason != null) {
+                                                            var fullpart = "http://cbt.backeyefinder.in.th/users/addBlacklist";
+                                                            console.log(id);
+                                                            console.log(reason);
+
+                                                            $.ajax({
+                                                                type: "POST",
+                                                                url: fullpart,
+                                                                data: {idsend: id, reasonsend: reason,stsend: stid}
+                                                            }).done(function (msg) {
+                                                                   show = '<div class="btn-group ">' +
+                                                                            ' <button  type="button" class="btn btn-danger dropdown-toggle btn-sm" data-toggle="dropdown">' +
+                                                                            '   Danger <span class="caret"></span>' +
+                                                                            ' </button>' +
+                                                                            '  <ul class="dropdown-menu" role="menu" id="eventselect">' +
+                                                                            '   <li ><a  class="btn " role="button" onclick="okja(' + id + ',this)">Active</a></li>' +
+                                                                            '  <li ><a  class="btn " role="button" onclick="warning(' + id + ',this)">Warning</a></li>' +
+                                                                            '   <!--<li class="divider"></li>-->' +
+                                                                            '</ul>' +
+                                                                            ' </div>' ;
+                                                                        $(t).parent().parent().parent().html(show);
+                                                                      function create(template, vars, opts) {
+                                                            return $container.notify("create", template, vars, opts);
+                                                        }
+                                                                console.log(msg);
+                                                                
+                                                                $("#notija").notify({
+                                                                speed: 500,
+                                                               
+                                                            });
+                                                            $("#notija").notify("create", {
+                                                                title: 'Add Complete',
+                                                                text: 'Status this user is Change '
+                                                            });
+
+
+                                                            });
+//                                                if (reason != null) {
+//                                                    document.getElementById("demo").innerHTML =
+//                                                            "Hello " + person + "! How are you today?";
+//                                                }
+                                                        }
                                                         }
 //                                            function blacklist() {
 //                                                var ids = $("#eventselect li").map(function () {
