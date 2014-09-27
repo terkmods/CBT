@@ -211,11 +211,14 @@ public function edituser($id) {
         $this->load->view('home');
     }
     function addBlacklist(){
-        $userId  = $this->input->post('');
+        $userId  = $this->input->post('idsend');
+        $reason = $this->input->post('reasonsend');
         $data = array(
-          'status'  => $this->input->post('')
+          'status'  => 'blacklist',
+          'reason' => $reason
         );
         $this->db->update('User', $data, array('user_id' => $userId));
+        echo 'complete';
     }
 
 

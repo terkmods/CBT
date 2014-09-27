@@ -383,6 +383,29 @@
         </form>
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<!--Modalll blacklist naja--> 
+
+<div class="modal fade" id="blacklist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="<?= base_url() ?>stadium/addBlacklist/<?= $this->uri->segment(3) //รับค่าจาก url ใน segment / ที่ 3 ?>" method="post" enctype="multipart/form-data"> 
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Add to black list </h4>
+                </div>
+                <div class="modal-body">
+                    Reason
+                    <textarea class="form-control form-group"></textarea>
+                    <input type="hidden" id="usID" >
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" value="Send" class="btn btn-default">
+                </div>
+            </div><!-- /.modal-content -->
+        </form>
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 

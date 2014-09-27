@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>asset/css/style.css">
   
         <link href="<?= base_url() ?>asset/css/bootstrap-switch.css" rel="stylesheet">
-
+        <link href="<?= base_url() ?>asset/css/ui.notify.css" rel="stylesheet">
         
 
         <style type="text/css">

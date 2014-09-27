@@ -12,7 +12,7 @@ $num = 1;
 ?>
 
 <div class="container">
-    <h4> <a href="#">หน้าหลัก</a> /HistoryBooking /<font style="color: green"><?php echo $this->session->flashdata('msg'); ?></font></h4> 
+    <h4> <a href="#">หน้าหลัก</a> /HistoryBooking / <span id="flashmsg"><font style="color: green"></font></span></h4> 
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">Account Settings</div>
@@ -77,8 +77,8 @@ $num = 1;
                                                     ปกติ <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu" id="eventselect">
-                                                    <li ><a data-toggle="modal" data-target="#addstadium" class="btn " role="button">Warning</a></li>
-                                                    <li ><a href="">BLACK LIST</a></li>
+                                                    <li ><a href="<?= base_url() ?>user/addblacklist" class="btn " role="button" onclick="blacklist()">Warning</a></li>
+                                                    <li ><a data-toggle="modal" data-target="#blacklist" class="btn " role="button">BLACK LIST</a></li>
 
                                                     <!--<li class="divider"></li>-->
 
@@ -128,21 +128,47 @@ $num = 1;
         <div class="row copyright">Copyright 2014 - Badminton</div>
     </div>
 </footer>
+<!-- set the container hidden to avoid a flash of unstyled content
+when the page first loads -->
+<div id="notija" style="display:none">
+    <!-- 
+    Later on, you can choose which template to use by referring to the 
+    ID assigned to each template.  Alternatively, you could refer
+    to each template by index, so in this example, "basic-tempate" is
+    index 0 and "advanced-template" is index 1.
+    -->
+    <div id="basic-template">
+        <a class="ui-notify-cross ui-notify-close" href="#">x</a>
+        <h1>#{title}</h1>
+        <p>#{text}</p>
+    </div>
+
+    <div id="advanced-template">
+        <!-- ... you get the idea ... -->
+    </div>
+</div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.js" type="text/javascript"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="<?= base_url() ?>asset/js/bootstrap.min.js"></script>
 <script src="<?= base_url() ?>asset/js/bootstrap-datepicker.js"></script>
 <script src="<?= base_url() ?>asset/js/bootstrap-switch.js"></script>
+<script src="<?= base_url() ?>asset/js/jquery.notify.js" type="text/javascript"></script>
 
 <script type="text/javascript">
+
+                                                  
                                                         function stadiumchange() {
+                                                            
+                                                            
+
                                                             var x = document.getElementById("stadiumselect").selectedIndex;
                                                             stadium = document.getElementsByTagName("option")[x].value;
                                                             stadium = stadium.split(',');
                                                             console.log(stadium);
-//        console.log(court[0]);
+                                                            //        console.log(court[0]);
                                                             console.log(stadium[1]);
                                                             //document.getElementById("court").innerHTML = court[0];
                                                             var fullpart = "http://cbt.backeyefinder.in.th/booking/showstadiumbook";
@@ -152,11 +178,14 @@ $num = 1;
                                                                 data: {stadiumsend: stadium[1]}
                                                             }).done(function (msg) {
                                                                 var obj = JSON.parse(msg);
+                                                                
                                                                 console.log(obj);
                                                                 console.log(obj[0].court_id);
                                                                 console.log(obj.length);
                                                                 show = ' ';
+                                                                
                                                                 for (i = 0; i < obj.length; i++) {
+                                                                  
                                                                     show = show + '  <tr>' +
                                                                             ' <td>' + obj[i].court_name + '</td>' +
                                                                             '<td>' + obj[i].start_time.substr(0, 10) + '</td>' +
@@ -164,7 +193,16 @@ $num = 1;
                                                                             '<td>' + obj[i].fname + ' ' + obj[i].lname + '</td>' +
                                                                             '<td>' + obj[i].phone + '</td>  ' +
                                                                             '<td>' + obj[i].sumprice + '</td>' +
-                                                                            '<td></td>' +
+                                                                            '<td><div class="btn-group t'+i+'">' +
+                                                                            ' <button  type="button" class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown">' +
+                                                                            '   ปกติ <span class="caret"></span>' +
+                                                                            ' </button>' +
+                                                                            '  <ul class="dropdown-menu" role="menu" id="eventselect">' +
+                                                                            '   <li ><a  class="btn " role="button" onclick="blacklist(' + obj[i].user_id + ',this)">Warning</a></li>' +
+                                                                            '  <li ><a data-toggle="modal" data-target="#blacklist" class="btn " role="button">BLACK LIST</a></li>' +
+                                                                            '   <!--<li class="divider"></li>-->' +
+                                                                            '</ul>' +
+                                                                            ' </div></td>' +
                                                                             '</tr>';
                                                                 }
 
@@ -183,13 +221,46 @@ $num = 1;
 
 
                                                         }
-                                                        function blacklist() {
-                                                            var ids = $("#eventselect li").map(function () {
-                                                                return this.id;
-                                                            }).get().join(",");
+                                                        function blacklist(id,t) {
+                                                            reason = prompt("Please enter Reason", "");
+                                                            var fullpart = "http://cbt.backeyefinder.in.th/users/addBlacklist";
+                                                            console.log(id);
+                                                            console.log(reason);
 
-                                                            console.log(ids);
+                                                            $.ajax({
+                                                                type: "POST",
+                                                                url: fullpart,
+                                                                data: {idsend: id, reasonsend: reason}
+                                                            }).done(function (msg) {
+                                                                        $(t).parent().html('gelll');
+                                                                      function create(template, vars, opts) {
+                                                            return $container.notify("create", template, vars, opts);
                                                         }
+                                                                console.log(msg);
+                                                                
+                                                                $("#notija").notify({
+                                                                speed: 500,
+                                                               
+                                                            });
+                                                            $("#notija").notify("create", {
+                                                                title: 'Add Complete',
+                                                                text: 'Status this user is Change '
+                                                            });
+
+
+                                                            });
+//                                                if (reason != null) {
+//                                                    document.getElementById("demo").innerHTML =
+//                                                            "Hello " + person + "! How are you today?";
+//                                                }
+                                                        }
+//                                            function blacklist() {
+//                                                var ids = $("#eventselect li").map(function () {
+//                                                    return this.id;
+//                                                }).get().join(",");
+//
+//                                                console.log(ids);
+//                                            }
 </script>
 <script type="text/javascript">
     /* pagination */
@@ -202,12 +273,10 @@ $num = 1;
                     hidePageNumbers: false
                 },
         settings = $.extend(defaults, opts);
-
         var listElement = $this;
         var perPage = settings.perPage;
         var children = listElement.children();
         var pager = $('.pagination');
-
         if (typeof settings.childSelector != "undefined") {
             children = listElement.find(settings.childSelector);
         }
@@ -218,9 +287,7 @@ $num = 1;
 
         var numItems = children.size();
         var numPages = Math.ceil(numItems / perPage);
-
         pager.data("curr", 0);
-
         if (settings.showPrevNext) {
             $('<li><a href="#" class="prev_link" style="font-size: 10px;padding: 5px 5px 5px 5px;">«</a></li>').appendTo(pager);
         }
@@ -245,10 +312,8 @@ $num = 1;
             pager.find('.next_link').hide();
         }
         pager.children().eq(1).addClass("active");
-
         children.hide();
         children.slice(0, perPage).show();
-
         pager.find('li .page_link').click(function () {
             var clickedPage = $(this).html().valueOf() - 1;
             goTo(clickedPage, perPage);
@@ -262,7 +327,6 @@ $num = 1;
             next();
             return false;
         });
-
         function previous() {
             var goToPage = parseInt(pager.data("curr")) - 1;
             goTo(goToPage);
@@ -276,9 +340,7 @@ $num = 1;
         function goTo(page) {
             var startAt = page * perPage,
                     endOn = startAt + perPage;
-
             children.css('display', 'none').slice(startAt, endOn).show();
-
             if (page >= 1) {
                 pager.find('.prev_link').show();
             }
@@ -294,7 +356,6 @@ $num = 1;
             }
 
             pager.data("curr", page);
-
             if (settings.numbersPerPage > 1) {
                 $('.page_link').hide();
                 $('.page_link').slice(page, settings.numbersPerPage + page).show();
@@ -304,7 +365,6 @@ $num = 1;
             pager.children().eq(page + 1).addClass("active");
         }
     };
-
     $('#items').pageMe({pagerSelector: '#myPager', childSelector: 'tr', showPrevNext: true, hidePageNumbers: false, perPage: 3});
     /****/
 </script>
@@ -312,9 +372,7 @@ $num = 1;
     $('#myTab a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
-    });
-
-</script>
+    });</script>
 <script>
     $(document).ready(function () {
         $("#btn1").click(function () {
@@ -338,16 +396,13 @@ $num = 1;
         $(document).on('click', '#btn3', function () { // ตรวจสอบตลอดเวลา เป็น dynamic 
             $(this).parent().parent().remove();
         });
-
         $("#btn4").click(function () {
             $("#time").append($('#showtime').html()); // แสดง ทั้ง div
         });
-
         $(document).on('click', '#btn5', function () { // ตรวจสอบตลอดเวลา เป็น dynamic 
             $(this).next().remove();
         });
-    });
-</script>
+    });</script>
 <script>
     $(document).ready(function () {
         var max_fields = 20; //maximum input boxes allowed
@@ -362,14 +417,12 @@ $num = 1;
                 $(wrapper).append('<div class="delja">' + $('#showtime').html() + '<a   class="remove_field">Remove</a></div>' + '</div>'); //add input box
             }
         });
-
         $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
             e.preventDefault();
             $(this).parent(".delja").remove();
-            x--;// อ้างอิงถึง class delja2
+            x--; // อ้างอิงถึง class delja2
         })
-    });
-</script>
+    });</script>
 
 <script>
     function del() {
