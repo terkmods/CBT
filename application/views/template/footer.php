@@ -36,7 +36,7 @@
 <script src="<?= base_url() ?>asset/js/bootstrap.min.js"></script>
 <script src="<?= base_url() ?>asset/js/bootstrap-datepicker.js"></script>
 <script src="<?= base_url() ?>asset/js/bootstrap-switch.js"></script>
-
+<script src="<?= base_url() ?>asset/js/jquery.notify.js"></script>
 
 <script type="text/javascript">
     /* pagination */

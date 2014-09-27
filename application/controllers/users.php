@@ -211,12 +211,43 @@ public function edituser($id) {
         $this->load->view('home');
     }
     function addBlacklist(){
-        $userId  = $this->input->post('');
+        $userId  = $this->input->post('idsend');
+        $reason = $this->input->post('reasonsend');
         $data = array(
-          'status'  => $this->input->post('')
+          'status'  => 'blacklist',
+          'reason' => $reason
+        );
+         $datasend = array(
+          'stadium_id'  => $this->input->post('stsend'),
+            'user_id'  => $this->input->post('idsend'), 
+          'reason' => $reason
         );
         $this->db->update('User', $data, array('user_id' => $userId));
+        $this->db->insert('blacklist',$datasend);
+        echo 'complete';
     }
+        function addWarning(){
+        $userId  = $this->input->post('idsend');
+        $reason = $this->input->post('reasonsend');
+        $data = array(
+          'status'  => 'warning',
+          'reason' => $reason
+        );
+        $this->db->update('User', $data, array('user_id' => $userId));
+        echo 'complete';
+    }
+     function addActive(){
+        $userId  = $this->input->post('idsend');
+        $reason = $this->input->post('reasonsend');
+        $data = array(
+          'status'  => 'ok',
+          'reason' => $reason
+        );
+        $this->db->update('User', $data, array('user_id' => $userId));
+        
+        echo 'complete';
+    }
+
 
 
 }

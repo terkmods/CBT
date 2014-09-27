@@ -18,28 +18,21 @@
                     <th>รูป</th>
                     <th>ชื่อ</th>
                     <th>profile URL</th>
+                    <th>Reason</th>
                     <th>แก้ไข</th>
                 </tr>
             </thead>
             <tbody>
+                <?php foreach ($blacklist as $b) {?>
                 <tr>
-                    <td><img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="images/c2.jpg" style="width: 100px; height: 100px;"></td>
-                    <td>Juno Servaco</td>
-                    <td>www.cbtonline.in.th/juno</td>
+                    <td><img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="<?=  base_url()?>asset/images/profilepic/<?=$b->profilepic_path?>" style="width: 100px; height: 100px;"></td>
+                    <td><?=$b->fname?></td>
+                    <td><a href="<?=  base_url()?>/users/profile/<?=$b->user_id?>">www.cbtonline.in.th/<?=$b->profile_url?></a></td>
+                    <td><?=$b->reason?></td>
                     <td><a href="#" class="btn btn-danger" role="button" >Unblacklist</a></td>
                 </tr>
-                <tr>
-                    <td><img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="images/c2.jpg" style="width: 100px; height: 100px;"></td>
-                    <td>Juno Servaco</td>
-                    <td>www.cbtonline.in.th/juno</td>
-                    <td><a href="#" class="btn btn-danger" role="button" >Unblacklist</a></td>
-                </tr>
-                <tr>
-                    <td><img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="images/c2.jpg" style="width: 100px; height: 100px;"></td>
-                    <td>Juno Servaco</td>
-                    <td>www.cbtonline.in.th/juno</td>
-                    <td><a href="#" class="btn btn-danger" role="button" >Unblacklist</a></td>
-                </tr>
+                <?php } ?>
+                
             </tbody>
         </table>
     </div>

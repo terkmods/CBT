@@ -76,6 +76,10 @@ FROM stadium join owner join User
 where stadium.owner_id = owner.owner_id and owner.user_id = User.user_id  ')->result();
         return $sql;
     }
+    function get_blacklist($stid){
+        $sql = $this->db->query('SELECT DISTINCT blacklist.user_id,stadium_id,fname,profile_url,profilepic_path,User.reason FROM `blacklist` join User on User.user_id = blacklist.user_id  where stadium_id='.$stid.'')->result();
+        return $sql;
+    }
     
 
 }
