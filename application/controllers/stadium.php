@@ -197,6 +197,7 @@ class stadium extends CI_Controller {
     }
 
     function profile($stId) {
+
         $st = array('data' => $this->mystadium->getstadiumprofile($stId)
         );
         // print_r($st);
@@ -278,33 +279,39 @@ class stadium extends CI_Controller {
         $this->session->set_flashdata('msg', 'เพิ่มคอร์ดเรียบร้อย');
         redirect('stadium/updatestadium/' . $id);
     }
-    
-    function compare(){
+
+    function compare() {
         $data = $this->input->post('compare');
-       // print_r($data);
+        // print_r($data);
 //        $sql = "select * form stadium where stadium_id =" $data
-      
+
         $detail['comparedata'] = $this->mystadium->showcompare($data);
         $detail['time'] = $this->mystadium->showtime($data);
         //$detail['price'] = $this->mystadium->showprice($data);
-        
         //print_r($detail['time']);
-        $this->load->view("compare",$detail);        
+        $this->load->view("compare", $detail);
     }
 
+    function historyBooking() {
+        $userid = $this->session->userdata('id');
+        $ownerid = $this->getOwnerid($userid);
 
-function historyBooking(){
-     $userid = $this->session->userdata('id');
-            $ownerid = $this->getOwnerid($userid);
 
-
-            $datasend = array(
-                'ow' => $this->getOwner($userid),
-                'stadium' => $this->mystadium->getstadium($ownerid)
-            );
-           // print_r($datasend);
-    $this->load->view('history_stadium_booking',$datasend);
+        $datasend = array(
+            'ow' => $this->getOwner($userid),
+            'stadium' => $this->mystadium->getstadium($ownerid)
+        );
+        // print_r($datasend);
+        $this->load->view('history_stadium_booking', $datasend);
+    }
+    
+    function search(){
+        $data = array($this->input->post('optionsRadios'),$this->input->post('value2'),$this->input->post('value3'));
+        $detail['result_Search'] = $this->mystadium->showSearch($data);
+        print_r($detail);
+        $this->load->view('result_search');
+    }
 }
-}
+
 ?>
        
