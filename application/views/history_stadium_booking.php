@@ -28,43 +28,65 @@ $num = 1;
                     <div class="col-md-3">
                         <ul class="nav nav-pills nav-stacked">
                             <?php if ($this->session->userdata('role') == "owner") { ?>
-                                <li <?php if ($type == "users") { ?><?= "class = 'active'";
-                            } ?> ><a href="<?php echo base_url() ?>users/edituser/<?php echo $this->session->userdata('id'); ?>">Basic Setting</a></li>
+                                <li <?php if ($type == "users") { ?><?=
+                                    "class = 'active'";
+                                }
+                                ?> ><a href="<?php echo base_url() ?>users/edituser/<?php echo $this->session->userdata('id'); ?>">Basic Setting</a></li>
                                 <li  ><a href="<?= base_url() ?>stadium">Manage stadium </a></li>
                                 <li  class = 'active'
-                             ><a href="<?= base_url() ?>stadium/historyBooking">History Booking stadium </a></li>
-                            <?php } ?>
+                                     ><a href="<?= base_url() ?>stadium/historyBooking">History Booking stadium </a></li>
+                                 <?php } ?>
                         </ul>                            
                     </div>
                     <div class="col-md-9">
                         <div class="row">
-                             <div class="control-group">
+                            <div class="control-group">
 
-                <div class="controls">
-                    <div class="input-group">
-                        <label for="date-pik" class="input-group-addon btn">
-                            เลือกสนาม
-                        </label>
-                        <select class="form-control" id="stadiumselect" onchange="stadiumchange()()">
-                            <option value="default">เลือกคอร์ด </option> 
-                            <?php foreach ($stadium as $ct) { ?>        
-                                <option value="<?= $ct->stadium_name ?>,<?= $ct->stadium_id ?>" id="stadiumtoption"><?= $ct->stadium_name ?></option>
-                            <?php } ?>
-                        </select>
+                                <div class="controls">
+                                    <div class="input-group">
+                                        <label for="date-pik" class="input-group-addon btn">
+                                            เลือกสนาม
+                                        </label>
+                                        <select class="form-control" id="stadiumselect" onchange="stadiumchange()">
+                                            <option value="default">เลือกสนาม </option> 
+                                            <?php foreach ($stadium as $ct) { ?>        
+                                                <option value="<?= $ct->stadium_name ?>,<?= $ct->stadium_id ?>" id="stadiumtoption"><?= $ct->stadium_name ?></option>
+                                            <?php } ?>
+                                        </select>
 
-                    </div>
-                </div>
-            </div>
-                           
+                                    </div>
+                                </div>
+                            </div>
+
 
                         </div>
                         <div class="row">
-                                               <table class="table table-bordered  table-condensedy" id="tableMorning">
-                        <thead><tr><th>คอร์ด</th><th>เวลาจอง</th><th>จองโดย</th><th>สถานะ</th></tr></thead>
-                        <tbody id="runtime">
-                           
-                        </tbody>
-                    </table>
+                            <table class="table table-bordered  table-condensedy" id="tableMorning">
+                                <thead><tr><th>ชื่อคอร์ด</th><th>วัน</th><th>เวลาจอง</th><th>จองโดย</th><th>เบอร์โทร</th><th>รวมเป็นเงิน</th><th>สถานะ</th></tr></thead>
+                                <tbody id="runtime">
+                                    <tr>
+                                        <td>1</td>
+                                        <td>19-02-2014 </td>
+                                        <td>19.00-20.00</td>
+                                        <td>ครับโผมมมม</td>
+                                        <td>08555555</td>  
+                                        <td>1000</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown">
+                                                    ปกติ <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu" id="eventselect">
+                                                    <li ><a data-toggle="modal" data-target="#addstadium" class="btn " role="button">Warning</a></li>
+                                                    <li ><a href="">BLACK LIST</a></li>
+
+                                                    <!--<li class="divider"></li>-->
+
+                                                </ul>
+                                            </div></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -115,37 +137,60 @@ $num = 1;
 <script src="<?= base_url() ?>asset/js/bootstrap-switch.js"></script>
 
 <script type="text/javascript">
-    function stadiumchange() {
-        var x = document.getElementById("stadiumselect").selectedIndex;
-        stadium = document.getElementsByTagName("option")[x].value;
-        stadium = stadium.split(',');
-        console.log(stadium);
+                                                        function stadiumchange() {
+                                                            var x = document.getElementById("stadiumselect").selectedIndex;
+                                                            stadium = document.getElementsByTagName("option")[x].value;
+                                                            stadium = stadium.split(',');
+                                                            console.log(stadium);
 //        console.log(court[0]);
-        console.log(stadium[1]);
-        //document.getElementById("court").innerHTML = court[0];
-        var fullpart = "http://cbt.backeyefinder.in.th/booking/showstadiumbook" ;
-        $.ajax({
-            type: "POST",
-            url: fullpart,
-            data: {stadiumsend: stadium[1]}
-        }).done(function (msg) {
-            var obj = JSON.parse(msg);
-            console.log(obj);
+                                                            console.log(stadium[1]);
+                                                            //document.getElementById("court").innerHTML = court[0];
+                                                            var fullpart = "http://cbt.backeyefinder.in.th/booking/showstadiumbook";
+                                                            $.ajax({
+                                                                type: "POST",
+                                                                url: fullpart,
+                                                                data: {stadiumsend: stadium[1]}
+                                                            }).done(function (msg) {
+                                                                var obj = JSON.parse(msg);
+                                                                console.log(obj);
+                                                                console.log(obj[0].court_id);
+                                                                console.log(obj.length);
+                                                                show = ' ';
+                                                                for (i = 0; i < obj.length; i++) {
+                                                                    show = show + '  <tr>' +
+                                                                            ' <td>' + obj[i].court_name + '</td>' +
+                                                                            '<td>' + obj[i].start_time.substr(0, 10) + '</td>' +
+                                                                            '<td>' + obj[i].START + '-' + obj[i].END + '</td>' +
+                                                                            '<td>' + obj[i].fname + ' ' + obj[i].lname + '</td>' +
+                                                                            '<td>' + obj[i].phone + '</td>  ' +
+                                                                            '<td>' + obj[i].sumprice + '</td>' +
+                                                                            '<td></td>' +
+                                                                            '</tr>';
+                                                                }
+
+                                                                $('#runtime').html(show);
 //             alert(obj);
 //                $("#runtime").html(obj.mor);
 //                starttime = obj.starttime1;
 //                endtimeja = obj.endtime;
-          
-        });
+
+                                                            });
 
 
-        
-  
-         
-        
-        
-    }
-    </script>
+
+
+
+
+
+                                                        }
+                                                        function blacklist() {
+                                                            var ids = $("#eventselect li").map(function () {
+                                                                return this.id;
+                                                            }).get().join(",");
+
+                                                            console.log(ids);
+                                                        }
+</script>
 <script type="text/javascript">
     /* pagination */
     $.fn.pageMe = function (opts) {

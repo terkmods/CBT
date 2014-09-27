@@ -210,7 +210,13 @@ public function edituser($id) {
     function  test(){
         $this->load->view('home');
     }
-    
+    function addBlacklist(){
+        $userId  = $this->input->post('');
+        $data = array(
+          'status'  => $this->input->post('')
+        );
+        $this->db->update('User', $data, array('user_id' => $userId));
+    }
 
 
 }

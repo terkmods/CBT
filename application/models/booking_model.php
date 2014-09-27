@@ -41,11 +41,17 @@ WHERE reserve.user_id =' . $userId)->result();
     }
 
     function get_bookings_stadium($stId) {
-        $this->db->select('*');
-        $this->db->from('reserve');
-//        $this->db->join('member', 'booking.member_id = member.id');
-        $this->db->where('reserve.stadium_id', $stId);
-                $query = $this->db->get();
+        $sql = 'SELECT reserve_id, court.court_id, reserve.stadium_id, User.user_id, CAST( start_time AS TIME ) AS 
+START , CAST( end_time AS TIME ) AS 
+END , start_time, sumprice, court_name, fname, lname, 
+STATUS , phone
+FROM reserve
+JOIN court ON reserve.court_id = court.court_id
+JOIN User ON User.user_id = reserve.user_id
+WHERE reserve.stadium_id ='.$stId.''
+;
+        
+$query = $this->db->query($sql);
         return $query->result();
     }
 
