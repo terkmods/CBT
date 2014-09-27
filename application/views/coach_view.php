@@ -1,9 +1,16 @@
 <?php include 'template/head.php'; ?>
 
-
+<div class="container">
 <div style="clear:both;"></div>
 <div id="cover">  
-    <img src="<?= base_url() ?>/asset/images/imagetest/cover-profile.jpg">
+      <img src="<?= base_url() ?>/asset/images/profilepic/<?php 
+        if ($data['0']->cover_path != "") {
+                echo '' . $data['0']->cover_path;
+            } else {
+                echo 'cover_new.jpg';
+            }
+            ?>" width="1280">
+        </div>  
 </div>  
 <div class="container upper-profile">
     <div class="row">
@@ -114,6 +121,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <hr>
     <?php include 'template/footer.php'; ?>  

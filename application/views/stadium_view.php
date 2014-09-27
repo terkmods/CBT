@@ -2,7 +2,7 @@
  ?>
 <div class="container">
     <div id="cover">
-<a role="button" data-toggle="modal" data-target="#uploadimgcover" class="btn"><img src="<?= base_url() ?>/asset/images/<?php
+        <a role="button" data-toggle="modal" data-target="#uploadimgcover" class="btn"><img src="<?= base_url() ?>/asset/images/<?php
             if ($data['0']->cover_path != "") {
                 echo 'stadiumpic/' . $data['0']->cover_path;
             } else {
@@ -17,25 +17,18 @@
                     <p>เจ้าของ
                         <span class="glyphicon glyphicon-map-marker"></span>&nbsp<a href="">Bangkok</a>, <a href="#">Thailand</a></p> <p>
                          โทรศัพท์:<h5><?= $data['0']->tel  ?></h5>
-                    
-                    
+
                 </div>
                 <div class="col-md-4 info">
                     <div class="row">
-                        <p><a class="btn btn-primary btn-lg pull-right" role="button" href="<?= base_url() ?>booking/reserve/<?php echo $this->uri->segment(3); ?>">Book Now</a></p>
-
+                        <p><a style="margin-top: 55px" class="btn btn-primary btn-lg pull-right" role="button" href="<?= base_url() ?>booking/reserve/<?php echo $this->uri->segment(3); ?>">Book Now</a></p>
                     </div>
-                                         <div class="row">
-
-                    <p><a class="btn btn-danger btn-lg pull-right" role="button" data-toggle="modal" data-target="#myrule">Rules</a></p>
-                      <!-- Modal -->
-                                         </div>
                 </div>
-
             </div>
         </div>
 
     <hr>
+    
     <div class="container">
         <!--<h4> <a href="#">หน้าหลัก</a> / เพิ่มรายละเอียดสนาม</h4> -->
         <div class="row">
@@ -103,7 +96,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
+            
+            <div class="col-md-8"><div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>เกี่ยวกับฉัน</h3>
+                        เกี่ยวกับสนามฉัน สนามฉันตั้งอยู่ที่
+
+                    </div>
+                </div>
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3>ประกาศ</h3>
@@ -114,6 +114,41 @@
                         </ul>
                     </div>
                 </div>
+                
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>Gallery</h3>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3">
+                                <a href="#" class="thumbnail">
+                                    <img src="<?= base_url() ?>/asset/images/g.png" alt="...">
+                                </a>
+                            </div>
+                            <div class="col-xs-6 col-md-3">
+                                <a href="#" class="thumbnail">
+                                    <img src="<?= base_url() ?>/asset/images/g.png" alt="...">
+                                </a>
+                            </div>
+                            <div class="col-xs-6 col-md-3">
+                                <a href="#" class="thumbnail">
+                                    <img src="<?= base_url() ?>/asset/images/g.png" alt="...">
+                                </a>
+                            </div>
+                            <div class="col-xs-6 col-md-3">
+                                <a href="#" class="thumbnail">
+                                    <img src="<?= base_url() ?>/asset/images/g.png" alt="...">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>Map</h3>
+                        <img src="<?= base_url() ?>/asset/images/25293.png">
+                    </div>
+                </div>
+                
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3>แสดงความคิดเห็น</h3>
@@ -154,47 +189,6 @@
                         <div class="col-md-2" style="margin-top: 15px">
                             <input type="submit" class="btn-success" value="send">    </div>
 
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h3>เกี่ยวกับฉัน</h3>
-                        เกี่ยวกับสนามฉัน สนามฉันตั้งอยู่ที่
-
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h3>Gallery</h3>
-                        <div class="row">
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="<?= base_url() ?>/asset/images/g.png" alt="...">
-                                </a>
-                            </div>
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="<?= base_url() ?>/asset/images/g.png" alt="...">
-                                </a>
-                            </div>
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="<?= base_url() ?>/asset/images/g.png" alt="...">
-                                </a>
-                            </div>
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="<?= base_url() ?>/asset/images/g.png" alt="...">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h3>Map</h3>
-                        <img src="<?= base_url() ?>/asset/images/25293.png">
                     </div>
                 </div>
                 

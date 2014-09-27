@@ -7,7 +7,7 @@ class Welcome extends CI_Controller {
     function __construct() {
         parent::__construct();
            $this->load->library('session');
-      
+           $this->load->model('stadium_model', 'mystadium');
         
         
     }
@@ -31,9 +31,15 @@ class Welcome extends CI_Controller {
      
 
         if (!$this->session->userdata('logged')) {
-                  $this->load->view('index');
+            $datasend ['province'] = $this->mystadium->getprovince();
+            $datasend ['district'] = $this->mystadium->getdistrict();
+            
+                  $this->load->view('index', $datasend);
         } else {
-            $this->load->view('index');
+            $datasend ['province'] = $this->mystadium->getprovince();
+            $datasend ['district'] = $this->mystadium->getdistrict();
+          
+            $this->load->view('index', $datasend);
         }
     }
 
