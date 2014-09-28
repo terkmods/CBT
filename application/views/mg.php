@@ -79,8 +79,8 @@ $status = $ow->authenowner_status; ?>
                                                 <th>ลำดับ</th>
                                                 <th>ชื่อสนาม</th>
 
-                                                <th>จำนวนคอร์ด</th>
-                                                <th>เวลาเปิดปิดสนาม</th>
+                                                <th>คอร์ด</th>
+                                                <th>กฏ</th>
                                                 <th>URL</th>
                                                 <th>สถานะ</th>
                                                 <th></th>
@@ -94,9 +94,18 @@ $status = $ow->authenowner_status; ?>
                                                             <td><input type="checkbox" name="num[]" value="'.$row->stadium_id.'"></td>
                                                             <td>' . $num++ . '</td>
                                                             <td>' . $row->stadium_name . '<input type="hidden" name=id value="' . $row->stadium_id . '"</td>
-
-                                                            <td></td>
-                                                            <td></td>
+                                                             '?> 
+                                            
+                                                            <?php if($row->court_check!=0){ ?>
+                                                            <?php echo '  <td><span class="label label-success">เพิ่มคอร์ดแล้ว</span></td>'; }   else {
+                                                                    echo '  <td><span class="label label-danger">ยังไม่เพิ่มคอร์ด</span></td>';
+                                                                 }?>
+                                                           
+                                                           
+                                                          
+                                             <?php echo '
+                                                           
+                                                
                                                             <td><a href="'?> <?php echo base_url() ?><?php echo 'stadium/profile/'.$row->stadium_id.'" class="btn ">' . $row->stadium_url . '</a></td>
                                                             <td> '
                                                 ?>
@@ -148,3 +157,7 @@ $status = $ow->authenowner_status; ?>
 <?php include 'template/footer.php'; ?>
         
 
+<?php include 'template/footer_scrpit.php'; ?>
+
+</body>
+</html>

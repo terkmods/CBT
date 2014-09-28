@@ -94,3 +94,7 @@ $num = 1;
 <?php include 'template/modal.php'; ?>
 
 <?php include 'template/footer.php'; ?>
+<?php include 'template/footer_scrpit.php'; ?>
+
+</body>
+</html>

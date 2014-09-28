@@ -22,7 +22,35 @@ class stadium extends CI_Controller {
             $datasend = array(
                 'ow' => $this->getOwner($userid),
                 'stadium' => $this->mystadium->getstadium($ownerid)
+                
             );
+            $stID =null;
+            foreach ($datasend['stadium'] as $d) {
+                $stID[] = $d->stadium_id;
+                
+            }
+            if($stID!=null){
+           
+            foreach ($stID as $r) {
+                    $totalcourt[] = $this->mystadium->getTotalcourt($r);
+                }
+                $x ;
+            for($i=0 ; $i<sizeof($stID);$i++){
+                if($totalcourt[$i]->courtnum!=0){
+                   $this->db->update('stadium', array('court_check' => 1), array('stadium_id' => $stID[$i]));
+                }else if($totalcourt[$i]->courtnum == 0){
+                   $this->db->update('stadium', array('court_check' => 0), array('stadium_id' => $stID[$i]));  
+                }
+                $datasend['total'] = $totalcourt;
+            }
+            //print_r($x);
+            }else{
+                $this->session->set_flashdata('msg', 'กรุณาเพิ่มสนาม');
+            }
+
+            //print_r($totalcourt);
+            
+
             $this->load->view("mg", $datasend);
         } else {
             echo 'session no';
@@ -107,8 +135,7 @@ class stadium extends CI_Controller {
             'showtime' => $this->mystadium->getTime($id), //result_array  
             'court' => $this->mystadium->gettableCourt($id), //result_array  getTotalcourt
             'total' => $this->mystadium->getTotalcourt($id), //result_array  getTotalcourt
-            'blacklist'=>  $this->myusers->get_blacklist($id)
-    
+            'blacklist' => $this->myusers->get_blacklist($id)
         );
 
         //print_r($data['total']);
@@ -307,14 +334,14 @@ class stadium extends CI_Controller {
         // print_r($datasend);
         $this->load->view('history_stadium_booking', $datasend);
     }
-    
-    function search(){
-        $data = array($this->input->post('optionsRadios'),$this->input->post('value2'),$this->input->post('value3'));
+
+    function search() {
+        $data = array($this->input->post('optionsRadios'), $this->input->post('value2'), $this->input->post('value3'));
         $detail['result_Search'] = $this->mystadium->showSearch($data);
         print_r($detail);
         $this->load->view('result_search');
     }
-}
 
+}
 ?>
        

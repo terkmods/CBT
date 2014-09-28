@@ -28,6 +28,12 @@ class Stadium_model extends CI_Model {
 
         return $query;
     }
+      function getonecourt($stId) {
+        $query = $this->db->query('select * from court where court_id = ' . $stId)->row();
+        ;
+
+        return $query;
+    }
 
     function getstadiumprofile($stId) {
         $query = $this->db->query('select * from stadium where stadium_id = ' . $stId)->result();
@@ -46,6 +52,7 @@ class Stadium_model extends CI_Model {
         ;
         return $query;
     }
+
 
     function getprovince() {
         $query = $this->db->query('SELECT distinct province FROM `stadium`')->result();
