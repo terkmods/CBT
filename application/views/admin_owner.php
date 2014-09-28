@@ -82,7 +82,7 @@
                                         <td><?= $row->owner_id ?></td>
                                         <td><?= $row->fname ?>    <?= $row->lname ?></td>
                                         <td><?= $row->email ?></td>
-                                        <td ><button type="button" class="btn btn-info">View</button></td>
+                                        <td ><button type="button" class="btn btn-info" role="button" data-toggle="modal" data-target="#viewAlthen">View</button></td>
                                         <td>
 
                                             <select class="form-control">
@@ -116,4 +116,5 @@
 <!-- /.row -->
 </div>
 <!-- /#page-wrapper -->
+<?php include 'template/modal.php'; ?>
 <?php include 'template/footeradmin.php'; ?>  

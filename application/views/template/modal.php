@@ -322,7 +322,7 @@
 <!-- Modal -->
 <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="<?= base_url() ?>stadium/uploadstadiumprofile/<?= $this->uri->segment(3) //รับค่าจาก url ใน segment / ที่ 3 ?>" method="post" enctype="multipart/form-data"> 
+        <form action="<?= base_url() ?>stadium/uploadstadiumprofile/<?= $this->uri->segment(3) //รับค่าจาก url ใน segment / ที่ 3  ?>" method="post" enctype="multipart/form-data"> 
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -342,7 +342,7 @@
 
 <div class="modal fade" id="uploadprofileuser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="<?= base_url() ?>users/uploaduserprofile/<?= $this->uri->segment(3) //รับค่าจาก url ใน segment / ที่ 3 ?>" method="post" enctype="multipart/form-data"> 
+        <form action="<?= base_url() ?>users/uploaduserprofile/<?= $this->uri->segment(3) //รับค่าจาก url ใน segment / ที่ 3  ?>" method="post" enctype="multipart/form-data"> 
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -366,7 +366,7 @@
 
 <div class="modal fade" id="uploadimgcover" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="<?= base_url() ?>stadium/uploadcoverphoto/<?= $this->uri->segment(3) //รับค่าจาก url ใน segment / ที่ 3 ?>" method="post" enctype="multipart/form-data"> 
+        <form action="<?= base_url() ?>stadium/uploadcoverphoto/<?= $this->uri->segment(3) //รับค่าจาก url ใน segment / ที่ 3  ?>" method="post" enctype="multipart/form-data"> 
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -387,7 +387,7 @@
 
 <div class="modal fade" id="blacklist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="<?= base_url() ?>stadium/addBlacklist/<?= $this->uri->segment(3) //รับค่าจาก url ใน segment / ที่ 3 ?>" method="post" enctype="multipart/form-data"> 
+        <form action="<?= base_url() ?>stadium/addBlacklist/<?= $this->uri->segment(3) //รับค่าจาก url ใน segment / ที่ 3  ?>" method="post" enctype="multipart/form-data"> 
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -406,6 +406,78 @@
         </form>
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<!--<div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Detail</h4>
+            </div>
+            <div class="modal-body">
+                <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div> /.modal-content 
+    </div> /.modal-dialog 
+</div> /.modal -->
+
+<div class="modal fade bs-example-modal-lg" id="viewAlthen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="background-color: #f5f5f5">
+            <form id="addcontent" action="" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Authentication </h4>
+                </div>
+                <div class="modal-body-booking" style="background-color: white;padding:30px">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <legend style="font-style: italic;text-align: right">Authentication Detail</legend>
+                        </div>
+                        <div class="col-md-4" style="text-align: center;margin-bottom: 30px;margin-left: 60px">
+                            <!--<h5 style="text-align: center"> Image</h5>-->
+                            <img id="slip" style="width: 340px;height: 370px;" src="images/picture_evidence/evidance_9_LNERU" class="img-thumbnail">
+                        </div>
+                        <div class="col-md-7" style="margin-top: 0px">
+                            <legend style="font-style: italic;text-align: left">Information</legend>
+                            <h5 style="text-align: left">Owner ID : <span id="bookID" class="pull-right"></span></h5>
+                            <h5 style="text-align: left">Name : <span id="name" class="pull-right"></span></h5>  
+                            <h5 style="text-align: left">Stadium : <span id="name" class="pull-right">ดึงชื่อสนามทั้งหมดที่เป็นเจ้าของมา</span></h5>  
+                            <h5 style="text-align: left">Authentication Date :<span id="date" class="pull-right">2014-09-08 22:50:43</span></h5>
+                            <br>
+                            
+                            <legend style="font-style: italic;text-align: left">Change Status</legend>
+                             <div class="col-md-3" style="margin-left: -15px">
+                                 
+                                 <h5 style="text-align: left">Status :</h5>
+                             </div>
+                            <div class="col-md-4" style="margin-left: -65px">
+                            <select class="form-control "  >
+                                <option>Wait</option>
+                                <option>Reject</option>
+                                <option>Approve</option>                                                   
+                            </select>
+                            </div> 
+                              <br>  
+                            <br>
+                             <h5 style="text-align: left">Massage</h5>
+                            <textarea class="form-control" rows="3"></textarea>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="text-align: center">
+                    <span id="ajaxscript"></span>
+                    <button id="close_modal" type="button" class="btn1 btn1-danger" data-dismiss="modal" style="width: 20%">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 

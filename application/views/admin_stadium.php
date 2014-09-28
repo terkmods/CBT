@@ -70,7 +70,7 @@
                                     <th>Stadium Name</th>
                                     <th>Owner</th>
                                     <th>Owner Authentication</th>
-                                    <th>Detail</th>
+                                    <th>Profile</th>
 
                                 </tr>
                             </thead>

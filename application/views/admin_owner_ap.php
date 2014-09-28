@@ -70,8 +70,9 @@
                                     <th>Owner Id</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Authentication</th>
                                     <th>Status</th>
+                                    <th>Authentication</th>
+                                    
 
 
                                 </tr>
@@ -82,15 +83,14 @@
                                         <td><?= $row->owner_id ?></td>
                                         <td><?= $row->fname ?>    <?= $row->lname ?></td>
                                         <td><?= $row->email ?></td>
-                                        <td ><button type="button" class="btn btn-info">View</button></td>
-                                        <td>
-
-                                            <select class="form-control">
-                                                <option>Approve</option>
-                                                <option>Reject</option>
-                                                <option>Wait</option>                                                   
-                                            </select>
-                                        </td>
+                                        <td><?= $row->authenowner_status ?></td> 
+                                        <td ><button type="button"  class="btn btn-info viewdetail" role="button" data-toggle="modal" data-target="#viewAlthen" 
+                                                     data-bookid="<?= $row->owner_id ?>"
+                                                     data-name="<?= $row->fname ?>    <?= $row->lname ?></td>"
+                                                     data-atdate="<?= $row->autherowner_date ?>"
+                                                     data-atstatus="<?= $row->authenowner_status ?>"
+                                                     >View</button></td>
+                                        
 
                                     </tr>
                                 <?php } ?>
@@ -116,4 +116,5 @@
 <!-- /.row -->
 </div>
 <!-- /#page-wrapper -->
+<?php include 'template/modal.php'; ?>
 <?php include 'template/footeradmin.php'; ?>  

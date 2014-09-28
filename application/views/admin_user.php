@@ -72,7 +72,7 @@
                                     <th>Gender</th>
                                     <th>Join Date</th>
                                     <th>Status</th>
-                                    <th>Detail</th>
+                                    <th>Profile</th>
 
                                 </tr>
                             </thead>

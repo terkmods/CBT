@@ -71,7 +71,8 @@
                                     <th>Email</th>
                                     <th>Type</th>
                                     <th>Status</th>
-                                    <th>Detail</th>
+                                    <th>Blacklist detail</th>
+                                    <th>Profile</th>
 
 
                                 </tr>
@@ -83,6 +84,7 @@
                                         <td><?= $row->fname ?>    <?= $row->lname ?></td>
                                         <td><?= $row->email ?></td>
                                         <td><?= $row->type ?></td>
+                                        <td><?= $row->status ?></td>
                                         <td><?= $row->status ?></td>
                                          <td><a href="<?= base_url() ?>users/profile/<?= $row->user_id ?>" class="btn ">View</a></td>
                                     </tr>
