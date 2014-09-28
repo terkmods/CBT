@@ -32,6 +32,7 @@
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.js" type="text/javascript"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="<?= base_url() ?>asset/js/bootstrap.min.js"></script>
 <script src="<?= base_url() ?>asset/js/bootstrap-datepicker.js"></script>

@@ -5,7 +5,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h5>ตั้งค่าพื้นฐาน</h5>
+            <h5>ตั้งค่าพื้นฐาน </h5>
         </div>
         <div class="col-md-2 pull-left text-right" style="padding-top: 2px">
             <h5>Profile Picture Stadium</h5>

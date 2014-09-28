@@ -52,6 +52,11 @@ class Stadium_model extends CI_Model {
         ;
         return $query;
     }
+        function getLaststadium() {
+        $query = $this->db->query('SELECT * FROM `stadium` ORDER BY stadium_id DESC LIMIT 0 , 6  ')->result();
+        ;
+        return $query;
+    }
 
 
     function getprovince() {

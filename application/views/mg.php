@@ -100,6 +100,10 @@ $status = $ow->authenowner_status; ?>
                                                             <?php echo '  <td><span class="label label-success">เพิ่มคอร์ดแล้ว</span></td>'; }   else {
                                                                     echo '  <td><span class="label label-danger">ยังไม่เพิ่มคอร์ด</span></td>';
                                                                  }?>
+                                                                 <?php if($row->rule!=null){ ?>
+                                                            <?php echo '  <td><span class="label label-success">Rule</span></td>'; }   else {
+                                                                    echo '  <td><span class="label label-danger">No Rule</span></td>';
+                                                                 }?>
                                                            
                                                            
                                                           
