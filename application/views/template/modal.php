@@ -440,13 +440,13 @@
                         </div>
                         <div class="col-md-4" style="text-align: center;margin-bottom: 30px;margin-left: 60px">
                             <!--<h5 style="text-align: center"> Image</h5>-->
-                            <img id="slip" style="width: 340px;height: 370px;" src="images/picture_evidence/evidance_9_LNERU" class="img-thumbnail">
+                            <img id="path" style="width: 340px;height: 370px;" src="<?= base_url() ?>asset/images/authen/" class="img-thumbnail">
                         </div>
                         <div class="col-md-7" style="margin-top: 0px">
                             <legend style="font-style: italic;text-align: left">Information</legend>
                             <h5 style="text-align: left">Owner ID : <span id="bookID" class="pull-right"></span></h5>
                             <h5 style="text-align: left">Name : <span id="name" class="pull-right"></span></h5>  
-                            <h5 style="text-align: left">Stadium : <span id="name" class="pull-right">ดึงชื่อสนามทั้งหมดที่เป็นเจ้าของมา</span></h5>  
+                            <h5 style="text-align: left">Stadium : <span id="#" class="pull-right">ดึงชื่อสนามทั้งหมดที่เป็นเจ้าของมา</span></h5>  
                             <h5 style="text-align: left">Authentication Date :<span id="date" class="pull-right">2014-09-08 22:50:43</span></h5>
                             <br>
                             
@@ -457,7 +457,8 @@
                              </div>
                             <div class="col-md-4" style="margin-left: -65px">
                             <select class="form-control "  >
-                                <option>Wait</option>
+                                
+                                <option id="status"></option>
                                 <option>Reject</option>
                                 <option>Approve</option>                                                   
                             </select>

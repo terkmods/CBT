@@ -194,7 +194,7 @@ var stadium_id = null;
                                                                     }if(obj[i].STATUS== 'blacklist'){
                                                                         w[i] = '<div class="btn-group ">' +
                                                                             ' <button  type="button" class="btn btn-danger dropdown-toggle btn-sm" data-toggle="dropdown">' +
-                                                                            '   Danger <span class="caret"></span>' +
+                                                                            '   Blacklist <span class="caret"></span>' +
                                                                             ' </button>' +
                                                                             '  <ul class="dropdown-menu" role="menu" id="eventselect">' +
                                                                             '   <li ><a  class="btn " role="button" onclick="okja(' + obj[i].user_id + ',this)">Active</a></li>' +
@@ -207,7 +207,7 @@ var stadium_id = null;
                                                                             ' <td>' + obj[i].court_name + '</td>' +
                                                                             '<td>' + obj[i].start_time.substr(0, 10) + '</td>' +
                                                                             '<td>' + obj[i].START + '-' + obj[i].END + '</td>' +
-                                                                            '<td>' + obj[i].fname + ' ' + obj[i].lname + '</td>' +
+                                                                            '<td>  <a href="http://cbt.backeyefinder.in.th/users/profile/'+obj[i].user_id+'">' + obj[i].fname + ' ' + obj[i].lname + '</a></td>' +
                                                                             '<td>' + obj[i].phone + '</td>  ' +
                                                                             '<td>' + obj[i].sumprice + '</td>' +
                                                                             '<td>'+w[i]; +'</td>' +
@@ -336,7 +336,7 @@ var stadium_id = null;
                                                             }).done(function (msg) {
                                                                    show = '<div class="btn-group ">' +
                                                                             ' <button  type="button" class="btn btn-danger dropdown-toggle btn-sm" data-toggle="dropdown">' +
-                                                                            '   Danger <span class="caret"></span>' +
+                                                                            '   Blacklist <span class="caret"></span>' +
                                                                             ' </button>' +
                                                                             '  <ul class="dropdown-menu" role="menu" id="eventselect">' +
                                                                             '   <li ><a  class="btn " role="button" onclick="okja(' + id + ',this)">Active</a></li>' +

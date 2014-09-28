@@ -31,12 +31,18 @@
     $(document).on("click", ".viewdetail", function () {
         
         $(".modal-body-booking #bookID").html($(this).data("bookid"));
-        $(".modal-body-booking #bookID").html($(this).data("bookid"));
+        $(".modal-body-booking #name").html($(this).data("name"));
+        $(".modal-body-booking #date").html($(this).data("atdate"));
+        $(".modal-body-booking #status").html($(this).data("atstatus"));
+        var path = $(this).data("atpath");
+        console.log(path);
+        document.getElementById("path").setAttribute("src", '<?= base_url() ?>asset/images/authen/'+path+'');
+        
         
     });
 </script>
 
-<!--data-bookID="' . $row["bookingID"] . '" data-name="' . $row["firstName"] . " " . $row["lastName"] . '" data-date="' . $row["date"] . '" data-expiredate="' . $row["expire_date"] . '" data-status="' . $row["booking_status"] . '" data-dormname="' . $row["dormName"] . '" data-room="' . $row["roomType"] . '" data-slip="' . $row["slip"] . '" data-totalprice="' . $row["totalPrice"] . '" data-transfername="' . $row["transfer_name"] . '" data-transfertime="' . $row["transfer_time"] . '" data-toggle="modal" data-target=".bs-example-modal-lg">View Detail</button></td>';-->-->
+
 
 </body>
 
