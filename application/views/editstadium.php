@@ -59,7 +59,7 @@ $num = 1;
 
                         <?php include 'template/sideSetting.php'; ?>
                     <div class="col-md-9">
-                        <div class="row">
+                        <div class="row" id="changeja">
                             <ul class="nav nav-tabs" id="myTab">
 
                                 <li class="active"><a href="#p1">Basic Info</a></li>
@@ -71,7 +71,7 @@ $num = 1;
                                 <li><a href="#">Add picture</a></li>
                                 <li><a href="#">Add rule</a></li>
                             </ul>
-                            <div class="tab-content">
+                            <div class="tab-content"  >
                                 
                                 <?php include 'Tabeditstadium/setting.php'; ?> <!--tab P1-->
                                 <?php include 'Tabeditstadium/blacklist.php'; ?> <!--tab P2-->
@@ -94,6 +94,7 @@ $num = 1;
 <?php include 'template/modal.php'; ?>
 
 <?php include 'template/footer.php'; ?>
+
 <?php include 'template/footer_scrpit.php'; ?>
 
 </body>
