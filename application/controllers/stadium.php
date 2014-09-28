@@ -341,6 +341,7 @@ class stadium extends CI_Controller {
         print_r($detail);
         $this->load->view('result_search');
     }
+    
 
 }
 ?>
