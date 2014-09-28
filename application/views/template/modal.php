@@ -11,22 +11,22 @@
 
 
                 <div class="col-xs-12">
-                    <small style="color: gray">ชื่อสนาม</small>
+                    <small style="color: gray">Stadium Name</small>
                     <input type="text"  class="form-control input-lg " placeholder="NAME" name="name" required="">
                 </div>
                 <div class="col-xs-4">
                     <p class="form-control-static input-lg" style="margin-top:20px">www.cbtonline.com/</p>
                 </div>
                 <div class="col-xs-8">
-                    <small style="color: gray">URL สำหรับเข้าชมหน้าสนามของคุณ</small>
+                    <small style="color: gray">URL to link to your stadium</small>
                     <input type="text"  class="form-control input-lg " placeholder="URL" name="url" required="">
                 </div>
                 <div class="col-xs-12">
-                    <small style="color: gray">เบอร์โทรติดต่อสนาม</small>
+                    <small style="color: gray">Phone number</small>
                     <input type="text"  class="form-control input-lg top-mar" placeholder="PHONE" name="tel">
                 </div>
                 <div class="col-xs-12">
-                    <small style="color: gray">รายละเอียดเกี่ขยวกับสนาม</small>
+                    <small style="color: gray">Stadium Detail</small>
                     <textarea class="form-control" rows="5" name="about"></textarea>
                 </div>
                 <div class="col-xs-12">
@@ -35,19 +35,19 @@
                         <fieldset>
                             <legend>Address</legend>
 
-                            <input type="text" class=" form-control input-small " placeholder="No." name="no"><small style="color: gray">   บ้านเลขที่</small>
+                            <input type="text" class=" form-control input-small " placeholder="No." name="no"><small style="color: gray">   house no.</small>
 
-                            <input type="text" class=" form-control input-small top-mar " placeholder="Soi" name="soi"><small style="color: gray">   ซอย</small>
+                            <input type="text" class=" form-control input-small top-mar " placeholder="Soi" name="soi"><small style="color: gray">   alley</small>
 
-                            <input type="text" class=" form-control input-small top-mar " placeholder="Road" name="road"><small style="color: gray">  ถนน</small>
+                            <input type="text" class=" form-control input-small top-mar " placeholder="Road" name="road"><small style="color: gray">  road</small>
 
-                            <input type="text" class=" form-control input-small top-mar" placeholder="District" name="district"><small style="color: gray">  เขต</small>
+                            <input type="text" class=" form-control input-small top-mar" placeholder="District" name="district"><small style="color: gray">  district</small>
 
-                            <input type="text" class=" form-control input-small top-mar" placeholder="Subdistrict" name="subdistrict"><small style="color: gray">  แขวง</small>
+                            <input type="text" class=" form-control input-small top-mar" placeholder="Subdistrict" name="subdistrict"><small style="color: gray">  subdistrict</small>
 
-                            <input type="text" class=" form-control input-small top-mar" placeholder="PROVINCE" name="province"><small style="color: gray">  จังหวัด</small>
+                            <input type="text" class=" form-control input-small top-mar" placeholder="PROVINCE" name="province"><small style="color: gray">  province</small>
 
-                            <input type="text" class=" form-control input-small top-mar" placeholder="ZIP CODE" name="zip"><small style="color: gray">  รหัสไปรษณีย์</small>
+                            <input type="text" class=" form-control input-small top-mar" placeholder="ZIP CODE" name="zip"><small style="color: gray">  zip code</small>
                         </fieldset>
 
                     </div>
@@ -66,7 +66,7 @@
                         <div class="col-md-12" id="time">
                             <div id="showtime">
                                 <div class="col-md-6">
-                                    เลือกวันเวลาเปิด-ปิดสนาม
+                                    Choose your start and end date
                                     <select class="form-control" name="typedate[]">
                                         <option value="จันทร์-ศุกร์">จันทร์-ศุกร์</option>
                                         <option value="เสาร์-อาทิตย์">เสาร์-อาทิตย์</option>
@@ -79,7 +79,7 @@
                                 <div class="col-md-6">
                                     Start-time
                                     <select class="form-control" name="opentime[]">
-                                        <option disabled="">เวลาเปิด</option>
+                                        <option disabled="">Start Time</option>
 
                                         <option value="00.00">00:00</option>
                                         <option value="01.00">01:00</option>
@@ -103,7 +103,7 @@
                                     </select>
                                     End-time
                                     <select class="form-control" name="endtime[]" >
-                                        <option disabled="">เวลาปิด</option>
+                                        <option disabled="">End-Time</option>
                                         <option value="00.00">00:00</option>
                                         <option value="01.00">01:00</option>
                                         <option value="02.00">02:00</option>
@@ -129,7 +129,7 @@
                             </div>
                             <div id="showtime">
                                 <div class="col-md-6">
-                                    เลือกวันเวลาเปิด-ปิดสนาม
+                                     Choose your start and end date
                                     <select class="form-control" name="typedate[]">
                                         <option value="จันทร์-ศุกร์">จันทร์-ศุกร์</option>
                                         <option value="เสาร์-อาทิตย์" selected="">เสาร์-อาทิตย์</option>
@@ -142,7 +142,7 @@
                                 <div class="col-md-6">
                                     Start-time
                                     <select class="form-control" name="opentime[]">
-                                        <option disabled="">เวลาเปิด</option>
+                                        <option disabled="">Start-time</option>
                                         <option value="00.00">00:00</option>
                                         <option value="01.00">01:00</option>
                                         <option value="02.00">02:00</option>
@@ -164,7 +164,7 @@
                                     </select>
                                     End-time
                                     <select class="form-control" name="endtime[]" >
-                                        <option disabled="">เวลาปิด</option>
+                                        <option disabled="">End-Time</option>
                                         <option value="00.00">00:00</option>
                                         <option value="01.00">01:00</option>
                                         <option value="02.00">02:00</option>
@@ -279,11 +279,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">ส่งหลักฐาน</h4>
+                <h4 class="modal-title">Sent an evidence</h4>
             </div>
             <div class="modal-body">
-                <p>เพื่อเป็นการยืนยันสนาม กรุณาส่งหลักฐานดังต่อไปนี้</p>
-                <p>1.บัตรประชาชนของเจ้าของสนาม</p> หรือ 
+                <p>To confirm stadium approval Please submit the following evidence</p>
+                <p>1.Owner citizen id</p> or 
                 <p>2.ใบประกอบกิจการ</p> 
                 <p style="text-align:  center" class="col-md-offset-4"><input type="file" title="Search for a file to add"></p>
             </div>
@@ -303,12 +303,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">ส่งหลักฐาน</h4>
+                <h4 class="modal-title">Sent an evidence</h4>
             </div>
             <div class="modal-body">
-                <p>เพื่อเป็นการยืนยันสนาม กรุณาส่งหลักฐานดังต่อไปนี้</p>
-                <p>1.บัตรประชาชนของเจ้าของสนาม</p> หรือ 
-                <p>2.ใบประกอบกิจการ</p> 
+                <p>To confirm stadium approval Please submit the following evidence</p>
+                <p>1.Owner citizen id</p> or
+                <p>2.License to operate</p> 
                 <p style="text-align:  center" class="col-md-offset-4"><input type="file" title="Search for a file to add"></p>
             </div>
             <div class="modal-footer">
@@ -440,13 +440,13 @@
                         </div>
                         <div class="col-md-4" style="text-align: center;margin-bottom: 30px;margin-left: 60px">
                             <!--<h5 style="text-align: center"> Image</h5>-->
-                            <img id="slip" style="width: 340px;height: 370px;" src="images/picture_evidence/evidance_9_LNERU" class="img-thumbnail">
+                            <img id="path" style="width: 340px;height: 370px;" src="<?= base_url() ?>asset/images/authen/" class="img-thumbnail">
                         </div>
                         <div class="col-md-7" style="margin-top: 0px">
                             <legend style="font-style: italic;text-align: left">Information</legend>
                             <h5 style="text-align: left">Owner ID : <span id="bookID" class="pull-right"></span></h5>
                             <h5 style="text-align: left">Name : <span id="name" class="pull-right"></span></h5>  
-                            <h5 style="text-align: left">Stadium : <span id="name" class="pull-right">ดึงชื่อสนามทั้งหมดที่เป็นเจ้าของมา</span></h5>  
+                            <h5 style="text-align: left">Stadium : <span id="name" class="pull-right">Pulling all of the stadium that the owner had</span></h5>  
                             <h5 style="text-align: left">Authentication Date :<span id="date" class="pull-right">2014-09-08 22:50:43</span></h5>
                             <br>
                             
@@ -457,7 +457,8 @@
                              </div>
                             <div class="col-md-4" style="margin-left: -65px">
                             <select class="form-control "  >
-                                <option>Wait</option>
+                                
+                                <option id="status"></option>
                                 <option>Reject</option>
                                 <option>Approve</option>                                                   
                             </select>

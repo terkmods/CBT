@@ -72,6 +72,7 @@
                                     <th>Email</th>
                                     <th>Status</th>
                                     <th>Authentication</th>
+                                    <th>Profile</th>
                                     
 
 
@@ -89,9 +90,10 @@
                                                      data-name="<?= $row->fname ?>    <?= $row->lname ?></td>"
                                                      data-atdate="<?= $row->autherowner_date ?>"
                                                      data-atstatus="<?= $row->authenowner_status ?>"
+                                                     data-atpath="<?= $row->authenowner_path ?>"
                                                      >View</button></td>
                                         
-
+                                        <td><a href="<?= base_url() ?>users/profile/<?= $row->user_id ?>" class="btn ">View</a></td> 
                                     </tr>
                                 <?php } ?>
 

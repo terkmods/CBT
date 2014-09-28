@@ -13,45 +13,45 @@
             <h2>Mark Jacob</h2>
 
 
-            <p><a class="btn btn-default" href="#" role="button">โค้ชประจำสนาม <span class="glyphicon glyphicon-ok"</span></a></p>
+            <p><a class="btn btn-default" href="#" role="button">Stadium coach <span class="glyphicon glyphicon-ok"</span></a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="images/c2.jpg" style="width: 140px; height: 140px;">
             <h2>Hua Wai</h2>
 
-            <p><a class="btn btn-default" href="#" role="button">เพิ่มเข้าสนาม »</a></p>
+            <p><a class="btn btn-default" href="#" role="button">Add to stadium »</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="images/c1.jpg" style="width: 140px; height: 140px;">
             <h2>Leee jung</h2>
-            <p><a class="btn btn-default" href="#" role="button">เพิ่มเข้าสนาม »</a></p>
+            <p><a class="btn btn-default" href="#" role="button">Add to stadium »</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="images/c1.jpg" style="width: 140px; height: 140px;">
             <h2>Leee jung</h2>
-            <p><a class="btn btn-default" href="#" role="button">เพิ่มเข้าสนาม »</a></p>
+            <p><a class="btn btn-default" href="#" role="button">Add to stadium »</a></p>
         </div><!-- /.col-lg-4 --><div class="col-lg-4">
             <img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="images/c1.jpg" style="width: 140px; height: 140px;">
             <h2>Leee jung</h2>
-            <p><a class="btn btn-default" href="#" role="button">เพิ่มเข้าสนาม »</a></p>
+            <p><a class="btn btn-default" href="#" role="button">Add to stadium»</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="images/c1.jpg" style="width: 140px; height: 140px;">
             <h2>Leee jung</h2>
-            <p><a class="btn btn-default" href="#" role="button">เพิ่มเข้าสนาม »</a></p>
+            <p><a class="btn btn-default" href="#" role="button">Add to stadium »</a></p>
         </div><!-- /.col-lg-4 --><div class="col-lg-4">
             <img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="images/c1.jpg" style="width: 140px; height: 140px;">
             <h2>Leee jung</h2>
-            <p><a class="btn btn-default" href="#" role="button">เพิ่มเข้าสนาม »</a></p>
+            <p><a class="btn btn-default" href="#" role="button">Add to stadium »</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="images/c1.jpg" style="width: 140px; height: 140px;">
             <h2>Leee jung</h2>
-            <p><a class="btn btn-default" href="#" role="button">เพิ่มเข้าสนาม »</a></p>
+            <p><a class="btn btn-default" href="#" role="button">Add to stadium »</a></p>
         </div><!-- /.col-lg-4 --><div class="col-lg-4">
             <img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="images/c1.jpg" style="width: 140px; height: 140px;">
             <h2>Leee jung</h2>
-            <p><a class="btn btn-default" href="#" role="button">เพิ่มเข้าสนาม »</a></p>
+            <p><a class="btn btn-default" href="#" role="button">Add to stadium »</a></p>
         </div><!-- /.col-lg-4 -->
     </div>
 

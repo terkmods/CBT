@@ -12,7 +12,7 @@ $num = 1;
 ?>
 
 <div class="container">
-    <h4> <a href="#">หน้าหลัก</a> /HistoryBooking / <span id="flashmsg"><font style="color: green"></font></span></h4> 
+    <h4> <a href="#"></a> HistoryBooking  <span id="flashmsg"><font style="color: green"></font></span></h4> 
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">Account Settings</div>
@@ -45,10 +45,10 @@ $num = 1;
                                 <div class="controls">
                                     <div class="input-group">
                                         <label for="date-pik" class="input-group-addon btn">
-                                            เลือกสนาม
+                                            Choose Stadium
                                         </label>
                                         <select class="form-control" id="stadiumselect" onchange="stadiumchange()">
-                                            <option value="default">เลือกสนาม </option> 
+                                            <option value="default">Pick Stadium </option> 
                                             <?php foreach ($stadium as $ct) { ?>        
                                                 <option value="<?= $ct->stadium_name ?>,<?= $ct->stadium_id ?>" id="stadiumtoption"><?= $ct->stadium_name ?></option>
                                             <?php } ?>
@@ -62,7 +62,7 @@ $num = 1;
                         </div>
                         <div class="row">
                             <table class="table table-bordered  table-condensedy" id="tableMorning">
-                                <thead><tr><th>ชื่อคอร์ด</th><th>วัน</th><th>เวลาจอง</th><th>จองโดย</th><th>เบอร์โทร</th><th>รวมเป็นเงิน</th><th>สถานะ</th></tr></thead>
+                                <thead><tr><th>Court name</th><th>Date</th><th>Time reserve</th><th>Reserve by</th><th>Tel number</th><th>Total price</th><th>Status</th></tr></thead>
                                 <tbody id="runtime">
                                     <tr>
                                         
@@ -100,10 +100,10 @@ $num = 1;
             <div class="col-md-4">
                 <h3>Contact us</h3>
                 <ul>
-                    <li>ที่อยู่ :</li>
-                    <li>เขต:</li>
-                    <li>แขวง :</li>
-                    <li>จังหวัด :</li>
+                    <li>address :</li>
+                    <li>district:</li>
+                    <li>subdistrict :</li>
+                    <li>province :</li>
                 </ul>
             </div>
         </div>
@@ -194,7 +194,7 @@ var stadium_id = null;
                                                                     }if(obj[i].STATUS== 'blacklist'){
                                                                         w[i] = '<div class="btn-group ">' +
                                                                             ' <button  type="button" class="btn btn-danger dropdown-toggle btn-sm" data-toggle="dropdown">' +
-                                                                            '   Danger <span class="caret"></span>' +
+                                                                            '   Blacklist <span class="caret"></span>' +
                                                                             ' </button>' +
                                                                             '  <ul class="dropdown-menu" role="menu" id="eventselect">' +
                                                                             '   <li ><a  class="btn " role="button" onclick="okja(' + obj[i].user_id + ',this)">Active</a></li>' +
@@ -207,7 +207,7 @@ var stadium_id = null;
                                                                             ' <td>' + obj[i].court_name + '</td>' +
                                                                             '<td>' + obj[i].start_time.substr(0, 10) + '</td>' +
                                                                             '<td>' + obj[i].START + '-' + obj[i].END + '</td>' +
-                                                                            '<td>' + obj[i].fname + ' ' + obj[i].lname + '</td>' +
+                                                                            '<td>  <a href="http://cbt.backeyefinder.in.th/users/profile/'+obj[i].user_id+'">' + obj[i].fname + ' ' + obj[i].lname + '</a></td>' +
                                                                             '<td>' + obj[i].phone + '</td>  ' +
                                                                             '<td>' + obj[i].sumprice + '</td>' +
                                                                             '<td>'+w[i]; +'</td>' +
@@ -336,7 +336,7 @@ var stadium_id = null;
                                                             }).done(function (msg) {
                                                                    show = '<div class="btn-group ">' +
                                                                             ' <button  type="button" class="btn btn-danger dropdown-toggle btn-sm" data-toggle="dropdown">' +
-                                                                            '   Danger <span class="caret"></span>' +
+                                                                            '   Blacklist <span class="caret"></span>' +
                                                                             ' </button>' +
                                                                             '  <ul class="dropdown-menu" role="menu" id="eventselect">' +
                                                                             '   <li ><a  class="btn " role="button" onclick="okja(' + id + ',this)">Active</a></li>' +
