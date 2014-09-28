@@ -1,4 +1,4 @@
-<?php
+ <?php
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,10 +12,10 @@ $num = 1;
 ?>
 
 <div class="container">
-    <h4> <a href="#">หน้าหลัก</a> /Manage Stadium /<font style="color: green"><?php echo $this->session->flashdata('msg'); ?></font></h4> 
+    <h4> <a href="#"></a> Manage Stadium <font style="color: green"><?php echo $this->session->flashdata('msg'); ?></font></h4> 
     <div class="row">
         <div class="panel panel-default">
-            <div class="panel-heading">Account Settings</div>
+            <div class="panel-heading">Account Settings </div>
             <div class="panel-body">
 
                 <!--
@@ -62,14 +62,14 @@ $num = 1;
                         <div class="row">
                             <ul class="nav nav-tabs" id="myTab">
 
-                                <li class="active"><a href="#p1">ข้อมูลทั่วไป</a></li>
-                                <li ><a href="#addcourt">คอร์ด</a></li>
-                                <li ><a href="#mycourt">ตารางจอง</a></li> 
-                                <li><a href="#p2">เพิ่มโค้ชประจำสนาม</a></li>
+                                <li class="active"><a href="#p1">Basic Info</a></li>
+                                <li ><a href="#addcourt">Add court</a></li>
+                               
+                                <li><a href="#p2">Add coach</a></li>
                                 <li><a href="#p3">Blacklist</a></li>
-                                <li><a href="#">เพิ่มข่าวประกาศ</a></li>
-                                <li><a href="#">เพิ่มรูป</a></li>
-                                <li><a href="#">เพิ่มกฎ</a></li>
+                                <li><a href="#">announcement</a></li>
+                                <li><a href="#">Add picture</a></li>
+                                <li><a href="#">Add rule</a></li>
                             </ul>
                             <div class="tab-content">
                                 

@@ -1,7 +1,7 @@
 
 <?php include 'template/head.php'; ?>
 <div class="container">
-    <h4> <a href="#">หน้าหลัก</a> /Basic Setting </h4>
+    <h4> <a href="#"></a> Basic Setting </h4>
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">Account Settings</div>

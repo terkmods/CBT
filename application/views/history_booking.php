@@ -10,7 +10,7 @@ include 'template/head.php';
 ?>
 
 <div class="container">
-    <h4> <a href="#">หน้าหลัก</a> /Histoyry booking </h4>
+    <h4> <a href="#"></a> History booking </h4>
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">Account Settings</div>
@@ -28,13 +28,12 @@ include 'template/head.php';
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>เลขที่จอง</th>
-                                            <th>วันที่จอง </th>
-
-                                            <th>สนาม</th>
-                                            <th>คอร์ด</th>
-                                            <th>เวลา</th>
-                                            <th>จำนวน ชั่วโมง</th>
+                                            <th>Reserve id</th>
+                                            <th>Date reserved</th>
+                                            <th>Stadium</th>
+                                            <th>Court</th>
+                                            <th>Period of time</th>
+                                            <th>Hours</th>
 
                                             <th></th>
                                         </tr>

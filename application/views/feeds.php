@@ -14,7 +14,7 @@
                                                           echo ' 
                             <div class="item">
                                 <div class="caption">
-                                    <h5>ชื่อสนาม</h5> <h4>'.$row->stadium_name.'</h4>
+                                    <h5>Name</h5> <h4>'.$row->stadium_name.'</h4>
                                     <img src="'?><?php echo base_url()?><?php echo '/asset/images/stadiumpic/'.$row->stadium_path.'" alt="..." style="width: 320px;height: 200px" >
                                     <hr>
                                     
