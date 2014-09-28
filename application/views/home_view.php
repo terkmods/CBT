@@ -206,7 +206,7 @@
                             <ul class="nav nav-pills nav-stacked">
                                 <li><img  src="<?=base_url()?>asset<?=$user['0']->profilepic_path != null ? '/images/profilepic/'.$user['0']->profilepic_path.'' : '/images/profil.jpg'?>" class="img-thumbnail" style="width: 50%;"></li>
                                 <li><a href="<?=base_url()?>users/profile/<?=$user['0']->user_id?>">Myprofile</a></li>
-                                <li><a href="#">History Reserve </a></li>
+                                <li><a href="<?=base_url()?>booking/historybooking">History Reserve </a></li>
                                 <li><a href="#">Search</a></li>
                                 
                             </ul>

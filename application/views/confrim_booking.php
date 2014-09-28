@@ -15,13 +15,13 @@
             </fieldset>
             <div class="col-md-4 col-md-offset-4 text-center">
             <h4> โปรดอ่านข้อปฏิบัติการจองของสนาม</h4>
-            <textarea class="form-control"  ></textarea>
+            <textarea class="form-control" rows="4" cols="50"  disabled=""><?= $stadium[0]->rule ?></textarea>
             <div class="checkbox text-center  " >
                 <label>
                     <input type="checkbox" id="myCheck"> ฉันได้อ่านข้อตกลง และยอมรับข้อปฏิบัติของสนาม
                 </label>
             </div>
-            <input type="button" class="next_button form-control" value="History booking" disabled="">
+            <button type="button" class="next_button form-control" value="History booking" disabled="" onclick="location.href='<?=base_url()?>/booking/historybooking'">History Booking</button>
             </div>
         </div>
 

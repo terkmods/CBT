@@ -18,7 +18,7 @@ class Home extends CI_Controller {
         $id = $userid = $this->session->userdata('id');
         $datasend ['stadium'] = $this->mystadium->getLaststadium();
         $datasend['user'] = $this->myusers->getUser($id);
-        print_r($datasend['user']);
+        //print_r($datasend['user']);
         $this->load->view('home_view',$datasend);
     
     }

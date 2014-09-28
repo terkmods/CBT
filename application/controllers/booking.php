@@ -97,13 +97,13 @@ class booking extends CI_Controller {
             $i = 0;
             $j = 0;
 
-            for ($i; $i < 48; $i++) {
+            for ($i; $i < 49; $i++) {
                 if (substr($st, 0, 2) == substr($time[$i], 0, 2)) {
                     $indexstartime = $i;
                     break;
                 }
             }
-            for ($j; $j < 48; $j++) {
+            for ($j; $j < 49; $j++) {
                 if (substr($et, 0, 2) == substr($time[$j], 0, 2)) {
                     $indexendtime = $j;
                     break;
@@ -136,13 +136,13 @@ class booking extends CI_Controller {
             $i = 0;
             $j = 0;
 
-            for ($i; $i < 48; $i++) {
+            for ($i; $i < 49; $i++) {
                 if (substr($st, 0, 2) == substr($time[$i], 0, 2)) {
                     $indexstartime = $i;
                     break;
                 }
             }
-            for ($j; $j < 48; $j++) {
+            for ($j; $j < 49; $j++) {
                 if (substr($et, 0, 2) == substr($time[$j], 0, 2)) {
                     $indexendtime = $j;
                     break;

@@ -207,9 +207,7 @@ public function edituser($id) {
     function coach(){
          $this->load->view('coach_view');
     }
-    function  test(){
-        $this->load->view('home');
-    }
+
     function addBlacklist(){
         $userId  = $this->input->post('idsend');
         $reason = $this->input->post('reasonsend');
@@ -247,6 +245,7 @@ public function edituser($id) {
         
         echo 'complete';
     }
+
 
 
 
