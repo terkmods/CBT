@@ -26,37 +26,49 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <style>
+            .btn-radio {
+	width: 100%;
+}
+.img-radio {
+	opacity: 0.5;
+	margin-bottom: 5px;
+}
+
+.space-20 {
+    margin-top: 20px;
+}
+        </style>
     </head>
     <body>
 
-        <div >
+        <div>
             <div class="container">
                 <center><img src="../../asset/images/logo.png" class="top-mar"></center>
                 <div style="clear:both;"></div>
                 <div class="row top-mar">
                     <br><br><br>
-                    <div class="col-md-6"><br><br><br><br><br><br><br><br>
-                        <center><a href="#"><img src="../../asset/images/loginfacebook.png" class="top-mar"></a></center>
-                    </div>
-                    <div class="col-md-6">
+                    
+                    <div class="col-md-8 col-md-offset-4">
                         <form action="reg/register" method="post">
-                            Who are you? <br>
-                            <p>
-                                <label>
-                                    <input type="radio" name="typeuser" id="optionsRadios1" value="user" checked>
-                                    &nbsp;&nbsp; User
-                                </label>
-
-                                <label>
-                                    <input type="radio" name="typeuser" id="optionsRadios2" value="owner">
-                                    &nbsp;&nbsp; Owner
-                                </label>
-
-                                <label>
-                                    <input type="radio" name="typeuser" id="optionsRadios2" value="coach">
-                                    &nbsp;&nbsp; Coach
-                                </label>
-                            </p>
+                            <h3>Who are you? </h3><br>
+                         	<div class="col-xs-2">
+        				<img src="<?=base_url()?>asset/images/userspic/user.jpg"  class="img-responsive img-radio">
+        				<button type="button" class="btn btn-primary btn-radio">User</button>
+        				<input type="radio" name="typeuser" id="optionsRadios1" value="user" class="hidden">
+                                </div>
+                            <div class="col-xs-2">
+        				<img src="<?=base_url()?>asset/images/userspic/owner.jpg" class="img-responsive img-radio">
+        				<button type="button" class="btn btn-primary btn-radio">Owner</button>
+        				<input type="radio" name="typeuser" id="optionsRadios2" value="owner" class="hidden">
+                                </div>
+                            <div class="col-xs-2">
+        				<img src="<?=base_url()?>asset/images/userspic/coach.jpg" class="img-responsive img-radio">
+        				<button type="button" class="btn btn-primary btn-radio">Coach</button>
+        				<input type="radio" name="typeuser" id="optionsRadios2" value="coach" class="hidden">
+                            </div>
+                            <br><br><br><br><br><br><br><br>
+                                                                                                             
                             <p></p> 
                             <p>www.cbtonline.in.th/<input type="text" class="input-url" name="url" placeholder="Profile URL (limit 4-24)" required=""></p>
                             <p>
@@ -70,13 +82,7 @@
                             <div class="col-xs-8"><input type="tel"  class="form-control input-lg top-mar" name="tel" placeholder="mobile-phone" required=""></div>
                             <div class="clear"></div>
                             <hr>
-                            <p class="top-mar">
-                                Profile Picture<br></p>
-                            <p>
-                                <img src="../../asset/images/profile-placeholder.png" alt="..." class="img-thumbnail top-mar">
-                                <input type="file" title="Search for a file to add" class="top-mar ">
-                            </p>
-                            <p class="top-mar"><button type="submit" name="SIGN_UP" class="btn btn-info btn-lg">Submit</button></p>
+                            <p class="top-mar"><button type="submit" name="SIGN_UP" class="btn btn-info btn-lg">Create your account</button></p>
                         </form>
                     </div>
                 </div>
@@ -120,5 +126,17 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="../../asset/js/bootstrap.min.js"></script>
+        <script>
+            $(function () {
+    $('.btn-radio').click(function(e) {
+        $('.btn-radio').not(this).removeClass('active')
+    		.siblings('input').prop('checked',false)
+            .siblings('.img-radio').css('opacity','0.5');
+    	$(this).addClass('active')
+            .siblings('input').prop('checked',true)
+    		.siblings('.img-radio').css('opacity','1');
+    });
+});
+        </script>
     </body>
 </html>
