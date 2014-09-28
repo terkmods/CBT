@@ -100,6 +100,10 @@ $status = $ow->authenowner_status; ?>
                                                             <?php echo '  <td><span class="label label-success">Already add court</span></td>'; }   else {
                                                                     echo '  <td><span class="label label-danger">No court added yet</span></td>';
                                                                  }?>
+                                                            <?php if($row->rule!=null){ ?>
+                                                            <?php echo '  <td><span class="label label-success">Already add Rule</span></td>'; }   else {
+                                                                    echo '  <td><span class="label label-danger">No Rule added yet</span></td>';
+                                                                 }?>
                                                            
                                                            
                                                           
