@@ -1,19 +1,49 @@
 <?php include 'template/head.php';
 ?>
-
-<?php include 'template/modal.php'; ?>
 <div class="container">
     <div class="row">
-        <div class="col-md-12 center">
-            การจองเสร็จสมบูรณ์
+
+
+
+        <div class="col-md-12 text-center">
+            <fieldset>
+                <legend>  การจองเสร็จสมบูรณ์</legend>
+                <p>จองสนาม : <?= $stadium[0]->stadium_name ?></p>
+                <p>คอร์ด :<?= $court->court_name ?></p>
+                <p>วันที่ : <?= $date ?>  </p>
+                <p>เวลา : <?= $start_time ?> - <?= $end_time ?>  </p>
+            </fieldset>
+            <div class="col-md-4 col-md-offset-4 text-center">
+            <h4> โปรดอ่านข้อปฏิบัติการจองของสนาม</h4>
+            <textarea class="form-control"  ></textarea>
+            <div class="checkbox text-center  " >
+                <label>
+                    <input type="checkbox" id="myCheck"> ฉันได้อ่านข้อตกลง และยอมรับข้อปฏิบัติของสนาม
+                </label>
+            </div>
+            <input type="button" class="next_button form-control" value="History booking" disabled="">
+            </div>
         </div>
-        <div class="col-md-12 center">
-            <p>จองสนาม : a</p>
-            <p>คอร์ด : a </p>
-            <p>วันที่ :  </p>
-             <p>เวลา :   </p>
-        </div>
-            
+
     </div>
 </div>
+
 <?php include 'template/footer.php'; ?>
+
+<script>
+$(function () {
+    $("#myCheck").change(function () {
+        if ($("#myCheck").is(':checked') ) {
+            $('.next_button').attr('disabled', false);
+        } else {
+            $('.next_button').attr('disabled', true);
+        }
+    });
+
+});
+</script>
+<?php include 'template/footer_scrpit.php'; ?>
+
+</body>
+</html>
+

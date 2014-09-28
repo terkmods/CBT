@@ -180,15 +180,24 @@ class booking extends CI_Controller {
             'stadium_id' => $this->input->post('stadiumid'),
             'court_id' => $this->input->post('courtid'),
             'user_id' => $this->input->post('userid'),
-            'notification_user' => NULL,
-            'notification_owner' => null,
+            'notification_user' => 1,
+            'notification_owner' => 1,
             'start_time' => $date_inverse . ' ' . $this->input->post('start_time') . ':00',
             'end_time' => $date_inverse . ' ' . $this->input->post('end_time') . ':00',
-            'sumprice' => $this->input->post('allprice'),
+            'sumprice' => $this->input->post('allprice')
+            
         );
-        //print_r($data);
+        $datasend = array(
+          'stadium'=>$this->mystadium->getstadiumprofile($this->input->post('stadiumid'))  ,
+           'court'=>$this->mystadium->getonecourt($this->input->post('courtid')),
+                        'start_time' =>  $this->input->post('start_time') . ':00',
+            'end_time' => $this->input->post('end_time') . ':00',
+            'date'=>$d,
+            'sumprice' => $this->input->post('allprice')
+        );
+        print_r($datasend['court']);
         $this->db->insert("reserve", $data);
-        $this->load->view("confrim_booking");
+        $this->load->view("confrim_booking",$datasend);
     }
 
     function historyBooking() {
