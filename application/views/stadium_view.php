@@ -14,9 +14,9 @@
             <div class="row">
                 <div class="col-md-3 profile-pic"><img src="<?= base_url() ?>/asset/images/stadiumpic/<?= $data['0']->stadium_path  ?>" width="200" class="img-thumbnail"></div>
                 <div class="col-md-3 info"><h3><?= $data['0']->stadium_name  ?></h3>
-                    <p>เจ้าของ
+                    <p>Owner
                         <span class="glyphicon glyphicon-map-marker"></span>&nbsp<a href="">Bangkok</a>, <a href="#">Thailand</a></p> <p>
-                         โทรศัพท์:<h5><?= $data['0']->tel  ?></h5>
+                         Phone number:<h5><?= $data['0']->tel  ?></h5>
 
                 </div>
                 <div class="col-md-4 info">
@@ -35,42 +35,42 @@
             <div class="col-md-4">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title">ที่ตั้ง</h3>
+                        <h3 class="panel-title">Located</h3>
                     </div>
                     <div class="panel-body">
-                        ที่อยู่ :&nbsp;<?= $data['0']->address_no ; ?><br>
-                        จังหวัด :&nbsp;<?= $data['0']->province ; ?> <br>
-                        รหัสไปรษณีย์ :&nbsp;<?= $data['0']->zipcode ; ?> 
+                        Address :&nbsp;<?= $data['0']->address_no ; ?><br>
+                        Province :&nbsp;<?= $data['0']->province ; ?> <br>
+                        Zip code :&nbsp;<?= $data['0']->zipcode ; ?> 
                     </div>
                 </div>
 
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title">รายละเอียดสนาม</h3>
+                        <h3 class="panel-title">Stadium Detail</h3>
                     </div>
                     <div class="panel-body">
-                        ชนิดของพื้น :  <br>
-                        จำนวน คอร์ท :<br>
-                        ราคา คอร์ด : <br> 
-                        เวลาเปิด-ปิด สนาม :
+                        Floor type :  <br>
+                        Total court:<br>
+                        Court price : <br> 
+                        Start-End time :
                     </div>
                 </div>
 
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title">สิ่งอำนวยความสะดวก</h3>
+                        <h3 class="panel-title">Facility</h3>
                     </div>
                     <div class="panel-body">
                         <ul>
-                            <li>ห้องอาบน้ำ</li>
-                            <li>ล็อกเกอร์</li>
+                            <li>Bathtroom</li>
+                            
                         </ul>
                     </div>
                 </div>
 
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title">โค้ชประจำสนาม</h3>
+                        <h3 class="panel-title">Stadium coach</h3>
                     </div>
                     <div class="panel-body">
                         <ul>
@@ -81,7 +81,7 @@
                 </div>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title">ผู้ดูแลสนาม</h3>
+                        <h3 class="panel-title">Owner</h3>
                     </div>
                     <div class="panel-body">
                         <p>
@@ -91,7 +91,7 @@
                            <span class="glyphicon glyphicon-phone"></span>089-xxx-xxxx
                         </p>
                         <p>
-                        สถานะ <span class="label label-success"><span class="glyphicon glyphicon-ok"></span>ยืนยันตัว</span>
+                        Status <span class="label label-success"><span class="glyphicon glyphicon-ok"></span>ยืนยันตัว</span>
                         </p>
                     </div>
                 </div>
@@ -99,18 +99,18 @@
             
             <div class="col-md-8"><div class="panel panel-default">
                     <div class="panel-body">
-                        <h3>เกี่ยวกับฉัน</h3>
+                        <h3>About my stadium</h3>
                         เกี่ยวกับสนามฉัน สนามฉันตั้งอยู่ที่
 
                     </div>
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h3>ประกาศ</h3>
+                        <h3>Announcement</h3>
                         <ul>
-                            <li><a href="#">ประกาศ 1</a></li>
-                            <li><a href="#">ประกาศ 2</a></li>
-                            <li><a href="#">ประกาศ 3</a></li>
+                            <li><a href="#">Announcement 1</a></li>
+                            <li><a href="#">Announcement 2</a></li>
+                            <li><a href="#">Announcement 3</a></li>
                         </ul>
                     </div>
                 </div>
@@ -151,7 +151,7 @@
                 
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h3>แสดงความคิดเห็น</h3>
+                        <h3>Comment</h3>
 
                         <div class="scroll">
                             <div class="row">

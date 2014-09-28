@@ -10,7 +10,7 @@ $num = 1    ;
 $status = $ow->authenowner_status; ?>
 
 <div class="container">
-    <h4> <a href="#">หน้าหลัก</a> /Manage Stadium </h4>
+    <h4> <a href="#"></a> Manage Stadium </h4>
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">Account Settings</div>
@@ -60,7 +60,7 @@ $status = $ow->authenowner_status; ?>
                         <div class="row">
                             <ul class="nav nav-tabs" id="myTab">
 
-                                <li class="active"><a href="#addStium">เพิ่มสนาม</a></li>
+                                <li class="active"><a href="#addStium">Add Stadium</a></li>
 
                             </ul>
                             <div class="tab-content">
@@ -76,13 +76,13 @@ $status = $ow->authenowner_status; ?>
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>ลำดับ</th>
-                                                <th>ชื่อสนาม</th>
+                                                <th>numbering</th>
+                                                <th>stadium name</th>
 
-                                                <th>คอร์ด</th>
-                                                <th>กฏ</th>
-                                                <th>URL</th>
-                                                <th>สถานะ</th>
+                                                <th>court</th>
+                                                <th>rule</th>
+                                                <th>url</th>
+                                                <th>status</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -97,8 +97,8 @@ $status = $ow->authenowner_status; ?>
                                                              '?> 
                                             
                                                             <?php if($row->court_check!=0){ ?>
-                                                            <?php echo '  <td><span class="label label-success">เพิ่มคอร์ดแล้ว</span></td>'; }   else {
-                                                                    echo '  <td><span class="label label-danger">ยังไม่เพิ่มคอร์ด</span></td>';
+                                                            <?php echo '  <td><span class="label label-success">Already add court</span></td>'; }   else {
+                                                                    echo '  <td><span class="label label-danger">No court added yet</span></td>';
                                                                  }?>
                                                            
                                                            
@@ -115,7 +115,7 @@ $status = $ow->authenowner_status; ?>
                                                     echo '
                                                                   <a data-toggle="modal" href="#approve" class="btn btn-danger btn-xs">Inactive</a>';
                                                 } else if ($status == 'wait') {
-                                                    echo '<span class="label label-danger">รออนุมัติ</span>';
+                                                    echo '<span class="label label-danger">waiting for approval</span>';
                                                 } else {
                                                     echo '<span class="label label-success">Active</span>';
                                                 }

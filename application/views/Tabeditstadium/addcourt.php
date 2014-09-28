@@ -10,7 +10,7 @@
          
         Start-time
         <select class="form-control" name="opentime[]">
-            <option disabled="">เวลาเปิด</option>
+            <option disabled="">End time</option>
                
                                       <option <?php
                 if ($r['open_time'] == '00.00') {
@@ -78,7 +78,7 @@
         </select>
         End-time
         <select class="form-control" name="endtime[]" >
-            <option disabled="">เวลาปิด</option>
+            <option disabled="">End time</option>
            
                
                                       <option <?php
@@ -165,7 +165,7 @@
 
       <div class="col-md-12 form-group">
           <hr>
-        <button type="submit" class="btn btn-default">แก้ไข</button>
+        <button type="submit" class="btn btn-default">Edit</button>
       </div>
     </form>
     </div>   
@@ -196,7 +196,7 @@
                  
 
                     <div class="col-md-3" style="margin-top:10px ;padding:  0; ">
-                        <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชม. " name="price1"></div>
+                        <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชั่วโมง " name="price1"></div>
                          <!--  <div class="col-md-1" style="margin-top:15px ;">
                          <button type="button" class="btn btn-success btn-sm" id="btn2">
   <span class="glyphicon glyphicon-plus-sign"></span>    
@@ -218,7 +218,7 @@
                  
 
                     <div class="col-md-3" style="margin-top:10px ;padding:  0; ">
-                        <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชม. " name="price2"></div>
+                        <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชั่วโมง" name="price2"></div>
                            <!--<div class="col-md-1" style="margin-top:15px ;">
                          <button type="button" class="btn btn-success btn-sm" id="btn2">
   <span class="glyphicon glyphicon-plus-sign"></span>    
@@ -229,11 +229,11 @@
             </div>
 
             <div class="form-group">
-                <label for="inputPassword1" class="col-lg-2 control-label">ชนิดพื้น </label>
+                <label for="inputPassword1" class="col-lg-2 control-label">Floor Type</label>
 
                 <div class="col-lg-10">
                     <select class="form-control" name="type">
-                        <option>พื้นปาเก้ </option>
+                        <option>พื้นปาร์เก้</option>
                         <option>พื้นปูน </option>
                         <option>พื้นยาง </option>
 
@@ -244,7 +244,7 @@
 
             <div class="form-group">
                 <div class="col-lg-offset-2 col-lg-10">
-                    <button type="submit" class="btn btn-default">เพิ่มคอร์ด</button>
+                    <button type="submit" class="btn btn-default">Add Court</button>
                 </div>
             </div>
         </form>
@@ -255,18 +255,18 @@
         <div class="col-md-12" style="margin-top: 17px">
                         
                      
-                                                <h5>จำนวนคอร์ดทั้งหมด : <?=$total->courtnum?> คอร์ด</h5>
+                                                <h5>Court Total : <?=$total->courtnum?> court</h5>
                         <form action="<?php echo base_url() ?>stadium/delcourt" method="post">
                                                 <table class="table tablecompare">
                                                 <thead style="text-align: center">
                                                     
                                                     <tr>
                                                         
-                                                        <th style="text-align: center">ชื่อคอร์ด</th>
+                                                        <th style="text-align: center">Court Name</th>
                                                     
-                                                      <th style="text-align: center">ราคาจันทร์-ศุกร์</th>
-                                                       <th style="text-align: center">ราคาเสาร์-อาทิตย์</th> 
-                                                     <th style="text-align: center">ลักษณะพื้น</th>
+                                                      <th style="text-align: center">Price Monday-Friday</th>
+                                                       <th style="text-align: center">Price Saturday-Sunday</th> 
+                                                     <th style="text-align: center">Floor Type</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -276,8 +276,8 @@
                                                        
                                                         <td><?=$ct['court_name'] ?></td>
                                                        
-                                                        <td><?=$ct['m_f_price'] ?> บาท</td>
-                                                        <td><?=$ct['st_sun_price'] ?> บาท</td>
+                                                        <td><?=$ct['m_f_price'] ?> Bath</td>
+                                                        <td><?=$ct['st_sun_price'] ?> Bath</td>
                                                        
                                                         <td><?=$ct['type'] ?></td>
                                                         <td><a href=" <?php echo base_url() ?>stadium/delcourt/<?=$ct['court_id']?>/<?=$ct['stadium_id']?> " class="btn btn-danger btn-sm ">Del</a></td>

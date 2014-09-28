@@ -15,11 +15,11 @@
         <table class="table tablecompare">
             <thead>
                 <tr>
-                    <th>รูป</th>
-                    <th>ชื่อ</th>
+                    <th>Picture</th>
+                    <th>Name</th>
                     <th>profile URL</th>
                     <th>Reason</th>
-                    <th>แก้ไข</th>
+                    <th>Edit</th>
                 </tr>
             </thead>
             <tbody>

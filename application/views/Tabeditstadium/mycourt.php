@@ -2,7 +2,7 @@
 
 
     <hr>
-    <h5>ตารางจองคอร์ดของฉัน</h5>
+    <h5>My reserve schedule</h5>
     
 <div class="control-group">
         

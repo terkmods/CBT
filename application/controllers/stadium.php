@@ -119,7 +119,7 @@ class stadium extends CI_Controller {
             $this->db->insert("stadium", $data);
             $this->mystadium->addtime($data2, $data['stadium_id']);
             $this->mystadium->addfacility($facility, $data['stadium_id']);
-            $this->session->set_flashdata('msg', 'เพิ่มสนามเรียบร้อย');
+            $this->session->set_flashdata('msg', 'Successful');
             redirect('stadium');
         } else {
             echo 'no user id ja addstadium';
