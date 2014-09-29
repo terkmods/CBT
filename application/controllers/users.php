@@ -80,7 +80,7 @@ class Users extends CI_Controller {
                 redirect('stadium');
             }
 
-            redirect('users/feed');
+            redirect('home');
         } else {
             $this->session->set_flashdata('msg_error', 'รหัสผ่านหรืออีเมลไม่ถูกต้องกรุณาตรวจสอบ');
             redirect('users');
@@ -202,6 +202,31 @@ public function edituser($id) {
         );
         $this->db->update('User', $data, array('user_id' => $Id));
         redirect('users/edituser/' . $Id);
+    }
+    function uploadevidence() {
+        $config['upload_path'] = "./asset/images/evidence";
+        $config['allowed_types'] = '*';
+        $config['max_size'] = '10000';
+
+        //$userid = $this->session->userdata('id');
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload()) {
+            $error = array('error' => $this->upload->display_errors());
+
+            $this->load->view('upload_form', $error);
+        } else {
+
+            $upload = $this->upload->data();
+        }
+        $data = array(
+            'authenowner_path' => $upload['file_name']
+        );
+        $owner = $this->myusers->getOwnerId($this->session->userdata('id'));
+        print_r($owner);
+        print_r($upload['file_name']);
+        $this->db->update('owner', $data, array('owner_id' => $owner->owner_id));
+        $this->session->set_flashdata('msg', 'upload Complete');
+        redirect('stadium');
     }
     
     function coach(){

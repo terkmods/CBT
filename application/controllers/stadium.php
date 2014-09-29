@@ -56,8 +56,28 @@ class stadium extends CI_Controller {
             echo 'session no';
         }
     }
+    function add(){
+                if ($this->session->userdata('logged')) {
 
-    function getOwnerid($userid) {
+            $userid = $this->session->userdata('id');
+            $ownerid = $this->getOwnerid($userid);
+
+
+            $datasend = array(
+                'ow' => $this->getOwner($userid),
+                'stadium' => $this->mystadium->getstadium($ownerid)
+                
+            );
+            
+
+            
+
+            $this->load->view("add_stadium", $datasend);
+        } else {
+            echo 'session no';
+        }
+    }
+                function getOwnerid($userid) {
 
         if ($userid != null) {
             $query = $this->db->query('SELECT owner.owner_id FROM owner join User  WHERE owner.user_id = User.user_id and User.user_id = ' . $userid)->result();

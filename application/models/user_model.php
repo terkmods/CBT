@@ -57,6 +57,11 @@ class User_model extends CI_Model {
         $sql = $this->db->query('select * from User where user_id='.$id)->result();
         return $sql;
     }
+        function getOwnerId($id) {
+       
+        $sql = $this->db->query('select * from owner where user_id='.$id)->row();
+        return $sql;
+    }
     
     function getCoach($id) {
        
