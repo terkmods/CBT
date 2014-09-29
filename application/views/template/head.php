@@ -40,7 +40,7 @@
                               <span class="icon-bar"></span>
                               <span class="icon-bar"></span>
                             </button>-->
-                            <a class="navbar-brand" href="<?=base_url()?>users/feed"><img src="../../../asset/images/logo-white.png"></a>
+                            <a class="navbar-brand" href="<?=base_url()?>home"><img src="../../../asset/images/logo-white.png"></a>
 
                         </div>
 

@@ -252,7 +252,9 @@ class stadium extends CI_Controller {
     function profile($stId) {
 
         $st = array('data' => $this->mystadium->getstadiumprofile($stId),
-                    'facility' => $this->mystadium->showfacility($stId)
+                    'facility' => $this->mystadium->showfacility($stId),
+                    'court' => $this->mystadium->gettableCourt($stId), //result_array  getTotalcourt
+                    'total' => $this->mystadium->getTotalcourt($stId)
               //  'user' => $this->myusers->getUser($id)
         );
         

@@ -51,7 +51,7 @@ $status = $ow->authenowner_status;
                 <div class="container">
 
 
-<?php include 'template/sideSetting.php'; ?>
+                    <?php include 'template/sideSetting.php'; ?>
 
 
 
@@ -60,35 +60,41 @@ $status = $ow->authenowner_status;
 <!--                        <select class="chosen-select" data-placeholder="เลือกภาค" id="pak" style="width: 150px; " name="pak">
                                     <option value="" selected="selected"></option><option value="1">ภาคเหนือ</option><option value="2">ภาคกลาง</option><option value="3">ภาคตะวันออกเฉียงเหนือ</option><option value="4">ภาคตะวันตก</option><option value="5">ภาคตะวันออก</option><option value="6">ภาคใต้</option>
                                 </select>-->
-                        
+
                         <div class="col-md-8">
                             <form action="<?= base_url() ?>stadium/addstadium" method="post" >
                                 <div class="modal-header">
-
-                                    <h4 class="modal-title" id="myModalLabel">Add Stadium</h4>
+                                    <h3 class="modal-title" id="myModalLabel">Add Stadium</h3>
                                 </div>
 
 
-                                <div class="col-xs-12">
-                                    <small style="color: gray">Stadium Name</small>
-                                    <input type="text"  class="form-control input-lg " placeholder="NAME" name="name" required="">
+                                <div class="col-xs-12" style="margin-top: 20px">
+                                    <div class="col-md-6" style="margin-left: -17px">
+                                        <small style="color: gray">Stadium Name</small>
+                                        <input type="text"  class="form-control input-lg " placeholder="NAME" name="name" required="">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <small style="color: gray" >Phone number</small>
+                                        <input type="text" style="margin-top: -0px" class="form-control input-lg top-mar" placeholder="PHONE" name="tel">
+                                    </div>
+
                                 </div>
-                                <div class="col-xs-4">
-                                    <p class="form-control-static input-lg" style="margin-top:20px">www.cbtonline.com/</p>
+                                <div class="col-xs-12" style="margin-top: 10px">
+                                    <div class="col-md-4" style="margin-left: -25px">
+                                        <p class="form-control-static input-lg" style="margin-top:20px">www.cbtonline.com/stadium/</p>
+                                    </div>
+
+                                    <div class="col-md-7" style="margin-left: 17px">
+                                        <small style="color: gray;margin-left: -249px">URL to link to your stadium</small>
+                                        <input type="text"  class="form-control input-lg " placeholder="URL" name="url" required="">
+                                    </div>
                                 </div>
-                                <div class="col-xs-8">
-                                    <small style="color: gray">URL to link to your stadium</small>
-                                    <input type="text"  class="form-control input-lg " placeholder="URL" name="url" required="">
-                                </div>
-                                <div class="col-xs-12">
-                                    <small style="color: gray">Phone number</small>
-                                    <input type="text"  class="form-control input-lg top-mar" placeholder="PHONE" name="tel">
-                                </div>
+
                                 <div class="col-xs-12">
                                     <small style="color: gray">Stadium Detail</small>
                                     <textarea class="form-control" rows="5" name="about"></textarea>
                                 </div>
-                                <div class="col-xs-12">
+                                <div class="col-xs-12" style="margin-top: 20px">
                                     <div class="col-md-5">
 
                                         <fieldset>
@@ -101,9 +107,9 @@ $status = $ow->authenowner_status;
                                             <input type="text" class=" form-control input-small top-mar " placeholder="Road" name="road"><small style="color: gray">  road</small>
 
                                             <input type="text" class=" form-control input-small top-mar" placeholder="District" name="district"><small style="color: gray">  district</small>
-                                          
-				
-                                
+
+
+
                                             <input type="text" class=" form-control input-small top-mar" placeholder="Subdistrict" name="subdistrict"><small style="color: gray">  subdistrict</small>
 
                                             <input type="text" class=" form-control input-small top-mar" placeholder="PROVINCE" name="province"><small style="color: gray">  province</small>
@@ -159,7 +165,7 @@ $status = $ow->authenowner_status;
                                                             ?>
                                                             <option value="<?= $time ?>.00"><?= $time ?>:00</option>
 
-<?php } ?>
+                                                        <?php } ?>
 
                                                     </select>
                                                     End-time
@@ -182,7 +188,7 @@ $status = $ow->authenowner_status;
                                                             ?>
                                                             <option value="<?= $time ?>.00"><?= $time ?>:00</option>
 
-<?php } ?>
+                                                        <?php } ?>
                                                     </select>
 
 
@@ -221,7 +227,7 @@ $status = $ow->authenowner_status;
                                                             ?>
                                                             <option value="<?= $time ?>.00"><?= $time ?>:00</option>
 
-<?php } ?>
+                                                        <?php } ?>
                                                     </select>
                                                     End-time
                                                     <select class="form-control" name="endtime[]" >
@@ -243,7 +249,7 @@ $status = $ow->authenowner_status;
                                                             ?>
                                                             <option value="<?= $time ?>.00"><?= $time ?>:00</option>
 
-<?php } ?>
+                                                        <?php } ?>
                                                     </select>
 
 
@@ -319,7 +325,7 @@ $status = $ow->authenowner_status;
 
 
 
-                                <div class="modal-footer">
+                                <div class="modal-footer" >
                                     <button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
                                     <button type="submit" name="submit" class="btn btn-primary">Add</button>
 
@@ -341,27 +347,27 @@ $status = $ow->authenowner_status;
 <?php include 'template/modal.php'; ?>
 <?php include 'template/footer.php'; ?>
 <script>
-    
 
 
-$('#pak').change(function(){ // เมื่อไอดี pak ถูกเลือก
-    var value = $("#pak").val(); // เราก็จะดึงค่ามา
- 
-    $.ajax({ // จากนั้นก็สร้าง ajax
-        type:'GET', // ชนิดของ http เป็น get
-        url:"/province", // url ที่จะยิงไป
-        data:{id:value}, // ค่าที่จะส่งไป 
-        success:function(data){ // ถ้าสำเร็จ
- 
-    $('#province').find('option') // ทำการค้นหา ตัว option ของ dropdown province
-                  .remove() // ลบ option ทิ้ง
-                  .end() // ใช้ reset กลับไปตอนที่ยังไม่ลบ option ครับ 
-                  .append(data) // เอาค่าที่ได้จาก ฐานข้อมูลใส่
-                  .trigger('chosen:updated'); // สั่งให้ chosen อัพเดท dropdown
- 
-        }
+
+    $('#pak').change(function () { // เมื่อไอดี pak ถูกเลือก
+        var value = $("#pak").val(); // เราก็จะดึงค่ามา
+
+        $.ajax({// จากนั้นก็สร้าง ajax
+            type: 'GET', // ชนิดของ http เป็น get
+            url: "/province", // url ที่จะยิงไป
+            data: {id: value}, // ค่าที่จะส่งไป 
+            success: function (data) { // ถ้าสำเร็จ
+
+                $('#province').find('option') // ทำการค้นหา ตัว option ของ dropdown province
+                        .remove() // ลบ option ทิ้ง
+                        .end() // ใช้ reset กลับไปตอนที่ยังไม่ลบ option ครับ 
+                        .append(data) // เอาค่าที่ได้จาก ฐานข้อมูลใส่
+                        .trigger('chosen:updated'); // สั่งให้ chosen อัพเดท dropdown
+
+            }
+        });
     });
-});
 </script>
 
 <?php include 'template/footer_scrpit.php'; ?>
