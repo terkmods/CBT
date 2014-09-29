@@ -67,9 +67,9 @@ $num = 1;
                                
                                 <li><a href="#p2">Add coach</a></li>
                                 <li><a href="#p3">Blacklist</a></li>
-                                <li><a href="#">announcement</a></li>
-                                <li><a href="#">Add picture</a></li>
-                                <li><a href="#">Add rule</a></li>
+                                <li><a href="#p4">announcement</a></li>
+                                <li><a href="#p5">Add picture</a></li>
+                                <li><a href="#p6">Add rule</a></li>
                             </ul>
                             <div class="tab-content"  >
                                 
@@ -78,6 +78,7 @@ $num = 1;
                                  <?php include 'Tabeditstadium/coachfav.php'; ?> <!--tab P3-->
                                  <?php include 'Tabeditstadium/addcourt.php'; ?> <!--tab P3-->
                                  <?php include 'Tabeditstadium/mycourt.php'; ?> <!--tab P3-->
+                                   <?php include 'Tabeditstadium/rule.php'; ?> <!--tab P3-->
                             </div>
 
                             <div style="clear:both; margin-top:20px;"></div>
