@@ -2,7 +2,7 @@
 <?php $type2 = $this->uri->segment(2) ?>    
 <?php $type3 = $this->uri->segment(3) ?>    
 <div class="col-md-3">
-    <ul class="nav nav-pills nav-stacked">
+    <ul class="nav nav-pills nav-stacked"> 
         <?php if($this->session->userdata('role') == "owner"){ ?>
         <li <?php if($type == "users" ){?><?="class = 'active'"; }?> ><a href="<?php echo base_url() ?>users/edituser/<?php echo $this->session->userdata('id'); ?>">Basic Setting</a></li>
         <li <?php if($type == "stadium" ){?><?="class = 'active'"; }?> >
