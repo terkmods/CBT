@@ -15,7 +15,7 @@
 
  }
         <div class="col-lg-4">
-            <a href="coach.html"> <img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="images/coach.jpg" style="width: 140px; height: 140px;"></a>
+            <a href="coach.html"> <img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="<?=base_url()?>asset<?=$r->profilepic_path != null ? '/images/profilepic/'.$r->profilepic_path.'' : '/images/profil.jpg'?>" style="width: 140px; height: 140px;"></a>
             <h2><?=$r->fname?>  <?=$r->lname?></h2>
 
 

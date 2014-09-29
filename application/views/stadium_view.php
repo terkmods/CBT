@@ -53,10 +53,11 @@
                         <h3 class="panel-title">Stadium Detail</h3>
                     </div>
                     <div class="panel-body">
-                        Floor type : <?php foreach ($court as $ct) { ?> <?=$ct['type'] ?><?php } ?> <br>
-                        Total court: &nbsp;<?=$total->courtnum != null ? $total->courtnum : '-' ?><br>
-                        Court price :&nbsp; จันทร์-ศุกร์: บาท / เสาร์-อาทิตย์: บาท<br>      
-                        Start-End time :
+                        Floor type : <?php if($floor != NULL ){?><?php foreach ($floor as $ct) { ?> <?= $ct->type ?> <?php } ?><?php }else{ ?> - <?php } ?>   <br>
+                        Total court: &nbsp;<?=$total->courtnum != 0 ? $total->courtnum : '-' ?><br>
+                        Court price :&nbsp; 80-160 บาท<br>      
+                            
+                        <?php foreach ($time as $ct) { ?> <?= $ct->type ?> : <?= $ct->open_time ?> - <?= $ct->end_time ?><br><?php } ?>
                     </div>
                 </div>
 
@@ -154,6 +155,7 @@
                     </div>
                 </div>
 
+                
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3>Comment</h3>

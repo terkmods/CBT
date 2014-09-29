@@ -54,5 +54,12 @@ WHERE reserve.stadium_id ='.$stId.''
 $query = $this->db->query($sql);
         return $query->result();
     }
-
+public function showIdMax() {
+        $rs = $this->db->select_max('reserve_id')->get('reserve');
+        if ($rs->num_rows() == 0) {
+            return array();
+        } else {
+            return $rs->result_array();
+        }
+    }
 }

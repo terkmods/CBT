@@ -175,32 +175,58 @@ class booking extends CI_Controller {
         $d = $this->input->post('dateid');
         $date_elements = explode("/", $d);
         $date_inverse = $date_elements[2] . '-' . $date_elements[0] . '-' . $date_elements[1];
+                $rs = $this->booking->showIdMax();
+
+        foreach ($rs as $r) {
+            $max = $r['reserve_id'] + "1";
+        }
         $data = array(
-            'reserve_id' => 0,
-            'stadium_id' => $this->input->post('stadiumid'),
-            'court_id' => $this->input->post('courtid'),
-            'user_id' => $this->input->post('userid'),
+            'reserve_id' => $max,
+            'stadium_idja' => $this->input->post('stadiumid'),
+            'court_idja' => $this->input->post('courtid'),
+            'user_idja' => $this->input->post('userid'),
             'notification_user' => 1,
             'notification_owner' => 1,
             'start_time' => $date_inverse . ' ' . $this->input->post('start_time') . ':00',
             'end_time' => $date_inverse . ' ' . $this->input->post('end_time') . ':00',
-            'sumprice' => $this->input->post('allprice')
+            'sumprice' => $this->input->post('allprice'),
+            'stadium_send'=>$this->mystadium->getstadiumprofile($this->input->post('stadiumid'))  ,
+            'court_send'=>$this->mystadium->getonecourt($this->input->post('courtid')),
+            'start_time_send' =>  $this->input->post('start_time') . ':00',
+            'end_time_send' => $this->input->post('end_time') . ':00',
+            'date'=>$d,
+             'user' => $this->users->getUser($this->input->post('userid'))
             
         );
-        $datasend = array(
-          'stadium'=>$this->mystadium->getstadiumprofile($this->input->post('stadiumid'))  ,
-           'court'=>$this->mystadium->getonecourt($this->input->post('courtid')),
-                        'start_time' =>  $this->input->post('start_time') . ':00',
-            'end_time' => $this->input->post('end_time') . ':00',
-            'date'=>$d,
-            'sumprice' => $this->input->post('allprice')
-        );
-        print_r($datasend['court']);
-        $this->db->insert("reserve", $data);
-        $this->load->view("confrim_booking",$datasend);
+        $this->session->set_userdata($data);
+       print_r($data['stadium_idja']);
+       // $this->db->insert("reserve", $data);
+        $this->load->view("confrim_booking",$data);
     }
-
-    function historyBooking() {
+    function bookja(){
+        
+        $datasession = array (
+                      'reserve_id' => $this->session->userdata('reserve_id'),
+            'stadium_id' => $this->session->userdata('stadium_idja'),
+            'court_id' => $this->session->userdata('court_idja'),
+            'user_id' => $this->session->userdata('user_idja'),
+            'notification_user' => 1,
+            'notification_owner' => 1,
+            'start_time' =>  $this->session->userdata('start_time') ,
+            'end_time' =>  $this->session->userdata('end_time'),
+            'sumprice' => $this->session->userdata('sumprice')
+           
+            
+            );
+         //   print_r($datasession);
+        $this->db->insert("reserve", $datasession);
+                $userId = $this->session->userdata('id');
+        $datasend['allbooking'] = $this->booking->getAllBooking($userId);
+        $this->load->view("history_booking",$datasend);
+       
+      
+    }
+                function historyBooking() {
         $userId = $this->session->userdata('id');
         $datasend['allbooking'] = $this->booking->getAllBooking($userId);
         //print_r($datasend);

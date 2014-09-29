@@ -53,7 +53,7 @@ class stadium extends CI_Controller {
             
 
             $this->load->view("mg", $datasend);
-            print_r($datasend);
+            //print_r($datasend);
         } else {
             echo 'session no';
         }
@@ -254,7 +254,9 @@ class stadium extends CI_Controller {
         $st = array('data' => $this->mystadium->getstadiumprofile($stId),
                     'facility' => $this->mystadium->showfacility($stId),
                     'court' => $this->mystadium->gettableCourt($stId), //result_array  getTotalcourt
-                    'total' => $this->mystadium->getTotalcourt($stId)
+                    'total' => $this->mystadium->getTotalcourt($stId),
+                    'floor' => $this->mystadium->getfloor($stId),
+                    'time' => $this->mystadium->gettimeprofile($stId)
               //  'user' => $this->myusers->getUser($id)
         );
         
