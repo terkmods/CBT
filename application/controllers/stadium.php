@@ -9,6 +9,7 @@ class stadium extends CI_Controller {
         parent::__construct();
         $this->load->model('stadium_model', 'mystadium');
         $this->load->model('user_model', 'myusers');
+        $this->load->model('coach_model', 'mycoach');
         $this->load->library('session');
     }
 
@@ -156,7 +157,8 @@ class stadium extends CI_Controller {
             'showtime' => $this->mystadium->getTime($id), //result_array  
             'court' => $this->mystadium->gettableCourt($id), //result_array  getTotalcourt
             'total' => $this->mystadium->getTotalcourt($id), //result_array  getTotalcourt
-            'blacklist' => $this->myusers->get_blacklist($id)
+            'blacklist' => $this->myusers->get_blacklist($id),
+            'coach'=>$this->mycoach->get_all_coach()
         );
 
         //print_r($data['total']);

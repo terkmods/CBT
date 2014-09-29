@@ -95,7 +95,64 @@ $num = 1;
 <?php include 'template/modal.php'; ?>
 
 <?php include 'template/footer.php'; ?>
+<script>
+    var states ;
+    function keynaja() {
+    var fullpart = "http://cbt.backeyefinder.in.th/coach/get_coach_name" ;
+       var a = document.getElementById("test").value;
+        console.log(a);
+        $.ajax({
+                type: "post",
+                url: fullpart,
+                data: {term: a}
+            }).done(function (msg) {
+                states = null
+                console.log(msg);
+                states=  msg;
+                console.log(msg[0].name);
+            });
+        }
 
+$(document).ready(function(){
+  
+var substringMatcher = function(strs) {
+  return function findMatches(q, cb) {
+    var matches, substrRegex;
+ 
+    // an array that will be populated with substring matches
+    matches = [];
+ 
+    // regex used to determine if a string contains the substring `q`
+    substrRegex = new RegExp(q, 'i');
+ 
+    // iterate through the pool of strings and for any string that
+    // contains the substring `q`, add it to the `matches` array
+    $.each(strs, function(i, str) {
+      if (substrRegex.test(str)) {
+        // the typeahead jQuery plugin expects suggestions to a
+        // JavaScript object, refer to typeahead docs for more info
+        matches.push({ value: str });
+      }
+    });
+ 
+    cb(matches);
+  };
+};
+
+//    
+
+$('#the-basics .typeahead').typeahead({
+  hint: true,
+  highlight: true,
+  minLength: 1
+},
+{
+  name: 'statess',
+  displayKey: 'value',
+  source: substringMatcher(statess)
+  });
+});
+    </script>
 <?php include 'template/footer_scrpit.php'; ?>
 
 </body>

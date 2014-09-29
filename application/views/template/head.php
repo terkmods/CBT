@@ -12,8 +12,9 @@
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>asset/css/style.css">
         
         <link href="<?= base_url() ?>asset/css/bootstrap-switch.css" rel="stylesheet">
+                <link href="<?= base_url() ?>asset/css/jquery-ui.css" rel="stylesheet">
         <link href="<?= base_url() ?>asset/css/ui.notify.css" rel="stylesheet">
-        <link href="<?= base_url() ?>asset/css/chosen.min.css" rel="stylesheet">
+
 
         <style type="text/css">
             .top-minus{
