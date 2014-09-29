@@ -189,14 +189,7 @@ join User on User.user_id = owner.user_id
     }
 
     function setstadium($stId) {
-
-
-
         $query = $this->db->query('select * from stadium  where stadium_id = ' . $stId)->row();
-
-
-
-
         return $query;
     }
 

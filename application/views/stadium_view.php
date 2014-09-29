@@ -66,7 +66,9 @@
                     </div>
                     <div class="panel-body">
                         <ul>
-                            <li>Bathtroom</li>
+                            <?php  foreach ($facility as $r) { //เรียกจาก $data['facility'] ?>
+                            <li><?php echo $r['facility']; //ใช้ return เป็น result_array?></li>
+                             <?php } ?>
                             
                         </ul>
                     </div>
