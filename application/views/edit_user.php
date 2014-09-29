@@ -23,8 +23,11 @@
                                             <img src="<?= base_url() ?>asset/images/profilepic/<?= $data['0']->profilepic_path; ?>" width="200" alt="" class="img-thumbnail top-mar">
                                          
                                             <br>
-                                            <a class="btn btn-default pull-left" role="button" data-toggle="modal" data-target="#uploadprofileuser">Upload Now</a>
-                                        </div>
+                                            <div style="padding-top: 5px ">
+                                            
+                                                <a class="btn btn-default pull-left "  role="button" data-toggle="modal" data-target="#uploadprofileuser">Upload Now</a>
+                                            </div>
+                                            </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-2 control-label">Email</label>

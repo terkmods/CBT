@@ -69,7 +69,7 @@ $num = 1;
                                 <li><a href="#p3">Blacklist</a></li>
                                 <li><a href="#p4">announcement</a></li>
                                 <li><a href="#p5">Add picture</a></li>
-                                <li><a href="#p6">Add rule</a></li>
+                                
                             </ul>
                             <div class="tab-content"  >
                                 

@@ -67,10 +67,10 @@ $status = $ow->authenowner_status; ?>
                                 <div class="tab-pane active" id="addStium">
                                     <form action="<?php echo base_url() ?>stadium/deletestadium" method="post">
                                     <div style="margin: 20px 10px 10px 0px">
-                                        <?php if( $stadium == NULL){?>
+                                        <?php if( $stadium == NULL){?> 
                                         <a href="<?php echo base_url()?>stadium/add"  class="btn btn-success" role="button">Add stadium</a>
                                         <?php }else{ ?>
-                                        <a data-toggle="modal" data-target="#addstadium" class="btn btn-success" role="button">Add stadium</a>
+                                        <a href="<?php echo base_url()?>stadium/add"  class="btn btn-success" role="button">Add stadium</a>
                                         <input type="submit" class="btn btn-danger" value="Delete stadium" onclick="del()">
                                         <?php } ?>
 <?php echo $this->session->flashdata('msg'); ?>

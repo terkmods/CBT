@@ -270,7 +270,7 @@
                                             <p>ราคา: &nbsp;120/ชม.</p>
                                             <p>เบอโทร: &nbsp;02-8997368</p>
                                             <p>
-                                                <a href="#" class="btn btn-primary">Book Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                                                <a href="<? echo base_url() ?>booking/reserve/30" class="btn btn-primary">Book Now!</a> <a href="<? echo base_url() ?>stadium/profile/30" class="btn btn-default">More Info</a>
                                             </p>
                                         </div>
                                     </div>
@@ -285,7 +285,7 @@
                                             <p>ราคา:&nbsp;140/ชม.</p>
                                             <p>เบอโทร:&nbsp;02-8113456</p>
                                             <p>
-                                                <a href="#" class="btn btn-primary">Book Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                                                <a href="<? echo base_url() ?>booking/reserve/29" class="btn btn-primary">Book Now!</a> <a href="<? echo base_url() ?>stadium/profile/28" class="btn btn-default">More Info</a>
                                             </p>
                                         </div>
                                     </div>
@@ -300,7 +300,7 @@
                                             <p>ราคา:&nbsp;140/ชม.</p>
                                             <p>เบอโทร:&nbsp;02-5554487</p>
                                             <p>
-                                                <a href="#" class="btn btn-primary">Book Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                                                <a href="<? echo base_url() ?>booking/reserve/28" class="btn btn-primary">Book Now!</a> <a href="<? echo base_url() ?>stadium/profile/28" class="btn btn-default">More Info</a>
                                             </p>
                                         </div>
                                     </div>

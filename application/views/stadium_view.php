@@ -55,7 +55,7 @@
                     <div class="panel-body">
                         Floor type : <?php if($floor != NULL ){?><?php foreach ($floor as $ct) { ?> <?= $ct->type ?> <?php } ?><?php }else{ ?> - <?php } ?>   <br>
                         Total court: &nbsp;<?=$total->courtnum != 0 ? $total->courtnum : '-' ?><br>
-                        Court price :&nbsp; 80-160 บาท<br>      
+                        Court price :&nbsp; 120-160 บาท<br>      
                             
                         <?php foreach ($time as $ct) { ?> <?= $ct->type ?> : <?= $ct->open_time ?> - <?= $ct->end_time ?><br><?php } ?>
                     </div>
@@ -94,7 +94,7 @@
                             <span class="glyphicon glyphicon-user"></span> <?= $data['0']->fname ?>   <?= $data['0']->lname ?>
                         </p>
                         <p>
-                            <span class="glyphicon glyphicon-phone"></span> <?= $data['0']->tel != null ? $data['0']->tel : '-'; ?>
+                            <span class="glyphicon glyphicon-phone"></span> <?= $data['0']->tel != null ? $data['0']->phone : '-'; ?>
                         </p>
                         <p>
                             Status <span class="label label-success"><span class="glyphicon glyphicon-ok"></span>&nbsp; <?= $data['0']->authenowner_status != null ? $data['0']->authenowner_status : '-'; ?></span>
