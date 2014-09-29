@@ -36,7 +36,7 @@
         $(".modal-body-booking #status").html($(this).data("atstatus"));
         var path = $(this).data("atpath");
         console.log(path);
-        document.getElementById("path").setAttribute("src", '<?= base_url() ?>asset/images/authen/'+path+'');
+        document.getElementById("path").setAttribute("src", '<?= base_url() ?>asset/images/evidence/'+path+'');
         
         
     });

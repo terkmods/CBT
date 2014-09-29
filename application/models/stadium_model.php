@@ -36,7 +36,11 @@ class Stadium_model extends CI_Model {
     }
 
     function getstadiumprofile($stId) {
-        $query = $this->db->query('select * from stadium where stadium_id = ' . $stId)->result();
+        $query = $this->db->query('select * from stadium 
+join owner on owner.owner_id = stadium.owner_id 
+join User on User.user_id = owner.user_id
+
+ where stadium_id =' . $stId)->result();
         ;
 
         return $query;

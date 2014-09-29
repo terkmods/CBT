@@ -14,9 +14,8 @@
             <div class="row">
                 <div class="col-md-3 profile-pic"><img src="<?= base_url() ?>/asset/images/stadiumpic/<?= $data['0']->stadium_path  ?>" width="200" class="img-thumbnail"></div>
                 <div class="col-md-3 info"><h3><?= $data['0']->stadium_name  ?></h3>
-                    <p>Owner
-                        <span class="glyphicon glyphicon-map-marker"></span>&nbsp<a href="">Bangkok</a>, <a href="#">Thailand</a></p> <p>
-                         Phone number:<h5><?= $data['0']->tel  ?></h5>
+                    <p><span class="glyphicon glyphicon-map-marker"></span>&nbsp<a href="">Bangkok</a>, <a href="#">Thailand</a></p> <p>
+                    <p> Phone number :     <?= $data['0']->tel!=null ? $data['0']->tel : '-' ; ?></p>
 
                 </div>
                 <div class="col-md-4 info">
@@ -38,9 +37,14 @@
                         <h3 class="panel-title">Located</h3>
                     </div>
                     <div class="panel-body">
-                        Address :&nbsp;<?= $data['0']->address_no ; ?><br>
-                        Province :&nbsp;<?= $data['0']->province ; ?> <br>
-                        Zip code :&nbsp;<?= $data['0']->zipcode ; ?> 
+                        House no. :&nbsp;<?= $data['0']->address_no!=null ? $data['0']->address_no : '-' ; ?><br>
+                        
+                        Alley :&nbsp;<?= $data['0']->soi!=null ? $data['0']->soi : '-' ; ?><br>
+                        Road :&nbsp;<?= $data['0']->road!=null ? $data['0']->road : '-' ; ?><br>
+                        District :&nbsp;<?= $data['0']->district!=null ? $data['0']->district : '-' ; ?><br>
+                        Subdistrict :&nbsp;<?= $data['0']->subdistrict!=null ? $data['0']->subdistrict : '-' ; ?><br>
+                        Province :&nbsp;<?= $data['0']->province!=null ? $data['0']->province : '-' ; ?> <br>
+                        Zip code :&nbsp;<?= $data['0']->zipcode!=null ? $data['0']->zipcode : '-' ; ?> 
                     </div>
                 </div>
 
@@ -74,8 +78,8 @@
                     </div>
                     <div class="panel-body">
                         <ul>
-                            <li><a href="coach.html">Mark Jacob </a></li>
-                            <li>นาย Lanka</li>
+                            <li>-</li>
+                            <li>-</li>
                         </ul>
                     </div>
                 </div>
@@ -85,10 +89,10 @@
                     </div>
                     <div class="panel-body">
                         <p>
-                           <span class="glyphicon glyphicon-user"></span>Andrew Smith
+                           <span class="glyphicon glyphicon-user"></span> <?= $data['0']->fname ?>   <?= $data['0']->lname ?>
                         </p>
                         <p>
-                           <span class="glyphicon glyphicon-phone"></span>089-xxx-xxxx
+                           <span class="glyphicon glyphicon-phone"></span>><?= $data['0']->tel!=null ? $data['0']->tel : '-' ; ?>
                         </p>
                         <p>
                         Status <span class="label label-success"><span class="glyphicon glyphicon-ok"></span>ยืนยันตัว</span>

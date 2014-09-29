@@ -228,9 +228,10 @@ class stadium extends CI_Controller {
 
     function profile($stId) {
 
-        $st = array('data' => $this->mystadium->getstadiumprofile($stId)
+        $st = array('data' => $this->mystadium->getstadiumprofile($stId),
+              //  'user' => $this->myusers->getUser($id)
         );
-        // print_r($st);
+        
         $this->load->view('stadium_view', $st);
     }
 
