@@ -81,6 +81,18 @@ join User on User.user_id = owner.user_id
         ;
         return $query;
     }
+    
+    function getfloor($cId) {
+        $query = $this->db->query('SELECT DISTINCT type FROM `court` WHERE stadium_id = ' . $cId)->result();
+        ;
+        return $query;
+    }
+    
+    function gettimeprofile($cId) {
+        $query = $this->db->query('SELECT * FROM `stadium_time` WHERE stadium_id = ' . $cId)->result();
+        ;
+        return $query;
+    }
 
     function getTotalcourt($cId) {
         $query = $this->db->query('SELECT count(court_id) as "courtnum" FROM court '

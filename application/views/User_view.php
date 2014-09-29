@@ -67,22 +67,7 @@
     <hr>
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  History Reserve</h3>
-                    </div>
-                    <div class="panel-body">
-                        <ul class="nav nav-pills nav-stacked">
-                            <li><a href="#">Reserve 1 <span class="badge">14/05/2014</span></a></li>
-                            <li><a href="#">Reserve 2 <span class="badge">23/04/2014</span></a></li>
-                            <li><a href="#">Reserve 3 <span class="badge">20/04/2014</span></a></li>
-                            <li><a href="#">Reserve 4 <span class="badge">17/04/2014</span></a></li>
-                            <li><a href="#">Reserve 5 <span class="badge">27/03/2014</span></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            
             <div class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
