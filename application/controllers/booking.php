@@ -199,7 +199,7 @@ class booking extends CI_Controller {
             
         );
         $this->session->set_userdata($data);
-       print_r($data['stadium_idja']);
+      // print_r($data['stadium_idja']);
        // $this->db->insert("reserve", $data);
         $this->load->view("confrim_booking",$data);
     }
@@ -232,7 +232,28 @@ class booking extends CI_Controller {
         //print_r($datasend);
         $this->load->view("history_booking", $datasend);
     }
-
+     function historyBookingajax() {
+        $userId = $this->session->userdata('id');
+        $type = $this->input->post('type');
+        $today = date('Y-m-d');
+        if($type==2){
+            $datasend = $this->booking->getAllBookingja($userId,$today);
+        }
+               else if($type==1){
+            
+             $datasend = $this->booking->getAllBookingna($userId,$today);
+        }
+         else if($type==3){
+            
+             $datasend = $this->booking->getAllBookingyo($userId,$today);
+        }
+       
+        
+      echo json_encode ($datasend);
+       // print_r($datasend);
+        //$this->load->view("history_booking", $datasend);
+    }
+    
     function cancelbooking($id) {
 
         $this->db->delete('reserve', array('reserve_id' => $id));
@@ -253,6 +274,14 @@ class booking extends CI_Controller {
         $query =  $this->booking->get_bookings_stadium($stId);
         echo json_encode($query);
         //print_r($query);
+    }
+    function get_booking_today(){
+        $today = date("Y-m-d");
+        $userId = $this->session->userdata('id');
+     $bookToday = $this->booking->getAllBooking_today($userId,$today);  
+     print_r($bookToday);
+     echo $userId;
+     echo $today;
     }
 
 }
