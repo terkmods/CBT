@@ -19,13 +19,13 @@
                             วันที่ : <?= $date ?>  <br>
                             เวลา : <?= $start_time_send ?> - <?= $end_time_send ?> <br>
                             ชื่อผู้จอง : <?= $user[0]->fname?>  <?= $user[0]->lname?> <br>
-                           รวมเป็นเงิน <strong><?= $sumprice?></strong><br>
+                           รวมเป็นเงิน <strong><?= $sumprice?></strong> บาท<br>
                         </div>
                     </div>
                     
                 </div>
                             <div class="col-md-4 col-md-offset-4 text-center">
-            <h4> โปรดอ่านข้อปฏิบัติการจองของสนาม</h4>
+            <h4> โปรดอ่านข้อปฏิบัติการใช้บริการสนาม</h4>
             <textarea class="form-control" rows="4" cols="50"  disabled=""><?= $stadium_send[0]->rule ?></textarea>
             <div class="checkbox text-center  " >
                 <label>

@@ -326,7 +326,7 @@ $status = $ow->authenowner_status;
 
 
                                 <div class="modal-footer" >
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
+<!--                                    <button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>-->
                                     <button type="submit" name="submit" class="btn btn-primary">Add</button>
 
 

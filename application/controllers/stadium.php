@@ -371,6 +371,17 @@ class stadium extends CI_Controller {
         $this->load->view('result_search');
     }
     
+    function allStadium(){
+        if ($this->session->userdata('logged')) {
+            $datasend ['stadium'] = $this->mystadium->getallstadium();
+            $datasend ['province'] = $this->mystadium->getprovince();
+            $datasend ['district'] = $this->mystadium->getdistrict();
+            $this->load->view('search', $datasend);
+            //print_r($datasend);
+        } else {
+            redirect('index.php');
+        }
+    }
 
 }
 ?>

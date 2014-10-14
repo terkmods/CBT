@@ -145,7 +145,7 @@
                               <span class="icon-bar"></span>
                               <span class="icon-bar"></span>
                             </button>-->
-                            <a class="navbar-brand" href="<?= base_url() ?>users/feed"><img src="../../../asset/images/logo-white.png"></a>
+                            <a class="navbar-brand" href="<?= base_url() ?>home"><img src="../../../asset/images/logo-white.png"></a>
 
                         </div>
 
@@ -344,6 +344,9 @@
                                     </div>
                                 </div>
                                 <?php } ?>
+                                <div class="" style="padding-left: 710px" >
+                                <a href="<?php echo base_url()?>stadium/allStadium "  class="btn btn-default ">All Stadium</a>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -128,7 +128,8 @@ class Users extends CI_Controller {
             $datasend ['stadium'] = $this->mystadium->getallstadium();
             $datasend ['province'] = $this->mystadium->getprovince();
             $datasend ['district'] = $this->mystadium->getdistrict();
-            $this->load->view('feeds', $datasend);
+            $this->load->view('result_search', $datasend);
+            //print_r($datasend);
         } else {
             redirect('index.php');
         }

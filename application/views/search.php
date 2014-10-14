@@ -206,10 +206,10 @@
                     <div class="row text-center">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Search result</h3>
+                                <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  All Stadium</h3>
                             </div>
                             <div class="panel-body">
-                                <?php foreach ($result_Search as $row) { ?>
+                                <?php foreach ($stadium as $row) { ?>
                                 <div class="col-md-4 col-sm-6 hero-feature">
                                     <div class="thumbnail">
                                         <img src="<?php echo base_url()?>asset/images/stadiumpic/<?=$row->stadium_path ?>" alt="" style="width: 220px;height: 170px">
