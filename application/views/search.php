@@ -194,11 +194,19 @@
 
         <div style="clear:both;"></div>
 
-        <div class="container">
-            <div class="row" style="
-                 margin-top: 10px;">
-                <div class="col-md-3">
-                    
+        <div class="container" style="padding-top: 20px">
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-md-3" style="">
+                    <div class="row text-center">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><span class="glyphicon glyphicon-search"> </span>  Search</h3>
+                            </div>
+                            <div class="panel-body">
+                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-md-9">

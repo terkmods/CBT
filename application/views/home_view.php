@@ -205,16 +205,31 @@
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked">
                                 <li><img  src="<?=base_url()?>asset<?=$user['0']->profilepic_path != null ? '/images/profilepic/'.$user['0']->profilepic_path.'' : '/images/profil.jpg'?>" class="img-thumbnail" style="width: 50%;"></li>
+                                 <?php if($this->session->userdata('role') == "user"){?>
                                 <li><a href="<?=base_url()?>users/profile/<?=$user['0']->user_id?>">My Profile</a></li>
+                                 <? }else if($this->session->userdata('role') == "owner"){ ?>
+                                <li><a href="<?=base_url()?>owner/profile/<?=$user['0']->user_id?>">My Profile</a></li>
+                                 <? }else{ ?>
+                                <li><a href="<?=base_url()?>coach/profile/<?=$user['0']->user_id?>">My Profile</a></li>
+                                 <? } ?>
+                                
+                                <?php if($this->session->userdata('role') == "user"){?>
                                 <li><a href="<?=base_url()?>users/edituser/<?=$user['0']->user_id?>">Edit Profile</a></li>
+                                <? }else if ($this->session->userdata('role') == "owner") {?>
+                                <li><a href="<?=base_url()?>owner/editProfile/<?=$user['0']->user_id?>">Edit Profile</a></li>
+                                <? }else{ ?>
+                                <li><a href="<?=base_url()?>coach/editProfile/<?=$user['0']->user_id?>">Edit Profile</a></li>
+                                <? } ?>
+                                
                                 <li><a href="<?=base_url()?>booking/historybooking">History Reserve </a></li>
-                                <li><a href="#">Search</a></li>
+                                <li><a href="<?=base_url()?>stadium/allStadium">Search</a></li>
                                 
                             </ul>
                         </div>
                     </div>
                 </div>
 
+                
                 <div class="col-md-9">
                     <!--                    <div class="row">
                                             <div class="col-xs-12 col-sm-6 col-lg-6">

@@ -15,8 +15,9 @@
                             </ul>
                             <div class="col-md-11">
                                 <br>
-
+                               
                                 <form class="form-horizontal" method="post" role="form" action="<?= base_url() ?>users/updateuser/<?= $this->uri->segment(3) ?>" enctype="multipart/form-data">
+     
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-2 control-label">Profile picture</label>
                                         <div class ="col-md-5">

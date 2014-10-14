@@ -157,8 +157,8 @@ class stadium extends CI_Controller {
             'court' => $this->mystadium->gettableCourt($id), //result_array  getTotalcourt
             'total' => $this->mystadium->getTotalcourt($id), //result_array  getTotalcourt
             'blacklist' => $this->myusers->get_blacklist($id),
-            'coach' => $this->mycoach->get_all_coach(),
-            'map' => $this->locatestadium()
+            'coach' => $this->mycoach->get_all_coach()
+           
         );
 
         //print_r($data['total']);
@@ -402,6 +402,7 @@ class stadium extends CI_Controller {
         } else {
             redirect('index.php');
         }
+        
     }
 
 }
