@@ -12,6 +12,7 @@ class Users extends CI_Controller {
         $this->load->library('session');
         $this->load->library('form_validation');
         $this->load->helper(array('url', 'html', 'form'));
+           $this->load->library('googlemaps');
     }
 
     function index() {
@@ -25,13 +26,14 @@ class Users extends CI_Controller {
                 'role' => $this->session->userdata('role'),
             );
 
-            $this->load->view('index',$data);
+            $this->load->view('index', $data);
         } else {
 
             redirect(base_url());
         }
     }
-        public function get_bookings($equipment_id, $date) {
+
+    public function get_bookings($equipment_id, $date) {
         $data = $this->booking->get_bookings($equipment_id, $date);
         echo json_encode($data);
     }
@@ -61,7 +63,7 @@ class Users extends CI_Controller {
         $check = $this->myusers->login($email, $password);
 
         if ($check != null) {
-           // print_r($check);
+            // print_r($check);
             foreach ($check as $row) {
 
                 $data = array(
@@ -76,7 +78,7 @@ class Users extends CI_Controller {
                 $this->session->set_userdata($data);
             }
             echo $data['role'];
-            if($data['role'] == "owner"){
+            if ($data['role'] == "owner") {
                 redirect('stadium');
             }
 
@@ -133,8 +135,8 @@ class Users extends CI_Controller {
             redirect('index.php');
         }
     }
-    
-     public function coachProfile($id) {
+
+    public function coachProfile($id) {
         $profile = array(
             'data' => $this->myusers->getCoach($id)
         );
@@ -145,27 +147,28 @@ class Users extends CI_Controller {
 
     public function profile($id) {
         $profile = array(
-            'data' => $this->myusers->getUser($id)
+            'data' => $this->myusers->getUser($id),
+                //'map' => $this->geolocation()
         );
 
 
         $this->load->view('User_view', $profile);
     }
-public function edituser($id) {
+
+    public function edituser($id) {
         $profile = array(
             'data' => $this->myusers->getUser($id)
         );
         //print_r($profile['data']);
-        $this->load->view("edit_user",$profile);
-        
+        $this->load->view("edit_user", $profile);
     }
 
-    public function updateuser($userId) {      
+    public function updateuser($userId) {
         $data = array(
-            'user_id' => $userId,          
+            'user_id' => $userId,
             'fname' => $this->input->post('fname'),
             'lname' => $this->input->post('lname'),
-            'gender' => $this->input->post('gender'),            
+            'gender' => $this->input->post('gender'),
             'birthdate' => $this->input->post('birthdate'),
             'Style' => $this->input->post('style'),
             'club' => $this->input->post('club'),
@@ -175,13 +178,12 @@ public function edituser($id) {
             'twitter' => $this->input->post('twitter'),
             'googleplus' => $this->input->post('googleplus'),
             'instagram' => $this->input->post('instargram'),
-            'aboutme' => $this->input->post('aboutme')          
+            'aboutme' => $this->input->post('aboutme')
         );
         $this->db->update('User', $data, array('user_id' => $userId));
         $this->edituser($userId);
-        
     }
-    
+
     function uploaduserprofile($Id) {
         $config['upload_path'] = "./asset/images/profilepic";
         $config['allowed_types'] = '*';
@@ -203,6 +205,7 @@ public function edituser($id) {
         $this->db->update('User', $data, array('user_id' => $Id));
         redirect('users/edituser/' . $Id);
     }
+
     function uploadevidence() {
         $config['upload_path'] = "./asset/images/evidence";
         $config['allowed_types'] = '*';
@@ -228,51 +231,82 @@ public function edituser($id) {
         $this->session->set_flashdata('msg', 'upload Complete');
         redirect('stadium');
     }
-    
-    function coach(){
-         $this->load->view('coach_view');
+
+    function coach() {
+        $this->load->view('coach_view');
     }
 
-    function addBlacklist(){
-        $userId  = $this->input->post('idsend');
+    function addBlacklist() {
+        $userId = $this->input->post('idsend');
         $reason = $this->input->post('reasonsend');
         $data = array(
-          'status'  => 'blacklist',
-          'reason' => $reason
+            'status' => 'blacklist',
+            'reason' => $reason
         );
-         $datasend = array(
-          'stadium_id'  => $this->input->post('stsend'),
-            'user_id'  => $this->input->post('idsend'), 
-          'reason' => $reason
+        $datasend = array(
+            'stadium_id' => $this->input->post('stsend'),
+            'user_id' => $this->input->post('idsend'),
+            'reason' => $reason
         );
         $this->db->update('User', $data, array('user_id' => $userId));
-        $this->db->insert('blacklist',$datasend);
+        $this->db->insert('blacklist', $datasend);
         echo 'complete';
     }
-        function addWarning(){
-        $userId  = $this->input->post('idsend');
+
+    function addWarning() {
+        $userId = $this->input->post('idsend');
         $reason = $this->input->post('reasonsend');
         $data = array(
-          'status'  => 'warning',
-          'reason' => $reason
+            'status' => 'warning',
+            'reason' => $reason
         );
         $this->db->update('User', $data, array('user_id' => $userId));
         echo 'complete';
     }
-     function addActive(){
-        $userId  = $this->input->post('idsend');
+
+    function addActive() {
+        $userId = $this->input->post('idsend');
         $reason = $this->input->post('reasonsend');
         $data = array(
-          'status'  => 'ok',
-          'reason' => $reason
+            'status' => 'ok',
+            'reason' => $reason
         );
         $this->db->update('User', $data, array('user_id' => $userId));
+
+        echo 'complete';
+    }
+
+    function geolocation() {
         
-        echo 'complete';
+     
+
+        $config = array();
+        $config['center'] = 'auto';
+        
+        $config['onboundschanged'] = 'if (!centreGot) {
+	var mapCentre = map.getCenter();
+	marker_0.setOptions({
+		position: new google.maps.LatLng(mapCentre.lat(), mapCentre.lng()),
+                animation: google.maps.Animation.DROP
+	}
+        );
+}
+
+centreGot = true;';
+        $this->googlemaps->initialize($config);
+
+// set up the marker ready for positioning 
+// once we know the users location
+        $marker = array();
+        $this->googlemaps->add_marker($marker);
+        $data['map'] = $this->googlemaps->create_map();
+        return $data['map'];
     }
-
-
-
+    
+    
+    
+    
+    
 
 }
 

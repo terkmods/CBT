@@ -87,6 +87,11 @@
             </div>
 
         </div>
+        <div class="row">
+            <input id="address" type="text" >
+            <input type="button" value="Geocode" onclick="codeAddress()">
+            <?php echo $map['html']; ?>
+        </div>
 
         <h4>Facility</h4>
         <div class="row">

@@ -56,9 +56,18 @@
             <div class="col-md-8">
                 <h3>About Me</h3>
                 <div class="panel panel-default">
-                    
+
                     <div class="panel-body">
                         <h4><?= $data['0']->aboutme; ?></h4>
+                        
+                        <form>
+                            <input type="button" onclick="getLocation();" value="Get Location"/>
+                        </form>
+                        <div id="panel">
+                            <input id="address" type="text" value="Sydney, NSW">
+                            <input type="button" value="Geocode" onclick="codeAddress()">
+                        </div>
+                        <div id="map-canvas"></div>
                     </div>
                 </div>
             </div>
@@ -67,7 +76,7 @@
     <hr>
     <div class="container">
         <div class="row">
-            
+
             <div class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -105,6 +114,78 @@
 </div>
 
 <?php include 'template/footer.php'; ?>
+
+<script type="text/javascript">
+                                var centreGot = false;
+</script>
+<script>
+    var geocoder;
+    var map;
+    var marker;
+
+function initialize() {
+  geocoder = new google.maps.Geocoder();
+  
+  var latlng = new google.maps.LatLng(13.7500, 100.4833);
+  var mapOptions = {
+    zoom: 10,
+    center: latlng
+  }
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+}
+
+                
+    function codeAddress() {
+        var address = document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                if (marker!=null)marker.setMap(null);
+                 marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location,
+                    animation: google.maps.Animation.DROP,
+                    draggable:true
+                });
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+
+
+<!--<script type="text/javascript">
+    function showLocation(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        alert("Latitude : " + latitude + " Longitude: " + longitude);
+    }
+
+    function errorHandler(err) {
+        if (err.code == 1) {
+            alert("Error: Access is denied!");
+        } else if (err.code == 2) {
+            alert("Error: Position is unavailable!");
+        }
+    }
+    function getLocation() {
+
+        if (navigator.geolocation) {
+// timeout at 60000 milliseconds (60 seconds)
+            var options = {timeout: 60000};
+            navigator.geolocation.getCurrentPosition(showLocation,
+                    errorHandler,
+                    options);
+        } else {
+            alert("Sorry, browser does not support geolocation!");
+        }
+    }
+</script>-->
+
 <?php include 'template/footer_scrpit.php'; ?>
 
 </body>
