@@ -23,34 +23,32 @@ class stadium extends CI_Controller {
             $datasend = array(
                 'ow' => $this->getOwner($userid),
                 'stadium' => $this->mystadium->getstadium($ownerid)
-                
             );
-            $stID =null;
+            $stID = null;
             foreach ($datasend['stadium'] as $d) {
                 $stID[] = $d->stadium_id;
-                
             }
-            if($stID!=null){
-           
-            foreach ($stID as $r) {
+            if ($stID != null) {
+
+                foreach ($stID as $r) {
                     $totalcourt[] = $this->mystadium->getTotalcourt($r);
                 }
-                $x ;
-            for($i=0 ; $i<sizeof($stID);$i++){
-                if($totalcourt[$i]->courtnum!=0){
-                   $this->db->update('stadium', array('court_check' => 1), array('stadium_id' => $stID[$i]));
-                }else if($totalcourt[$i]->courtnum == 0){
-                   $this->db->update('stadium', array('court_check' => 0), array('stadium_id' => $stID[$i]));  
+                $x;
+                for ($i = 0; $i < sizeof($stID); $i++) {
+                    if ($totalcourt[$i]->courtnum != 0) {
+                        $this->db->update('stadium', array('court_check' => 1), array('stadium_id' => $stID[$i]));
+                    } else if ($totalcourt[$i]->courtnum == 0) {
+                        $this->db->update('stadium', array('court_check' => 0), array('stadium_id' => $stID[$i]));
+                    }
+                    $datasend['total'] = $totalcourt;
                 }
-                $datasend['total'] = $totalcourt;
-            }
-            //print_r($x);
-            }else{
+                //print_r($x);
+            } else {
                 $this->session->set_flashdata('msg', 'กรุณาเพิ่มสนาม');
             }
 
             //print_r($totalcourt);
-            
+
 
             $this->load->view("mg", $datasend);
             //print_r($datasend);
@@ -58,8 +56,9 @@ class stadium extends CI_Controller {
             echo 'session no';
         }
     }
-    function add(){
-                if ($this->session->userdata('logged')) {
+
+    function add() {
+        if ($this->session->userdata('logged')) {
 
             $userid = $this->session->userdata('id');
             $ownerid = $this->getOwnerid($userid);
@@ -68,18 +67,18 @@ class stadium extends CI_Controller {
             $datasend = array(
                 'ow' => $this->getOwner($userid),
                 'stadium' => $this->mystadium->getstadium($ownerid)
-                
             );
-            
 
-            
+
+
 
             $this->load->view("add_stadium", $datasend);
         } else {
             echo 'session no';
         }
     }
-                function getOwnerid($userid) {
+
+    function getOwnerid($userid) {
 
         if ($userid != null) {
             $query = $this->db->query('SELECT owner.owner_id FROM owner join User  WHERE owner.user_id = User.user_id and User.user_id = ' . $userid)->result();
@@ -158,13 +157,35 @@ class stadium extends CI_Controller {
             'court' => $this->mystadium->gettableCourt($id), //result_array  getTotalcourt
             'total' => $this->mystadium->getTotalcourt($id), //result_array  getTotalcourt
             'blacklist' => $this->myusers->get_blacklist($id),
-            'coach'=>$this->mycoach->get_all_coach()
+            'coach' => $this->mycoach->get_all_coach(),
+            'map' => $this->locatestadium()
         );
 
         //print_r($data['total']);
         //echo $this->mystadium->settime($id);
         // print_r($data['showtime']);
         $this->load->view("editstadium", $data);
+    }
+
+    function locatestadium() {
+        $this->load->library('googlemaps');
+
+        $config['center'] = '13.7500, 100.4833';
+        $config['zoom'] = '8';
+        $config['placesAutocompleteInputID'] = 'address';
+        $config['placesAutocompleteBoundsMap'] = TRUE; // set results biased towards the maps viewport
+        $this->googlemaps->initialize($config);
+
+        $marker['marker'] = array();
+        $marker['position'] = '13.7500, 100.4833';
+        $marker['draggable'] = true;
+        $marker['ondragend'] = 'updateDatabase(event.latLng.lat(), event.latLng.lng());';
+        $this->googlemaps->add_marker($marker);
+        $data['map'] = $this->googlemaps->create_map();
+
+
+
+        return $data['map'];
     }
 
     function updatetime($stId) {
@@ -252,14 +273,14 @@ class stadium extends CI_Controller {
     function profile($stId) {
 
         $st = array('data' => $this->mystadium->getstadiumprofile($stId),
-                    'facility' => $this->mystadium->showfacility($stId),
-                    'court' => $this->mystadium->gettableCourt($stId), //result_array  getTotalcourt
-                    'total' => $this->mystadium->getTotalcourt($stId),
-                    'floor' => $this->mystadium->getfloor($stId),
-                    'time' => $this->mystadium->gettimeprofile($stId)
-              //  'user' => $this->myusers->getUser($id)
+            'facility' => $this->mystadium->showfacility($stId),
+            'court' => $this->mystadium->gettableCourt($stId), //result_array  getTotalcourt
+            'total' => $this->mystadium->getTotalcourt($stId),
+            'floor' => $this->mystadium->getfloor($stId),
+            'time' => $this->mystadium->gettimeprofile($stId)
+                //  'user' => $this->myusers->getUser($id)
         );
-        
+
         $this->load->view('stadium_view', $st);
     }
 

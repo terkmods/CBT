@@ -23,7 +23,16 @@ include 'template/head.php';
                     <?php include 'template/sideSetting.php'; ?>
                     <div class="col-md-9">
                         <div class="row">
-                            <form method="post" action="<?=base_url()?>booking/cancelbooking">
+                            <div class="col-md-6 col-md-offset-3">
+                                <button  class="btn btn-default " role="button" id="history" value="1" onclick="history()">History</button>
+                                <button  class="btn btn-success " role="button" id="today" value="2" onclick="today()">Today</button>
+
+                                <button  class="btn btn-primary " role="button" id="futuer" value="3" onclick="futuer()">Comming</button>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <form method="post" action="<?= base_url() ?>booking/cancelbooking">
                                 <table class="table tablecompare">
                                     <thead>
                                         <tr>
@@ -39,7 +48,7 @@ include 'template/head.php';
                                         </tr>
                                     </thead>
 
-                                    <tbody>
+                                    <tbody id="showbooking">
 
 
 
@@ -56,8 +65,8 @@ include 'template/head.php';
                                                 $date = strtotime($date);
                                                 ?>
                                                 <td><?= substr($r->end_time, 10, 11) - substr($r->start_time, 10, 11) ?>ชม. <?= date('i', $date) ?> นาที</td>
-                                                <td><a href="<?=base_url()?>booking/cancelbooking/<?= $r->reserve_id ?>" class="form-control btn-danger btn-sm" onclick="del()"> cancel</a>
-<!--                                                    <input type="submit" value="cancel" class="form-control btn-danger btn-sm"></td>-->
+                                                <td><a href="<?= base_url() ?>booking/cancelbooking/<?= $r->reserve_id ?>" class="form-control btn-danger btn-sm" onclick="del()"> cancel</a>
+    <!--                                                    <input type="submit" value="cancel" class="form-control btn-danger btn-sm"></td>-->
                                             </tr>
                                         <?php } ?>
                                     </tbody>    
@@ -80,7 +89,111 @@ include 'template/head.php';
 </div>
 <?php include 'template/modal.php'; ?>
 <?php include 'template/footer.php'; ?>
-        
+<script>
+    function today() {
+        var x = document.getElementById("today").value;
+        var fullpart = "http://cbt.backeyefinder.in.th/booking/historyBookingajax";
+        $.ajax({
+            type: "POST",
+            url: fullpart,
+            data: {type: x}
+        }).done(function (msg) {
+            var obj = JSON.parse(msg);
+
+           // console.log(obj[0].stadium_id);
+            show = ' ';
+
+            console.log(obj);
+            if (obj != null) {
+                for (i = 0; i < obj.length; i++) {
+                    show = show + '<tr>' +
+                            '<td></td>' +
+                            '<td>' + obj[i].reserve_id + '<input type="hidden" name="rId" value="<?= $r->reserve_id ?>"></td>' +
+                            '<td><?= substr($r->start_time, 0, 10) ?></td>' +
+                            ' <td><?= $r->stadium_name ?></td>' +
+                            '  <td><?= $r->court_name ?></td>' +
+                            '   <td><?= substr($r->start_time, 10, 11) ?>-<?= substr($r->end_time, 10, 11) ?></td>' +
+<?php
+$date = $r->start_time;
+$date = strtotime($date);
+?>
+                    '    <td><?= substr($r->end_time, 10, 11) - substr($r->start_time, 10, 11) ?>ชม. <?= date('i', $date) ?> นาที</td>' +
+                            '     <td><a href="<?= base_url() ?>booking/cancelbooking/<?= $r->reserve_id ?>" class="form-control btn-danger btn-sm" onclick="del()"> cancel</a>' +
+                            '  </tr>';
+                }
+            }
+
+            console.log(show);
+             $("#showbooking").html(show);
+        });
+    }
+    function history() {
+        var x = document.getElementById("history").value;
+        var fullpart = "http://cbt.backeyefinder.in.th/booking/historyBookingajax";
+        $.ajax({
+            type: "POST",
+            url: fullpart,
+            data: {type: x}
+        }).done(function (msg) {
+            var obj = JSON.parse(msg);
+
+//            console.log(obj[0].stadium_id);
+            show = ' ';
+                 if (obj != null) {
+                for (i = 0; i < obj.length; i++) {
+                    show = show + '<tr>' +
+                            '<td></td>' +
+                            '<td>' + obj[i].reserve_id + '<input type="hidden" name="rId" value="<?= $r->reserve_id ?>"></td>' +
+                            '<td>'+obj[i].start_time.substring(0,10)+'</td>' +
+                            ' <td>'+obj[i].stadium_name+'</td>' +
+                            '  <td>'+obj[i].court_name+'</td>' +
+                            '   <td>'+obj[i].start_time.substring(10,16)+'-'+obj[i].end_time.substring(10,16)+'</td>' +
+                            '<td>'+(obj[i].end_time.substring(10,13)-obj[i].start_time.substring(10,13))+'ชม. '+(obj[i].end_time.substring(14,16)-obj[i].start_time.substring(14,16))+' นาที</td>'+
+                   
+                                
+                            '  </tr>';
+                    console.log(obj[i].end_time.substring(14,16));
+                }
+            }
+           // console.log(show);
+            $("#showbooking").html(show);
+
+        });
+    }
+    function futuer() {
+        var x = document.getElementById("futuer").value;
+        var fullpart = "http://cbt.backeyefinder.in.th/booking/historyBookingajax";
+        $.ajax({
+            type: "POST",
+            url: fullpart,
+            data: {type: x}
+        }).done(function (msg) {
+            var obj = JSON.parse(msg);
+
+//            console.log(obj[0].stadium_id);
+            show = ' ';
+                 if (obj != null) {
+                for (i = 0; i < obj.length; i++) {
+                    show = show + '<tr>' +
+                            '<td></td>' +
+                            '<td>' + obj[i].reserve_id + '<input type="hidden" name="rId" value="<?= $r->reserve_id ?>"></td>' +
+                            '<td>'+obj[i].start_time.substring(0,10)+'</td>' +
+                            ' <td>'+obj[i].stadium_name+'</td>' +
+                            '  <td>'+obj[i].court_name+'</td>' +
+                            '   <td>'+obj[i].start_time.substring(10,16)+'-'+obj[i].end_time.substring(10,16)+'</td>' +
+                            '<td>'+(obj[i].end_time.substring(10,13)-obj[i].start_time.substring(10,13))+'ชม. '+(obj[i].end_time.substring(14,16)-obj[i].start_time.substring(14,16))+' นาที</td>'+
+                   
+                                
+                            '  </tr>';
+                    console.log(obj[i].end_time.substring(14,16));
+                }
+            }
+           // console.log(show);
+            $("#showbooking").html(show);
+
+        });
+    }
+</script>
 
 <?php include 'template/footer_scrpit.php'; ?>
 
