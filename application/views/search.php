@@ -196,7 +196,7 @@
 
         <div class="container" style="padding-top: 20px">
             <div class="row" style="margin-top: 10px;">
-                <div class="col-md-3" style="">
+                <div class="col-md-3" style="padding-right: 20px">
                     <div class="row text-center">
                         <div class="panel panel-default">
                             <div class="panel-heading">
