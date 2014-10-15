@@ -33,16 +33,32 @@
       }
       #panel {
         position: absolute;
-        top: 5px;
+        top: 1020px;
         left: 50%;
-        margin-left: -180px;
+        margin-left: -260px;
         z-index: 5;
         background-color: #fff;
         padding: 5px;
         border: 1px solid #999;
       }
+      #address {
+        background-color: #fff;
+        padding: 0 11px 0 13px;
+        width: 400px;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        text-overflow: ellipsis;
+      }
+
+      #address:focus {
+        border-color: #4d90fe;
+        margin-left: -1px;
+        padding-left: 14px;  /* Regular padding-left + 1. */
+        width: 401px;
+      }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
     </head>
     <body>
         <div id="topbar container">

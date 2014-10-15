@@ -93,8 +93,27 @@ $num = 1;
 </div>
 
 <?php include 'template/modal.php'; ?>
-<?php echo $map['js']; ?>
+
+<div id="notija" style="display:none">
+    <!-- 
+    Later on, you can choose which template to use by referring to the 
+    ID assigned to each template.  Alternatively, you could refer
+    to each template by index, so in this example, "basic-tempate" is
+    index 0 and "advanced-template" is index 1.
+    -->
+    <div id="basic-template">
+        <a class="ui-notify-cross ui-notify-close " href="#">x</a>
+        <h1>#{title}</h1>
+        <p>#{text}</p>
+    </div>
+
+    <div id="advanced-template">
+        <!-- ... you get the idea ... -->
+    </div>
+</div>
+
 <?php include 'template/footer.php'; ?>
+<script src="<?= base_url() ?>asset/js/jquery.notify.js" type="text/javascript"></script>
 <script>
     var states;
     function keynaja() {
@@ -153,17 +172,67 @@ $num = 1;
         });
     });
 </script>
+<script type="text/javascript">
+    var centreGot = false;
+</script>
 <script>
     var geocoder;
     var map;
     var marker;
+    var placesService;
+    var placesAutocomplete;
+
+    function initialize() {
+        geocoder = new google.maps.Geocoder();
+        var check = " <?= $data->lat ?>";
+        console.log(check);
+
+        var latlng = new google.maps.LatLng((check != ' ' ? '<?= $data->lat ?>' : '13.7500'), (check != ' ' ? '<?= $data->long ?>' : '100.4833'));
+        var mapOptions = {
+            zoom: 10,
+            center: latlng
+        }
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        if (check != ' ') {
+            map.setZoom(17);
+            ;
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                draggable: true
+
+            });
+            google.maps.event.addListener(marker, 'dragend', function (event) {
+
+                x = event.latLng.lat();
+                y = event.latLng.lng();
+                updateDatabase(x, y);
+                console.log(x);
+                console.log(y);
+            });
+        }
+        var autocompleteOptions = {
+        }
+        var autocompleteInput = document.getElementById('address');
+
+        placesAutocomplete = new google.maps.places.Autocomplete(autocompleteInput, autocompleteOptions);
+        placesAutocomplete.bindTo('bounds', map);
+
+        google.maps.event.addListener(placesAutocomplete, 'place_changed', function () {
+            codeAddress();
+        });
+
+
+    }
+
+
 
     function codeAddress() {
-        geocoder = new google.maps.Geocoder();
         var address = document.getElementById('address').value;
-        geocoder.geocode({'address': address}, function (results, status) {
+        geocoder.geocode({'address': address}, function (results, status, event) {
             if (status == google.maps.GeocoderStatus.OK) {
                 map.setCenter(results[0].geometry.location);
+                map.setZoom(17);
                 if (marker != null)
                     marker.setMap(null);
                 marker = new google.maps.Marker({
@@ -172,12 +241,126 @@ $num = 1;
                     animation: google.maps.Animation.DROP,
                     draggable: true
                 });
+                console.log(marker.getPosition());
+                console.log(marker.getPosition().k);
+                updateDatabase(marker.getPosition().k, marker.getPosition().B);
+                google.maps.event.addListener(marker, 'dragend', function (event) {
+
+                    x = event.latLng.lat();
+                    y = event.latLng.lng();
+                    updateDatabase(x, y);
+                    console.log(x);
+                    console.log(y);
+                });
             } else {
                 alert('Geocode was not successful for the following reason: ' + status);
             }
         });
+    }
+    function updateDatabase(newLat, newLng)
+    {
+        var fullpart = "http://cbt.backeyefinder.in.th/stadium/updateLatLng/<?php echo $this->uri->segment(3); ?>";
+
+        $.ajax({
+            type: "post",
+            url: fullpart,
+            data: {newLat: newLat, newLng: newLng}
+        }).done(function (msg) {
+
+            console.log(msg);
+            $("#notija").notify({
+                speed: 500,
+            });
+            $("#notija").notify("create", {
+                title: 'Update Complete',
+                text: 'Lat Lng  this Stadium is Change '
+            });
+        });
+
 
     }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+
+</script>
+<script>
+
+    //<![CDATA[
+
+    var map; // Global declaration of the map
+    var lat_longs_map = new Array();
+    var markers_map = new Array();
+    var iw_map;
+    var placesService;
+    var placesAutocomplete;
+
+    iw_map = new google.maps.InfoWindow();
+
+    function initialize_map() {
+
+        var myLatlng = new google.maps.LatLng(37.4419, -122.1419);
+        var myOptions = {
+            zoom: 13,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP}
+        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        var autocompleteOptions = {
+        }
+        var autocompleteInput = document.getElementById('myPlaceTextBox');
+
+        placesAutocomplete = new google.maps.places.Autocomplete(autocompleteInput, autocompleteOptions);
+        placesAutocomplete.bindTo('bounds', map);
+        google.maps.event.addListener(placesAutocomplete, 'place_changed', function () {
+            alert('You selected a place');
+        });
+
+        fitMapToBounds_map();
+
+
+    }
+
+
+    function placesCallback(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+            for (var i = 0; i < results.length; i++) {
+
+                var place = results[i];
+
+                var placeLoc = place.geometry.location;
+                var placePosition = new google.maps.LatLng(placeLoc.lat(), placeLoc.lng());
+                var markerOptions = {
+                    map: map,
+                    position: placePosition
+                };
+                var marker = createMarker_map(markerOptions);
+                marker.set("content", place.name);
+                google.maps.event.addListener(marker, "click", function () {
+                    iw_map.setContent(this.get("content"));
+                    iw_map.open(map, this);
+                });
+
+                lat_longs_map.push(placePosition);
+
+            }
+            fitMapToBounds_map();
+        }
+    }
+
+    function fitMapToBounds_map() {
+        var bounds = new google.maps.LatLngBounds();
+        if (lat_longs_map.length > 0) {
+            for (var i = 0; i < lat_longs_map.length; i++) {
+                bounds.extend(lat_longs_map[i]);
+            }
+            map.fitBounds(bounds);
+        }
+    }
+
+    google.maps.event.addDomListener(window, "load", initialize_map);
+
+    //]]>
+
 </script>
 <?php include 'template/footer_scrpit.php'; ?>
 

@@ -1,6 +1,6 @@
 <div class="tab-pane active" id="p1">
 
-    <form action="<?= base_url() ?>stadium/editstadium/<?= $this->uri->segment(3) //รับค่าจาก url ใน segment / ที่ 3 ?>" method="post" enctype="multipart/form-data"> 
+    <form action="<?= base_url() ?>stadium/editstadium/<?= $this->uri->segment(3) //รับค่าจาก url ใน segment / ที่ 3  ?>" method="post" enctype="multipart/form-data"> 
 
         <div class="row" style="padding-top: 10px">
 
@@ -31,7 +31,7 @@
             </div>
             <div class="col-md-5">
                 <input class="form-control" type="text" value="<?php echo $data->stadium_name ?>" name='name'  >
-                
+
             </div>
         </div>
 
@@ -54,11 +54,11 @@
                 <textarea class="form-control" rows="4" name='rule'>
                     <?php echo $data->rule ?>
                 </textarea>
-                
+
                 <hr>
             </div>
         </div>
-        
+
         <div class="col-md-12">
             <h3>Address</h3>
         </div>
@@ -88,9 +88,13 @@
 
         </div>
         <div class="row">
-            <input id="address" type="text" >
-            <input type="button" value="Geocode" onclick="codeAddress()">
-            <?php echo $map['html']; ?>
+            <?=$data->lat ==null ? '
+            <div id="panel">
+                <input id="address" type="text"   placeholder="Enter a location">
+                
+                
+            </div>' : 'ต้องการแก้ไขตำแหน่ง กรุณาเลื่อน marker' ;?>
+            <div id="map-canvas"></div> 
         </div>
 
         <h4>Facility</h4>
@@ -103,7 +107,7 @@
             <div class="col-md-6">
                 <div style='margin-top: 15px'>
                     <?php foreach ($facility as $r) { //เรียกจาก $data['facility'] ?>
-                        <div class="col-md-6"><?php echo $r['facility']; //ใช้ return เป็น result_array ?></div>
+                        <div class="col-md-6"><?php echo $r['facility']; //ใช้ return เป็น result_array  ?></div>
 
                         <span style="margin-top: 20px"> 
                         <?php } ?>
