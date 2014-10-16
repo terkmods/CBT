@@ -266,5 +266,12 @@ join User on User.user_id = owner.user_id
         $query = $this->db->query($sql)->result();
         return $query;
     }
+    public function getLatLngAll(){
+        $query = $this->db->query('SELECT stadium_name, m_f_price,st_sun_price,court.stadium_id,lat,stadium.long,address_no,soi,road,district,province,tel,stadium_path
+FROM  `stadium` join court on stadium.stadium_id = court.stadium_id 
+WHERE stadium.lat IS NOT NULL  ')->result_array();
+
+        echo json_encode( $query);
+    }
 
 }
