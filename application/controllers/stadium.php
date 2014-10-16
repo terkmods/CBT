@@ -157,18 +157,36 @@ class stadium extends CI_Controller {
             'court' => $this->mystadium->gettableCourt($id), //result_array  getTotalcourt
             'total' => $this->mystadium->getTotalcourt($id), //result_array  getTotalcourt
             'blacklist' => $this->myusers->get_blacklist($id),
-            'coach' => $this->mycoach->get_all_coach(),
-            
+            'coach' => $this->mycoach->get_all_coach()
+           
         );
 
-       
         //print_r($data['total']);
         //echo $this->mystadium->settime($id);
-        //print_r($data['data']);
+        // print_r($data['showtime']);
         $this->load->view("editstadium", $data);
     }
 
+    function locatestadium() {
+        $this->load->library('googlemaps');
 
+        $config['center'] = '13.7500, 100.4833';
+        $config['zoom'] = '8';
+        $config['placesAutocompleteInputID'] = 'address';
+        $config['placesAutocompleteBoundsMap'] = TRUE; // set results biased towards the maps viewport
+        $this->googlemaps->initialize($config);
+
+        $marker['marker'] = array();
+        $marker['position'] = '13.7500, 100.4833';
+        $marker['draggable'] = true;
+        $marker['ondragend'] = 'updateDatabase(event.latLng.lat(), event.latLng.lng());';
+        $this->googlemaps->add_marker($marker);
+        $data['map'] = $this->googlemaps->create_map();
+
+
+
+        return $data['map'];
+    }
 
     function updatetime($stId) {
 
@@ -219,14 +237,7 @@ class stadium extends CI_Controller {
         $this->db->update('stadium', $data, array('stadium_id' => $stId));
         $this->updatestadium($stId);
     }
-    function updateLatLng($stId){
-        $data = array(
-            'lat' =>$this->input->post('newLat'),
-            'long'=>$this->input->post('newLng')
-        );
-        $x = $this->db->update('stadium', $data, array('stadium_id' => $stId));
-        echo $x;
-    }
+
     function deletestadium() {
 
         $del = $this->input->post('num');
@@ -393,6 +404,7 @@ class stadium extends CI_Controller {
         }
         
     }
+    
 
 }
 ?>
