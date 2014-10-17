@@ -40,6 +40,8 @@
 
 $route['default_controller'] = "welcome";
 $route['404_override'] = '';
+$route['upload'] = 'upload';
+$route['upload/do_upload'] = 'upload/do_upload';
 
 
 /* End of file routes.php */

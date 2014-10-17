@@ -404,6 +404,10 @@ class stadium extends CI_Controller {
         }
         
     }
+    function uploadGallery(){
+        $file = $this->input->post('files');
+        print_r($file);
+    }
     
 
 }

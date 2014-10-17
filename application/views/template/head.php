@@ -14,7 +14,14 @@
         <link href="<?= base_url() ?>asset/css/bootstrap-switch.css" rel="stylesheet">
                 <link href="<?= base_url() ?>asset/css/jquery-ui.css" rel="stylesheet">
         <link href="<?= base_url() ?>asset/css/ui.notify.css" rel="stylesheet">
-
+        <!-- blueimp Gallery styles -->
+        <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+        <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+        <link rel="stylesheet" href="<?= base_url() ?>asset/css/jquery.fileupload.css">
+        <link rel="stylesheet" href="<?= base_url() ?>asset/css/jquery.fileupload-ui.css">
+        <!-- CSS adjustments for browsers with JavaScript disabled -->
+        <noscript><link rel="stylesheet" href="<?= base_url() ?>asset/css/jquery.fileupload-noscript.css"></noscript>
+        <noscript><link rel="stylesheet" href="<?= base_url() ?>asset/css/jquery.fileupload-ui-noscript.css"></noscript>
 
         <style type="text/css">
             .top-minus{
@@ -57,7 +64,20 @@
         padding-left: 14px;  /* Regular padding-left + 1. */
         width: 401px;
       }
+           #directions-panel {
+        height: 100%;
+        float: right;
+        width: 390px;
+        overflow: auto;
+      }
+              #directions-panel {
+          float: none;
+          width: auto;
+        }
+      
+      
     </style>
+    
    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
     </head>
     <body>
