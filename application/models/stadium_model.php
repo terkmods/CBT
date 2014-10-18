@@ -28,7 +28,8 @@ class Stadium_model extends CI_Model {
 
         return $query;
     }
-      function getonecourt($stId) {
+
+    function getonecourt($stId) {
         $query = $this->db->query('select * from court where court_id = ' . $stId)->row();
         ;
 
@@ -56,12 +57,12 @@ join User on User.user_id = owner.user_id
         ;
         return $query;
     }
-        function getLaststadium() {
+
+    function getLaststadium() {
         $query = $this->db->query('SELECT * FROM `stadium` ORDER BY stadium_id DESC LIMIT 0 , 6  ')->result();
         ;
         return $query;
     }
-
 
     function getprovince() {
         $query = $this->db->query('SELECT distinct province FROM `stadium`')->result();
@@ -81,13 +82,13 @@ join User on User.user_id = owner.user_id
         ;
         return $query;
     }
-    
+
     function getfloor($cId) {
         $query = $this->db->query('SELECT DISTINCT type FROM `court` WHERE stadium_id = ' . $cId)->result();
         ;
         return $query;
     }
-    
+
     function gettimeprofile($cId) {
         $query = $this->db->query('SELECT * FROM `stadium_time` WHERE stadium_id = ' . $cId)->result();
         ;
@@ -260,18 +261,25 @@ join User on User.user_id = owner.user_id
     }
 
     public function showSearch($data) {
-        
-        
-        $sql = "SELECT * FROM `stadium` WHERE district='".$data[1]."' and province='". $data[2]."'" ;
+
+
+        $sql = "SELECT * FROM `stadium` WHERE district='" . $data[1] . "' and province='" . $data[2] . "'";
         $query = $this->db->query($sql)->result();
         return $query;
     }
-    public function getLatLngAll(){
+
+    public function getLatLngAll() {
         $query = $this->db->query('SELECT stadium_name, m_f_price,st_sun_price,court.stadium_id,lat,stadium.long,address_no,soi,road,district,province,tel,stadium_path
 FROM  `stadium` join court on stadium.stadium_id = court.stadium_id 
 WHERE stadium.lat IS NOT NULL  ')->result_array();
 
-        echo json_encode( $query);
+        echo json_encode($query);
+    }
+
+    public function getComment($sId) {
+        $sql = " SELECT comment.user_id,stadium_id,text,comment.date,fname,lname,profilepic_path FROM `comment` join User on User.user_id = comment.user_id WHERE stadium_id='" . $sId . "' ORDER BY DATE DESC  ";
+        $query = $this->db->query($sql)->result();
+        echo json_encode($query);
     }
 
 }

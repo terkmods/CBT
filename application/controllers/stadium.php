@@ -408,6 +408,23 @@ class stadium extends CI_Controller {
         $file = $this->input->post('files');
         print_r($file);
     }
+    function addcomment($sId){
+        $data = array(
+            'text' => $this->input->post('content'),
+            'user_id' => $this->session->userdata('id'),
+                'stadium_id' => $sId
+        );
+
+        
+        
+        $this->db->insert('comment', $data); 
+        $this->showcomment($sId);
+        echo $this->session->userdata('id').' : OK';
+    }
+    function showcomment($sId){
+        $data['comment'] = $this->mystadium->getComment($sId);
+        return $data['comment'];
+    }
     
 
 }

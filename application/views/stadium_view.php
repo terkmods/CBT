@@ -68,7 +68,7 @@
                     <div class="panel-body">
                         <ul>
                             <?php foreach ($facility as $r) { //เรียกจาก $data['facility'] ?>
-                                <li><?php echo $r['facility']; //ใช้ return เป็น result_array      ?></li>
+                                <li><?php echo $r['facility']; //ใช้ return เป็น result_array          ?></li>
                             <?php } ?>
 
                         </ul>
@@ -151,7 +151,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3>Map</h3>
-                        
+
                         <div id="map-canvas"></div> 
                         <div id="directions-panel"></div>
 
@@ -164,48 +164,47 @@
                     <div class="panel-body">
                         <h3>Comment</h3>
 
+
                         <div class="scroll">
-                            <div class="row">
-                                <div class="pull-left">
-                                    <img src="<?= base_url() ?>/asset/images/profile.jpg" class="imgcomment">
-                                </div>
-                                <div class="pull-left ">
 
-                                    <img src="<?= base_url() ?>/asset/images/comment.png">
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top: 10px">
-                                <div class="pull-left">
-                                    <a href="user.html">   <img src="<?= base_url() ?>/asset/images/sporter.jpg" class="imgcomment"></a>
-                                </div>
-                                <div class="pull-left ">
+                            <!--                                <div class="pull-left">
+                                                                <img src="<?= base_url() ?>/asset/images/profile.jpg" class="imgcomment">
+                                                            </div>
+                                                            <div class="pull-left ">
+                            
+                                                                <img src="<?= base_url() ?>/asset/images/comment.png">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="margin-top: 10px">
+                                                            <div class="pull-left">
+                                                                <a href="user.html">   <img src="<?= base_url() ?>/asset/images/sporter.jpg" class="imgcomment"></a>
+                                                            </div>
+                                                            <div class="pull-left ">
+                            
+                                                                <img src="<?= base_url() ?>/asset/images/comment.png">
+                                                            </div>
+                                                        </div>-->
 
-                                    <img src="<?= base_url() ?>/asset/images/comment.png">
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top: 10px">
-                                <div class="pull-left">
-                                    <img src="<?= base_url() ?>/asset/images/profile-placeholder.png" class="imgcomment">
-                                </div>
-                                <div class="pull-left ">
 
-                                    <img src="<?= base_url() ?>/asset/images/comment.png">
-                                </div>
-                            </div>
+
+                            
+                            <span id="comeentindex"></span>
                         </div>
-
-                        <div class="col-md-10" style="margin-top: 15px">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-md-2" style="margin-top: 15px">
-                            <input type="submit" class="btn-success" value="send">    </div>
-
+                        <form method="post" id="formcomment" >
+                            <div class="col-md-10" style="margin-top: 15px">
+                                <!--<input type="text" class="form-control" name="textcomment">-->
+                                <textarea placeholder="comment here." class="form-control" required name="content" id="content"></textarea>
+                            </div>
+                            <div class="col-md-2" style="margin-top: 15px">
+                                <input type="button" class="btn-success controls btn" value="send" id="addcomment" >    </div>
+                        </form>
                     </div>
                 </div>
 
 
             </div>
         </div>
+        <input type="hidden" id="stadiumidja" value="<?= $this->uri->segment(3) ?>">
     </div>
 </div>
 <?php include 'template/modal.php'; ?>
@@ -215,7 +214,7 @@
     var directionsDisplay;
     var directionsService = new google.maps.DirectionsService();
     var curlatlng;
-    
+
 
     function initialize() {
         directionsDisplay = new google.maps.DirectionsRenderer();
@@ -254,7 +253,7 @@
         directionsDisplay.setMap(map);
         directionsDisplay.setPanel(document.getElementById('directions-panel'));
 
-       
+
 
     }
     function calcRoute() {
@@ -292,6 +291,100 @@
         var infowindow = new google.maps.InfoWindow(options);
         map.setCenter(options.position);
     }
+</script>
+<script>
+    var st_id = $("#stadiumidja").val();
+
+    function showComment() {
+        $(".nocom").remove();
+        $.getJSON("http://cbt.backeyefinder.in.th/stadium/showcomment/" + st_id, function (data) {
+             $(".nonja").remove();
+             
+        if (data.length != 0) {
+               
+                console.log(data);
+                $(data).each(function (k, v) {
+                    console.log(v.comment_id);
+                    html = '                            <div class="bubble-list nonja">' +
+                            '  <div class="bubble clearfix">' +
+                            '      <img src="http://cbt.backeyefinder.in.th/asset/images/profilepic/'+v.profilepic_path+'">' +
+                            '      <div class="bubble-content">' +
+                            '          <div class="point"></div>' +
+                            '           <p>' + v.text + '</p>' +
+                            '<small>By : '+v.fname+' '+v.lname+'</small>'+
+                            '<small>'+v.date+'</small>'+
+                            '        </div>' +
+                            '    </div>' +
+                            ' </div>';
+                    $(html).insertBefore($("#comeentindex"));
+
+
+                });
+            }else {
+//                nocomment = '<div clas="col-md-12 nocom" style="text-align: center;">No comment</div>';
+//                $(nocomment).insertBefore($("#comeentindex"));
+            }
+        });
+    }
+
+
+
+
+    $(function () {
+
+        showComment();
+//        var aTable = $('#AllAnnounce').dataTable({
+//            /* Disable initial sort */
+//            "aaSorting": [],
+//            "bLengthChange": false,
+//            "bFilter": true,
+//            "bInfo": false,
+//            "bSort": false
+//        });
+//        
+////        var sData = aTable.fnGetData();
+////        if (sData.length == 0) {
+////            var html = '<h1 class="text-muted" style="text-align: center" id="noann">No announement.</h1>';
+////            $("#AllAnnounce_wrapper table tbody").html(html);
+////        }
+        $("#addcomment").click(function () {
+            
+            var content = $("#content").val();
+            if (content.length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "http://cbt.backeyefinder.in.th/stadium/addcomment/" + st_id,
+                    data: {content: content}
+                }).done(function (msg) {
+//                    if($("#noann").length!=0){
+//                        $("#noann").remove();
+//                    }
+//                    var html = '<tr class="even"><td><div class="media" id="newAnnounce"><a class="pull-left" href="#"><img class="img-circle" width="64" src="' + pic + '"></a><div class="media-body"><h4 class="media-heading"><small class="text-muted">' + fullname + '</small><small class="pull-right">' + dateSt + '</small></h4><p>' + $("#content").val() + '</p></div></div></td></tr>';
+//                    $("#listAnnounce table tbody").prepend(html);
+//                    $("#newAnnounce").slideDown().removeAttr("id");
+//                    $("#title").val("");
+//                    $("#content").val("");
+//                    //aTable.fnDraw();
+                    console.log(msg);
+                    $("#content").val("");
+                    showComment();
+                });
+            }
+            else {
+                alert("Please write something in text box!");
+                $("#content").focus();
+            }
+        });
+        var pic = '${ac.profile_pic}';
+        var fullname = '${ac.firstname}' + '${ac.lastname}';
+        var d = new Date();
+        var dateSt = d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2) + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getMilliseconds();
+        $("#newannounce").click(function () {
+            $(this).hide();
+            $("#formAddAnnouce").slideDown();
+        });
+
+    });
 </script>
 
 
