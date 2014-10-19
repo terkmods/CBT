@@ -67,7 +67,7 @@ $num = 1;
 
                                 <li><a href="#p2">Add coach</a></li>
                                 <li><a href="#p3">Blacklist</a></li>
-                                <li><a href="#p4">announcement</a></li>
+                                <li><a href="#p7">announcement</a></li>
                                 <li><a href="#p6">Add picture</a></li>
 
                             </ul>
@@ -79,6 +79,7 @@ $num = 1;
                                 <?php include 'Tabeditstadium/addcourt.php'; ?> <!--tab P3-->
                                 <?php include 'Tabeditstadium/mycourt.php'; ?> <!--tab P3-->
                                 <?php include 'Tabeditstadium/rule.php'; ?> <!--tab P3-->
+                                <?php include 'Tabeditstadium/AddNews.php'; ?> <!--tab P3-->
                             </div>
 
                             <div style="clear:both; margin-top:20px;"></div>
@@ -113,82 +114,16 @@ $num = 1;
 </div>
 
 <?php include 'template/footer.php'; ?>
-<script src="<?= base_url() ?>asset/js/jquery.notify.js" type="text/javascript"></script>
-        <!-- The template to display files available for upload -->
-        <script id="template-upload" type="text/x-tmpl">
-            {% for (var i=0, file; file=o.files[i]; i++) { %}
-            <tr class="template-upload fade">
-            <td>
-            <span class="preview"></span>
-            </td>
-            <td>
-            <p class="name">{%=file.name%}</p>
-            <strong class="error text-danger"></strong>
-            </td>
-            <td>
-            <p class="size">Processing...</p>
-            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
-            </td>
-            <td>
-            {% if (!i && !o.options.autoUpload) { %}
-            <button class="btn btn-primary start" disabled>
-            <i class="glyphicon glyphicon-upload"></i>
-            <span>Start</span>
-            </button>
-            {% } %}
-            {% if (!i) { %}
-            <button class="btn btn-warning cancel">
-            <i class="glyphicon glyphicon-ban-circle"></i>
-            <span>Cancel</span>
-            </button>
-            {% } %}
-            </td>
-            </tr>
-            {% } %}
-        </script>
-        <!-- The template to display files available for download -->
-        <script id="template-download" type="text/x-tmpl">
-            {% for (var i=0, file; file=o.files[i]; i++) { %}
-            <tr class="template-download fade">
-            <td>
-            <span class="preview">
-            {% if (file.thumbnailUrl) { %}
-            <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
-            {% } %}
-            </span>
-            </td>
-            <td>
-            <p class="name">
-            {% if (file.url) { %}
-            <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
-            {% } else { %}
-            <span>{%=file.name%}</span>
-            {% } %}
-            </p>
-            {% if (file.error) { %}
-            <div><span class="label label-danger">Error</span> {%=file.error%}</div>
-            {% } %}
-            </td>
-            <td>
-            <span class="size">{%=o.formatFileSize(file.size)%}</span>
-            </td>
-            <td>
-            {% if (file.deleteUrl) { %}
-            <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
-            <i class="glyphicon glyphicon-trash"></i>
-            <span>Delete</span>
-            </button>
-            <input type="checkbox" name="delete" value="1" class="toggle">
-            {% } else { %}
-            <button class="btn btn-warning cancel">
-            <i class="glyphicon glyphicon-ban-circle"></i>
-            <span>Cancel</span>
-            </button>
-            {% } %}
-            </td>
-            </tr>
-            {% } %}
-        </script>
+<script type="text/javascript" language="javascript" src="<?php echo base_url() . 'module/DataTables/js/jquery.dataTables.js'; ?>"></script>
+<script type="text/javascript" language="javascript" src="<?php echo base_url() . 'module/loadover/loadover.js'; ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url() . 'asset/js/tinymce/tinymce.min.js'; ?>"></script>
+<script>
+    $("#input-id").fileinput();
+
+// with plugin options
+    $("#input-id").fileinput({'showUpload': false, 'previewFileType': 'any','maxFileCount': 2});
+</script>
+
 <script>
     var states;
     function keynaja() {
@@ -249,6 +184,7 @@ $num = 1;
 </script>
 <script type="text/javascript">
     var centreGot = false;
+
 </script>
 <script>
     var geocoder;
@@ -360,7 +296,115 @@ $num = 1;
 
 </script>
 
+<script type="text/javascript">
+                    var newsPos = 10;
 
+                    $(document).ready(function(e) {
+                        $('#addForm').hide();
+
+                        tinymce.init({
+                            selector: "textarea",
+                            theme: "modern",
+                            skin: "light",
+                            height: 300,
+                            plugins: [
+                                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                                "insertdatetime media nonbreaking save table contextmenu directionality",
+                                "emoticons paste textcolor jbimages"
+                            ],
+                            toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | jbimages",
+                            toolbar2: "print preview media | forecolor backcolor emoticons",
+                            image_advtab: true
+                        });
+
+                        // แสดงช่อง caption เมื่อเลือก รูปแต่อันนี้ทำให้เมื่อคลิกแล้วแสดงช่องอย่างเดียว
+                        $('#ct').hide();
+                        $('#banner').click(function(e) {
+                            $('#ct').slideDown();
+                        }); 
+
+                        if ($('#news-table tbody tr').length >= 1) {
+                            $('#news-table').dataTable({
+                                "bPaginate": true,
+                                "bLengthChange": false,
+                                "bFilter": true,
+                                "bSort": true,
+                                "bInfo": true,
+                                "bAutoWidth": true,
+                                'iDisplayLength': 10,
+                            });
+                            append_button_news();
+						}
+						
+						$('#news-table_previous,#news-table_next,.sorting').on('click', function() {
+							append_button_news();
+						});
+                    });
+					 
+					function append_button_news(){
+						$("#news-table tbody tr").each(function(index, element) { 
+							if (typeof $(this).find(".dynamic_td").html() == "undefined") {
+                                var id = $(this).attr("data-id");
+                                var custom_column = '<td class="dynamic_td"><a href="javascript:;" onClick="editNews(\'' + id + '\')">แก้ไข</a></td><td class="dynamic_td"><a href="javascript:;" onClick="deleteNews(\'' + id + '\')"><i class="icon-remove-sign"></i></a></td>';
+                                $(this).append(custom_column);
+							}
+                         });	
+						
+					}
+					
+                    function submitNews() {
+                        if ($.trim($('input[name="news_title"]').val()).length == 0 || $.trim(tinyMCE.activeEditor.getContent()).length == 0) {
+                            alert('กรุณากรอกข้อมูลให้ครบถ้วน!');
+                            return false;
+                        }
+                        var val = $('form').serialize();
+                        val += '&news_content=' + encodeURIComponent(tinyMCE.activeEditor.getContent());
+						$('#addForm').loadOverStart();
+                  		$.post('/admin/submit_news', val, function(data) {
+							$('#addForm').loadOverStop(); 
+           					if (data != 0) {
+                                addNews();
+                            } else {
+                                alert('เกิดข้อผิดพลาด!');
+                            } 
+                        });
+						 
+                        return false;
+                    }
+
+                    function appendNews() {
+                        $('#loading').removeClass('hide');
+                        $.post('/admin/get_news', {start: newsPos}, function(msg) {
+                            $('#news-list').append(msg);
+                            $('#loading').addClass('hide');
+                        });
+                        newsPos += 10;
+                    }
+
+                    function deleteNews(id) {
+                        var c = confirm('คุณต้องการลบข่าวนี้จริงหรือไม่?');
+                        if (c) {
+                            $.post('/admin/delete_news', {id: id}, function(msg) {
+                                if (msg != 0) {
+                                    addNews();
+                                } else {
+                                    alert('เกิดข้อผิดพลาด!');
+                                }
+                            });
+                        }
+                    }
+
+                    function editNews(id) {
+                        loadPage('/admin/edit_news/' + id);
+                    }
+
+</script>
+<script type="text/javascript">
+tinymce.init({
+    selector: "textarea#em1"
+ });
+</script>
 <?php include 'template/footer_scrpit.php'; ?>
 
 </body>

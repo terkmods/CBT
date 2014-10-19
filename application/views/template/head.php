@@ -10,9 +10,9 @@
         <link href="<?= base_url() ?>asset/css/bootstrap.css" rel="stylesheet">
         <link href="<?= base_url() ?>asset/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>asset/css/style.css">
-        
+
         <link href="<?= base_url() ?>asset/css/bootstrap-switch.css" rel="stylesheet">
-                <link href="<?= base_url() ?>asset/css/jquery-ui.css" rel="stylesheet">
+        <link href="<?= base_url() ?>asset/css/jquery-ui.css" rel="stylesheet">
         <link href="<?= base_url() ?>asset/css/ui.notify.css" rel="stylesheet">
         <!-- blueimp Gallery styles -->
         <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
@@ -22,7 +22,10 @@
         <!-- CSS adjustments for browsers with JavaScript disabled -->
         <noscript><link rel="stylesheet" href="<?= base_url() ?>asset/css/jquery.fileupload-noscript.css"></noscript>
         <noscript><link rel="stylesheet" href="<?= base_url() ?>asset/css/jquery.fileupload-ui-noscript.css"></noscript>
-
+<link rel="stylesheet" href="<?php echo base_url() . 'module/DataTables/css/demo_table.css'; ?>" /> 
+<link rel="stylesheet" href="<?php echo base_url() . 'module/loadover/loadover.css'; ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'asset/css/ui-lightness/jquery-ui-1.10.3.custom.min.css'; ?>"/>
+        <link href="<?= base_url() ?>asset/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
         <style type="text/css">
             .top-minus{
                 margin-top: -20px !important;
@@ -32,53 +35,53 @@
                 left: 100px;
             }
         </style>
-         <style>
-      html, body, #map-canvas {
-        height: 500px;
-        margin: 0px;
-        padding: 0px
-      }
-      #panel {
-        position: absolute;
-        top: 1020px;
-        left: 50%;
-        margin-left: -260px;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-      }
-      #address {
-        background-color: #fff;
-        padding: 0 11px 0 13px;
-        width: 400px;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-        text-overflow: ellipsis;
-      }
+        <style>
+            html, body, #map-canvas {
+                height: 500px;
+                margin: 0px;
+                padding: 0px
+            }
+            #panel {
+                position: absolute;
+                top: 1020px;
+                left: 50%;
+                margin-left: -260px;
+                z-index: 5;
+                background-color: #fff;
+                padding: 5px;
+                border: 1px solid #999;
+            }
+            #address {
+                background-color: #fff;
+                padding: 0 11px 0 13px;
+                width: 400px;
+                font-family: Roboto;
+                font-size: 15px;
+                font-weight: 300;
+                text-overflow: ellipsis;
+            }
 
-      #address:focus {
-        border-color: #4d90fe;
-        margin-left: -1px;
-        padding-left: 14px;  /* Regular padding-left + 1. */
-        width: 401px;
-      }
-           #directions-panel {
-        height: 100%;
-        float: right;
-        width: 390px;
-        overflow: auto;
-      }
-              #directions-panel {
-          float: none;
-          width: auto;
-        }
-      
-      
-    </style>
-    
-   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+            #address:focus {
+                border-color: #4d90fe;
+                margin-left: -1px;
+                padding-left: 14px;  /* Regular padding-left + 1. */
+                width: 401px;
+            }
+            #directions-panel {
+                height: 100%;
+                float: right;
+                width: 390px;
+                overflow: auto;
+            }
+            #directions-panel {
+                float: none;
+                width: auto;
+            }
+
+
+        </style>
+
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
     </head>
     <body>
         <div id="topbar container">
@@ -93,7 +96,7 @@
                               <span class="icon-bar"></span>
                               <span class="icon-bar"></span>
                             </button>-->
-                            <a class="navbar-brand" href="<?=base_url()?>home"><img src="../../../asset/images/logo-white.png"></a>
+                            <a class="navbar-brand" href="<?= base_url() ?>home"><img src="../../../asset/images/logo-white.png"></a>
 
                         </div>
 
@@ -101,21 +104,21 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="#">Notifications <span class="badge"> 10</span></a></li>
-                                
-                                <?php if($this->session->userdata('role') == "coach"){?>
-                                <li><a href="<?=base_url()?>users/coachProfile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
-                                <?php } else if($this->session->userdata('role') == "user") { ?> 
-                                <li><a href="<?=base_url()?>users/profile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
-                                <?php }else {?>
-                                <li><a href="<?=base_url()?>stadium"><?php echo $this->session->userdata('profile_url') ?></a></li>
-                                <?php }?>
+
+                                <?php if ($this->session->userdata('role') == "coach") { ?>
+                                    <li><a href="<?= base_url() ?>users/coachProfile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
+                                <?php } else if ($this->session->userdata('role') == "user") { ?> 
+                                    <li><a href="<?= base_url() ?>users/profile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
+                                <?php } else { ?>
+                                    <li><a href="<?= base_url() ?>stadium"><?php echo $this->session->userdata('profile_url') ?></a></li>
+                                <?php } ?>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">Black List</a></li>
                                         <li><a href="#">Privacy</a></li>
-                                        <li><a href="<?php if( $this->session->userdata('role') == "owner"){?><?=base_url() ?>stadium <?php } else {  ?>  <?= base_url() ?>users/edituser/<?=$this->session->userdata('id')?>  <?php }?>" >
-                                                
+                                        <li><a href="<?php if ($this->session->userdata('role') == "owner") { ?><?= base_url() ?>stadium <?php } else { ?>  <?= base_url() ?>users/edituser/<?= $this->session->userdata('id') ?>  <?php } ?>" >
+
                                                 Settings</a></li>
                                         <li class="divider"></li>
                                         <li><a href="<?= base_url() ?>users/logout">Logout</a></li>
@@ -128,10 +131,10 @@
                                 </div>
                                 <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                             </form>
-                                
 
 
-                            
+
+
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->
                 </nav>
