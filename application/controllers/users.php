@@ -130,7 +130,7 @@ class Users extends CI_Controller {
             $datasend ['stadium'] = $this->mystadium->getallstadium();
             $datasend ['province'] = $this->mystadium->getprovince();
             $datasend ['district'] = $this->mystadium->getdistrict();
-            $this->load->view('result_search', $datasend);
+            $this->load->view('feeds', $datasend);
             //print_r($datasend);
         } else {
             redirect('index.php');
@@ -304,6 +304,10 @@ centreGot = true;';
         return $data['map'];
     }
     
+    
+     function test() {
+        $this->load->view('feeds');
+    }
     
     
     

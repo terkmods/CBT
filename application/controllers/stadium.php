@@ -388,8 +388,8 @@ class stadium extends CI_Controller {
     function search() {
         $data = array($this->input->post('optionsRadios'), $this->input->post('value2'), $this->input->post('value3'));
         $detail['result_Search'] = $this->mystadium->showSearch($data);
-        print_r($detail);
-        $this->load->view('result_search');
+        //print_r($detail);
+        $this->load->view('result_search', $detail);
     }
     
     function allStadium(){

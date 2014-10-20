@@ -1,10 +1,5 @@
 
 <div class="col-md-3" >
-    <!--<div class="profile_pic">
-    <center><img src="images/sporter.jpg" alt="user" class="img-circle"></center>
-   <br><br> <p>Welcome, </p>
-    <h3>Jaden Anthony</h3>
-    </div>-->
     <div class="well profile_pic">
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
