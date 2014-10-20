@@ -53,10 +53,10 @@
                         <h3 class="panel-title">Stadium Detail</h3>
                     </div>
                     <div class="panel-body">
-                        Floor type : <?php if($floor != NULL ){?><?php foreach ($floor as $ct) { ?> <?= $ct->type ?> <?php } ?><?php }else{ ?> - <?php } ?>   <br>
-                        Total court: &nbsp;<?=$total->courtnum != 0 ? $total->courtnum : '-' ?><br>
+                        Floor type : <?php if ($floor != NULL) { ?><?php foreach ($floor as $ct) { ?> <?= $ct->type ?> <?php } ?><?php } else { ?> - <?php } ?>   <br>
+                        Total court: &nbsp;<?= $total->courtnum != 0 ? $total->courtnum : '-' ?><br>
                         Court price :&nbsp; 120-160 บาท<br>      
-                            
+
                         <?php foreach ($time as $ct) { ?> <?= $ct->type ?> : <?= $ct->open_time ?> - <?= $ct->end_time ?><br><?php } ?>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                     <div class="panel-body">
                         <ul>
                             <?php foreach ($facility as $r) { //เรียกจาก $data['facility'] ?>
-                                <li><?php echo $r['facility']; //ใช้ return เป็น result_array ?></li>
+                                <li><?php echo $r['facility']; //ใช้ return เป็น result_array          ?></li>
                             <?php } ?>
 
                         </ul>
@@ -151,61 +151,244 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3>Map</h3>
-                        <img src="<?= base_url() ?>/asset/images/25293.png">
+
+                        <div id="map-canvas"></div> 
+                        <div id="directions-panel"></div>
+
+                        <button class="controls btn btn-primary" onclick="calcRoute()">Navigation</button>
                     </div>
                 </div>
 
-                
+
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3>Comment</h3>
 
+
                         <div class="scroll">
-                            <div class="row">
-                                <div class="pull-left">
-                                    <img src="<?= base_url() ?>/asset/images/profile.jpg" class="imgcomment">
-                                </div>
-                                <div class="pull-left ">
 
-                                    <img src="<?= base_url() ?>/asset/images/comment.png">
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top: 10px">
-                                <div class="pull-left">
-                                    <a href="user.html">   <img src="<?= base_url() ?>/asset/images/sporter.jpg" class="imgcomment"></a>
-                                </div>
-                                <div class="pull-left ">
+                            <!--                                <div class="pull-left">
+                                                                <img src="<?= base_url() ?>/asset/images/profile.jpg" class="imgcomment">
+                                                            </div>
+                                                            <div class="pull-left ">
+                            
+                                                                <img src="<?= base_url() ?>/asset/images/comment.png">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="margin-top: 10px">
+                                                            <div class="pull-left">
+                                                                <a href="user.html">   <img src="<?= base_url() ?>/asset/images/sporter.jpg" class="imgcomment"></a>
+                                                            </div>
+                                                            <div class="pull-left ">
+                            
+                                                                <img src="<?= base_url() ?>/asset/images/comment.png">
+                                                            </div>
+                                                        </div>-->
 
-                                    <img src="<?= base_url() ?>/asset/images/comment.png">
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top: 10px">
-                                <div class="pull-left">
-                                    <img src="<?= base_url() ?>/asset/images/profile-placeholder.png" class="imgcomment">
-                                </div>
-                                <div class="pull-left ">
 
-                                    <img src="<?= base_url() ?>/asset/images/comment.png">
-                                </div>
-                            </div>
+
+                            
+                            <span id="comeentindex"></span>
                         </div>
-
-                        <div class="col-md-10" style="margin-top: 15px">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-md-2" style="margin-top: 15px">
-                            <input type="submit" class="btn-success" value="send">    </div>
-
+                        <form method="post" id="formcomment" >
+                            <div class="col-md-10" style="margin-top: 15px">
+                                <!--<input type="text" class="form-control" name="textcomment">-->
+                                <textarea placeholder="comment here." class="form-control" required name="content" id="content"></textarea>
+                            </div>
+                            <div class="col-md-2" style="margin-top: 15px">
+                                <input type="button" class="btn-success controls btn" value="send" id="addcomment" >    </div>
+                        </form>
                     </div>
                 </div>
 
 
             </div>
         </div>
+        <input type="hidden" id="stadiumidja" value="<?= $this->uri->segment(3) ?>">
     </div>
 </div>
 <?php include 'template/modal.php'; ?>
 <?php include 'template/footer.php'; ?>
+<script>
+    var map;
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
+    var curlatlng;
+
+
+    function initialize() {
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        var myLatLng = new google.maps.LatLng(<?= $data['0']->lat ?>, <?= $data['0']->long ?>);
+        var mapOptions = {
+            zoom: 17,
+            center: myLatLng
+        };
+        map = new google.maps.Map(document.getElementById('map-canvas'),
+                mapOptions);
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+        });
+        var contentString = '<?= $data['0']->stadium_name ?>';
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+        google.maps.event.addListener(marker, 'click', function () {
+            infowindow.open(map, marker);
+        });
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var pos = new google.maps.LatLng(position.coords.latitude,
+                        position.coords.longitude);
+                curlatlng = pos;
+
+            }, function () {
+                handleNoGeolocation(true);
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleNoGeolocation(false);
+        }
+
+        directionsDisplay.setMap(map);
+        directionsDisplay.setPanel(document.getElementById('directions-panel'));
+
+
+
+    }
+    function calcRoute() {
+
+
+        console.log(curlatlng);
+        var start = curlatlng;
+        var end = new google.maps.LatLng(<?= $data['0']->lat ?>, <?= $data['0']->long ?>);
+        var request = {
+            origin: start,
+            destination: end,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+        directionsService.route(request, function (response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            }
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+    function handleNoGeolocation(errorFlag) {
+        if (errorFlag) {
+            var content = 'Error: The Geolocation service failed.';
+        } else {
+            var content = 'Error: Your browser doesn\'t support geolocation.';
+        }
+
+        var options = {
+            map: map,
+            position: new google.maps.LatLng(60, 105),
+            content: content
+        };
+
+        var infowindow = new google.maps.InfoWindow(options);
+        map.setCenter(options.position);
+    }
+</script>
+<script>
+    var st_id = $("#stadiumidja").val();
+
+    function showComment() {
+        $(".nocom").remove();
+        $.getJSON("http://cbt.backeyefinder.in.th/stadium/showcomment/" + st_id, function (data) {
+             $(".nonja").remove();
+             
+        if (data.length != 0) {
+               
+                console.log(data);
+                $(data).each(function (k, v) {
+                    console.log(v.comment_id);
+                    html = '                            <div class="bubble-list nonja">' +
+                            '  <div class="bubble clearfix">' +
+                            '      <img src="http://cbt.backeyefinder.in.th/asset/images/profilepic/'+v.profilepic_path+'">' +
+                            '      <div class="bubble-content">' +
+                            '          <div class="point"></div>' +
+                            '           <p>' + v.text + '</p>' +
+                            '<small>By : '+v.fname+' '+v.lname+'</small>'+
+                            '<small>'+v.date+'</small>'+
+                            '        </div>' +
+                            '    </div>' +
+                            ' </div>';
+                    $(html).insertBefore($("#comeentindex"));
+
+
+                });
+            }else {
+//                nocomment = '<div clas="col-md-12 nocom" style="text-align: center;">No comment</div>';
+//                $(nocomment).insertBefore($("#comeentindex"));
+            }
+        });
+    }
+
+
+
+
+    $(function () {
+
+        showComment();
+//        var aTable = $('#AllAnnounce').dataTable({
+//            /* Disable initial sort */
+//            "aaSorting": [],
+//            "bLengthChange": false,
+//            "bFilter": true,
+//            "bInfo": false,
+//            "bSort": false
+//        });
+//        
+////        var sData = aTable.fnGetData();
+////        if (sData.length == 0) {
+////            var html = '<h1 class="text-muted" style="text-align: center" id="noann">No announement.</h1>';
+////            $("#AllAnnounce_wrapper table tbody").html(html);
+////        }
+        $("#addcomment").click(function () {
+            
+            var content = $("#content").val();
+            if (content.length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "http://cbt.backeyefinder.in.th/stadium/addcomment/" + st_id,
+                    data: {content: content}
+                }).done(function (msg) {
+//                    if($("#noann").length!=0){
+//                        $("#noann").remove();
+//                    }
+//                    var html = '<tr class="even"><td><div class="media" id="newAnnounce"><a class="pull-left" href="#"><img class="img-circle" width="64" src="' + pic + '"></a><div class="media-body"><h4 class="media-heading"><small class="text-muted">' + fullname + '</small><small class="pull-right">' + dateSt + '</small></h4><p>' + $("#content").val() + '</p></div></div></td></tr>';
+//                    $("#listAnnounce table tbody").prepend(html);
+//                    $("#newAnnounce").slideDown().removeAttr("id");
+//                    $("#title").val("");
+//                    $("#content").val("");
+//                    //aTable.fnDraw();
+                    console.log(msg);
+                    $("#content").val("");
+                    showComment();
+                });
+            }
+            else {
+                alert("Please write something in text box!");
+                $("#content").focus();
+            }
+        });
+        var pic = '${ac.profile_pic}';
+        var fullname = '${ac.firstname}' + '${ac.lastname}';
+        var d = new Date();
+        var dateSt = d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2) + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getMilliseconds();
+        $("#newannounce").click(function () {
+            $(this).hide();
+            $("#formAddAnnouce").slideDown();
+        });
+
+    });
+</script>
+
+
+
 <?php include 'template/footer_scrpit.php'; ?>
 
 </body>
