@@ -330,7 +330,7 @@
 
 
 
-    $(function () {
+    $(function () {     
 
         showComment();
 //        var aTable = $('#AllAnnounce').dataTable({

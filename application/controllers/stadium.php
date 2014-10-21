@@ -10,6 +10,7 @@ class stadium extends CI_Controller {
         $this->load->model('stadium_model', 'mystadium');
         $this->load->model('user_model', 'myusers');
         $this->load->model('coach_model', 'mycoach');
+        $this->load->model('news_model', 'news');
         $this->load->library('session');
     }
 
@@ -157,7 +158,8 @@ class stadium extends CI_Controller {
             'court' => $this->mystadium->gettableCourt($id), //result_array  getTotalcourt
             'total' => $this->mystadium->getTotalcourt($id), //result_array  getTotalcourt
             'blacklist' => $this->myusers->get_blacklist($id),
-            'coach' => $this->mycoach->get_all_coach()
+            'coach' => $this->mycoach->get_all_coach(),
+            'all_news' => $this->news->getallNews($id)
            
         );
 
@@ -423,105 +425,15 @@ class stadium extends CI_Controller {
         $data['comment'] = $this->mystadium->getComment($sId);
         return $data['comment'];
     }
-    public function add_gallery()
-{
-        $path = './asset/images/upload';
-         
+    function uploadGallery($stId) {
+        $config['upload_path'
+                ] = "./asset/images/upload";
+        $config['allowed_types'] = '*';
+        $config['max_size'] = '10000';
 
-           
-
-            if (!empty($_FILES['images']['name'][0])) {
-                if ($this->upload_files($path, $_FILES['images']) === FALSE) {
-                    $data['error'] = $this->upload->display_errors('<div class="alert alert-danger">', '</div>');
-                }
-            }                   
-
-            if (!isset($data['error'])) {
-               // $this->admin_model->add_estate($title, $description, $image_name);    
-                $this->session->set_flashdata('suc_msg', 'New real estate added successfully'); 
-                //redirect('admin/add_estates');    
-            }          
-        
-    
-
-    $data['suc_msg'] = $this->session->flashdata('suc_msg');
-
-//    $this->load->view('layout_admin', $data);
-        print_r($data);
-}
-    
-     private function upload_files($path,  $files)
-    {
-        $config = array(
-            'upload_path'   => $path,
-            'allowed_types' => 'jpg|gif|png',
-            'overwrite'     => 1,                       
-        );
-
+        //$userid = $this->session->userdata('id');
         $this->load->library('upload', $config);
-
-        $images = array();
-
-        foreach ($files['name'] as $key => $image) {
-            $_FILES['images[]']['name']= $files['name'][$key];
-            $_FILES['images[]']['type']= $files['type'][$key];
-            $_FILES['images[]']['tmp_name']= $files['tmp_name'][$key];
-            $_FILES['images[]']['error']= $files['error'][$key];
-            $_FILES['images[]']['size']= $files['size'][$key];
-
-            $fileName = $title .'_'. $image;
-
-            $images[] = $fileName;
-
-            $config['file_name'] = $fileName;
-
-            $this->upload->initialize($config);
-
-            if ($this->upload->do_upload('images[]')) {
-                $this->upload->data();
-            } else {
-                return false;
-            }
-        }
-
-        return $images;
-    }
-    private function set_upload_options()
-{   
-//  upload an image options
-    $config = array();
-    $config['upload_path'] = './asset/images/upload';
-    $config['allowed_types'] = 'gif|jpg|png';
-    $config['max_size']      = '0';
-    $config['overwrite']     = FALSE;
-
-
-    return $config;
-}
-    
-
-     function uploadGallery()
-{
-
-    $this->load->library('upload');
-
-    $files = $_FILES;
-    $cpt = count($_FILES['userfile']['name']);
-    for($i=0; $i<$cpt; $i++)
-    {
-
-        $_FILES['images[]']['name']= $files['images']['name'][$i];
-        $_FILES['images[]']['type']= $files['images']['type'][$i];
-        $_FILES['images[]']['tmp_name']= $files['images']['tmp_name'][$i];
-        $_FILES['images[]']['error']= $files['images']['error'][$i];
-        $_FILES['images[]']['size']= $files['images']['size'][$i];    
-
-
-
-    $this->upload->initialize($this->set_upload_options());
-//    echo $this->upload->do_upload();
-    
-           if (!$this->upload->do_upload()) {
+        if (!$this->upload->do_upload()) {
             $error = array('error' => $this->upload->display_errors());
 
             $this->load->view('upload_form', $error);
@@ -529,12 +441,28 @@ class stadium extends CI_Controller {
 
             $upload = $this->upload->data();
         }
+        
+        $data = array(
+            'picstadium_path' => $upload['file_name'],
+            'stadium_id'=>$stId
+        );
+//        $this->db->update('picture_stadium', $data, array('stadium_id' => $stId));
+        $this->db->insert("picture_stadium", $data);
+        //redirect('stadium/profile/' . $stId);
+    }
+    function updateLatLng($stId){
+      $data = array(
+          'lat' =>$this->input->post('newLat'),
+            'long'=>$this->input->post('newLng')
+        );
+        $x = $this->db->update('stadium', $data, array('stadium_id' => $stId));
+        echo $x;
+    }
     
 
-    }
-
 }
+    
 
-}
+
 ?>
        

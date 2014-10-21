@@ -722,7 +722,7 @@
                 status = ' disabled ';
             }
             if (isEmpty(self.uploadUrl)) {
-                content = '<button type="submit" class="' + css + '"' + status + '>' + self.uploadIcon + self.uploadLabel + '</button>';
+                content = '<button id ="testja" type="submit" class="' + css + '"' + status + '>' + self.uploadIcon + self.uploadLabel + '</button>';
             } else {
                 content = '<a href="' + self.uploadUrl + '" class="' + self.uploadClass + '"' + status + '>' + self.uploadIcon + self.uploadLabel + '</a>';
             }

@@ -116,71 +116,83 @@ $num = 1;
 <?php include 'template/footer.php'; ?>
 <script type="text/javascript" language="javascript" src="<?php echo base_url() . 'module/DataTables/js/jquery.dataTables.js'; ?>"></script>
 <script type="text/javascript" language="javascript" src="<?php echo base_url() . 'module/loadover/loadover.js'; ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url() . 'asset/js/tinymce/tinymce.min.js'; ?>"></script>
+<script type="text/javascript" src="<?php echo base_url() . 'asset/js/tinymce/tinymce.min.js'; ?>"></script>
 <script>
-    $("#input-id").fileinput();
+//    $("#input-id").fileinput();
 
 // with plugin options
-    $("#input-id").fileinput({'showUpload': false, 'previewFileType': 'any','maxFileCount': 2});
+//    $("#input-id").fileinput({'showUpload': false, 'previewFileType': 'any', 'maxFileCount': 2});
+    $("#input-20").fileinput({
+        browseClass: "btn btn-primary btn-block",
+        showCaption: false,
+        showRemove: false,
+        showUpload: false
+    });
+        $("#input-21").fileinput({
+        browseClass: "btn btn-primary btn-block",
+        showCaption: false,
+        showRemove: false,
+        showUpload: false
+    });
 </script>
 
 <script>
-    var states;
-    function keynaja() {
-        var fullpart = "http://cbt.backeyefinder.in.th/coach/get_coach_name";
-        var a = document.getElementById("test").value;
-        console.log(a);
-        $.ajax({
-            type: "post",
-            url: fullpart,
-            data: {term: a}
-        }).done(function (msg) {
-            states = null
-            console.log(msg);
-            states = msg;
-            console.log(msg[0].name);
-        });
-    }
+//    var states;
+//    function keynaja() {
+//        var fullpart = "http://cbt.backeyefinder.in.th/coach/get_coach_name";
+//        var a = document.getElementById("test").value;
+//        console.log(a);
+//        $.ajax({
+//            type: "post",
+//            url: fullpart,
+//            data: {term: a}
+//        }).done(function (msg) {
+//            states = null
+//            console.log(msg);
+//            states = msg;
+//            console.log(msg[0].name);
+//        });
+//    }
 
-    $(document).ready(function () {
-
-        var substringMatcher = function (strs) {
-            return function findMatches(q, cb) {
-                var matches, substrRegex;
-
-                // an array that will be populated with substring matches
-                matches = [];
-
-                // regex used to determine if a string contains the substring `q`
-                substrRegex = new RegExp(q, 'i');
-
-                // iterate through the pool of strings and for any string that
-                // contains the substring `q`, add it to the `matches` array
-                $.each(strs, function (i, str) {
-                    if (substrRegex.test(str)) {
-                        // the typeahead jQuery plugin expects suggestions to a
-                        // JavaScript object, refer to typeahead docs for more info
-                        matches.push({value: str});
-                    }
-                });
-
-                cb(matches);
-            };
-        };
-
-//    
-
-        $('#the-basics .typeahead').typeahead({
-            hint: true,
-            highlight: true,
-            minLength: 1
-        },
-        {
-            name: 'statess',
-            displayKey: 'value',
-            source: substringMatcher(statess)
-        });
-    });
+//    $(document).ready(function () {
+//
+//        var substringMatcher = function (strs) {
+//            return function findMatches(q, cb) {
+//                var matches, substrRegex;
+//
+//                // an array that will be populated with substring matches
+//                matches = [];
+//
+//                // regex used to determine if a string contains the substring `q`
+//                substrRegex = new RegExp(q, 'i');
+//
+//                // iterate through the pool of strings and for any string that
+//                // contains the substring `q`, add it to the `matches` array
+//                $.each(strs, function (i, str) {
+//                    if (substrRegex.test(str)) {
+//                        // the typeahead jQuery plugin expects suggestions to a
+//                        // JavaScript object, refer to typeahead docs for more info
+//                        matches.push({value: str});
+//                    }
+//                });
+//
+//                cb(matches);
+//            };
+//        };
+//
+////    
+//
+//        $('#the-basics .typeahead').typeahead({
+//            hint: true,
+//            highlight: true,
+//            minLength: 1
+//        },
+//        {
+//            name: 'statess',
+//            displayKey: 'value',
+//            source: substringMatcher(statess)
+//        });
+//    });
 </script>
 <script type="text/javascript">
     var centreGot = false;
@@ -297,114 +309,171 @@ $num = 1;
 </script>
 
 <script type="text/javascript">
-                    var newsPos = 10;
+    var newsPos = 10;
+    var htmlNews;
+    var mytable;
+    var myarray ={
+                "bPaginate": true,
+                "bLengthChange": false,
+                "bFilter": true,
+                "bSort": true,
+                "bInfo": true,
+                "bAutoWidth": true,
+                'iDisplayLength': 10
+            };
+    function showAddForm() {
+        alert("show");
+        $('#addForm').show();
+    }
 
-                    $(document).ready(function(e) {
-                        $('#addForm').hide();
+    $(document).ready(function (e) {
+        $('#addForm').hide();
 
-                        tinymce.init({
-                            selector: "textarea",
-                            theme: "modern",
-                            skin: "light",
-                            height: 300,
-                            plugins: [
-                                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-                                "searchreplace wordcount visualblocks visualchars code fullscreen",
-                                "insertdatetime media nonbreaking save table contextmenu directionality",
-                                "emoticons paste textcolor jbimages"
-                            ],
-                            toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | jbimages",
-                            toolbar2: "print preview media | forecolor backcolor emoticons",
-                            image_advtab: true
-                        });
+        tinymce.init({
+            selector: "textarea#em1",
+            theme: "modern",
+            skin: "light",
+            height: 300,
+            plugins: [
+                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                "insertdatetime media nonbreaking save table contextmenu directionality",
+                "emoticons paste textcolor jbimages"
+            ],
+            toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | jbimages",
+            toolbar2: "print preview media | forecolor backcolor emoticons",
+            image_advtab: true
+        });
 
-                        // แสดงช่อง caption เมื่อเลือก รูปแต่อันนี้ทำให้เมื่อคลิกแล้วแสดงช่องอย่างเดียว
-                        $('#ct').hide();
-                        $('#banner').click(function(e) {
-                            $('#ct').slideDown();
-                        }); 
+        // แสดงช่อง caption เมื่อเลือก รูปแต่อันนี้ทำให้เมื่อคลิกแล้วแสดงช่องอย่างเดียว
+        $('#ct').hide();
+        $('#banner').click(function (e) {
+            $('#ct').slideDown();
+        });
 
-                        if ($('#news-table tbody tr').length >= 1) {
-                            $('#news-table').dataTable({
-                                "bPaginate": true,
-                                "bLengthChange": false,
-                                "bFilter": true,
-                                "bSort": true,
-                                "bInfo": true,
-                                "bAutoWidth": true,
-                                'iDisplayLength': 10,
-                            });
-                            append_button_news();
-						}
-						
-						$('#news-table_previous,#news-table_next,.sorting').on('click', function() {
-							append_button_news();
-						});
-                    });
-					 
-					function append_button_news(){
-						$("#news-table tbody tr").each(function(index, element) { 
-							if (typeof $(this).find(".dynamic_td").html() == "undefined") {
-                                var id = $(this).attr("data-id");
-                                var custom_column = '<td class="dynamic_td"><a href="javascript:;" onClick="editNews(\'' + id + '\')">แก้ไข</a></td><td class="dynamic_td"><a href="javascript:;" onClick="deleteNews(\'' + id + '\')"><i class="icon-remove-sign"></i></a></td>';
-                                $(this).append(custom_column);
-							}
-                         });	
-						
-					}
-					
-                    function submitNews() {
-                        if ($.trim($('input[name="news_title"]').val()).length == 0 || $.trim(tinyMCE.activeEditor.getContent()).length == 0) {
-                            alert('กรุณากรอกข้อมูลให้ครบถ้วน!');
-                            return false;
-                        }
-                        var val = $('form').serialize();
-                        val += '&news_content=' + encodeURIComponent(tinyMCE.activeEditor.getContent());
-						$('#addForm').loadOverStart();
-                  		$.post('/admin/submit_news', val, function(data) {
-							$('#addForm').loadOverStop(); 
-           					if (data != 0) {
-                                addNews();
-                            } else {
-                                alert('เกิดข้อผิดพลาด!');
-                            } 
-                        });
-						 
-                        return false;
-                    }
+        if ($('#news-table tbody tr').length >= 1) {
+           mytable =  $('#news-table').dataTable({
+                "bPaginate": true,
+                "bLengthChange": false,
+                "bFilter": true,
+                "bSort": true,
+                "bInfo": true,
+                "bAutoWidth": true,
+                'iDisplayLength': 10
+            });
+            append_button_news();
+        }
 
-                    function appendNews() {
-                        $('#loading').removeClass('hide');
-                        $.post('/admin/get_news', {start: newsPos}, function(msg) {
-                            $('#news-list').append(msg);
-                            $('#loading').addClass('hide');
-                        });
-                        newsPos += 10;
-                    }
+        $('#news-table_previous,#news-table_next,.sorting').on('click', function () {
+            append_button_news();
+        });
+    });
 
-                    function deleteNews(id) {
-                        var c = confirm('คุณต้องการลบข่าวนี้จริงหรือไม่?');
-                        if (c) {
-                            $.post('/admin/delete_news', {id: id}, function(msg) {
-                                if (msg != 0) {
-                                    addNews();
-                                } else {
-                                    alert('เกิดข้อผิดพลาด!');
-                                }
-                            });
-                        }
-                    }
+    function append_button_news() {
+        $("#news-table tbody tr").each(function (index, element) {
+            if (typeof $(this).find(".dynamic_td").html() == "undefined") {
+                var id = $(this).attr("data-id");
+                var custom_column = '<td class="dynamic_td"><a href="javascript:;" onClick="editNews(\'' + id + '\')">แก้ไข</a></td><td class="dynamic_td"><a href="javascript:;" onClick="deleteNews(\'' + id + '\')"><i class="glyphicon glyphicon-remove-circle"></i></a></td>';
+                $(this).append(custom_column);
+            }
+        });
 
-                    function editNews(id) {
-                        loadPage('/admin/edit_news/' + id);
-                    }
+    }
+
+    function submitNews() {
+        if ($.trim($('input[name="news_title"]').val()).length == 0 || $.trim(tinyMCE.activeEditor.getContent()).length == 0) {
+            alert('กรุณากรอกข้อมูลให้ครบถ้วน!');
+            return false;
+        }
+        var val = $('form').serialize();
+        val += '&news_content=' + encodeURIComponent(tinyMCE.activeEditor.getContent());
+        $('#addForm').loadOverStart();
+        
+
+        
+        
+        $.getJSON('http://cbt.backeyefinder.in.th/news/submit_news', val, function (data) {
+            $('#addForm').loadOverStop();
+            console.log(data);
+            console.log(data[0].news_id);
+            if (data.length != 0) {
+                //addNews();
+                
+                $(data).each(function (k, v) {
+                    showNewsData(v);
+                });
+               
+                mytable.fnClearTable();
+                //mytable.fnAddData(myarray); 
+              
+                mytable.fnDraw();
+                  $('#news-list').html(htmlNews); 
+                $('#addForm').hide();
+                $('#news_title').val('');
+                tinyMCE.activeEditor.setContent('');
+            } else {
+                alert('เกิดข้อผิดพลาด!');
+            }
+        });
+
+
+        return false;
+    }
+    function showNewsData(rs){
+         htmlNews =       htmlNews +                      '<tr data-id="'+rs.news_id + '">'+
+                            '<td>' +rs.news_id + '</td>'+
+                             '<td>'+rs.title + '</td>'+
+                             '<td>' + rs.an_date +'</td>'+
+                            '</tr>';
+
+    }
+
+    function appendNews() {
+        $('#loading').removeClass('hide');
+        $.post('/admin/get_news', {start: newsPos}, function (msg) {
+            $('#news-list').append(msg);
+            $('#loading').addClass('hide');
+        });
+        newsPos += 10;
+    }
+
+    function deleteNews(id) {
+        var c = confirm('คุณต้องการลบข่าวนี้จริงหรือไม่?');
+        if (c) {
+            $.post('/admin/delete_news', {id: id}, function (msg) {
+                if (msg != 0) {
+                    addNews();
+                } else {
+                    alert('เกิดข้อผิดพลาด!');
+                }
+            });
+        }
+    }
+
+    function editNews(id) {
+        loadPage('/admin/edit_news/' + id);
+    }
+    function submitUploadForm() {
+        var fd = new FormData(document.getElementById("upload-form"));
+        $.ajax({
+            url: "apiimgup",
+            type: "POST",
+            data: fd,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false
+        }).done(function (data) {
+            var addImg = '<img src="' + data.toString() + '">';
+            tinyMCE.execCommand('mceInsertContent', true, addImg);
+            $('#upload-form').reset();
+        });
+        return false;
+    }
 
 </script>
-<script type="text/javascript">
-tinymce.init({
-    selector: "textarea#em1"
- });
-</script>
+
+
+
 <?php include 'template/footer_scrpit.php'; ?>
 
 </body>
