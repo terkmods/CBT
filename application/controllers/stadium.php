@@ -157,7 +157,8 @@ class stadium extends CI_Controller {
             'court' => $this->mystadium->gettableCourt($id), //result_array  getTotalcourt
             'total' => $this->mystadium->getTotalcourt($id), //result_array  getTotalcourt
             'blacklist' => $this->myusers->get_blacklist($id),
-            'coach' => $this->mycoach->get_all_coach()
+            'coach' => $this->mycoach->get_all_coach(),
+            
            
         );
 
@@ -368,6 +369,7 @@ class stadium extends CI_Controller {
 
         $detail['comparedata'] = $this->mystadium->showcompare($data);
         $detail['time'] = $this->mystadium->showtime($data);
+        
         //$detail['price'] = $this->mystadium->showprice($data);
         //print_r($detail['time']);
         $this->load->view("compare", $detail);

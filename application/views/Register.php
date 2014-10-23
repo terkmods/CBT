@@ -73,13 +73,13 @@
                             <p>www.cbtonline.in.th/<input type="text" class="input-url" name="url" placeholder="Profile URL (limit 4-24)" required=""></p>
                             <p>
                             <div class="col-xs-8">
-                                <input type="text" class="form-control input-lg top-mar" placeholder="Email" name="email" required=""></div>
+                                <input type="text" class="form-control input-lg top-mar" placeholder="Email" name="email" required></div>
                             <div class="clear"></div>
-                            <div class="col-xs-8"><input type="password"  class="form-control input-lg top-mar" name="pass" placeholder="Password" required=""></div>
+                            <div class="col-xs-8"><input type="password"  class="form-control input-lg top-mar" name="pass" placeholder="Password" required></div>
                             <div class="clear"></div>
-                            <div class="col-xs-8"><input type="password"  class="form-control input-lg top-mar" name="pass-con" placeholder="Confirm Password"></div>
+                            <div class="col-xs-8"><input type="password"  class="form-control input-lg top-mar" name="pass-con" placeholder="Confirm Password" required></div>
                             <div class="clear"></div>
-                            <div class="col-xs-8"><input type="tel"  class="form-control input-lg top-mar" name="tel" placeholder="mobile-phone" required=""></div>
+                            <div class="col-xs-8"><input type="tel"  class="form-control input-lg top-mar" name="tel" placeholder="mobile-phone" required></div>
                             <div class="clear"></div>
                             <hr>
                             <p class="top-mar"><button type="submit" name="SIGN_UP" class="btn btn-info btn-lg">Create your account</button></p>

@@ -70,12 +70,12 @@ $status = $ow->authenowner_status;
 
                                 <div class="col-xs-12" style="margin-top: 20px">
                                     <div class="col-md-6" style="margin-left: -17px">
-                                        <small style="color: gray">Stadium Name</small>
-                                        <input type="text"  class="form-control input-lg " placeholder="NAME" name="name" required="">
+                                        <small style="color: gray">Stadium Name*</small>
+                                        <input type="text"  class="form-control input-lg " placeholder="NAME" name="name" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <small style="color: gray" >Phone number</small>
-                                        <input type="text" style="margin-top: -0px" class="form-control input-lg top-mar" placeholder="PHONE" name="tel">
+                                        <small style="color: gray" >Phone number*</small>
+                                        <input type="text" style="margin-top: -0px" class="form-control input-lg top-mar" placeholder="PHONE" name="tel" required>
                                     </div>
 
                                 </div>
@@ -85,8 +85,8 @@ $status = $ow->authenowner_status;
                                     </div>
 
                                     <div class="col-md-7" style="margin-left: 17px">
-                                        <small style="color: gray;margin-left: -249px">URL to link to your stadium</small>
-                                        <input type="text"  class="form-control input-lg " placeholder="URL" name="url" required="">
+                                        <small style="color: gray;margin-left: -249px">URL to link to your stadium*</small>
+                                        <input type="text"  class="form-control input-lg " placeholder="URL" name="url" required>
                                     </div>
                                 </div>
 
@@ -99,22 +99,21 @@ $status = $ow->authenowner_status;
 
                                         <fieldset>
                                             <legend>Address</legend>
-
-                                            <input type="text" class=" form-control input-small " placeholder="No." name="no"><small style="color: gray">   house no.</small>
-
-                                            <input type="text" class=" form-control input-small top-mar " placeholder="Soi" name="soi"><small style="color: gray">   alley</small>
-
-                                            <input type="text" class=" form-control input-small top-mar " placeholder="Road" name="road"><small style="color: gray">  road</small>
-
-                                            <input type="text" class=" form-control input-small top-mar" placeholder="District" name="district"><small style="color: gray">  district</small>
-
-
-
-                                            <input type="text" class=" form-control input-small top-mar" placeholder="Subdistrict" name="subdistrict"><small style="color: gray">  subdistrict</small>
-
-                                            <input type="text" class=" form-control input-small top-mar" placeholder="PROVINCE" name="province"><small style="color: gray">  province</small>
-
-                                            <input type="text" class=" form-control input-small top-mar" placeholder="ZIP CODE" name="zip"><small style="color: gray">  zip code</small>
+                                            <small style="color: gray">house no.*</small>
+                                            <input type="text" class=" form-control input-small " placeholder="No." name="no" required>
+                                            <small style="color: gray">alley*</small>
+                                            <input type="text" class=" form-control input-small top-mar " placeholder="Soi" name="soi" required>
+                                            <small style="color: gray">road*</small>
+                                            <input type="text" class=" form-control input-small top-mar " placeholder="Road" name="road" required>
+                                            <small style="color: gray">district*</small>
+                                            <input type="text" class=" form-control input-small top-mar" placeholder="District" name="district" required>
+                                            <small style="color: gray">subdistrict*</small>
+                                            <input type="text" class=" form-control input-small top-mar" placeholder="Subdistrict" name="subdistrict" required>
+                                            <small style="color: gray">province*</small>
+                                            <input type="text" class=" form-control input-small top-mar" placeholder="PROVINCE" name="province" required>
+                                            <small style="color: gray">zip code*</small>
+                                            <input type="text" class=" form-control input-small top-mar" placeholder="ZIP CODE" name="zip" required>
+                                            
                                         </fieldset>
 
                                     </div>

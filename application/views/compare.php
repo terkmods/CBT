@@ -7,23 +7,23 @@
                 <div class="panel-heading">Compare Stadium</div>
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-bordered">
 
                             <tbody>
                                 <tr>
-                                    <th style="width: 15%">ชื่อสนาม</th>
+                                    <th style="width: 15%" class="success" >ชื่อสนาม</th>
                                     <?php foreach ($comparedata as $r){ ?>
                                     <td><?=$r->stadium_name?></td>
                                     <?php } ?>
                                 </tr>
                                 <tr>
-                                    <th>รูปภาพ</th>
+                                    <th class="success">รูปภาพ</th>
                                     <?php foreach ($comparedata as $r){ ?>
                                     <td><img src="<?php echo base_url()?><?php echo '/asset/images/stadiumpic/'?><?=$r->stadium_path?>" alt="..." style="width: 250px;height: 170px" ></td>
                                     <?php } ?>
                                 </tr>
                                 <tr>
-                                    <th>อัตราค่าเช่า</th>
+                                    <th class="success">อัตราค่าเช่า</th>
                                     
      
  
@@ -31,7 +31,7 @@
                                     
                                 </tr>
                                 <tr>
-                                    <th>เวลาเปิดปิด</th>
+                                    <th class="success">เวลาเปิดปิด</th>
                                     <td>
                                     <?php $idtemp=$time[0]->stadium_id; foreach ($time as $s){ ?>
                                         
@@ -48,48 +48,47 @@
                                     
                                 </tr>
                                 <tr>
-                                    <th>เบอร์โทรศัพท์</th>
+                                    <th class="success">เบอร์โทรศัพท์</th>
                                     <?php foreach ($comparedata as $r){ ?>
                                     <td><?=$r->tel?></td>
                                     <?php } ?>
                                 </tr>
                                 <tr>
-                                    <th>ที่อยู่</th>
+                                    <th class="success">ที่อยู่</th>
                                     <?php foreach ($comparedata as $r){ ?>
-                                    <td style="width: 40%">เลขที่ <?=$r->address_no?> 
-                                        ซอย <?=$r->soi?> 
+                                    <td style="width: 40%"> 
+                                         <?=$r->soi?> 
                                         ถนน <?=$r->road?> 
-                                        เขต <?=$r->district?> 
-                                        แขวง<?=$r->subdistrict?> 
-                                            <?=$r->province?> <?=$r->zipcode?></td>
+                                        
+                                        
+                                            <?=$r->province?>
                                     <?php } ?>
                                 </tr>
                                 <tr>
-                                    <th>รายละเอียดสนาม</th>
+                                    <th class="success">รายละเอียดสนาม</th>
                                     <?php foreach ($comparedata as $r){ ?>
                                     <td><?=$r->about_stadium?></td>
                                     <?php } ?>
                                 </tr>
                                 <tr>
-                                    <th>กฎของสนาม</th>
+                                    <th class="success">กฎของสนาม</th>
                                     <?php foreach ($comparedata as $r){ ?>
                                     <td ><?=$r->rule?></td>
                                     <?php } ?>
                                 </tr>
                                 <tr>
-                                    <th>สิ่งอำนวยความสะดวก</th>
-                                    <td>555 77 855</td>
+                                    <th class="success">สิ่งอำนวยความสะดวก</th>
+                                    <td>llllllllllllllllllll</td>
+                                    
                                 </tr>
                                 <tr>
-                                    <th>โปรไฟล์สนาม</th>
+                                    <th class="success"></th>
                                     <?php foreach ($comparedata as $r){ ?>
-                                    <td><a href="<?php echo base_url()?><?php echo 'stadium/profile/'?><?=$r->stadium_id?>">View</a></td>
+                                    <td><a href="<?php echo base_url()?><?php echo 'stadium/profile/'?><?=$r->stadium_id?>"><button type="button" class="btn btn-info">More Info!</button></a>
+                                    <a href="<?= base_url() ?>booking/reserve/<?=$r->stadium_id?>"><button type="button" class="btn btn-danger">Book Now!</button></a></td>
                                     <?php } ?>
                                 </tr>
-                                <tr>
-                                    <th>จองสนาม</th>
-                                    <td>555 77 855</td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>
@@ -97,173 +96,119 @@
             </div>
         </div>
     </div>
+    
 </div>
 
-<div class="container">
+<div class="container" >
     <div class="row">
-        <div class="col-xs-12 col-sm-offset-4 col-sm-8">
+        <div class="col-xs-12 col-sm-offset-2 col-sm-10">
             <div class="row">
                 
-                <div class="col-xs-4 theader free">
-                    <div class="ptitle">Stadium name  </div>                                       
+                <?php foreach ($comparedata as $r){ ?>
+                                    
+                                    
+                <div class="col-xs-3 theader free">
+                    <div class="ptitle"><?=$r->stadium_name?></div>                                       
                     <a class="btn btn-lg btn-danger">Book Now!</a>
                 </div>
-                <div class="col-xs-4 theader standard">
-                   <div class="ptitle">Stadium name  </div>                                       
-                    <a class="btn btn-lg btn-danger">Book Now!</a>
-                </div>
-                <div class="col-xs-4 theader premium">
-                   <div class="ptitle">Stadium name  </div>                                       
-                    <a class="btn btn-lg btn-danger">Book Now!</a>
-                </div>
-                
+              <?php } ?>
             </div>
         </div>
     </div>
+    
     <div class="row feature">
-        <div class="col-xs-12 col-sm-4 cfeature infos">
+        <div class="col-xs-12 col-sm-2 cfeature infos">
             รูปภาพ
         </div>
-        <div class="col-xs-12 col-sm-8">
+        <div class="col-xs-12 col-sm-10">
             <div class="row">
-                <div class="col-xs-4 col-sm-4 ccfreature free">
-                    <i class="fa fa-check iconok"></i>
+                <?php foreach ($comparedata as $r){ ?>                   
+                <div class="col-xs-3 col-sm-3 ccfreature free">
+                  <img src="<?php echo base_url()?><?php echo '/asset/images/stadiumpic/'?><?=$r->stadium_path?>" alt="..." style="width: 200px;height: 120px" >  
                 </div>
-                <div class="col-xs-4 col-sm-4 ccfreature standard">
-                    <i class="fa fa-check iconok"></i>
-                </div>
-                <div class="col-xs-4 col-sm-4 ccfreature premium">
-                    <i class="fa fa-check iconok"></i>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </div>
     <div class="row feature">
-        <div class="col-xs-12 col-sm-4 cfeature infos">
+        <div class="col-xs-12 col-sm-2 cfeature infos">
             อัตราค่าเช่า
         </div>
-        <div class="col-xs-12 col-sm-8">
+        <div class="col-xs-12 col-sm-10">
             <div class="row">
-                <div class="col-xs-4 col-sm-4 ccfreature free">
-                    <i class="fa fa-lock iconno"></i>
-                </div>
-                <div class="col-xs-4 col-sm-4 ccfreature standard">
+                <div class="col-xs-3 col-sm-3 ccfreature free">
                     <i class="fa fa-check iconok"></i>
                 </div>
-                <div class="col-xs-4 col-sm-4 ccfreature premium">
-                    <i class="fa fa-check iconok"></i>
-                </div>
+                
             </div>
         </div>
     </div>
     <div class="row feature">
-        <div class="col-xs-12 col-sm-4 cfeature infos">
+        <div class="col-xs-12 col-sm-2 cfeature infos">
             เวลาเปิด-ปิด
         </div>
-        <div class="col-xs-12 col-sm-8">
+        <div class="col-xs-12 col-sm-10">
             <div class="row">
-                <div class="col-xs-4 col-sm-4 ccfreature free">
-                    <i class="fa fa-lock iconno"></i>
-                </div>
-                <div class="col-xs-4 col-sm-4 ccfreature standard">
-                    <i class="fa fa-lock iconno"></i>
-                </div>
-                <div class="col-xs-4 col-sm-4 ccfreature premium">
+                <div class="col-xs-3 col-sm-3 ccfreature free">
                     <i class="fa fa-check iconok"></i>
                 </div>
+                
             </div>
         </div>
     </div>
       <div class="row feature">
-        <div class="col-xs-12 col-sm-4 cfeature infos">
+        <div class="col-xs-12 col-sm-2 cfeature infos">
             เบอร์โทรศัพท์
         </div>
-        <div class="col-xs-12 col-sm-8">
+        <div class="col-xs-12 col-sm-10">
             <div class="row">
-                <div class="col-xs-4 col-sm-4 ccfreature free">
-                    <i class="fa fa-lock iconno"></i>
-                </div>
-                <div class="col-xs-4 col-sm-4 ccfreature standard">
+                <div class="col-xs-3 col-sm-3 ccfreature free">
                     <i class="fa fa-check iconok"></i>
                 </div>
-                <div class="col-xs-4 col-sm-4 ccfreature premium">
-                    <i class="fa fa-check iconok"></i>
-                </div>
+                
             </div>
         </div>
     </div>
     <div class="row feature">
-        <div class="col-xs-12 col-sm-4 cfeature infos">
+        <div class="col-xs-12 col-sm-2 cfeature infos">
             ที่อยู่
         </div>
-        <div class="col-xs-12 col-sm-8">
+        <div class="col-xs-12 col-sm-10">
             <div class="row">
-                <div class="col-xs-4 col-sm-4 ccfreature free">
-                    <i class="fa fa-lock iconno"></i>
-                </div>
-                <div class="col-xs-4 col-sm-4 ccfreature standard">
+                <div class="col-xs-3 col-sm-3 ccfreature free">
                     <i class="fa fa-check iconok"></i>
                 </div>
-                <div class="col-xs-4 col-sm-4 ccfreature premium">
-                    <i class="fa fa-check iconok"></i>
-                </div>
+                
             </div>
         </div>
     </div>
     <div class="row feature">
-        <div class="col-xs-12 col-sm-4 cfeature infos">
+        <div class="col-xs-12 col-sm-2 cfeature infos">
             รายละเอียดสนาม
         </div>
-        <div class="col-xs-12 col-sm-8">
+        <div class="col-xs-12 col-sm-10">
             <div class="row">
-                <div class="col-xs-4 col-sm-4 ccfreature free">
-                    <i class="fa fa-lock iconno"></i>
-                </div>
-                <div class="col-xs-4 col-sm-4 ccfreature standard">
+                <div class="col-xs-3 col-sm-3 ccfreature free">
                     <i class="fa fa-check iconok"></i>
                 </div>
-                <div class="col-xs-4 col-sm-4 ccfreature premium">
-                    <i class="fa fa-check iconok"></i>
-                </div>
+                
             </div>
         </div>
     </div>
     <div class="row feature">
-        <div class="col-xs-12 col-sm-4 cfeature infos">
+        <div class="col-xs-12 col-sm-2 cfeature infos">
             สิ่งอำนวยความสะดวก
         </div>
-        <div class="col-xs-12 col-sm-8">
+        <div class="col-xs-12 col-sm-10">
             <div class="row">
-                <div class="col-xs-4 col-sm-4 ccfreature free">
-                    <i class="fa fa-lock iconno"></i>
-                </div>
-                <div class="col-xs-4 col-sm-4 ccfreature standard">
+                <div class="col-xs-3 col-sm-3 ccfreature free">
                     <i class="fa fa-check iconok"></i>
                 </div>
-                <div class="col-xs-4 col-sm-4 ccfreature premium">
-                    <i class="fa fa-check iconok"></i>
-                </div>
+                
             </div>
         </div>
     </div>
-    <div class="row feature">
-        <div class="col-xs-12 col-sm-4 cfeature infos">
-            เบอร์โทรศัพท์
-        </div>
-        <div class="col-xs-12 col-sm-8">
-            <div class="row">
-                <div class="col-xs-4 col-sm-4 ccfreature free">
-                    <i class="fa fa-lock iconno"></i>
-                </div>
-                <div class="col-xs-4 col-sm-4 ccfreature standard">
-                    <i class="fa fa-check iconok"></i>
-                </div>
-                <div class="col-xs-4 col-sm-4 ccfreature premium">
-                    <i class="fa fa-check iconok"></i>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </div>
 
 <style>

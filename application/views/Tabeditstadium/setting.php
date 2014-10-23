@@ -68,33 +68,36 @@
 
 
 
-                <input type="text" class=" form-control input-small " value="<?php echo $data->address_no ?>" name="no"><small style="color: gray">   house no.</small>
+                <input type="text" class=" form-control input-small " value="<?php echo $data->address_no ?>" name="no" required><small style="color: gray">   house no.</small>
 
-                <input type="text" class=" form-control input-small top-mar " value="<?php echo $data->soi ?>" name="soi"><small style="color: gray">   alley</small>
+                <input type="text" class=" form-control input-small top-mar " value="<?php echo $data->soi ?>" name="soi" required><small style="color: gray">   alley</small>
 
-                <input type="text" class=" form-control input-small top-mar " value="<?php echo $data->road ?> " name="road"><small style="color: gray">  road</small>
+                <input type="text" class=" form-control input-small top-mar " value="<?php echo $data->road ?> " name="road" required><small style="color: gray">  road</small>
 
-                <input type="text" class=" form-control input-small top-mar" value="<?php echo $data->district ?>" name="district"><small style="color: gray">  district</small>
+                <input type="text" class=" form-control input-small top-mar" value="<?php echo $data->district ?>" name="district" required><small style="color: gray">  district</small>
             </div><div class="col-md-6">
-                <input type="text" class=" form-control input-small top-mar" value="<?php echo $data->subdistrict ?>" name="subdistrict"><small style="color: gray"> subdistrict</small>
+                <input type="text" class=" form-control input-small top-mar" value="<?php echo $data->subdistrict ?>" name="subdistrict" required><small style="color: gray"> subdistrict</small>
 
-                <input type="text" class=" form-control input-small top-mar" value="<?php echo $data->province ?>" name="province"><small style="color: gray">  province</small>
+                <input type="text" class=" form-control input-small top-mar" value="<?php echo $data->province ?>" name="province" required><small style="color: gray">  province</small>
 
-                <input type="text" class=" form-control input-small top-mar" value="<?php echo $data->zipcode ?>" name="zip"><small style="color: gray">  zip code</small>
+                <input type="text" class=" form-control input-small top-mar" value="<?php echo $data->zipcode ?>" name="zip" required><small style="color: gray">  zip code</small>
 
 
 
             </div>
 
         </div>
-        <div class="row">
+        <div class="row" style="padding-top: 20px">
+            
             <?=$data->lat ==null ? '
+                Pin on the map to located your stadium
             <div id="panel">
+            
                 <input id="address" type="text"   placeholder="Enter a location">
                 
                 
-            </div>' : 'ต้องการแก้ไขตำแหน่ง กรุณาเลื่อน marker' ;?>
-            <div id="map-canvas"></div> 
+            </div>' : 'If you want to change your location, please move pin marker' ;?>
+            <div id="map-canvas" ></div> 
         </div>
 
         <h4>Facility</h4>
