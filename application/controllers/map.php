@@ -27,4 +27,5 @@ $data['map'] = $this->googlemaps->create_map();
 
 $this->load->view('view_file', $data);
     }
+
 }

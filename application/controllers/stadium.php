@@ -263,7 +263,7 @@ class stadium extends CI_Controller {
         $this->db->delete('court', array('court_id' => $id));
         $this->session->set_flashdata('msg', 'ลบสนามเรียบร้อย');
 
-        redirect('stadium/updatestadium/' . $stId . '#addcourt');
+        redirect('stadium/updatestadium/' . $stId . '?type=addcourt');
     }
 
     function test() {
@@ -360,7 +360,7 @@ class stadium extends CI_Controller {
         $this->db->update("court", $dataprice, array('court_id' => $maxstadium));
         // $this->mystadium->addcourttime($dataprice, $data['stadium_id']);
         $this->session->set_flashdata('msg', 'เพิ่มคอร์ดเรียบร้อย');
-        redirect('stadium/updatestadium/' . $id);
+        redirect('stadium/updatestadium/' . $id.'?type=1');
     }
 
     function compare() {

@@ -1,4 +1,4 @@
-<div class="tab-pane" id="p7">
+<div class="tab-pane fade" id="p7">
         <div class="content" id="news_content" style="padding-top:0;padding-bottom:0">
         <div class="title"><center>ข่าว</center></div>
     <div class="row" >
@@ -9,6 +9,7 @@
                             <th>#</th>
                             <th>หัวข้อ</th>
                             <th>วัน/เวลาที่ลง</th>
+                            <th>ประเภท</th>
                         </tr>
                     </thead>
                     <tbody id="news-list">
@@ -19,6 +20,11 @@
                             echo '<td>' . $i++ . '</td>';
                             echo '<td>' . $news->title . '</td>';
                             echo '<td>' . $news->an_date . '</td>';
+                            if($news->type == 1){
+                                echo '<td>Promotion</td>';
+                            }else{
+                                echo '<td>News</td>';
+                            }
                             echo '</tr>';
                         }
 
@@ -55,11 +61,21 @@
 
             <div class="col-md-12" style="padding-bottom:0">
 
-                <form method="post" class="form-horizontal well" style="margin-bottom:0" onSubmit="return submitNews();" enctype="multipart/form-data">
+                <form method="post" class="form-horizontal well" style="margin-bottom:0" action="<?=  base_url()?>/news/submit_news" enctype="multipart/form-data">
                     <div class="control-group">
                         <label class="control-label" for="news_title">หัวข้อ</label>
                         <div class="controls col-md-12" >
                             <input type="text" class="span5" name="news_title" id="news_title"/>
+                          
+                        </div>
+                    </div>
+                     <div class="control-group">
+                        <label class="control-label" for="banner">ประเภท</label>
+                        <div class="controls">
+                            <div class="input-append">
+                                <input type="radio" class="span6" name="typeA" value="1">Promotion
+                            <input type="radio" class="span6" name="typeA" value="2">News  
+                            </div>
                         </div>
                     </div>
                     <div class="control-group">
@@ -90,7 +106,7 @@
                             <input type="submit" class="btn btn-main span3"  value="เพิ่ม!">
                         </div> 
                     </div>
-                    <input type="hidden" name="stadium_id" id="member_id" value="<?php echo $this->uri->segment(3); ?>" />
+                    <input type="hidden" name="stadium_id" id="st_id" value="<?php echo $this->uri->segment(3); ?>" />
                 </form> 
             </div>
         </div>

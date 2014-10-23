@@ -16,7 +16,12 @@ class News_model extends CI_Model {
     }
     
     function getallNews($stId) {
-        $query = $this->db->query('SELECT * FROM `announcement` where stadium_id = '.$stId)->result();
+        $query = $this->db->query('SELECT * FROM `announcement` where stadium_id = '.$stId.' order by news_id desc')->result();
+        ;
+        return $query;
+    }
+    function getNewsSelect($id){
+           $query = $this->db->query('SELECT * FROM `announcement` where news_id = '.$id.' order by news_id desc')->result();
         ;
         return $query;
     }

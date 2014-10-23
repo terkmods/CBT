@@ -118,6 +118,47 @@ $num = 1;
 <script type="text/javascript" language="javascript" src="<?php echo base_url() . 'module/loadover/loadover.js'; ?>"></script>
 <script type="text/javascript" src="<?php echo base_url() . 'asset/js/tinymce/tinymce.min.js'; ?>"></script>
 <script>
+    function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+
+    console.log(getUrlVars().type);
+        if(getUrlVars().type == 1){
+   
+       
+            $('#myTab li:eq(1) a').tab('show')
+    }else if(getUrlVars().type == 4){
+        
+        
+            $('#myTab li:eq(4) a').tab('show')
+                        $("#notija").notify({
+                speed: 500,
+            });
+            $("#notija").notify("create", {
+                title: 'Add Complete',
+                text: 'Addnoucment is complete '
+            });
+    }else if(getUrlVars().type == 5){
+      
+        
+            $('#myTab li:eq(4) a').tab('show')
+                        $("#notija").notify({
+                speed: 500,
+            });
+            $("#notija").notify("create", {
+                title: 'Delete Complete',
+                text: 'News has been Delete '
+            });
+    }
 //    $("#input-id").fileinput();
 
 // with plugin options
@@ -322,7 +363,7 @@ $num = 1;
                 'iDisplayLength': 10
             };
     function showAddForm() {
-        alert("show");
+//        alert("show");
         $('#addForm').show();
     }
 
@@ -393,21 +434,30 @@ $num = 1;
         
         
         $.getJSON('http://cbt.backeyefinder.in.th/news/submit_news', val, function (data) {
+            htmlNews = ' ';
             $('#addForm').loadOverStop();
             console.log(data);
             console.log(data[0].news_id);
             if (data.length != 0) {
                 //addNews();
-                
-                $(data).each(function (k, v) {
-                    showNewsData(v);
-                });
-               
-                mytable.fnClearTable();
+                    
+              
+                mytable.fnDestroy();
+                 $('#news-list').prepend(htmlNews); 
+                mytable = $('#news-table').dataTable({
+                "bPaginate": true,
+                "bLengthChange": false,
+                "bFilter": true,
+                "bSort": true,
+                "bInfo": true,
+                "bAutoWidth": true,
+                'iDisplayLength': 10
+            });
+               append_button_news();
                 //mytable.fnAddData(myarray); 
               
-                mytable.fnDraw();
-                  $('#news-list').html(htmlNews); 
+             //   mytable.fnDraw();
+            
                 $('#addForm').hide();
                 $('#news_title').val('');
                 tinyMCE.activeEditor.setContent('');
@@ -420,7 +470,7 @@ $num = 1;
         return false;
     }
     function showNewsData(rs){
-         htmlNews =       htmlNews +                      '<tr data-id="'+rs.news_id + '">'+
+         htmlNews =                         '<tr data-id="'+rs.news_id + '">'+
                             '<td>' +rs.news_id + '</td>'+
                              '<td>'+rs.title + '</td>'+
                              '<td>' + rs.an_date +'</td>'+
@@ -438,11 +488,13 @@ $num = 1;
     }
 
     function deleteNews(id) {
-        var c = confirm('คุณต้องการลบข่าวนี้จริงหรือไม่?');
+        console.log(id);
+         var c = confirm('คุณต้องการลบข่าวนี้จริงหรือไม่?');
         if (c) {
-            $.post('/admin/delete_news', {id: id}, function (msg) {
+            $.post('<?=base_url()?>/news/delete_news', {id: id}, function (msg) {
                 if (msg != 0) {
-                    addNews();
+                    console.log('OK');
+                    location.href = '<?=base_url()?>stadium/updatestadium/'+$('#st_id').val()+'?type=5';
                 } else {
                     alert('เกิดข้อผิดพลาด!');
                 }
@@ -451,7 +503,7 @@ $num = 1;
     }
 
     function editNews(id) {
-        loadPage('/admin/edit_news/' + id);
+        location.href = '<?=base_url()?>news/editnews/'+id;
     }
     function submitUploadForm() {
         var fd = new FormData(document.getElementById("upload-form"));

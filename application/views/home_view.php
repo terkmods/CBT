@@ -384,9 +384,9 @@
 
                 </div>
             </div>
-            
-  
-        
+
+
+
         </div>
 
         <?php include 'template/modal.php'; ?>
@@ -409,33 +409,49 @@
 // The following example creates complex markers to indicate beaches near
 // Sydney, NSW, Australia. Note that the anchor is set to
 // (0,32) to correspond to the base of the flagpole.
-var map ;
-var infowindow1;
-var mk;
-  var image = {
-    url: 'http://cbt.backeyefinder.in.th/asset/images/markerbad.png',
-    // This marker is 20 pixels wide by 32 pixels tall.
-    size: new google.maps.Size(20, 32),
-    // The origin for this image is 0,0.
-    origin: new google.maps.Point(0,0),
-    // The anchor for this image is the base of the flagpole at 0,32.
-    anchor: new google.maps.Point(0, 32)
-  };
+            var map;
+            var infowindow1;
+            var mk;
+            var image = {
+                url: 'http://cbt.backeyefinder.in.th/asset/images/markerbad.png',
+                // This marker is 20 pixels wide by 32 pixels tall.
+                size: new google.maps.Size(20, 32),
+                // The origin for this image is 0,0.
+                origin: new google.maps.Point(0, 0),
+                // The anchor for this image is the base of the flagpole at 0,32.
+                anchor: new google.maps.Point(0, 32)
+            };
+            var rad = function (x) {
+                return x * Math.PI / 180;
+            };
+
+            var getDistance = function (p1, p2) {
+                var R = 6378137; // Earth’s mean radius in meter
+                var dLat = rad(p2.lat() - p1.lat());
+                var dLong = rad(p2.lng() - p1.lng());
+                var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                        Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) *
+                        Math.sin(dLong / 2) * Math.sin(dLong / 2);
+                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                var d = R * c;
+                return d; // returns the distance in meter
+            };
             function initialize() {
                 var mapOptions = {
                     zoom: 15
 
                 }
                 infowindow1 = new google.maps.InfoWindow();
-                 map = new google.maps.Map(document.getElementById('map-canvas'),
+                map = new google.maps.Map(document.getElementById('map-canvas'),
                         mapOptions);
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function (position) {
                         var pos = new google.maps.LatLng(position.coords.latitude,
                                 position.coords.longitude);
 
-                        if(mk!=null)mk.setMap(null);
-                mk = new google.maps.Marker({ position: new google.maps.LatLng(position.coords.latitude,position.coords.longitude),map: map,draggable:false,animation: google.maps.Animation.DROP});
+                        if (mk != null)
+                            mk.setMap(null);
+                        mk = new google.maps.Marker({position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude), map: map, draggable: false, animation: google.maps.Animation.DROP});
 
                         map.setCenter(pos);
                     }, function () {
@@ -445,13 +461,17 @@ var mk;
                     // Browser doesn't support Geolocation
                     handleNoGeolocation(false);
                 }
-               // setMarkers(map, beaches);
+                // setMarkers(map, beaches);
 
                 $.getJSON('http://cbt.backeyefinder.in.th/home/test', function (json) {
-                    
+
                     $(json).each(function (k, v) {
                         eachmaker(v);
                     });
+                });
+                
+                                                google.maps.event.addListener(mk, 'click', function () {
+  alert("hello");
                 });
             }
 
@@ -463,33 +483,34 @@ var mk;
                     map: map,
                     animation: google.maps.Animation.DROP,
                     icon: image
-                   
+
                 });
 
-                var htmlForMap = '<div class="row">'+
-                '<div class="col-md-6 col-sm-6">'+
-                                   ' <img src="http://cbt.backeyefinder.in.th/asset/images/'+(rs.stadium_path != "" ? 'stadiumpic/'+rs.stadium_path:'bad.png') +'" width=200px alt="">'+
-               ' </div>'+
-                '<div class="col-md-6 col-sm-6">'+
-                                   ' <div class="caption">'+
-                                        '<h3>'+rs.stadium_name+'</h3>'+
-                                       ' <p>ที่อยู่:'+rs.address_no+''+rs.soi +
-                                       ' '+rs.road+''+rs.district+
-                                       '</p>'+
-                                       ' <p>ราคา:'+(rs.m_f_price==rs.st_sun_price ? rs.m_f_price :rs.m_f_price+'-'+rs.st_sun_price )+'บาท</p>'+
-                                       ' <p>เบอโทร:'+(rs.tel != "" ? rs.tel : '-')+'</p>'+
-                                       ' <p>'+
-                                          '  <a href="http://cbt.backeyefinder.in.th/booking/reserve/'+rs.stadium_id+'" class="btn btn-primary">Book Now!</a> <a href="<? echo base_url() ?>stadium/profile/'+rs.stadium_id+'" class="btn btn-default">More Info</a>'+
-                                        '</p>'+
-                                    '</div>'+
-               ' </div>'+
-                                '</div>';
-                
-                
-                google.maps.event.addListener(marker, 'click', function() {
-                   infowindow1.setContent(htmlForMap);
-                           infowindow1.open(map,marker);
+                var htmlForMap = '<div class="row">' +
+                        '<div class="col-md-6 col-sm-6">' +
+                        ' <img src="http://cbt.backeyefinder.in.th/asset/images/' + (rs.stadium_path != "" ? 'stadiumpic/' + rs.stadium_path : 'bad.png') + '" width=200px alt="">' +
+                        ' </div>' +
+                        '<div class="col-md-6 col-sm-6">' +
+                        ' <div class="caption">' +
+                        '<h3>' + rs.stadium_name + '</h3>' +
+                        ' <p>ที่อยู่:' + rs.address_no + '' + rs.soi +
+                        ' ' + rs.road + '' + rs.district +
+                        '</p>' +
+                        ' <p>ราคา:' + (rs.m_f_price == rs.st_sun_price ? rs.m_f_price : rs.m_f_price + '-' + rs.st_sun_price) + 'บาท</p>' +
+                        ' <p>เบอโทร:' + (rs.tel != "" ? rs.tel : '-') + '</p>' +
+                        ' <p>' +
+                        '  <a href="http://cbt.backeyefinder.in.th/booking/reserve/' + rs.stadium_id + '" class="btn btn-primary">Book Now!</a> <a href="<? echo base_url() ?>stadium/profile/' + rs.stadium_id + '" class="btn btn-default">More Info</a>' +
+                        '</p>' +
+                        '</div>' +
+                        ' </div>' +
+                        '</div>';
+
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow1.setContent(htmlForMap);
+                    infowindow1.open(map, marker);
                 });
+
             }
 
             /**
@@ -498,9 +519,9 @@ var mk;
              * other.
              */
 
-           
 
-            
+
+
 
             function handleNoGeolocation(errorFlag) {
                 if (errorFlag) {
