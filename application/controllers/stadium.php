@@ -11,6 +11,7 @@ class stadium extends CI_Controller {
         $this->load->model('user_model', 'myusers');
         $this->load->model('coach_model', 'mycoach');
         $this->load->model('news_model', 'news');
+        $this->load->model('gallery_model', 'img');
         $this->load->library('session');
     }
 
@@ -159,7 +160,8 @@ class stadium extends CI_Controller {
             'total' => $this->mystadium->getTotalcourt($id), //result_array  getTotalcourt
             'blacklist' => $this->myusers->get_blacklist($id),
             'coach' => $this->mycoach->get_all_coach(),
-            'all_news' => $this->news->getallNews($id)
+            'all_news' => $this->news->getallNews($id),
+            'img'=>  $this->img->getGallery($id)
            
         );
 
@@ -485,7 +487,7 @@ class stadium extends CI_Controller {
         );
 //        $this->db->update('picture_stadium', $data, array('stadium_id' => $stId));
         $this->db->insert("picture_stadium", $data);
-        //redirect('stadium/profile/' . $stId);
+        redirect('stadium/updatestadium/' . $stId. '?type=gallery');
     }
     function updateLatLng($stId){
       $data = array(

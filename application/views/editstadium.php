@@ -78,7 +78,7 @@ $num = 1;
                                 <?php include 'Tabeditstadium/coachfav.php'; ?> <!--tab P3-->
                                 <?php include 'Tabeditstadium/addcourt.php'; ?> <!--tab P3-->
                                 <?php include 'Tabeditstadium/mycourt.php'; ?> <!--tab P3-->
-                                <?php include 'Tabeditstadium/rule.php'; ?> <!--tab P3-->
+                                <?php include 'Tabeditstadium/gallery.php'; ?> <!--tab P3-->
                                 <?php include 'Tabeditstadium/AddNews.php'; ?> <!--tab P3-->
                             </div>
 
@@ -159,10 +159,22 @@ $num = 1;
                 text: 'News has been Delete '
             });
     }
+    else if(getUrlVars().type == 'gallery'){
+      
+        
+            $('#myTab li:eq(5) a').tab('show')
+                        $("#notija").notify({
+                speed: 500,
+            });
+            $("#notija").notify("create", {
+                title: 'Add Complete',
+                text: 'New picture has been added '
+            });
+    }
 //    $("#input-id").fileinput();
 
 // with plugin options
-//    $("#input-id").fileinput({'showUpload': false, 'previewFileType': 'any', 'maxFileCount': 2});
+    $("#input-id").fileinput({ 'previewFileType': 'any', 'maxFileCount': 2});
     $("#input-20").fileinput({
         browseClass: "btn btn-primary btn-block",
         showCaption: false,
