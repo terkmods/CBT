@@ -41,6 +41,8 @@
 <script src="<?= base_url() ?>asset/js/jquery.notify.js"></script>
 
 <script src="<?= base_url() ?>asset/js/fileinput.min.js" type="text/javascript"></script>
+    <script src="<?= base_url() ?>asset/material/js/ripples.min.js"></script>
+    <script src="<?= base_url() ?>asset/material/js/material.min.js"></script>
 
 
 

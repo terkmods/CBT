@@ -14,16 +14,13 @@
         <link href="<?= base_url() ?>asset/css/bootstrap-switch.css" rel="stylesheet">
         <link href="<?= base_url() ?>asset/css/jquery-ui.css" rel="stylesheet">
         <link href="<?= base_url() ?>asset/css/ui.notify.css" rel="stylesheet">
-        <!-- blueimp Gallery styles -->
-        <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
-        <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-        <link rel="stylesheet" href="<?= base_url() ?>asset/css/jquery.fileupload.css">
         <link rel="stylesheet" href="<?= base_url() ?>asset/css/jquery.fileupload-ui.css">
-        <!-- CSS adjustments for browsers with JavaScript disabled -->
-        <noscript><link rel="stylesheet" href="<?= base_url() ?>asset/css/jquery.fileupload-noscript.css"></noscript>
-        <noscript><link rel="stylesheet" href="<?= base_url() ?>asset/css/jquery.fileupload-ui-noscript.css"></noscript>
-<link rel="stylesheet" href="<?php echo base_url() . 'module/DataTables/css/demo_table.css'; ?>" /> 
-<link rel="stylesheet" href="<?php echo base_url() . 'module/loadover/loadover.css'; ?>" />
+
+
+        <link href="<?= base_url() ?>asset/material/css/ripples.min.css" rel="stylesheet">
+        <link href="<?= base_url() ?>asset/material/css/material-wfont.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="<?php echo base_url() . 'module/DataTables/css/demo_table.css'; ?>" /> 
+        <link rel="stylesheet" href="<?php echo base_url() . 'module/loadover/loadover.css'; ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'asset/css/ui-lightness/jquery-ui-1.10.3.custom.min.css'; ?>"/>
         <link href="<?= base_url() ?>asset/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
         <style type="text/css">
@@ -125,12 +122,12 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <form class="navbar-form navbar-right" role="search">
+<!--                            <form class="navbar-form navbar-right" role="search">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Search">
                                 </div>
                                 <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-                            </form>
+                            </form>-->
 
 
 

@@ -273,13 +273,50 @@ class stadium extends CI_Controller {
     }
 
     function profile($stId) {
+         $this->load->library('pagination');
+                 $total_rows = $this->news->get_count($stId);
+        $config['per_page'] = 10;
 
+        $config['base_url'] = base_url() . 'stadium/profile/'.$stId;
+        $config['total_rows'] = $total_rows;
+        $config['uri_segment'] = 4;
+
+//pagination customization using bootstrap styles
+		$config['full_tag_open'] = ' <ul class="pagination pagination-sm pull-right ">';
+		$config['full_tag_close'] = '</ul><!--pagination-->';
+		$config['first_link'] = '&laquo; First';
+		$config['first_tag_open'] = '<li class="prev page">';
+		$config['first_tag_close'] = '</li>';
+
+		$config['last_link'] = 'Last &raquo;';
+		$config['last_tag_open'] = '<li class="next page">';
+		$config['last_tag_close'] = '</li>';
+
+		$config['next_link'] = 'Next &rarr;';
+		$config['next_tag_open'] = '<li class="next page">';
+		$config['next_tag_close'] = '</li>';
+
+		$config['prev_link'] = '&larr; Previous';
+		$config['prev_tag_open'] = '<li class="prev page">';
+		$config['prev_tag_close'] = '</li>';
+
+		$config['cur_tag_open'] = '<li class="active"><a href="">';
+		$config['cur_tag_close'] = '</a></li>';
+
+		$config['num_tag_open'] = '<li class="page">';
+		$config['num_tag_close'] = '</li>';
+        $uri = $this->uri->segment(4);
+        if($uri == null){
+            $uri=0;
+        }
+        $this->pagination->initialize($config);
         $st = array('data' => $this->mystadium->getstadiumprofile($stId),
             'facility' => $this->mystadium->showfacility($stId),
             'court' => $this->mystadium->gettableCourt($stId), //result_array  getTotalcourt
             'total' => $this->mystadium->getTotalcourt($stId),
             'floor' => $this->mystadium->getfloor($stId),
-            'time' => $this->mystadium->gettimeprofile($stId)
+            'time' => $this->mystadium->gettimeprofile($stId),
+            'annouc' => $this->news->NewsView($stId,$config['per_page'],  $uri)
                 //  'user' => $this->myusers->getUser($id)
         );
 

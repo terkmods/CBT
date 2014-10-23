@@ -60,5 +60,29 @@ class News extends CI_Controller {
        $data =  $this->news->getNewsSelect(id);
          //redirect('stadium/updatestadium/' . $id_new.'?type=6');
     }
+    function  delete_news(){
+        $id = $this->input->post('id');
+       echo  $this->db->delete('announcement',array('news_id' => $id));
+    }
+    public function pagination_demo($page=1){
+  
+        $this->load->library('pagination');
+        $this->load->library('app/pagination');
+       // $this->load->language("message");
+        try
+        {
+            $pagingConfig   = $this->paginationlib->initPagination("/news/pagination-demo",$this->news->get_count());
+            
+            $this->data["pagination_helper"]   = $this->pagination;
+            $this->data["messages"] = $this->news->get_by_range((($page-1) * $pagingConfig['per_page']),$pagingConfig['per_page']);
+            
+            return $this->view();             
+        }
+        catch (Exception $err)
+        {
+            log_message("error", $err->getMessage());
+            return show_error($err->getMessage());
+        }
+    }
 
 }
