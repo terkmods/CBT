@@ -11,29 +11,87 @@ class booking extends CI_Controller {
         $this->load->model('stadium_model', 'mystadium');
         $this->load->model('booking_model', 'booking');
         $this->load->library('session');
+        $this->load->helper('date');
     }
 
     function showcourtbook() {
         $court = $this->input->post('courtsend');
-        //echo print_r($court);
-        $courtname = $court['0'];
-        $courtId = $court['1'];
+        $day = $this->input->post('daytypeja');
+        
+        $courtId = $court;
+        $cause_court = array('court_id' => $courtId,'type'=>$day);
         $cause2 = array('court_id' => $courtId);
         $query = $this->db->get_where('court', $cause2)->row();
-
-        echo json_encode($query);
+        $querycourt = $this->db->get_where('court_price', $cause_court)->row();
+        
+        $datasend = array(
+          'court'=>  $query,
+            'price' => $querycourt
+        );
+        echo json_encode($datasend);
     }
 
-    function showTablebook() {
+    
+    
+    function showTablebookNew(){
         $date = $this->input->post('date');
+     
         $stId = $this->input->post('stId');
-        $n = $this->input->post('i');
+
         $indexstartime = null;
         $indexendtime = null;
         $indexstartime1 = null;
         $indexendtime1 = null;
         //$day = substr($date,0,3);
-        $cause = array('type' => "เสาร์-อาทิต", 'stadium_id' => $stId);
+        $type=null;
+        $dayofweek = array(
+                'Mon','Tue','Wed','Thu','Fri','Sat','Sun'
+            );
+        for($i=0;$i<count($dayofweek);$i++){
+            if($dayofweek[$i]==$date){
+                $type = $i;
+                break;
+            }
+        }
+        $cause = array('type' => $type, 'stadium_id' => $stId);
+        $cause2 = array('stadium_id' => $stId);
+        
+        $time3 = $this->db->get_where('stadium_time', $cause)->row();
+        $court = $this->db->get_where('court', $cause2)->result_array();
+       
+        $time = array(
+            '00:00 - 00:30', '00:30 - 01:00', '01:00 - 01:30', '01:30 - 02:00', '02:00 - 02:30', '02:30 - 03:00', '03:00 - 03:30', '03:30 - 04:00', '04:00 - 04:30', '04:30 - 05:00', '05:00 - 05:30', '05:30 - 06:00', '06:00 - 06:30', '06:30 - 07:00', '07:00 - 07:30', '07:30 - 08:00', '08:00 - 08:30', '08:30 - 09:00', '09:00 - 09:30', '09:30 - 10:00', '10:00 - 10:30', '10:30 - 11:00', '11:00 - 11:30', '11:30 - 12:00'
+            , '12:00 - 12:30', '12:30 - 13:00', '13:00 - 13:30', '13:30 - 14:00', '14:00  - 14:30', '14:30 - 15:00', '15:00 - 15:30', '15:30 - 16:00', '16:00 - 16:30', '16:30 - 17:00', '17:00 - 17:30', '17:30 - 18:00', '18:00 - 18:30', '18:30 - 19:00', '19:00 - 19:30', '19:30 - 20:00', '20:00 - 20:30', '20:30 - 21:00', '21:00 - 21:30', '21:30 - 22:00', '22:00 - 22:30', '22:30 - 23:00', '23:00 - 23:30', '23:30 - 24:00', '24:00 - 00:00');
+        
+        $data = array(
+          'time'=> $time3,
+            'court'=>$this->mystadium->gettableCourt($stId),
+            
+        );
+        echo json_encode($data);
+        
+    }
+            
+    function showTablebook() {
+        $date = $this->input->post('date');
+        $stId = $this->input->post('stId');
+
+        $indexstartime = null;
+        $indexendtime = null;
+        $indexstartime1 = null;
+        $indexendtime1 = null;
+        //$day = substr($date,0,3);
+        $type=null;
+        $dayofweek = array(
+                'Mon','Tue','Wed','Thu','Fri','Sat','Sun'
+            );
+        for($i=0;$i<count($dayofweek);$i++){
+            if($dayofweek[$i]==$date){
+                $type = $i;
+                break;
+            }
+        }
+        $cause = array('type' => $type, 'stadium_id' => $stId);
         $cause2 = array('stadium_id' => $stId);
 
         $time3 = $this->db->get_where('stadium_time', $cause)->row();
@@ -162,13 +220,16 @@ class booking extends CI_Controller {
     }
 
     function reserve($stId) {
+        $datestring = "%Y-%m-%d";
         $st = array(
             'data' => $this->mystadium->getstadiumprofile($stId),
             'court' => $this->mystadium->gettableCourt($stId),
-            'user' => $this->users->getUser($this->session->userdata('id'))
+            'user' => $this->users->getUser($this->session->userdata('id')),
+            'date' => $datestring
         );
-        //print_r($st['court']);
-        $this->load->view('booking_view', $st);
+        print_r($st['date']);
+      echo  mdate($datestring);
+        $this->load->view('booking_view_1', $st);
     }
 
     function doBooking() {
@@ -263,6 +324,7 @@ class booking extends CI_Controller {
     public function get_bookings($c_id, $date) {
 
         $data = $this->booking->get_bookings($c_id, $date);
+//        $data = $this->booking->get_bookings_stadium($c_id);
        // print_r($data);
         
         echo json_encode($data);

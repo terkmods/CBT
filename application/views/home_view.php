@@ -326,7 +326,7 @@
                                                                 </div>
                                                                
                                                             </div>  เก็บไว้ก่อน !-->
-                    <div class="row text-center">
+                    <div class="text-center">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Nearby Stadium</h3>

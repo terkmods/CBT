@@ -18,38 +18,18 @@
 </style>
 <div class="container">
 
-    <div id="cover" >  
-
-        <a role="button" data-toggle="modal" data-target="#uploadimg" class="btn"><img src="<?= base_url() ?>/asset/images/<?php
-            if ($data['0']->cover_path != "") {
-                echo 'stadiumpic/' . $data['0']->cover_path;
-            } else {
-                echo 'cover_new.jpg';
-            }
-            ?>" width="1280"></a>
-
-    </div>  
-    <div class="container upper-profile">
-        <div class="row">
-            <div class="col-md-3 profile-pic"><img src="<?= base_url() ?>/asset/images/stadiumpic/<?= $data['0']->stadium_path ?>" width="200" class="img-thumbnail"></div>
-            <div class="col-md-3 info"><h3><?= $data['0']->stadium_name ?></h3>
-                <p>เจ้าของ
-                    <span class="glyphicon glyphicon-map-marker"></span>&nbsp<a href="">Bangkok</a>, <a href="#">Thailand</a></p> <p>
-                    โทรศัพท์:<h5><?= $data['0']->tel ?></h5>
-
-
-            </div>
-        </div>
-    </div>
+    <div class="well well-sm" style="text-align:center">
+        <h4>Booking System</h4>
+</div>
     <!--    ส่วนจอง-->
     <div class="container" >
-        <hr>
+      
         <div class="row">
-            <div class="control-group">
+            <div class="control-group col-md-3 col-md-offset-4">
 
                 <div class="controls">
                     <div class="input-group">
-                        <label for="date-pik" class="input-group-addon btn">
+                        <label for="date-pik" class="input-group-addon btn form-control">
                             <span class="glyphicon glyphicon-calendar"></span> เลือกวัน
                         </label>
                         <input  type="text" id="date-pik" class="date-picker form-control" />
@@ -57,7 +37,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div><!--
         <div class="row">
             <div class="control-group">
 
@@ -76,13 +56,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <div class="row">
-            <div class="today col-md-5 col-md-offset-5 ">
+            <div class="today col-md-5 col-md-offset-4 ">
                 <h4 style="font-size: 15px">วัน : <span id="dayOfWeek" ></span></h4> <h5> เวลาให้บริการ : <span id="court"></span></h5>
             </div>
         </div>
-        <div class="col-md-5" >
+<!--        <div class="col-md-3">
             <div class="tab-pane" id="mycourt">
 
 
@@ -100,7 +80,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5" style="overflow-x: scroll;height: 600px;">
+        <div class="col-md-9" >
             <div class="tab-pane" id="mycourt">
 
 
@@ -109,8 +89,8 @@
 
                 <div id="evening">
                     <table class="table table-bordered  table-condensedy" id="tableEvening">
-                        <thead><tr><th>เวลา</th><th>#</th></tr></thead>
-                        <tbody id="runtime1">
+                        <thead id="runhead"><tr></tr></thead>
+                        <tbody id="runtime2">
                             <tr>
                                 <td style="width: 110px; text-align: center">No select</td>
                                 <td class="span6"></td>
@@ -120,8 +100,87 @@
                     </table>
                 </div>
             </div>
-        </div>
+            
+        </div>-->
     </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+<!--            <div class="row text-center">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Recommended Stadium</h3>
+                            </div>
+                            <div class="panel-body">
+
+                                <div class="thumbnail">
+                                    <img src="<?php echo base_url() ?>asset/images/stadiumpic/p1.jpg" alt="">
+                                    <div class="caption">
+                                        <h3>Bangkok Badminton</h3>
+                                        <p>ที่อยู่ : &nbsp;33/45 ถนนบางบอน5 ซอย40 กรุงเทพฯ </p>
+                                        <p>ราคา: &nbsp;120/ชม.</p>
+                                        <p>เบอโทร: &nbsp;02-8997368</p>
+                                        <p>
+                                            <a href="<? echo base_url() ?>booking/reserve/30" class="btn btn-primary">Book Now!</a> <a href="<? echo base_url() ?>stadium/profile/30" class="btn btn-default">More Info</a>
+                                        </p>
+                                    </div>
+                                </div>
+
+
+
+
+                                
+
+                            </div>
+                        </div>
+                    </div>-->
+            <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Welcome</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li> <img src="<?= base_url() ?>/asset/images/<?= $data['0']->stadium_path != null ? 'stadiumpic/' . $data['0']->stadium_path : 'bad.png' ?>" width="200" class="img-thumbnail"></li>
+
+                                <li>สนาม : <?= $data['0']->stadium_name ?></li>
+                                <li>โทรศัพท์: <?= $data['0']->tel !=null ? $data['0']->tel :'-' ?></li>
+
+                            </ul>
+                        </div>
+                    </div>
+        </div>
+        <div class="col-md-9" style="overflow-y: scroll; height: 500" id="mytablebook">
+            <table class="table table-striped table-hover table-bordered ">
+    <thead>
+        <tr>
+            <th>#</th>
+            <?php                        foreach ($court as $c){ ?>
+            <th id="s<?=$c['court_id']?>">คอร์ด <?=$c['court_name']?></th>
+            <?php }?>
+        </tr>
+    </thead>
+    <tbody id="newshow">
+        <tr>
+            <td>1</td>
+            <td>Column content</td>
+            <td>Column content</td>
+            <td>Column content</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Column content</td>
+            <td>Column content</td>
+            <td>Column content</td>
+        </tr>
+        
+    </tbody>
+</table>
+        </div>
+        
+    
+    </div>
+    
 </div>
 <!--bookingnaja-->
 <!--Modalll jaa up cover na--> 
@@ -197,6 +256,7 @@
         </div>
         <div class="row copyright">Copyright 2014 - Badminton</div>
     </div>
+    <input type="hidden" id="countcort" value="<?=count($court)?>">
 </footer>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -205,7 +265,7 @@
 <script src="<?= base_url() ?>asset/js/bootstrap.min.js"></script>
 <script src="<?= base_url() ?>asset/js/bootstrap-datepicker.js"></script>
 <script src="<?= base_url() ?>asset/js/bootstrap-switch.js"></script>
-<script src="<?= base_url() ?>asset/js/booking.js"></script>
+<script src="<?= base_url() ?>asset/js/booking_1.js"></script>
 
 <script type="text/javascript">
     /* pagination */
