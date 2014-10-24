@@ -68,7 +68,7 @@
                     <div class="panel-body">
                         <ul>
                             <?php foreach ($facility as $r) { //เรียกจาก $data['facility'] ?>
-                                <li><?php echo $r['facility']; //ใช้ return เป็น result_array          ?></li>
+                                <li><?php echo $r['facility']; //ใช้ return เป็น result_array           ?></li>
                             <?php } ?>
 
                         </ul>
@@ -113,12 +113,34 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3>Announcement</h3>
-                        <ul>
-                            <li><a href="#">Announcement 1</a></li>
-                            <li><a href="#">Announcement 2</a></li>
-                            <li><a href="#">Announcement 3</a></li>
-                        </ul>
+                        <div class="col-md-6">
+                        <div class="list-group">
+                            <?php $o=0 ?>
+                            <?php foreach ($annouc as $a) { ?>
+                            <?php $o +=1 ?>
+                            <div class="list-group-item">
+                                <div class="row-action-primary">
+                                   <img class="circle" src="<?=base_url()?>asset/images/<?=$a->type==1 ? 'AN_icon1.png':'AN_icon.png'?>" alt="icon">
+                                </div>
+                                <div class="row-content">
+                                    <div class="action-secondary"><span class="label <?=$a->type==1 ? 'label-danger':'label-success'?>"><?=$a->type==1 ? 'Promotion':'News'?></span></div>
+                                    <h4 class="list-group-item-heading"><?= $a->title ?></h4>
+                                    <p class="list-group-item-text"><?=$a->an_date?></p>
+                                </div>
+                            </div>
+                            <div class="list-group-separator"></div>
+                            <?php if($o==5){ echo '</div></div><div class="col-md-6"><div class="list-group">' ; $o=0;}?>
+                            <?php } ?>
+                            
+                        </div>
+                       
+                        
+
+                        </div>
+                        <?php echo $this->pagination->create_links(); ?>
                     </div>
+                   
+                    
                 </div>
 
                 <div class="panel panel-default">
@@ -187,7 +209,7 @@
 
 
 
-                            
+
                             <span id="comeentindex"></span>
                         </div>
                         <form method="post" id="formcomment" >
@@ -298,21 +320,21 @@
     function showComment() {
         $(".nocom").remove();
         $.getJSON("http://cbt.backeyefinder.in.th/stadium/showcomment/" + st_id, function (data) {
-             $(".nonja").remove();
-             
-        if (data.length != 0) {
-               
+            $(".nonja").remove();
+
+            if (data.length != 0) {
+
                 console.log(data);
                 $(data).each(function (k, v) {
                     console.log(v.comment_id);
                     html = '                            <div class="bubble-list nonja">' +
                             '  <div class="bubble clearfix">' +
-                            '      <img src="http://cbt.backeyefinder.in.th/asset/images/profilepic/'+v.profilepic_path+'">' +
+                            '      <img src="http://cbt.backeyefinder.in.th/asset/images/profilepic/' + v.profilepic_path + '">' +
                             '      <div class="bubble-content">' +
                             '          <div class="point"></div>' +
                             '           <p>' + v.text + '</p>' +
-                            '<small>By : '+v.fname+' '+v.lname+'</small>'+
-                            '<small>'+v.date+'</small>'+
+                            '<small>By : ' + v.fname + ' ' + v.lname + '</small>' +
+                            '<small>' + v.date + '</small>' +
                             '        </div>' +
                             '    </div>' +
                             ' </div>';
@@ -320,7 +342,7 @@
 
 
                 });
-            }else {
+            } else {
 //                nocomment = '<div clas="col-md-12 nocom" style="text-align: center;">No comment</div>';
 //                $(nocomment).insertBefore($("#comeentindex"));
             }
@@ -348,7 +370,7 @@
 ////            $("#AllAnnounce_wrapper table tbody").html(html);
 ////        }
         $("#addcomment").click(function () {
-            
+
             var content = $("#content").val();
             if (content.length > 0) {
                 $.ajax({

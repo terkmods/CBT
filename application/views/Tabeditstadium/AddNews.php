@@ -1,24 +1,30 @@
-<div class="tab-pane" id="p7">
+<div class="tab-pane fade" id="p7">
         <div class="content" id="news_content" style="padding-top:0;padding-bottom:0">
         <div class="title"><center>ข่าว</center></div>
     <div class="row" >
-            <div class="span10 offset1" style="margin-top:20px;margin-bottom:20px">
+            <div class="col-md-10 col-md-offset-1" style="margin-top:20px;margin-bottom:20px">
                 <table class="table" style="margin-bottom:0" id="news-table">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>หัวข้อ</th>
                             <th>วัน/เวลาที่ลง</th>
+                            <th>ประเภท</th>
                         </tr>
                     </thead>
                     <tbody id="news-list">
                         <?php
                         $i = 1;
                         foreach ($all_news as $news) {
-                            echo '<tr data-id="' . $news->id . '">';
+                            echo '<tr data-id="' . $news->news_id . '">';
                             echo '<td>' . $i++ . '</td>';
                             echo '<td>' . $news->title . '</td>';
-                            echo '<td>' . $news->timestamp . '</td>';
+                            echo '<td>' . $news->an_date . '</td>';
+                            if($news->type == 1){
+                                echo '<td>Promotion</td>';
+                            }else{
+                                echo '<td>News</td>';
+                            }
                             echo '</tr>';
                         }
 
@@ -41,7 +47,7 @@
                     }
                     ?>
                 </div>-->
-                    <div class="span6 offset2" style="text-align: center">
+                    <div class="col-md-6 col-md-offset-2" style="text-align: center">
                         <button class="btn  btn-main" onclick="showAddForm()"  > เพิ่มข่าว</button>
                     </div>
                 </div>
@@ -53,13 +59,23 @@
     
     <div class="row" id="addForm">
 
-            <div class="span12" style="padding-bottom:0">
+            <div class="col-md-12" style="padding-bottom:0">
 
-                <form class="form-horizontal well" style="margin-bottom:0" onSubmit="return submitNews();">
+                <form method="post" class="form-horizontal well" style="margin-bottom:0" action="<?=  base_url()?>/news/submit_news" enctype="multipart/form-data">
                     <div class="control-group">
                         <label class="control-label" for="news_title">หัวข้อ</label>
-                        <div class="controls" >
+                        <div class="controls col-md-12" >
                             <input type="text" class="span5" name="news_title" id="news_title"/>
+                          
+                        </div>
+                    </div>
+                     <div class="control-group">
+                        <label class="control-label" for="banner">ประเภท</label>
+                        <div class="controls">
+                            <div class="input-append">
+                                <input type="radio" class="span6" name="typeA" value="1">Promotion
+                            <input type="radio" class="span6" name="typeA" value="2">News  
+                            </div>
                         </div>
                     </div>
                     <div class="control-group">
@@ -71,12 +87,13 @@
                         </div>
                     </div>
                     <div class="control-group" id="ct">
-                        <label class="control-label" for="caption">คำบรรยายใต้ภาพ</label>
+<!--                        <label class="control-label" for="caption">คำบรรยายใต้ภาพ</label>
                         <div class="controls">
                             <div class="input-append">
                                 <input type="text" class="span5" name="caption" id="caption"/>
                             </div>
-                        </div>
+                        </div>-->
+<input id="input-21" type="file" class="file"   name="userfile">
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="news_content">เนื้อหา</label>
@@ -89,7 +106,7 @@
                             <input type="submit" class="btn btn-main span3"  value="เพิ่ม!">
                         </div> 
                     </div>
-                    <!--<input type="hidden" name="member_id" id="member_id" value="<?php echo $user_id; ?>" />-->
+                    <input type="hidden" name="stadium_id" id="st_id" value="<?php echo $this->uri->segment(3); ?>" />
                 </form> 
             </div>
         </div>

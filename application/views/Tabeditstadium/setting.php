@@ -40,7 +40,7 @@
                 <h5>About Stadium </h5>
             </div>
             <div class="col-md-5">
-                <textarea class="form-control" rows="5" name='about'>
+                <textarea class="form-control" rows="5" name='about' id="em2">
                     <?php echo $data->about_stadium ?>
                 </textarea>
 

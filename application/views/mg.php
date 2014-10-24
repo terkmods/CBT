@@ -96,7 +96,7 @@ $status = $ow->authenowner_status; ?>
                                                         <tr>
                                                             <td><input type="checkbox" name="num[]" value="'.$row->stadium_id.'"></td>
                                                             <td>' . $num++ . '</td>
-                                                            <td>' . $row->stadium_name . '<input type="hidden" name=id value="' . $row->stadium_id . '"</td>
+                                                            <td><a href="'?> <?php echo base_url() ?><?php echo 'stadium/profile/'.$row->stadium_id.'" class="btn ">'. $row->stadium_name . '<input type="hidden" name=id value="' . $row->stadium_id . '"</td>
                                                              '?> 
                                             
                                                             <?php if($row->court_check!=0){ ?>
@@ -113,7 +113,7 @@ $status = $ow->authenowner_status; ?>
                                              <?php echo '
                                                            
                                                 
-                                                            <td><a href="'?> <?php echo base_url() ?><?php echo 'stadium/profile/'.$row->stadium_id.'" class="btn ">' . $row->stadium_url . '</a></td>
+                                                            
                                                             <td> '
                                                 ?>
 
