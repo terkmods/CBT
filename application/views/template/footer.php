@@ -43,6 +43,13 @@
 <script src="<?= base_url() ?>asset/js/fileinput.min.js" type="text/javascript"></script>
     <script src="<?= base_url() ?>asset/material/js/ripples.min.js"></script>
     <script src="<?= base_url() ?>asset/material/js/material.min.js"></script>
+    
+            <!-- Second, add the Timer and Easing plugins -->
+        <script type="text/javascript" src="<?= base_url() ?>asset/GalleryView/js/jquery.timers-1.2.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>asset/GalleryView/js/jquery.easing.1.3.js"></script>
+
+        <!-- Third, add the GalleryView Javascript and CSS files -->
+        <script type="text/javascript" src="<?= base_url() ?>asset/GalleryView/js/jquery.galleryview-3.0-dev.js"></script>
 
 
 

@@ -2,17 +2,11 @@
 ?>
 <div class="container">
     <div id="cover">
-        <a role="button" data-toggle="modal" data-target="#uploadimgcover" class="btn"><img src="<?= base_url() ?>/asset/images/<?php
-            if ($data['0']->cover_path != "") {
-                echo 'stadiumpic/' . $data['0']->cover_path;
-            } else {
-                echo 'cover_new.jpg';
-            }
-            ?>" width="1280"></a>
+<!--        <a role="button" data-toggle="modal" data-target="#uploadimgcover" class="btn"><img src="<?= base_url() ?>/asset/images/<?= $data['0']->cover_path ?>" width="1280"></a>-->
     </div>
-    <div class="container upper-profile">
+    <div class="container ">
         <div class="row">
-            <div class="col-md-3 profile-pic"><img src="<?= base_url() ?>/asset/images/stadiumpic/<?= $data['0']->stadium_path ?>" width="200" class="img-thumbnail"></div>
+            <div class="col-md-3 profile-pic"><img src="<?= base_url() ?>/asset/images/<?= $data['0']->stadium_path != null ? 'stadiumpic/' . $data['0']->stadium_path : 'bad.png' ?>" width="200" class="img-thumbnail"></div>
             <div class="col-md-3 info"><h3><?= $data['0']->stadium_name ?></h3>
                 <p><span class="glyphicon glyphicon-map-marker"></span>&nbsp<a href="">Bangkok</a>, <a href="#">Thailand</a></p> <p>
                 <p> Phone number :     <?= $data['0']->tel != null ? $data['0']->tel : '-'; ?></p>
@@ -68,7 +62,7 @@
                     <div class="panel-body">
                         <ul>
                             <?php foreach ($facility as $r) { //เรียกจาก $data['facility'] ?>
-                                <li><?php echo $r['facility']; //ใช้ return เป็น result_array           ?></li>
+                                <li><?php echo $r['facility']; //ใช้ return เป็น result_array            ?></li>
                             <?php } ?>
 
                         </ul>
@@ -101,6 +95,16 @@
                         </p>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>Map</h3>
+
+                        <div id="map-canvas"></div> 
+                        <div id="directions-panel"></div>
+
+                        <button class="controls btn btn-primary" onclick="calcRoute()">Navigation</button>
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-8"><div class="panel panel-default">
@@ -114,72 +118,55 @@
                     <div class="panel-body">
                         <h3>Announcement</h3>
                         <div class="col-md-6">
-                        <div class="list-group">
-                            <?php $o=0 ?>
-                            <?php foreach ($annouc as $a) { ?>
-                            <?php $o +=1 ?>
-                            <div class="list-group-item">
-                                <div class="row-action-primary">
-                                   <img class="circle" src="<?=base_url()?>asset/images/<?=$a->type==1 ? 'AN_icon1.png':'AN_icon.png'?>" alt="icon">
-                                </div>
-                                <div class="row-content">
-                                    <div class="action-secondary"><span class="label <?=$a->type==1 ? 'label-danger':'label-success'?>"><?=$a->type==1 ? 'Promotion':'News'?></span></div>
-                                    <h4 class="list-group-item-heading"><?= $a->title ?></h4>
-                                    <p class="list-group-item-text"><?=$a->an_date?></p>
-                                </div>
+                            <div class="list-group">
+                                <?php $o = 0 ?>
+                                <?php foreach ($annouc as $a) { ?>
+                                    <?php $o +=1 ?>
+                                    <div class="list-group-item">
+                                        <div class="row-action-primary">
+                                            <img class="circle" src="<?= base_url() ?>asset/images/<?= $a->type == 1 ? 'AN_icon1.png' : 'AN_icon.png' ?>" alt="icon">
+                                        </div>
+                                        <div class="row-content">
+                                            <div class="action-secondary"><span class="label <?= $a->type == 1 ? 'label-danger' : 'label-success' ?>"><?= $a->type == 1 ? 'Promotion' : 'News' ?></span></div>
+                                            <h4 class="list-group-item-heading"><?= $a->title ?></h4>
+                                            <p class="list-group-item-text"><?= $a->an_date ?></p>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-separator"></div>
+                                    <?php if ($o == 5) {
+                                        echo '</div></div><div class="col-md-6"><div class="list-group">';
+                                        $o = 0;
+                                    } ?>
+<?php } ?>
+
                             </div>
-                            <div class="list-group-separator"></div>
-                            <?php if($o==5){ echo '</div></div><div class="col-md-6"><div class="list-group">' ; $o=0;}?>
-                            <?php } ?>
-                            
-                        </div>
-                       
-                        
+
+
 
                         </div>
-                        <?php echo $this->pagination->create_links(); ?>
+<?php echo $this->pagination->create_links(); ?>
                     </div>
-                   
-                    
+
+
                 </div>
 
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3>Gallery</h3>
                         <div class="row">
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="<?= base_url() ?>/asset/images/g.png" alt="...">
-                                </a>
-                            </div>
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="<?= base_url() ?>/asset/images/g.png" alt="...">
-                                </a>
-                            </div>
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="<?= base_url() ?>/asset/images/g.png" alt="...">
-                                </a>
-                            </div>
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="<?= base_url() ?>/asset/images/g.png" alt="...">
-                                </a>
-                            </div>
+                                <?php if ($img != null) { ?>
+                                <ul id="myGallery">
+                                    <?php foreach ($img as $i) { ?>
+                                        <li><img src="<?= base_url() ?>asset/images/upload/<?= $i->picstadium_path ?>"   >
+                                     <?php } ?>
+                                </ul>
+                                <?php } else { ?>
+                            <p class="text-danger" style="text-align : center"> No gallery </p>
+                                <?php }?>
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h3>Map</h3>
 
-                        <div id="map-canvas"></div> 
-                        <div id="directions-panel"></div>
-
-                        <button class="controls btn btn-primary" onclick="calcRoute()">Navigation</button>
-                    </div>
-                </div>
 
 
                 <div class="panel panel-default">
@@ -231,6 +218,24 @@
 </div>
 <?php include 'template/modal.php'; ?>
 <?php include 'template/footer.php'; ?>
+<script type="text/javascript">
+    $(function () {
+        $('#myGallery').galleryView({
+            filmstrip_style: 'showall',
+            filmstrip_position: 'bottom',
+            frame_height: 32,
+            frame_width: 50,
+            transition_interval: 6000,
+            autoplay: true,
+            enable_overlays: true,
+            pan_images: true,
+            panel_animation: 'slide',
+            panel_width: 750
+
+
+        });
+    });
+</script>
 <script>
     var map;
     var directionsDisplay;

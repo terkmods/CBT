@@ -13,7 +13,8 @@
 
         <link href="<?= base_url() ?>asset/css/bootstrap-switch.css" rel="stylesheet">
         <link href="<?= base_url() ?>asset/css/ui.notify.css" rel="stylesheet">
-
+                <link href="<?= base_url() ?>asset/material/css/ripples.min.css" rel="stylesheet">
+        <link href="<?= base_url() ?>asset/material/css/material-wfont.min.css" rel="stylesheet">
 
         <style type="text/css">
             .top-minus{
@@ -181,12 +182,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <form class="navbar-form navbar-right" role="search">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search">
-                                </div>
-                                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-                            </form>
+                            
 
 
 
