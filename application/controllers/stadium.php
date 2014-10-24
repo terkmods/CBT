@@ -318,10 +318,11 @@ class stadium extends CI_Controller {
             'total' => $this->mystadium->getTotalcourt($stId),
             'floor' => $this->mystadium->getfloor($stId),
             'time' => $this->mystadium->gettimeprofile($stId),
-            'annouc' => $this->news->NewsView($stId,$config['per_page'],  $uri)
+            'annouc' => $this->news->NewsView($stId,$config['per_page'],  $uri),
+            'img'=>  $this->img->getGallery($stId)
                 //  'user' => $this->myusers->getUser($id)
         );
-
+//        print_r($st['data']);
         $this->load->view('stadium_view', $st);
     }
 
@@ -483,7 +484,9 @@ class stadium extends CI_Controller {
         
         $data = array(
             'picstadium_path' => $upload['file_name'],
-            'stadium_id'=>$stId
+            'stadium_id'=>$stId,
+            'slideshow'=>0,
+            'show'=>1
         );
 //        $this->db->update('picture_stadium', $data, array('stadium_id' => $stId));
         $this->db->insert("picture_stadium", $data);
