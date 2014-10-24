@@ -52,7 +52,7 @@ class News extends CI_Controller {
         $this->db->insert('announcement', $data);
         //$datasend = $this->news->postAllnews($this->input->post('stadium_id'));
         
-        redirect('stadium/updatestadium/' . $this->input->post('stadium_id').'?type=4');
+        redirect('stadium/announcement/' . $this->input->post('stadium_id'));
         
     }
     function editnews($id){

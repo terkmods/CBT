@@ -161,8 +161,7 @@ class stadium extends CI_Controller {
             'blacklist' => $this->myusers->get_blacklist($id),
             'coach' => $this->mycoach->get_all_coach(),
             'all_news' => $this->news->getallNews($id),
-            'img'=>  $this->img->getGallery($id)
-           
+            'img' => $this->img->getGallery($id)
         );
 
         //print_r($data['total']);
@@ -275,41 +274,41 @@ class stadium extends CI_Controller {
     }
 
     function profile($stId) {
-         $this->load->library('pagination');
-                 $total_rows = $this->news->get_count($stId);
+        $this->load->library('pagination');
+        $total_rows = $this->news->get_count($stId);
         $config['per_page'] = 10;
 
-        $config['base_url'] = base_url() . 'stadium/profile/'.$stId;
+        $config['base_url'] = base_url() . 'stadium/profile/' . $stId;
         $config['total_rows'] = $total_rows;
         $config['uri_segment'] = 4;
 
 //pagination customization using bootstrap styles
-		$config['full_tag_open'] = ' <ul class="pagination pagination-sm pull-right ">';
-		$config['full_tag_close'] = '</ul><!--pagination-->';
-		$config['first_link'] = '&laquo; First';
-		$config['first_tag_open'] = '<li class="prev page">';
-		$config['first_tag_close'] = '</li>';
+        $config['full_tag_open'] = ' <ul class="pagination pagination-sm pull-right ">';
+        $config['full_tag_close'] = '</ul><!--pagination-->';
+        $config['first_link'] = '&laquo; First';
+        $config['first_tag_open'] = '<li class="prev page">';
+        $config['first_tag_close'] = '</li>';
 
-		$config['last_link'] = 'Last &raquo;';
-		$config['last_tag_open'] = '<li class="next page">';
-		$config['last_tag_close'] = '</li>';
+        $config['last_link'] = 'Last &raquo;';
+        $config['last_tag_open'] = '<li class="next page">';
+        $config['last_tag_close'] = '</li>';
 
-		$config['next_link'] = 'Next &rarr;';
-		$config['next_tag_open'] = '<li class="next page">';
-		$config['next_tag_close'] = '</li>';
+        $config['next_link'] = 'Next &rarr;';
+        $config['next_tag_open'] = '<li class="next page">';
+        $config['next_tag_close'] = '</li>';
 
-		$config['prev_link'] = '&larr; Previous';
-		$config['prev_tag_open'] = '<li class="prev page">';
-		$config['prev_tag_close'] = '</li>';
+        $config['prev_link'] = '&larr; Previous';
+        $config['prev_tag_open'] = '<li class="prev page">';
+        $config['prev_tag_close'] = '</li>';
 
-		$config['cur_tag_open'] = '<li class="active"><a href="">';
-		$config['cur_tag_close'] = '</a></li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="">';
+        $config['cur_tag_close'] = '</a></li>';
 
-		$config['num_tag_open'] = '<li class="page">';
-		$config['num_tag_close'] = '</li>';
+        $config['num_tag_open'] = '<li class="page">';
+        $config['num_tag_close'] = '</li>';
         $uri = $this->uri->segment(4);
-        if($uri == null){
-            $uri=0;
+        if ($uri == null) {
+            $uri = 0;
         }
         $this->pagination->initialize($config);
         $st = array('data' => $this->mystadium->getstadiumprofile($stId),
@@ -318,8 +317,8 @@ class stadium extends CI_Controller {
             'total' => $this->mystadium->getTotalcourt($stId),
             'floor' => $this->mystadium->getfloor($stId),
             'time' => $this->mystadium->gettimeprofile($stId),
-            'annouc' => $this->news->NewsView($stId,$config['per_page'],  $uri),
-            'img'=>  $this->img->getGallery($stId)
+            'annouc' => $this->news->NewsView($stId, $config['per_page'], $uri),
+            'img' => $this->img->getGallery($stId)
                 //  'user' => $this->myusers->getUser($id)
         );
 //        print_r($st['data']);
@@ -342,7 +341,7 @@ class stadium extends CI_Controller {
 
             $upload = $this->upload->data();
         }
-        
+
         $data = array(
             'cover_path' => $upload['file_name']
         );
@@ -400,7 +399,7 @@ class stadium extends CI_Controller {
         $this->db->update("court", $dataprice, array('court_id' => $maxstadium));
         // $this->mystadium->addcourttime($dataprice, $data['stadium_id']);
         $this->session->set_flashdata('msg', 'เพิ่มคอร์ดเรียบร้อย');
-        redirect('stadium/updatestadium/' . $id.'?type=1');
+        redirect('stadium/updatestadium/' . $id . '?type=1');
     }
 
     function compare() {
@@ -434,8 +433,8 @@ class stadium extends CI_Controller {
         print_r($detail);
         $this->load->view('result_search');
     }
-    
-    function allStadium(){
+
+    function allStadium() {
         if ($this->session->userdata('logged')) {
             $datasend ['stadium'] = $this->mystadium->getallstadium();
             $datasend ['province'] = $this->mystadium->getprovince();
@@ -445,26 +444,27 @@ class stadium extends CI_Controller {
         } else {
             redirect('index.php');
         }
-        
     }
 
-    function addcomment($sId){
+    function addcomment($sId) {
         $data = array(
             'text' => $this->input->post('content'),
             'user_id' => $this->session->userdata('id'),
-                'stadium_id' => $sId
+            'stadium_id' => $sId
         );
 
-        
-        
-        $this->db->insert('comment', $data); 
+
+
+        $this->db->insert('comment', $data);
         $this->showcomment($sId);
-        echo $this->session->userdata('id').' : OK';
+        echo $this->session->userdata('id') . ' : OK';
     }
-    function showcomment($sId){
+
+    function showcomment($sId) {
         $data['comment'] = $this->mystadium->getComment($sId);
         return $data['comment'];
     }
+
     function uploadGallery($stId) {
         $config['upload_path'
                 ] = "./asset/images/upload";
@@ -481,30 +481,66 @@ class stadium extends CI_Controller {
 
             $upload = $this->upload->data();
         }
-        
+
         $data = array(
             'picstadium_path' => $upload['file_name'],
-            'stadium_id'=>$stId,
-            'slideshow'=>0,
-            'show'=>1
+            'stadium_id' => $stId,
+            'slideshow' => 0,
+            'show' => 1
         );
 //        $this->db->update('picture_stadium', $data, array('stadium_id' => $stId));
         $this->db->insert("picture_stadium", $data);
-        redirect('stadium/updatestadium/' . $stId. '?type=gallery');
+        redirect('stadium/gallery/' . $stId . '?type=gallery');
     }
-    function updateLatLng($stId){
-      $data = array(
-          'lat' =>$this->input->post('newLat'),
-            'long'=>$this->input->post('newLng')
+
+    function updateLatLng($stId) {
+        $data = array(
+            'lat' => $this->input->post('newLat'),
+            'long' => $this->input->post('newLng')
         );
         $x = $this->db->update('stadium', $data, array('stadium_id' => $stId));
         echo $x;
     }
-    
 
+    function gallery($id) {
+        $data = array(
+            'img' => $this->img->getGallery($id)
+        );
+        $this->load->view("gallery", $data);
+    }
+    
+    function announcement($id){
+       $data = array(
+            'all_news' => $this->news->getallNews($id)           
+        );    
+        $this->load->view("announcement", $data); 
+    }
+    
+    function blacklist($id){
+        $data = array(      
+            'blacklist' => $this->myusers->get_blacklist($id)       
+        );
+        $this->load->view("blacklist", $data);
+        
+    }
+    
+    function coach($id){
+        $data = array(
+            'data' => $this->mystadium->setstadium($id), //row
+            'facility' => $this->mystadium->showfacility($id), //result_array
+            'showtime' => $this->mystadium->getTime($id), //result_array  
+            'court' => $this->mystadium->gettableCourt($id), //result_array  getTotalcourt
+            'total' => $this->mystadium->getTotalcourt($id), //result_array  getTotalcourt
+            'blacklist' => $this->myusers->get_blacklist($id),
+            'coach' => $this->mycoach->get_all_coach(),
+            'all_news' => $this->news->getallNews($id),
+            'img' => $this->img->getGallery($id)
+        );
+
+        
+        $this->load->view("coach", $data);
+        
+    }
 }
-    
-
-
 ?>
        

@@ -57,29 +57,64 @@ $num = 1;
                 <div class="container">
 
 
-                    <?php include 'template/sideSetting.php'; ?>
+                        
+<div class="col-md-3 ">
+    <ul class="nav nav-pills nav-stacked" >  
+        <?php if($this->session->userdata('role') == "owner"){ ?>
+        <li><a href="<?php echo base_url() ?>users/edituser/<?php echo $this->session->userdata('id'); ?>">Basic Setting</a>
+        </li>
+        <li>
+            <a href="<?= base_url() ?>stadium">Manage stadium </a>           
+        </li>
+        
+        <li class="active">
+            <a  href="<?= base_url() ?>stadium/updatestadium/<?=$this->uri->segment(3)?>" >&nbsp;&nbsp;&nbsp;Basic Infomation </a>           
+        </li>
+        
+        <li >
+            <a href="<?= base_url() ?>stadium/coach/<?=$this->uri->segment(3)?>">&nbsp;&nbsp;&nbsp;Coach </a>           
+        </li>
+        <li >
+            <a href="<?= base_url() ?>stadium/blacklist/<?=$this->uri->segment(3)?>">&nbsp;&nbsp;&nbsp;Blacklist </a>           
+        </li>
+        <li>
+            <a href="<?= base_url() ?>stadium/announcement/<?=$this->uri->segment(3)?>">&nbsp;&nbsp;&nbsp;Announcement</a>
+        </li>
+        <li >
+            <a href="<?= base_url() ?>stadium/gallery/<?=$this->uri->segment(3)?>">&nbsp;&nbsp;&nbsp;Gallery </a>           
+        </li>
+        
+        <li><a href="<?= base_url() ?>stadium/historyBooking">History Booking stadium </a></li>
+        
+            <?php }?>
+        
+        
+    </ul>  
+</div>
                     <div class="col-md-9">
                         <div class="row" id="changeja">
                             <ul class="nav nav-tabs" id="myTab">
 
                                 <li class="active"><a href="#p1">Basic Info</a></li>
+                                <li ><a href="#addtime">Service Time</a></li>
                                 <li ><a href="#addcourt">Add court</a></li>
 
-                                <li><a href="#p2">Add coach</a></li>
-                                <li><a href="#p3">Blacklist</a></li>
-                                <li><a href="#p7">announcement</a></li>
-                                <li><a href="#p6">Add picture</a></li>
+                                
+                                
+                                
+                                
 
                             </ul>
                             <div class="tab-content"  >
 
                                 <?php include 'Tabeditstadium/setting.php'; ?> <!--tab P1-->
-                                <?php include 'Tabeditstadium/blacklist.php'; ?> <!--tab P2-->
-                                <?php include 'Tabeditstadium/coachfav.php'; ?> <!--tab P3-->
+                                
+                               
+                                <?php include 'Tabeditstadium/addtime.php'; ?> <!--tab P3-->
                                 <?php include 'Tabeditstadium/addcourt.php'; ?> <!--tab P3-->
                                 <?php include 'Tabeditstadium/mycourt.php'; ?> <!--tab P3-->
-                                <?php include 'Tabeditstadium/gallery.php'; ?> <!--tab P3-->
-                                <?php include 'Tabeditstadium/AddNews.php'; ?> <!--tab P3-->
+                                
+                              
                             </div>
 
                             <div style="clear:both; margin-top:20px;"></div>
@@ -535,7 +570,6 @@ $num = 1;
     }
 
 </script>
-
 
 
 <?php include 'template/footer_scrpit.php'; ?>
