@@ -162,10 +162,11 @@
         </div>
         <div class="col-xs-12 col-sm-10">
             <div class="row">
+                <?php foreach ($comparedata as $r){ ?>                           
                 <div class="col-xs-3 col-sm-3 ccfreature free">
-                    <i class="fa fa-check iconok"></i>
+                    <?=$r->tel != null ? $r->tel : '-'?>
                 </div>
-                
+                <?php } ?>
             </div>
         </div>
     </div>
@@ -175,10 +176,16 @@
         </div>
         <div class="col-xs-12 col-sm-10">
             <div class="row">
+                <?php foreach ($comparedata as $r){ ?>
+                                    
+                                         
+                                   
                 <div class="col-xs-3 col-sm-3 ccfreature free">
-                    <i class="fa fa-check iconok"></i>
+                    <?=$r->soi?> 
+                    ถนน <?=$r->road?> 
+                    <?=$r->province?>
                 </div>
-                
+                 <?php } ?>
             </div>
         </div>
     </div>
@@ -188,10 +195,13 @@
         </div>
         <div class="col-xs-12 col-sm-10">
             <div class="row">
+                <?php foreach ($comparedata as $r){ ?>
+                                    
+                                    
                 <div class="col-xs-3 col-sm-3 ccfreature free">
-                    <i class="fa fa-check iconok"></i>
+                    <?=$r->about_stadium != null ? $r->about_stadium : '-'?>
                 </div>
-                
+                <?php } ?>
             </div>
         </div>
     </div>
@@ -291,7 +301,7 @@
 
     .ccfreature {
         text-align: center;
-        font-size: 2em;
+        
     }        
 </style>
 <?php include 'template/footer.php'; ?>  

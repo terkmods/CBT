@@ -1,4 +1,170 @@
 <div class="tab-pane" id="addtime">
+    <form action="rust" method="post">
+        <div class="col-md-8 col-md-offset-2 well" style="margin-top: 20px">
+            <div class="row">
+                <legend class="text-center">เวลาเปิดบริการ</legend>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>วัน</th><th>เปิดบริการ</th><th>เปิด</th><th>ปิด</th>
+                        </tr>
+                    </thead>
+                    <tbody>                                       
+
+
+
+                        <tr>
+                            <td>
+
+
+
+
+
+
+                                จันทร์
+
+
+
+
+
+                            </td>
+                            <td><input type="checkbox" name="day" value="2" checked></td>
+                            <td><input type="time" name="open" class="form-control input-sm" value="19:00:00"></td>
+                            <td><input type="time" name="close" class="form-control input-sm" value="05:00:00"></td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td>
+
+
+
+
+
+
+
+                                อังคาร
+
+
+
+
+                            </td>
+                            <td><input type="checkbox" name="day" value="3" checked></td>
+                            <td><input type="time" name="open" class="form-control input-sm" value="19:00:00"></td>
+                            <td><input type="time" name="close" class="form-control input-sm" value="05:00:00"></td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td>
+
+
+
+
+
+
+
+
+                                พุธ
+
+
+
+                            </td>
+                            <td><input type="checkbox" name="day" value="4" checked></td>
+                            <td><input type="time" name="open" class="form-control input-sm" value="19:00:00"></td>
+                            <td><input type="time" name="close" class="form-control input-sm" value="05:00:00"></td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td>
+
+
+
+
+
+
+
+
+
+                                พฤหัสบดี
+
+
+                            </td>
+                            <td><input type="checkbox" name="day" value="5" checked></td>
+                            <td><input type="time" name="open" class="form-control input-sm" value="19:00:00"></td>
+                            <td><input type="time" name="close" class="form-control input-sm" value="05:00:00"></td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td>
+
+
+
+
+
+
+
+
+
+
+                                ศุกร์
+
+                            </td>
+                            <td><input type="checkbox" name="day" value="6" checked></td>
+                            <td><input type="time" name="open" class="form-control input-sm" value="19:00:00"></td>
+                            <td><input type="time" name="close" class="form-control input-sm" value="05:00:00"></td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td>
+
+
+
+
+
+
+
+
+
+
+
+                                เสาร์
+                            </td>
+                            <td><input type="checkbox" name="day" value="7" checked></td>
+                            <td><input type="time" name="open" class="form-control input-sm" value="19:00:00"></td>
+                            <td><input type="time" name="close" class="form-control input-sm" value="05:00:00"></td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                อาทิตย์    
+                            </td>
+                            <td><input type="checkbox" name="day" value="1" checked></td>
+                            <td><input type="time" name="open" class="form-control input-sm" value="19:00:00"></td>
+                            <td><input type="time" name="close" class="form-control input-sm" value="05:00:00"></td>
+
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-primary withripple">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
     <div class="col-md-5 pull-left " style="padding-top: 2px;margin-top: 10px">
         <form  method="post" role="form" action="<?= base_url() ?>stadium/updatetime/<?= $this->uri->segment(3) ?>">
 
@@ -75,7 +241,7 @@
 
                                 value=" <?= $time ?>.00" ><?= $time ?>:00</option>
 
-    <?php } ?>
+                        <?php } ?>
                     </select>
                     End-time
                     <select class="form-control" name="endtime[]" >
@@ -145,10 +311,10 @@
 
                                 value=" <?= $time ?>.00" ><?= $time ?>:00</option>
 
-                <?php } ?>
+                        <?php } ?>
                     </select>    
                 </div>
-<?php } ?>
+            <?php } ?>
             <!-- <div class="radio">
                   <label>
                       <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
@@ -171,6 +337,6 @@
             </div>
         </form>
     </div>   
-    
+
 
 </div>
