@@ -10,10 +10,10 @@ $num = 1    ;
 $status = $ow->authenowner_status; ?>
 
 <div class="container">
-    <h4> <a href="#"></a> Manage Stadium </h4>
+    <h4> <a href="#"></a> Owner System </h4>
     <div class="row">
         <div class="panel panel-default">
-            <div class="panel-heading">Stadium : </div>
+            <div class="panel-heading">DashBoard</div>
             <div class="panel-body">
 
              
@@ -40,11 +40,14 @@ $status = $ow->authenowner_status; ?>
         <?php         foreach ($totalbooking as $b) { ?>
         <div class="list-group-item">
         <div class="row-picture">
-            <img class="circle" src="http://lorempixel.com/56/56/people/1" alt="icon">
+            <img class="circle" src="<?php echo base_url() ?>asset/images/<?= $b->stadium_path != null ? 'stadiumpic/' . $b->stadium_path . '' : 'bad.png' ?>" alt="icon">
         </div>
         <div class="row-content">
-            <h4 class="list-group-item-heading">Tile with avatar</h4>
-            <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus</p>
+            <div class="action-secondary">test</div>
+            <h4 class="list-group-item-heading">สนาม : <?=$b->stadium_name?> <small>คอร์ด : <?=$b->court_name?></small> </h4>
+            <p class="list-group-item-text">เวลา  <?=$b->start?> - <?=$b->end?></p>
+            <p class="list-group-item-text">ผู้จอง <?=$b->fname?> <?=$b->lname?> โทร : <?=$b->phone?></p>
+            <p class="list-group-item-text">โทร : <?=$b->phone?></p>
         </div>
     </div>
     <div class="list-group-separator"></div>
