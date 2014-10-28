@@ -196,7 +196,8 @@
                 <div class="modal-body">
                     <span>จองโดย : </span> <?=$user['0']->email?>,<?=$user['0']->fname?> <?=$user['0']->lname?> <br>
                     <span>วันที่ : </span><span id="datenaja" >&nbsp;&nbsp; </span> <br>
-                    <span>เวลา : </span><br> เริ่ม <input type="time" id="time_start" name="start_time" class="form-control" step="1800" onchange="totalpricechange()">
+                    <span>เวลา : </span><br> เริ่ม <input type="time" id="time_start" name="start_time" class="form-control" step="1800" disabled="">
+                    <input type="hidden" id="time_start1" name="start_time">
                     ถึง <input type="time" id="time_end" class="form-control" name="end_time" step="1800" onchange="totalpricechange()"> 
 <!--                    <select id="selecttime" class="form-control">
                     </select>-->

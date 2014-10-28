@@ -321,11 +321,12 @@ class booking extends CI_Controller {
         $this->historyBooking();
     }
 
-    public function get_bookings($c_id, $date) {
-
+    public function get_bookings() {
+        $c_id = $this->input->post('st_id');
+        $date = $this->input->post('datesend');
         $data = $this->booking->get_bookings($c_id, $date);
 //        $data = $this->booking->get_bookings_stadium($c_id);
-       // print_r($data);
+//        print_r($data);
         
         echo json_encode($data);
        // echo 'eeeeee';
