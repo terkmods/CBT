@@ -15,6 +15,9 @@ var time1 = null;
 var time2 = null;
 var Daytype;
 var val ;
+var booking ; 
+var curdate = $('.date-picker').datepicker('setDate', 'today');
+var counterdate =0 ; 
 ///////////////////////
 //////////////////////
 function addZero(str) {
@@ -25,11 +28,11 @@ function addZero(str) {
     return a;
 }
 ////////////////
-function RowClick(currenttr, lock) {
-    console.log($(currenttr).attr('id'));
+function RowClick(currenttd, lock) {
+    console.log('curenttr : '+($(currenttd).attr('id')));
 
-    console.log('Court ID : '+$(currenttr).attr('value'));
-    var court = $(currenttr).attr('value');
+    console.log('Court ID : '+$(currenttd).attr('value'));
+    var court = $(currenttd).attr('value');
 
     courtview(court, Daytype);
 
@@ -43,30 +46,35 @@ function RowClick(currenttr, lock) {
         if (!window.event.ctrlKey && !window.event.shiftKey) {
 
             var d = new Date('2013-01-01 00:00');
-            var id = parseInt($(currenttr).attr('id').substr(1), 10);
-
-            for (var i = 0; i < id - 1; i++) {
-                d = new Date(d.getTime() + 30 * 60000);
+            var id = parseInt($(currenttd).attr('id'));
+            console.log('id->>>'+id);
+            
+            for (var i = 0; i < id-1 ; i++) {
+                d = new Date(d.getTime()+30  * 60000);  
+                console.log('testttttttt->>>>'+d);
             }
-
+            console.log('testttttttt->>>>'+d.getHours());
             var d2 = new Date(d.getTime() + 30 * 60000);
-
+        console.log('testttttttt->>>>'+d2);
             var start = addZero(d.getHours()) + ':' + addZero(d.getMinutes());
             var end = addZero(d2.getHours()) + ':' + addZero(d2.getMinutes());
-
-            $('#time_start').val(addZero(d.getHours()) + ':' + addZero(d.getMinutes()));
-            $('#time_end').val(addZero(d2.getHours()) + ':' + addZero(d2.getMinutes()));
+            
+            console.log('tstarttttt->>>>'+start);
+            
+            $('#time_start').val(start);
+            $('#time_start1').val(start);
+            $('#time_end').val(end);
             $("#sumpricesend").val(price / 2);
             $('#booking').modal('show');
             $("#sumpricesend").val(price / 2);
-            totalpricechange()
+            totalpricechange();
             return false;
         }
     }
 
 
 //                                if (window.event.shiftKey) {
-//                                    selectRowsBetweenIndexes([lastSelectedRow.rowIndex, currenttr.rowIndex])
+//                                    selectRowsBetweenIndexes([lastSelectedRow.rowIndex, currenttd.rowIndex])
 //                                }
 
 }
@@ -107,7 +115,8 @@ function clearAll() {
 function getbooking(st) {
 
     $.get('/booking/get_bookings/' + st + '/' + date_inverse + '', function (data) {
-        console.log(data);
+        booking = data;
+        console.log('DATA : => '+ JSON.parse(data));
         console.log(data[0].start.substring(0, 5));
 
 
@@ -202,20 +211,23 @@ function getbooking(st) {
         //  console.log(data.length);
         var indextimefromdb = [];
         for (var i = 0; i < data.length; i++) {
-            console.log("time for db : " + i + "->" + start);
+            
             indextimefromdb = time2.indexOf(data[i].start.substring(0, 5));
-            console.log(indextimefromdb);
-            var start = new_timeja[i].substring(0, 5);
-
+            //console.log(indextimefromdb);
+            var start = time2[indextimefromdb];
+            console.log(start);
+             console.log("time for db : " + i + "->" + start);
             //var end = data[i]end.substring(0, 5);
             for (var j = 0; j < time2.length; j++) {
                 //Note// ลบ onclick="loadRequestForm();" ออกจาก td ไป
-                console.log("time for new_time : " + j + "->" + time);
+                //console.log("time for new_time : " + j + "->" + time);
                 var time = time1[j].substring(0, 5);
-
+                
                 if (time == start) {
                     console.log("yes");
-                    $('#t' + (j + 1)).find('td:eq(1)').html(time == start ? '<b>ไม่ว่าง</b>' : '').addClass('bookline');
+                    console.log('i= >>>>>>'+(i+1));
+                    $('#t' + (j + 1)).find('td:eq('+(i+1)+')').html(time == start ? '<b>ไม่ว่าง</b>' : '').addClass('bookline');
+                    console.log('j = '+(j+1));
                 }
 //              if (time == end) {
 //            $('#t' + (j + 1)).find('td:eq(1)').html(time == start ? (data[i].description == '' ? '<b>จองโดย:</b> ' + data[i].firstname : '<b>จองโดย:</b> ' + data[i].firstname + ' (' + data[i].description
@@ -224,6 +236,35 @@ function getbooking(st) {
             }
         }
     }, 'json');
+}
+function getbooking_new(){
+        var fullpart = "http://cbt.backeyefinder.in.th/booking/get_bookings";
+         var href = window.location.pathname;
+    console.log(href);
+    var st = href.substr(href.lastIndexOf('/') + 1);
+        val = $('.date-picker').datepicker('getDate').toDateString();
+     
+     
+    datesendnaja = $('.date-picker').val();
+    
+    var date_elements = datesendnaja.split('/');
+    date_inverse = date_elements[2] + '-' + date_elements[0] + '-' + date_elements[1];
+    //alert(st);
+    alert(date_inverse);
+    $.ajax({
+        type: "POST",
+        url: fullpart,
+        data: {st_id: st, datesend: date_inverse}
+    }).done(function (msg) {
+        console.log('get_bookingNEWWW');
+//        alert(msg);
+        console.log(JSON.parse(msg));
+         booking = JSON.parse(msg);
+//        
+        counterdate = 0 ;
+            showTableBook();
+        
+    });
 }
 function courtview(ct, day) {
 
@@ -239,7 +280,7 @@ function courtview(ct, day) {
         document.getElementById("courtja").innerHTML = obj.court.court_name;
         price = obj.price.price;
 
-        alert(price);
+        //alert(price);
         document.getElementById("priceja").innerHTML = price;
         document.getElementById("sumprice").innerHTML = price / 2 + "(30 นาที )";
 
@@ -256,7 +297,9 @@ function courtview(ct, day) {
 
 $(function () {
 
-    $(".date-picker").datepicker();
+    $(".date-picker").datepicker().on('changeDate', function(e){
+        getbooking_new();
+    });
     var myDate = new Date();
     var prettyDate = (myDate.getMonth() + 1) + '/' + myDate.getDate() + '/' +
             myDate.getFullYear();
@@ -268,12 +311,10 @@ $(function () {
     var starttime = null;
     var show = ' ';
     var showid;
-    val = $('.date-picker').datepicker('setDate', 'today');
-    showTableBook();
+    //val = $('.date-picker').datepicker('setDate', 'today');
+    showTableBook(curdate.val());
     
-    $(".date-picker").on("change", function () {
-        showTableBook();
-    });
+
 
 ////////////////////////////////
 //////////////////////////////
@@ -313,8 +354,10 @@ $(function () {
 function showTableBook() {
 
      val = $('.date-picker').datepicker('getDate').toDateString();
+     
+     
     datesendnaja = $('.date-picker').val();
-
+    
     var date_elements = datesendnaja.split('/');
     date_inverse = date_elements[2] + '-' + date_elements[0] + '-' + date_elements[1];
     var href = window.location.pathname;
@@ -322,7 +365,8 @@ function showTableBook() {
     var id = href.substr(href.lastIndexOf('/') + 1);
 
 //            var id = <?php echo $this->uri->segment(3); ?>;
-    console.log($('.date-picker').val());
+    console.log('select   '+datesendnaja);
+    console.log('cureent '+curdate.val());
     val = val.split(' ');
     var weekday = new Array();
     weekday['Mon'] = "จันทร์";
@@ -345,8 +389,8 @@ function showTableBook() {
         url: fullpart,
         data: {date: val[0], stId: id}
     }).done(function (msg) {
-
-        console.log(msg);
+        
+        //console.log(msg);
         var obj = JSON.parse(msg);
         console.log(obj.time.open_time);
         console.log(time2.indexOf(obj.open_time));
@@ -360,26 +404,29 @@ function showTableBook() {
         show = ' ';
         selectja = ' ';
         showtd = '';
-
-
-
-
-
-////                    selectja = selectja + '<option>' + time1[starttime] + '</option>'
-//                 for(k=0;k < 2 ; k++){
-//                     for (starttime; starttime < endtimeja; starttime++) {
-//                         show = show + '<tr id="t' + (parseInt(starttime) + 1) + '" onmousedown="RowClick(this,false);"><td style="width: 110px; text-align: center">' + time1[starttime] + '</td>';
-//                    showtd = showtd + '<td class="span6">'+k+','+starttime+','+endtimeja+'</td>';
-//                    }
-//                show = show+showtd+'</tr>';
-//                }
+        //alert(booking[0].court_id);
 
         for (starttime; starttime < endtimeja; starttime++) {
 
-            show = show + '<tr><td style="width: 110px; text-align: center">' + time1[starttime] + '</td>';
+            show = show + '<tr id="t' + (parseInt(starttime) + 1) +'"><td style="width: 110px; text-align: center">' + time1[starttime] + '</td>';
             for (k = 0; k < $('#countcort').val(); k++) {
-                show = show + '<td class="span6" id="t' + (parseInt(starttime) + 1) + '" onmousedown="RowClick(this,false);" value="' + obj.court[k].court_id + '"></td>';
+                show = show + '<td class="span6 c'+ obj.court[k].court_id +'"  onmousedown="RowClick(this,false);" id="'+ (parseInt(starttime) + 1) +'" value="' + obj.court[k].court_id + '">';
+                   
+               if (counterdate < booking.length){
+                    x_start = new Date('2013-01-01 ' +booking[counterdate].start).getTime()/1000;
+                    x_end = new Date('2013-01-01 ' +booking[counterdate].end).getTime()/1000;
+                    y_start = new Date('2013-01-01 ' +time2[starttime]).getTime()/1000;
+                    
+                    if(booking[counterdate].court_id== obj.court[k].court_id && y_start>=x_start && y_start<x_end){
+                            show = show +'xx';
+                            counterdate++;
+                            console.log('counterdate= '+counterdate);
+                    }
 
+
+                    show = show + '</td>';
+
+                }
             }
             show = show + '</tr>';
         }
@@ -401,7 +448,7 @@ function showTableBook() {
 
 
     });
-    getbooking(id);
+    
 
 
 

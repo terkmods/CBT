@@ -13,10 +13,62 @@ class stadium extends CI_Controller {
         $this->load->model('news_model', 'news');
         $this->load->model('gallery_model', 'img');
         $this->load->library('session');
+                $this->load->model('booking_model', 'booking');
+  
+        $this->load->helper('date');
     }
 
     function index() {
+        $datestring = "%Y-%m-%d";
+        $date = mdate($datestring);
         if ($this->session->userdata('logged')) {
+
+            $userid = $this->session->userdata('id');
+            $ownerid = $this->getOwnerid($userid);
+
+
+            $datasend = array(
+                'ow' => $this->getOwner($userid),
+                'stadium' => $this->mystadium->getstadium($ownerid)
+                    
+            );
+            $stID = null;
+            foreach ($datasend['stadium'] as $d) {
+                $stID[] = $d->stadium_id;
+            }
+            if ($stID != null) {
+
+                foreach ($stID as $r) {
+                    $totalcourt[] = $this->mystadium->getTotalcourt($r);
+                    $totalbooking = $this->booking->getbookingDashboard($r, $date);
+                }
+                $x;
+                for ($i = 0; $i < sizeof($stID); $i++) {
+                    if ($totalcourt[$i]->courtnum != 0) {
+                        $this->db->update('stadium', array('court_check' => 1), array('stadium_id' => $stID[$i]));
+                    } else if ($totalcourt[$i]->courtnum == 0) {
+                        $this->db->update('stadium', array('court_check' => 0), array('stadium_id' => $stID[$i]));
+                    }
+                    $datasend['total'] = $totalcourt;
+                    $datasend['totalbooking'] = $totalbooking;
+                    
+                }
+                $datasend['date'] = $date ;
+                print_r($datasend['totalbooking']);
+            } else {
+                $this->session->set_flashdata('msg', 'กรุณาเพิ่มสนาม');
+            }
+
+   
+
+            $this->load->view("dashboard", $datasend);
+            //print_r($datasend);
+        } else {
+            echo 'session no';
+        }
+    }
+    function managestadium(){
+       if ($this->session->userdata('logged')) {
 
             $userid = $this->session->userdata('id');
             $ownerid = $this->getOwnerid($userid);
@@ -56,7 +108,7 @@ class stadium extends CI_Controller {
             //print_r($datasend);
         } else {
             echo 'session no';
-        }
+        } 
     }
 
     function add() {
