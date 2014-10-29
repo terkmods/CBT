@@ -1,5 +1,5 @@
 <div class="tab-pane" id="addtime">
-    <form action="rust" method="post">
+    <form  method="post" role="form" action="<?= base_url() ?>stadium/updatetime/<?= $this->uri->segment(3) ?>">
         <div class="col-md-8 col-md-offset-2 well" style="margin-top: 20px">
             <div class="row">
                 <legend class="text-center">เวลาเปิดบริการ</legend>
@@ -28,9 +28,9 @@
 
 
                             </td>
-                            <td><input type="checkbox" name="day" value="2" checked></td>
-                            <td><input type="time" name="open" class="form-control input-sm" value="19:00:00"></td>
-                            <td><input type="time" name="close" class="form-control input-sm" value="05:00:00"></td>
+                            <td><input type="checkbox" name="day[]" value="0" class="checkboxmon" checked="checked"></td>
+                            <td><input type="time" id="txtBoxmon" name="open[]" class="form-control input-sm" value="19:00:00"></td>
+                            <td><input type="time" id="txtBoxmon1" name="close[]" class="form-control input-sm" value="05:00:00"></td>
 
                         </tr>
 
@@ -50,9 +50,9 @@
 
 
                             </td>
-                            <td><input type="checkbox" name="day" value="3" checked></td>
-                            <td><input type="time" name="open" class="form-control input-sm" value="19:00:00"></td>
-                            <td><input type="time" name="close" class="form-control input-sm" value="05:00:00"></td>
+                            <td><input type="checkbox" name="day[]" class="checkboxtue" value="1" checked></td>
+                            <td><input type="time" name="open[]" id="txtBoxtue" class="form-control input-sm" value="19:00:00"></td>
+                            <td><input type="time" name="close[]" id="txtBoxtue1" class="form-control input-sm" value="05:00:00"></td>
 
                         </tr>
 
@@ -72,9 +72,9 @@
 
 
                             </td>
-                            <td><input type="checkbox" name="day" value="4" checked></td>
-                            <td><input type="time" name="open" class="form-control input-sm" value="19:00:00"></td>
-                            <td><input type="time" name="close" class="form-control input-sm" value="05:00:00"></td>
+                            <td><input type="checkbox" name="day[]" class="checkboxwed" value="2" checked></td>
+                            <td><input type="time" name="open[]" id="txtBoxwed" class="form-control input-sm" value="19:00:00"></td>
+                            <td><input type="time" name="close[]" id="txtBoxwed1" class="form-control input-sm" value="05:00:00"></td>
 
                         </tr>
 
@@ -94,9 +94,9 @@
 
 
                             </td>
-                            <td><input type="checkbox" name="day" value="5" checked></td>
-                            <td><input type="time" name="open" class="form-control input-sm" value="19:00:00"></td>
-                            <td><input type="time" name="close" class="form-control input-sm" value="05:00:00"></td>
+                            <td><input type="checkbox" name="day[]" value="3" class="checkboxthu" checked></td>
+                            <td><input type="time" name="open[]" id="txtBoxthu" class="form-control input-sm" value="19:00:00"></td>
+                            <td><input type="time" name="close[]" id="txtBoxthu1" class="form-control input-sm" value="05:00:00"></td>
 
                         </tr>
 
@@ -116,9 +116,9 @@
                                 ศุกร์
 
                             </td>
-                            <td><input type="checkbox" name="day" value="6" checked></td>
-                            <td><input type="time" name="open" class="form-control input-sm" value="19:00:00"></td>
-                            <td><input type="time" name="close" class="form-control input-sm" value="05:00:00"></td>
+                            <td><input type="checkbox" name="day[]" value="4" class="checkboxfri" checked></td>
+                            <td><input type="time" name="open[]" id="txtBoxfri" class="form-control input-sm" value="19:00:00"></td>
+                            <td><input type="time" name="close[]" id="txtBoxfri1" class="form-control input-sm" value="05:00:00"></td>
 
                         </tr>
 
@@ -138,18 +138,18 @@
 
                                 เสาร์
                             </td>
-                            <td><input type="checkbox" name="day" value="7" checked></td>
-                            <td><input type="time" name="open" class="form-control input-sm" value="19:00:00"></td>
-                            <td><input type="time" name="close" class="form-control input-sm" value="05:00:00"></td>
+                            <td><input type="checkbox" name="day[]" value="5" class="checkboxsta" checked></td>
+                            <td><input type="time" name="open[]" id="txtBoxsta" class="form-control input-sm" value="19:00:00"></td>
+                            <td><input type="time" name="close[]" id="txtBoxsta1" class="form-control input-sm" value="05:00:00"></td>
 
                         </tr>
                         <tr>
                             <td>
                                 อาทิตย์    
                             </td>
-                            <td><input type="checkbox" name="day" value="1" checked></td>
-                            <td><input type="time" name="open" class="form-control input-sm" value="19:00:00"></td>
-                            <td><input type="time" name="close" class="form-control input-sm" value="05:00:00"></td>
+                            <td><input type="checkbox" name="day[]" value="6" class="checkboxsun" checked></td>
+                            <td><input type="time" name="open[]" id="txtBoxsun" class="form-control input-sm" value="19:00:00"></td>
+                            <td><input type="time" name="close[]" id="txtBoxsun1"  class="form-control input-sm" value="05:00:00"></td>
 
                         </tr>
 
@@ -163,9 +163,10 @@
                 </div>
             </div>
         </div>
+        <input type="hidden" name="check" value="<?=count($showtime)?>">
     </form>
 
-    <div class="col-md-5 pull-left " style="padding-top: 2px;margin-top: 10px">
+<!--    <div class="col-md-5 pull-left " style="padding-top: 2px;margin-top: 10px">
         <form  method="post" role="form" action="<?= base_url() ?>stadium/updatetime/<?= $this->uri->segment(3) ?>">
 
             <?php foreach ($showtime as $r) { ?>
@@ -315,7 +316,7 @@
                     </select>    
                 </div>
             <?php } ?>
-            <!-- <div class="radio">
+             <div class="radio">
                   <label>
                       <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
                       Per-hour <small>(example 8.00-9.00 )</small>
@@ -328,7 +329,7 @@
                       <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
                       Per-half-hour <small>(example 8.30-9.00) </small>
                   </label>
-              </div>-->
+              </div>
 
 
             <div class="col-md-12 form-group">
@@ -336,7 +337,7 @@
                 <button type="submit" class="btn btn-default">Edit</button>
             </div>
         </form>
-    </div>   
+    </div>   -->
 
 
 </div>

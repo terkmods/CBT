@@ -23,70 +23,77 @@
             <div class="form-group">
                 <label for="inputPassword1" class="col-lg-2 control-label">Price</label>
                 <div id="add" >
-                    <div class="col-lg-10" >    
-                        <div class="col-md-3" style="margin-top:10px ;padding: 0; ">  
-                            <h5>จันทร์</h5> 
-                        </div>
-                        <div class="col-md-3" style="margin-top:10px ;padding:  0; ">
-                            <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชั่วโมง " name="price1">
-                        </div>
+                    
+                        <div class="col-lg-10" >    
+                            <div class="col-md-3" style="margin-top:10px ;padding: 0; ">  
+                                <h5>จันทร์</h5> 
+                            </div>
+                            <div class="col-md-3" style="margin-top:10px ;padding:  0; ">
+                                <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชั่วโมง " name="price1[]">
+                            </div>
 
-                    </div> <!--add-->
-                    <div class="col-lg-10 col-md-offset-2">    
-                        <div class="col-md-3" style="margin-top:10px ;padding: 0; ">  
-                            <h5>อังคาร</h5> 
-                        </div>
-                        <div class="col-md-3" style="margin-top:10px ;padding:  0; ">
-                            <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชั่วโมง " name="price1">
-                        </div>
+                        </div> <!--add-->
+                         <div class="col-lg-10 col-md-offset-2" >    
+                            <div class="col-md-3" style="margin-top:10px ;padding: 0; ">  
+                                <h5>อังคาร</h5> 
+                            </div>
+                            <div class="col-md-3" style="margin-top:10px ;padding:  0; ">
+                                <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชั่วโมง " name="price1[]">
+                            </div>
 
-                    </div> <!--add-->
-                    <div class="col-lg-10 col-md-offset-2">    
-                        <div class="col-md-3" style="margin-top:10px ;padding: 0; ">  
-                            <h5>พุธ</h5>  
-                        </div>
-                        <div class="col-md-3" style="margin-top:10px ;padding:  0; ">
-                            <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชั่วโมง " name="price1">
-                        </div>   
-                    </div> <!--add-->
-                    <div class="col-lg-10 col-md-offset-2">    
-                        <div class="col-md-3" style="margin-top:10px ;padding: 0; ">  
-                            <h5>พฤหัสบดี</h5> 
-                        </div>
-                        <div class="col-md-3" style="margin-top:10px ;padding:  0; ">
-                            <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชั่วโมง " name="price1">
-                        </div>
-                    </div> <!--add-->
-                    <div class="col-lg-10 col-md-offset-2">    
-                        <div class="col-md-3" style="margin-top:10px ;padding: 0; ">  
-                            <h5>ศุกร์</h5> 
-                        </div>
-                        <div class="col-md-3" style="margin-top:10px ;padding:  0; ">
-                            <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชั่วโมง " name="price1">
-                        </div>
-                    </div> <!--add-->
-                    <div class="col-lg-10 col-md-offset-2">    
-                        <div class="col-md-3" style="margin-top:10px ;padding: 0; ">  
-                            <h5>เสาร์</h5> 
-                        </div>
-                        <div class="col-md-3" style="margin-top:10px ;padding:  0; ">
-                            <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชั่วโมง " name="price1">
-                        </div>
-                    </div> <!--add-->
-                    <div class="col-lg-10 col-md-offset-2">    
-                        <div class="col-md-3" style="margin-top:10px ;padding: 0; ">  
-                            <h5>อาทิตย์</h5> 
-                        </div>
-                        <div class="col-md-3" style="margin-top:10px ;padding:  0; ">
-                            <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชั่วโมง " name="price1">
-                        </div>
-                    </div> <!--add-->
+                        </div> <!--add-->
+                                               <div class="col-lg-10 col-md-offset-2" >    
+                            <div class="col-md-3" style="margin-top:10px ;padding: 0; ">  
+                                <h5>พุธ</h5> 
+                            </div>
+                            <div class="col-md-3" style="margin-top:10px ;padding:  0; ">
+                                <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชั่วโมง " name="price1[]">
+                            </div>
+
+                        </div> <!--add-->
+                                               <div class="col-lg-10 col-md-offset-2" >    
+                            <div class="col-md-3" style="margin-top:10px ;padding: 0; ">  
+                                <h5>พฤหัสบดี</h5> 
+                            </div>
+                            <div class="col-md-3" style="margin-top:10px ;padding:  0; ">
+                                <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชั่วโมง " name="price1[]">
+                            </div>
+
+                        </div> <!--add-->
+                                               <div class="col-lg-10 col-md-offset-2" >    
+                            <div class="col-md-3" style="margin-top:10px ;padding: 0; ">  
+                                <h5>ศุกร์</h5> 
+                            </div>
+                            <div class="col-md-3" style="margin-top:10px ;padding:  0; ">
+                                <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชั่วโมง " name="price1[]">
+                            </div>
+
+                        </div> <!--add-->
+                                               <div class="col-lg-10 col-md-offset-2" >    
+                            <div class="col-md-3" style="margin-top:10px ;padding: 0; ">  
+                                <h5>เสาร์</h5> 
+                            </div>
+                            <div class="col-md-3" style="margin-top:10px ;padding:  0; ">
+                                <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชั่วโมง " name="price1[]">
+                            </div>
+
+                        </div> <!--add-->
+                                               <div class="col-lg-10 col-md-offset-2" >    
+                            <div class="col-md-3" style="margin-top:10px ;padding: 0; ">  
+                                <h5>อาทิตย์</h5> 
+                            </div>
+                            <div class="col-md-3" style="margin-top:10px ;padding:  0; ">
+                                <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชั่วโมง " name="price1[]">
+                            </div>
+
+                        </div> <!--add-->
+                    
 
 
                 </div>
             </div>
 
-            
+
 
             <div class="form-group">
                 <div class="col-lg-offset-1 col-lg-10" style="">
@@ -97,44 +104,56 @@
 
 
     </div>
-    <div class="row">
-        <div class="col-md-12" style="margin-top: 17px">
+    
+        <div class="col-md-12" style="margin-top: 17px; overflow-x: scroll">
 
 
             <h5>Court Total : <?= $total->courtnum ?> court</h5>
             <form action="<?php echo base_url() ?>stadium/delcourt" method="post">
-                <table class="table tablecompare">
+                <table class=" table table-striped table-hover ">
                     <thead style="text-align: center">
 
                         <tr>
 
-                            <th style="text-align: center">Court Name</th>
-
-                            <th style="text-align: center">Price Monday-Friday</th>
-                            <th style="text-align: center">Price Saturday-Sunday</th> 
-                            <th style="text-align: center">Floor Type</th>
+                            <th style="text-align: center"></th>
+                            <?php foreach ($court as $c) { ?>
+                                <td style="text-align: center"><h4><?= $c['court_name'] ?></h4><small><?= $c['type'] ?></small></td>
+                                    <?php } ?>
                         </tr>
                     </thead>
                     <tbody>
+                      
+                        <?php
+                        $i = 0;
+                        $k = 0;
+                        $html = null;
+                        $day = array ('Monday','Tuesday','Wedday','Thursday','Friday','Starday','Sunday');
+                        for ($i; $i< 7 ;$i++) {
+                            $html = $html . '<tr style=" text-align: center";>';
 
-                        <?php foreach ($court as $ct) { ?>
-                            <tr >
-
-                                <td><?= $ct['court_name'] ?></td>
-
-                                <td><?= $ct['m_f_price'] ?> Bath</td>
-                                <td><?= $ct['st_sun_price'] ?> Bath</td>
-
-                                <td><?= $ct['type'] ?></td>
-                                <td><a href=" <?php echo base_url() ?>stadium/delcourt/<?= $ct['court_id'] ?>/<?= $ct['stadium_id'] ?> " class="btn btn-danger btn-sm ">Cancle</a></td>
-                            </tr>
-
-                        <?php } ?> 
+                            $html = $html . '<td>' . $day[($courtprice[$i]['type'])] . '</td>';
+                            
+                                for($k ; $k < count($court);$k++){
+                                 $html = $html . ' <td> ' . $courtprice[$i+(7*$k)]['price'] . ' Bath</td>';
+                             }
+                                $html = $html . '</tr >';
+                                $k=0;
+                            
+                        }
+                        ?>
+                        <?= $html ?> 
+<!--                        <td><a href=" <?php echo base_url() ?>stadium/delcourt/<?= $ct['court_id'] ?>/<?= $ct['stadium_id'] ?> " class="btn btn-danger btn-sm ">Cancle</a></td>-->
+                        <tr>
+                            <td></td>
+                             <?php foreach ($court as $c) { ?>
+                            <td style="text-align: center"><a href=" " class="btn btn-primary btn-sm">EDIT</a><br><a href="" class="btn btn-danger btn-sm">Delete</a></td>
+                                    <?php } ?>
+                        </tr>
                     </tbody>
                 </table>
             </form>
 
 
         </div>
-    </div>
+    
 </div>

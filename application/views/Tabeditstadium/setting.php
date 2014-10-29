@@ -100,7 +100,7 @@
             <div id="map-canvas" ></div> 
         </div>
 
-        <h4>Facility</h4>
+<!--        <h4>Facility</h4>
         <div class="row">
 
             <div class="col-md-2 pull-left text-right" style="padding-top: 15px">
@@ -119,7 +119,7 @@
                 </div>
             </div>
 
-        </div>
+        </div>-->
         <div class="row">
             <input type='submit' value="Update" class="btn btn-info">
         </div>

@@ -13,8 +13,8 @@ class stadium extends CI_Controller {
         $this->load->model('news_model', 'news');
         $this->load->model('gallery_model', 'img');
         $this->load->library('session');
-                $this->load->model('booking_model', 'booking');
-  
+        $this->load->model('booking_model', 'booking');
+
         $this->load->helper('date');
     }
 
@@ -30,7 +30,6 @@ class stadium extends CI_Controller {
             $datasend = array(
                 'ow' => $this->getOwner($userid),
                 'stadium' => $this->mystadium->getstadium($ownerid)
-                    
             );
             $stID = null;
             foreach ($datasend['stadium'] as $d) {
@@ -51,15 +50,14 @@ class stadium extends CI_Controller {
                     }
                     $datasend['total'] = $totalcourt;
                     $datasend['totalbooking'] = $totalbooking;
-                    
                 }
-                $datasend['date'] = $date ;
+                $datasend['date'] = $date;
                 print_r($datasend['totalbooking']);
             } else {
                 $this->session->set_flashdata('msg', 'กรุณาเพิ่มสนาม');
             }
 
-   
+
 
             $this->load->view("dashboard", $datasend);
             //print_r($datasend);
@@ -67,8 +65,9 @@ class stadium extends CI_Controller {
             echo 'session no';
         }
     }
-    function managestadium(){
-       if ($this->session->userdata('logged')) {
+
+    function managestadium() {
+        if ($this->session->userdata('logged')) {
 
             $userid = $this->session->userdata('id');
             $ownerid = $this->getOwnerid($userid);
@@ -108,7 +107,7 @@ class stadium extends CI_Controller {
             //print_r($datasend);
         } else {
             echo 'session no';
-        } 
+        }
     }
 
     function add() {
@@ -206,9 +205,10 @@ class stadium extends CI_Controller {
         //echo $id;
         $data = array(
             'data' => $this->mystadium->setstadium($id), //row
-            'facility' => $this->mystadium->showfacility($id), //result_array
+//            'facility' => $this->mystadium->showfacility($id), //result_array
             'showtime' => $this->mystadium->getTime($id), //result_array  
-            'court' => $this->mystadium->gettableCourt($id), //result_array  getTotalcourt
+            'courtprice' => $this->mystadium->getcourtprice($id), 
+            'court' => $this->mystadium->gettableCourt($id),//result_array  getTotalcourt
             'total' => $this->mystadium->getTotalcourt($id), //result_array  getTotalcourt
             'blacklist' => $this->myusers->get_blacklist($id),
             'coach' => $this->mycoach->get_all_coach(),
@@ -218,8 +218,15 @@ class stadium extends CI_Controller {
 
         //print_r($data['total']);
         //echo $this->mystadium->settime($id);
-        // print_r($data['showtime']);
+       // print_r($data['courtprice']);
         $this->load->view("editstadium", $data);
+    }
+    function facility($stId){
+        $data = array(
+          'facility' => $this->mystadium->showfacility($stId),  
+        );
+        //print_r($data['facility']);
+        $this->load->view("facility_view",$data);
     }
 
     function locatestadium() {
@@ -244,22 +251,43 @@ class stadium extends CI_Controller {
     }
 
     function updatetime($stId) {
-
+        $open = $this->input->post('open');
+        $close = $this->input->post('close');
+        $day = $this->input->post('day');
+        $check = $this->input->post('check');
+            print_r($open);
+            echo '////////////';
+            print_r($close);
+            echo '////////////';
+        
+        print_r($day);
+        echo $check;
         $data = array(
             'stadium_id' => $stId,
-            'open_time' => $this->input->post('opentime'),
-            'end_time' => $this->input->post('endtime'),
+            'open_time' => $this->input->post('open'),
+            'end_time' => $this->input->post('close'),
             'type' => $this->input->post('type')
         );
 
         //echo $data['type']['0'];
-        for ($r = 0; $r < 2; $r++) {
-            $sql = 'UPDATE  `backeyefin_cbt`.`stadium_time` SET  `open_time` =  ' . $data['open_time'][$r] . ',
-                `end_time` =  ' . $data['end_time'][$r] . '
-                 WHERE `stadium_time`.`stadium_id` = ' . $stId . ' And type ="' . $data['type'][$r] . '"';
-            $this->db->query($sql);
+        if ($check != 0) {
+            for ($r = 0; $r < count($day); $r++) {
+                for($k =0 ;$k< count($open); $k++){
+            $sql = "UPDATE  `backeyefin_cbt`.`stadium_time` SET  `open_time` =  '".$open[$k]."',
+            `end_time` =  '".$close[$k]."',
+            `isopen` =  '1' WHERE  `stadium_time`.`stadium_id` =".$stId." AND  `stadium_time`.`type` =  '".$day[$r]."'";
+            
+                }
+                $this->db->query($sql);
+                }
+        } else {
+            for ($r = 0; $r < count($open); $r++) {
+                $sql = "INSERT INTO `backeyefin_cbt`.`stadium_time` (`stadium_id`, `open_time`, `end_time`, `type`, `isopen`)"
+                        . " VALUES ('" . $stId . "', '" . $open[$r] . "', '" . $close[$r] . "', '" . $r . "', '0')";
+                $this->db->query($sql);
+            }
         }
-        $this->updatestadium($stId);
+//        $this->updatestadium($stId);
     }
 
     function editstadium($stId) {
@@ -364,7 +392,7 @@ class stadium extends CI_Controller {
         }
         $this->pagination->initialize($config);
         $st = array('data' => $this->mystadium->getstadiumprofile($stId),
-            'facility' => $this->mystadium->showfacility($stId),
+//            'facility' => $this->mystadium->showfacility($stId),
             'court' => $this->mystadium->gettableCourt($stId), //result_array  getTotalcourt
             'total' => $this->mystadium->getTotalcourt($stId),
             'floor' => $this->mystadium->getfloor($stId),
@@ -440,15 +468,14 @@ class stadium extends CI_Controller {
             'type' => $this->input->post('type')
         );
         $this->db->insert("court", $data);
-        $dataprice = array(
-            'court_id' => $maxstadium,
-            'm_f_price' => $this->input->post('price1'),
-            'm_f' => $this->input->post('typedate1'),
-            'st_sun_price' => $this->input->post('price2'),
-            'st_sun' => $this->input->post('typedate2')
-        );
+        
+        
+        $price = $this->input->post('price1');
+        for($i=0;$i<count($price);$i++){
+            $this->mystadium->addcourtprice($maxstadium,$price[$i],$i);
+        }
         // print_r($dataprice);
-        $this->db->update("court", $dataprice, array('court_id' => $maxstadium));
+//        $this->db->update("court", $dataprice, array('court_id' => $maxstadium));
         // $this->mystadium->addcourttime($dataprice, $data['stadium_id']);
         $this->session->set_flashdata('msg', 'เพิ่มคอร์ดเรียบร้อย');
         redirect('stadium/updatestadium/' . $id . '?type=1');
@@ -561,39 +588,33 @@ class stadium extends CI_Controller {
         );
         $this->load->view("gallery", $data);
     }
-    
-    function announcement($id){
-       $data = array(
-            'all_news' => $this->news->getallNews($id)           
-        );    
-        $this->load->view("announcement", $data); 
+
+    function announcement($id) {
+        $data = array(
+            'all_news' => $this->news->getallNews($id)
+        );
+        $this->load->view("announcement", $data);
     }
-    
-    function blacklist($id){
-        $data = array(      
-            'blacklist' => $this->myusers->get_blacklist($id)       
+
+    function blacklist($id) {
+        $data = array(
+            'blacklist' => $this->myusers->get_blacklist($id)
         );
         $this->load->view("blacklist", $data);
-        
     }
-    
-    function coach($id){
+
+    function coach($id) {
         $data = array(
             'data' => $this->mystadium->setstadium($id), //row
-            'facility' => $this->mystadium->showfacility($id), //result_array
-            'showtime' => $this->mystadium->getTime($id), //result_array  
-            'court' => $this->mystadium->gettableCourt($id), //result_array  getTotalcourt
-            'total' => $this->mystadium->getTotalcourt($id), //result_array  getTotalcourt
-            'blacklist' => $this->myusers->get_blacklist($id),
-            'coach' => $this->mycoach->get_all_coach(),
-            'all_news' => $this->news->getallNews($id),
-            'img' => $this->img->getGallery($id)
+
+            'coach' => $this->mycoach->get_all_coach()
+
         );
 
-        
+
         $this->load->view("coach", $data);
-        
     }
+
 }
 ?>
        
