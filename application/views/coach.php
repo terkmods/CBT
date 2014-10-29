@@ -70,8 +70,10 @@ $num = 1;
         <li >
             <a  href="<?= base_url() ?>stadium/updatestadium/<?=$this->uri->segment(3)?>" >&nbsp;&nbsp;&nbsp;Basic Infomation </a>           
         </li>
-        
-        <li class="active">
+                <li >
+            <a href="<?= base_url() ?>stadium/facility/<?=$this->uri->segment(3)?>">&nbsp;&nbsp;&nbsp;Facility </a>           
+        </li>
+        <li >
             <a href="<?= base_url() ?>stadium/coach/<?=$this->uri->segment(3)?>">&nbsp;&nbsp;&nbsp;Coach </a>           
         </li>
         <li >
@@ -83,6 +85,7 @@ $num = 1;
         <li >
             <a href="<?= base_url() ?>stadium/gallery/<?=$this->uri->segment(3)?>">&nbsp;&nbsp;&nbsp;Gallery </a>           
         </li>
+        
         
         <li><a href="<?= base_url() ?>stadium/historyBooking">History Booking stadium </a></li>
         

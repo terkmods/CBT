@@ -28,6 +28,12 @@ class Stadium_model extends CI_Model {
 
         return $query;
     }
+        function getcourtprice($stId) {
+        $query = $this->db->query('select * from court join court_price on court.court_id = court_price.court_id where court.stadium_id = ' . $stId)->result_array();
+        ;
+
+        return $query;
+    }
 
     function getonecourt($stId) {
         $query = $this->db->query('select * from court where court_id = ' . $stId)->row();
@@ -162,6 +168,12 @@ join User on User.user_id = owner.user_id
         }
         $this->db->query($sql);
     }
+    public function addcourtprice($c_id,$price,$i){
+        
+        $sql = "INSERT INTO `backeyefin_cbt`.`court_price` (`court_id`, `price`, `type`) VALUES ('".$c_id."', '".$price."', '".$i."')";
+        $this->db->query($sql);
+       
+    }
 
     public function addtime($data, $stId) {
 
@@ -213,7 +225,7 @@ join User on User.user_id = owner.user_id
     }
 
     function showfacility($stId) {
-        $query = $this->db->query('select facility from stadium join facility where facility.stadium_id = ' . $stId . ' and stadium.stadium_id = ' . $stId)->result_array();
+        $query = $this->db->query('select facility,addon,isShow from stadium join facility where facility.stadium_id = ' . $stId . ' and stadium.stadium_id = ' . $stId)->result_array();
         return $query;
     }
 
@@ -269,7 +281,7 @@ join User on User.user_id = owner.user_id
     }
 
     public function getLatLngAll() {
-        $query = $this->db->query('SELECT stadium_name, m_f_price,st_sun_price,court.stadium_id,lat,stadium.long,address_no,soi,road,district,province,tel,stadium_path
+        $query = $this->db->query('SELECT stadium_name, court.stadium_id,lat,stadium.long,address_no,soi,road,district,province,tel,stadium_path
 FROM  `stadium` join court on stadium.stadium_id = court.stadium_id 
 WHERE stadium.lat IS NOT NULL  ')->result_array();
 

@@ -70,7 +70,9 @@ $num = 1;
         <li class="active">
             <a  href="<?= base_url() ?>stadium/updatestadium/<?=$this->uri->segment(3)?>" >&nbsp;&nbsp;&nbsp;Basic Infomation </a>           
         </li>
-        
+                <li >
+            <a href="<?= base_url() ?>stadium/facility/<?=$this->uri->segment(3)?>">&nbsp;&nbsp;&nbsp;Facility </a>           
+        </li>
         <li >
             <a href="<?= base_url() ?>stadium/coach/<?=$this->uri->segment(3)?>">&nbsp;&nbsp;&nbsp;Coach </a>           
         </li>
@@ -83,6 +85,7 @@ $num = 1;
         <li >
             <a href="<?= base_url() ?>stadium/gallery/<?=$this->uri->segment(3)?>">&nbsp;&nbsp;&nbsp;Gallery </a>           
         </li>
+        
         
         <li><a href="<?= base_url() ?>stadium/historyBooking">History Booking stadium </a></li>
         
@@ -170,7 +173,7 @@ $num = 1;
         if(getUrlVars().type == 1){
    
        
-            $('#myTab li:eq(1) a').tab('show')
+            $('#myTab li:eq(2) a').tab('show')
     }else if(getUrlVars().type == 4){
         
         
@@ -570,6 +573,87 @@ $num = 1;
     }
 
 </script>
+<script>
+    $(document).ready(function(){
+    $('.checkboxmon').click(function(){
+        if (this.checked) {
+            $('#txtBoxmon').removeAttr("disabled");
+            $('#txtBoxmon1').removeAttr("disabled");
+          
+        } else {
+            $("#txtBoxmon").attr("disabled", true);
+            $("#txtBoxmon1").attr("disabled", true);
+           
+        }
+    });
+    $('.checkboxtue').click(function(){
+        if (this.checked) {
+            $('#txtBoxtue').removeAttr("disabled");
+            $('#txtBoxtue1').removeAttr("disabled");
+          
+        } else {
+            $("#txtBoxtue").attr("disabled", true);
+            $("#txtBoxtue1").attr("disabled", true);
+           
+        }
+    });
+    $('.checkboxwed').click(function(){
+        if (this.checked) {
+            $('#txtBoxwed').removeAttr("disabled");
+            $('#txtBoxwed1').removeAttr("disabled");
+          
+        } else {
+            $("#txtBoxwed").attr("disabled", true);
+            $("#txtBoxwed1").attr("disabled", true);
+           
+        }
+    });
+    $('.checkboxthu').click(function(){
+        if (this.checked) {
+            $('#txtBoxthu').removeAttr("disabled");
+            $('#txtBoxthu1').removeAttr("disabled");
+          
+        } else {
+            $("#txtBoxthu").attr("disabled", true);
+            $("#txtBoxthu1").attr("disabled", true);
+           
+        }
+    });
+    $('.checkboxfri').click(function(){
+        if (this.checked) {
+            $('#txtBoxfri').removeAttr("disabled");
+            $('#txtBoxfri1').removeAttr("disabled");
+          
+        } else {
+            $("#txtBoxfri").attr("disabled", true);
+            $("#txtBoxfri1").attr("disabled", true);
+           
+        }
+    });
+    $('.checkboxsta').click(function(){
+        if (this.checked) {
+            $('#txtBoxsta').removeAttr("disabled");
+            $('#txtBoxsta1').removeAttr("disabled");
+          
+        } else {
+            $("#txtBoxsta").attr("disabled", true);
+            $("#txtBoxsta1").attr("disabled", true);
+           
+        }
+    });
+    $('.checkboxsun').click(function(){
+        if (this.checked) {
+            $('#txtBoxsun').removeAttr("disabled");
+            $('#txtBoxsun1').removeAttr("disabled");
+          
+        } else {
+            $("#txtBoxsun").attr("disabled", true);
+            $("#txtBoxsun1").attr("disabled", true);
+           
+        }
+    });
+});
+    </script>
 
 
 <?php include 'template/footer_scrpit.php'; ?>
