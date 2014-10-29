@@ -137,8 +137,8 @@ join User on User.user_id = owner.user_id
 
 
 
-            $sql = 'INSERT INTO  `backeyefin_cbt`.`facility` (`stadium_id` ,`facility`)
-                VALUES (' . $stId . ',  "' . $r . '")';
+            $sql = 'INSERT INTO  `backeyefin_cbt`.`facility` (`stadium_id`, `facility`, `addon`, `isShow`)
+                VALUES (' . $stId . ',  "' . $r . '","1","1")';
 
             $this->db->query($sql);
         }

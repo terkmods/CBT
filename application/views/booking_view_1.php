@@ -20,19 +20,20 @@
 
     <div class="well well-sm" style="text-align:center">
         <h4>Booking System</h4>
-</div>
+    </div>
     <!--    ส่วนจอง-->
     <div class="container" >
-      
+
         <div class="row">
-            <div class="control-group col-md-3 col-md-offset-4">
+            <div class="well control-group col-md-3 col-md-offset-4">
 
                 <div class="controls">
                     <div class="input-group">
-                        <label for="date-pik" class="input-group-addon btn form-control">
+                        <label for="date-pik" class="input-group-addon btn ">
                             <span class="glyphicon glyphicon-calendar"></span> เลือกวัน
                         </label>
                         <input  type="text" id="date-pik" class="date-picker form-control" />
+
 
                     </div>
                 </div>
@@ -48,9 +49,9 @@
                         </label>
                         <select class="form-control" id="courtselect" onchange="courtchange()">
                             <option value="default">เลือกคอร์ด </option> 
-                            <?php foreach ($court as $ct) { ?>        
-                                <option value="<?= $ct['court_name'] ?>,<?= $ct['court_id'] ?>" id="courtoption"><?= $ct['court_name'] ?></option>
-                            <?php } ?>
+        <?php foreach ($court as $ct) { ?>        
+                                        <option value="<?= $ct['court_name'] ?>,<?= $ct['court_id'] ?>" id="courtoption"><?= $ct['court_name'] ?></option>
+        <?php } ?>
                         </select>
 
                     </div>
@@ -62,165 +63,226 @@
                 <h4 style="font-size: 15px">วัน : <span id="dayOfWeek" ></span></h4> <h5> เวลาให้บริการ : <span id="court"></span></h5>
             </div>
         </div>
-<!--        <div class="col-md-3">
-            <div class="tab-pane" id="mycourt">
-
-
-                <hr>
-
-
-
-                <div id="morning">
-                    <table class="table table-bordered  table-condensedy" id="tableMorning">
-                        <thead><tr><th>เวลา</th><th>#</th></tr></thead>
-                        <tbody id="runtime">
-                           
-                        </tbody>
-                    </table>
+        <!--        <div class="col-md-3">
+                    <div class="tab-pane" id="mycourt">
+        
+        
+                        <hr>
+        
+        
+        
+                        <div id="morning">
+                            <table class="table table-bordered  table-condensedy" id="tableMorning">
+                                <thead><tr><th>เวลา</th><th>#</th></tr></thead>
+                                <tbody id="runtime">
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-9" >
-            <div class="tab-pane" id="mycourt">
-
-
-                <hr>
-
-
-                <div id="evening">
-                    <table class="table table-bordered  table-condensedy" id="tableEvening">
-                        <thead id="runhead"><tr></tr></thead>
-                        <tbody id="runtime2">
-                            <tr>
-                                <td style="width: 110px; text-align: center">No select</td>
-                                <td class="span6"></td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-        </div>-->
+                <div class="col-md-9" >
+                    <div class="tab-pane" id="mycourt">
+        
+        
+                        <hr>
+        
+        
+                        <div id="evening">
+                            <table class="table table-bordered  table-condensedy" id="tableEvening">
+                                <thead id="runhead"><tr></tr></thead>
+                                <tbody id="runtime2">
+                                    <tr>
+                                        <td style="width: 110px; text-align: center">No select</td>
+                                        <td class="span6"></td>
+                                    </tr>
+        
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                </div>-->
     </div>
 </div>
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-<!--            <div class="row text-center">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Recommended Stadium</h3>
-                            </div>
-                            <div class="panel-body">
-
-                                <div class="thumbnail">
-                                    <img src="<?php echo base_url() ?>asset/images/stadiumpic/p1.jpg" alt="">
-                                    <div class="caption">
-                                        <h3>Bangkok Badminton</h3>
-                                        <p>ที่อยู่ : &nbsp;33/45 ถนนบางบอน5 ซอย40 กรุงเทพฯ </p>
-                                        <p>ราคา: &nbsp;120/ชม.</p>
-                                        <p>เบอโทร: &nbsp;02-8997368</p>
-                                        <p>
-                                            <a href="<? echo base_url() ?>booking/reserve/30" class="btn btn-primary">Book Now!</a> <a href="<? echo base_url() ?>stadium/profile/30" class="btn btn-default">More Info</a>
-                                        </p>
+            <!--            <div class="row text-center">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Recommended Stadium</h3>
+                                        </div>
+                                        <div class="panel-body">
+            
+                                            <div class="thumbnail">
+                                                <img src="<?php echo base_url() ?>asset/images/stadiumpic/p1.jpg" alt="">
+                                                <div class="caption">
+                                                    <h3>Bangkok Badminton</h3>
+                                                    <p>ที่อยู่ : &nbsp;33/45 ถนนบางบอน5 ซอย40 กรุงเทพฯ </p>
+                                                    <p>ราคา: &nbsp;120/ชม.</p>
+                                                    <p>เบอโทร: &nbsp;02-8997368</p>
+                                                    <p>
+                                                        <a href="<? echo base_url() ?>booking/reserve/30" class="btn btn-primary">Book Now!</a> <a href="<? echo base_url() ?>stadium/profile/30" class="btn btn-default">More Info</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+            
+            
+            
+            
+                                            
+            
+                                        </div>
                                     </div>
-                                </div>
-
-
-
-
-                                
-
-                            </div>
-                        </div>
-                    </div>-->
+                                </div>-->
             <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Welcome</h3>
-                        </div>
-                        <div class="panel-body">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li> <img src="<?= base_url() ?>/asset/images/<?= $data['0']->stadium_path != null ? 'stadiumpic/' . $data['0']->stadium_path : 'bad.png' ?>" width="200" class="img-thumbnail"></li>
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Welcome</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li> <img src="<?= base_url() ?>/asset/images/<?= $data['0']->stadium_path != null ? 'stadiumpic/' . $data['0']->stadium_path : 'bad.png' ?>" width="200" class="img-thumbnail"></li>
 
-                                <li>สนาม : <?= $data['0']->stadium_name ?></li>
-                                <li>โทรศัพท์: <?= $data['0']->tel !=null ? $data['0']->tel :'-' ?></li>
+                        <li>สนาม : <?= $data['0']->stadium_name ?></li>
+                        <li>โทรศัพท์: <?= $data['0']->tel != null ? $data['0']->tel : '-' ?></li>
 
-                            </ul>
-                        </div>
-                    </div>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="col-md-9" style="overflow-y: scroll; height: 500" id="mytablebook">
             <table class="table table-striped table-hover table-bordered ">
-    <thead>
-        <tr>
-            <th>#</th>
-            <?php                        foreach ($court as $c){ ?>
-            <th id="s<?=$c['court_id']?>">คอร์ด <?=$c['court_name']?></th>
-            <?php }?>
-        </tr>
-    </thead>
-    <tbody id="newshow">
-        <tr>
-            <td>1</td>
-            <td>Column content</td>
-            <td>Column content</td>
-            <td>Column content</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Column content</td>
-            <td>Column content</td>
-            <td>Column content</td>
-        </tr>
-        
-    </tbody>
-</table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <?php foreach ($court as $c) { ?>
+                            <th id="s<?= $c['court_id'] ?>">คอร์ด <?= $c['court_name'] ?></th>
+                        <?php } ?>
+                    </tr>
+                </thead>
+                <tbody id="newshow">
+                    <tr>
+                        <td>1</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                    </tr>
+
+                </tbody>
+            </table>
         </div>
-        
-    
+
+
     </div>
-    
+
 </div>
 <!--bookingnaja-->
 <!--Modalll jaa up cover na--> 
 
 <div class="modal fade" id="booking" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="<?= base_url() ?>booking/doBooking/" method="post" > 
+        <form action="<?= base_url() ?>booking/doBooking/" method="post" class="form-horizontal" > 
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Confrim - Booking</h4>
+                    <!--                    <h4 class="modal-title">Confrim - Booking</h4>-->
                 </div>
                 <div class="modal-body">
-                    <span>จองโดย : </span> <?=$user['0']->email?>,<?=$user['0']->fname?> <?=$user['0']->lname?> <br>
-                    <span>วันที่ : </span><span id="datenaja" >&nbsp;&nbsp; </span> <br>
-                    <span>เวลา : </span><br> เริ่ม <input type="time" id="time_start" name="start_time" class="form-control" step="1800" disabled="">
-                    <input type="hidden" id="time_start1" name="start_time">
-                    ถึง <input type="time" id="time_end" class="form-control" name="end_time" step="1800" onchange="totalpricechange()"> 
-<!--                    <select id="selecttime" class="form-control">
-                    </select>-->
-                    <span>สถานที่ : </span> <?=$data['0']->stadium_name?> <br>
-                    <span> คอร์ด : </span> <span id="courtja" >&nbsp;&nbsp; </span> <br>
-                    <span> ราคา / ชม. : </span> <span id="priceja" >&nbsp;&nbsp; </span>  <br>
-                    <span> รวมเป็นเงิน : </span> <span id="sumprice" >&nbsp;&nbsp; </span> <br>
-                    <input type="hidden" name="userid" value="<?=$user['0']->user_id?>">
-                    <input type="hidden" name="stadiumid" value="<?=$data['0']->stadium_id?>">
-<!--                    <input type="hidden" id="courtid" value="<?=$user['0']->court_id?>">-->
-                    <input type="hidden" id="tr_id">
-                    <input type="hidden" id="courtid" name="courtid" >
-                    <input type="hidden" id="error_count" value="0">
-                    <input type="hidden" id="dateid" name="dateid">
-                    <input type="hidden" id="sumpricesend" name="allprice">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <input type="submit" value="Book Now">
-                </div>
-            </div><!-- /.modal-content -->
-        </form>
-    </div><!-- /.modal-dialog -->
+                    <fieldset>
+                        <legend>Booking Detail</legend>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-lg-2 control-label">Name</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputEmail" placeholder="Name" name="bookingname" value="<?= $user['0']->fname ?> <?= $user['0']->lname ?>">
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label for="inputEmail" class="col-lg-2 control-label">Tel</label>
+                            <div class="col-lg-10">
+                                <input type="tel" class="form-control" name="telephone" placeholder="tel" value="<?= $user['0']->phone ?>">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-lg-2 control-label">Day</label>
+                            <div class="col-lg-10">
+                                <span id="datenaja" class="form-control" >&nbsp;&nbsp; </span>
+
+                            </div>
+                        </div>
+                   <div class="form-group">
+                            <label for="inputPassword" class="col-lg-2 control-label">Start</label>
+                            <div class="col-lg-10">
+                                <input type="time" id="time_start" name="start_time" class="form-control" step="1800" disabled="">
+                                
+                            </div>
+                        </div>
+                        
+                                  <div class="form-group">
+                            <label for="inputPassword" class="col-lg-2 control-label">End</label>
+                            <div class="col-lg-10">
+                               <input type="time" id="time_end" class="form-control" name="end_time" step="1800" onchange="totalpricechange()"> 
+
+                            </div>
+                        </div>
+                          <div class="form-group">
+                            <label for="inputPassword" class="col-lg-2 control-label">Stadium</label>
+                            <div class="col-lg-10">
+                                <input type="text" id="time_end" class="form-control" name="stadium" disabled="" value="<?= $data['0']->stadium_name ?>"> 
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-lg-2 control-label">Court</label>
+                            <div class="col-lg-10">
+                                <span class="form-control" id="courtja" >&nbsp;&nbsp; </span>
+
+                            </div>
+                        </div>
+                           <div class="form-group">
+                            <label for="inputPassword" class="col-lg-2 control-label">Price</label>
+                            <div class="col-lg-10">
+                                <span class="form-control" id="priceja" >&nbsp;&nbsp; </span>
+
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label for="inputPassword" class="col-lg-2 control-label">Total</label>
+                            <div class="col-lg-10">
+                                <span class="form-control" id="sumprice" >&nbsp;&nbsp; </span>
+
+                            </div>
+                        </div>
+                        
+
+            </fieldset>
+            
+
+           <input type="hidden" id="time_start1" name="start_time" class="form-control">
+            
+        
+            <input type="hidden" name="userid" value="<?= $user['0']->user_id ?>">
+            <input type="hidden" name="stadiumid" value="<?= $data['0']->stadium_id ?>">
+<!--                    <input type="hidden" id="courtid" value="<?= $user['0']->court_id ?>">-->
+            <input type="hidden" id="tr_id">
+            <input type="hidden" id="courtid" name="courtid" >
+            <input type="hidden" id="error_count" value="0">
+            <input type="hidden" id="dateid" name="dateid">
+            <input type="hidden" id="sumpricesend" name="allprice">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="submit" value="Book Now" class="btn btn-primary">Book Now</button>
+        </div>
+    </div><!-- /.modal-content -->
+</form>
+</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
 <?php include 'template/modal.php'; ?>
@@ -257,7 +319,7 @@
         </div>
         <div class="row copyright">Copyright 2014 - Badminton</div>
     </div>
-    <input type="hidden" id="countcort" value="<?=count($court)?>">
+    <input type="hidden" id="countcort" value="<?= count($court) ?>">
 </footer>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -269,121 +331,121 @@
 <script src="<?= base_url() ?>asset/js/booking_1.js"></script>
 
 <script type="text/javascript">
-    /* pagination */
-    $.fn.pageMe = function (opts) {
-        var $this = this,
-                defaults = {
-                    perPage: 7,
-                    showPrevNext: false,
-                    numbersPerPage: 1,
-                    hidePageNumbers: false
-                },
-        settings = $.extend(defaults, opts);
+                /* pagination */
+                $.fn.pageMe = function (opts) {
+                    var $this = this,
+                            defaults = {
+                                perPage: 7,
+                                showPrevNext: false,
+                                numbersPerPage: 1,
+                                hidePageNumbers: false
+                            },
+                    settings = $.extend(defaults, opts);
 
-        var listElement = $this;
-        var perPage = settings.perPage;
-        var children = listElement.children();
-        var pager = $('.pagination');
+                    var listElement = $this;
+                    var perPage = settings.perPage;
+                    var children = listElement.children();
+                    var pager = $('.pagination');
 
-        if (typeof settings.childSelector != "undefined") {
-            children = listElement.find(settings.childSelector);
-        }
+                    if (typeof settings.childSelector != "undefined") {
+                        children = listElement.find(settings.childSelector);
+                    }
 
-        if (typeof settings.pagerSelector != "undefined") {
-            pager = $(settings.pagerSelector);
-        }
+                    if (typeof settings.pagerSelector != "undefined") {
+                        pager = $(settings.pagerSelector);
+                    }
 
-        var numItems = children.size();
-        var numPages = Math.ceil(numItems / perPage);
+                    var numItems = children.size();
+                    var numPages = Math.ceil(numItems / perPage);
 
-        pager.data("curr", 0);
+                    pager.data("curr", 0);
 
-        if (settings.showPrevNext) {
-            $('<li><a href="#" class="prev_link" style="font-size: 10px;padding: 5px 5px 5px 5px;">«</a></li>').appendTo(pager);
-        }
+                    if (settings.showPrevNext) {
+                        $('<li><a href="#" class="prev_link" style="font-size: 10px;padding: 5px 5px 5px 5px;">«</a></li>').appendTo(pager);
+                    }
 
-        var curr = 0;
-        while (numPages > curr && (settings.hidePageNumbers == false)) {
-            $('<li><a href="#" class="page_link" style="font-size: 10px;padding: 5px 5px 5px 5px;">' + (curr + 1) + '</a></li>').appendTo(pager);
-            curr++;
-        }
+                    var curr = 0;
+                    while (numPages > curr && (settings.hidePageNumbers == false)) {
+                        $('<li><a href="#" class="page_link" style="font-size: 10px;padding: 5px 5px 5px 5px;">' + (curr + 1) + '</a></li>').appendTo(pager);
+                        curr++;
+                    }
 
-        if (settings.numbersPerPage > 1) {
-            $('.page_link').hide();
-            $('.page_link').slice(pager.data("curr"), settings.numbersPerPage).show();
-        }
+                    if (settings.numbersPerPage > 1) {
+                        $('.page_link').hide();
+                        $('.page_link').slice(pager.data("curr"), settings.numbersPerPage).show();
+                    }
 
-        if (settings.showPrevNext) {
-            $('<li><a href="#" class="next_link" style="font-size: 10px;padding: 5px 5px 5px 5px;">»</a></li>').appendTo(pager);
-        }
+                    if (settings.showPrevNext) {
+                        $('<li><a href="#" class="next_link" style="font-size: 10px;padding: 5px 5px 5px 5px;">»</a></li>').appendTo(pager);
+                    }
 
-        pager.find('.page_link:first').addClass('active');
-        if (numPages <= 1) {
-            pager.find('.next_link').hide();
-        }
-        pager.children().eq(1).addClass("active");
+                    pager.find('.page_link:first').addClass('active');
+                    if (numPages <= 1) {
+                        pager.find('.next_link').hide();
+                    }
+                    pager.children().eq(1).addClass("active");
 
-        children.hide();
-        children.slice(0, perPage).show();
+                    children.hide();
+                    children.slice(0, perPage).show();
 
-        pager.find('li .page_link').click(function () {
-            var clickedPage = $(this).html().valueOf() - 1;
-            goTo(clickedPage, perPage);
-            return false;
-        });
-        pager.find('li .prev_link').click(function () {
-            previous();
-            return false;
-        });
-        pager.find('li .next_link').click(function () {
-            next();
-            return false;
-        });
+                    pager.find('li .page_link').click(function () {
+                        var clickedPage = $(this).html().valueOf() - 1;
+                        goTo(clickedPage, perPage);
+                        return false;
+                    });
+                    pager.find('li .prev_link').click(function () {
+                        previous();
+                        return false;
+                    });
+                    pager.find('li .next_link').click(function () {
+                        next();
+                        return false;
+                    });
 
-        function previous() {
-            var goToPage = parseInt(pager.data("curr")) - 1;
-            goTo(goToPage);
-        }
+                    function previous() {
+                        var goToPage = parseInt(pager.data("curr")) - 1;
+                        goTo(goToPage);
+                    }
 
-        function next() {
-            goToPage = parseInt(pager.data("curr")) + 1;
-            goTo(goToPage);
-        }
+                    function next() {
+                        goToPage = parseInt(pager.data("curr")) + 1;
+                        goTo(goToPage);
+                    }
 
-        function goTo(page) {
-            var startAt = page * perPage,
-                    endOn = startAt + perPage;
+                    function goTo(page) {
+                        var startAt = page * perPage,
+                                endOn = startAt + perPage;
 
-            children.css('display', 'none').slice(startAt, endOn).show();
+                        children.css('display', 'none').slice(startAt, endOn).show();
 
-            if (page >= 1) {
-                pager.find('.prev_link').show();
-            }
-            else {
-                pager.find('.prev_link').hide();
-            }
+                        if (page >= 1) {
+                            pager.find('.prev_link').show();
+                        }
+                        else {
+                            pager.find('.prev_link').hide();
+                        }
 
-            if (page < (numPages - 1)) {
-                pager.find('.next_link').show();
-            }
-            else {
-                pager.find('.next_link').hide();
-            }
+                        if (page < (numPages - 1)) {
+                            pager.find('.next_link').show();
+                        }
+                        else {
+                            pager.find('.next_link').hide();
+                        }
 
-            pager.data("curr", page);
+                        pager.data("curr", page);
 
-            if (settings.numbersPerPage > 1) {
-                $('.page_link').hide();
-                $('.page_link').slice(page, settings.numbersPerPage + page).show();
-            }
+                        if (settings.numbersPerPage > 1) {
+                            $('.page_link').hide();
+                            $('.page_link').slice(page, settings.numbersPerPage + page).show();
+                        }
 
-            pager.children().removeClass("active");
-            pager.children().eq(page + 1).addClass("active");
-        }
-    };
+                        pager.children().removeClass("active");
+                        pager.children().eq(page + 1).addClass("active");
+                    }
+                };
 
-    $('#items').pageMe({pagerSelector: '#myPager', childSelector: 'tr', showPrevNext: true, hidePageNumbers: false, perPage: 3});
-    /****/
+                $('#items').pageMe({pagerSelector: '#myPager', childSelector: 'tr', showPrevNext: true, hidePageNumbers: false, perPage: 3});
+                /****/
 </script>
 <script>
     $('#myTab a').click(function (e) {

@@ -101,17 +101,31 @@ $num = 1;
                             </ul>
                             <div class="tab-content"  >
 
-                                <div class="col-md-6 col-md-offset-3">
-        <form class="navbar-form navbar-left" role="search">
-            <div class="form-group " id="the-basics">
-                <input type="text" class="form-control typeahead ja" placeholder="Search" id="test" onkeyup="keynaja()"  >
-                
-                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-            </div>
-
+                                <div class="col-md-6 col-md-offset-3 well">
+<form >
+            <input type="text" class="form-control col-lg-8" placeholder="Search">
+            <a  class="form-control btn btn-default" onclick="showAdsearch(this)">Advance Search</a>  
+            <div id="advancefun">
+ <div class="checkbox ">
+                    <label>
+                        <input type="checkbox"> ประสบการสอน               <select class="controls" id="select">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                    </label>
+                    <label>
+                        <input type="checkbox"> รางวัล 
+                    </label>
+                </div>
+</div>
         </form>
     </div>
+                                 
     <div class="row text-center">
+        
         <?php foreach ($coach as $r) { ?>
 
 
@@ -141,6 +155,8 @@ $num = 1;
     </div>
 </div>
 
+
+
 <?php include 'template/modal.php'; ?>
 
 <div id="notija" style="display:none">
@@ -165,424 +181,26 @@ $num = 1;
 <script type="text/javascript" language="javascript" src="<?php echo base_url() . 'module/DataTables/js/jquery.dataTables.js'; ?>"></script>
 <script type="text/javascript" language="javascript" src="<?php echo base_url() . 'module/loadover/loadover.js'; ?>"></script>
 <script type="text/javascript" src="<?php echo base_url() . 'asset/js/tinymce/tinymce.min.js'; ?>"></script>
-<script>
-    function getUrlVars()
-{
-    var vars = [], hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    for(var i = 0; i < hashes.length; i++)
-    {
-        hash = hashes[i].split('=');
-        vars.push(hash[0]);
-        vars[hash[0]] = hash[1];
-    }
-    return vars;
-}
 
-    console.log(getUrlVars().type);
-        if(getUrlVars().type == 1){
-   
-       
-            $('#myTab li:eq(1) a').tab('show')
-    }else if(getUrlVars().type == 4){
-        
-        
-            $('#myTab li:eq(4) a').tab('show')
-                        $("#notija").notify({
-                speed: 500,
-            });
-            $("#notija").notify("create", {
-                title: 'Add Complete',
-                text: 'Addnoucment is complete '
-            });
-    }else if(getUrlVars().type == 5){
-      
-        
-            $('#myTab li:eq(4) a').tab('show')
-                        $("#notija").notify({
-                speed: 500,
-            });
-            $("#notija").notify("create", {
-                title: 'Delete Complete',
-                text: 'News has been Delete '
-            });
-    }
-    else if(getUrlVars().type == 'gallery'){
-      
-        
-            $('#myTab li:eq(5) a').tab('show')
-                        $("#notija").notify({
-                speed: 500,
-            });
-            $("#notija").notify("create", {
-                title: 'Add Complete',
-                text: 'New picture has been added '
-            });
-    }
-//    $("#input-id").fileinput();
 
-// with plugin options
-    $("#input-id").fileinput({ 'previewFileType': 'any', 'maxFileCount': 2});
-    $("#input-20").fileinput({
-        browseClass: "btn btn-primary btn-block",
-        showCaption: false,
-        showRemove: false,
-        showUpload: false
-    });
-        $("#input-21").fileinput({
-        browseClass: "btn btn-primary btn-block",
-        showCaption: false,
-        showRemove: false,
-        showUpload: false
-    });
-</script>
 
-<script>
-//    var states;
-//    function keynaja() {
-//        var fullpart = "http://cbt.backeyefinder.in.th/coach/get_coach_name";
-//        var a = document.getElementById("test").value;
-//        console.log(a);
-//        $.ajax({
-//            type: "post",
-//            url: fullpart,
-//            data: {term: a}
-//        }).done(function (msg) {
-//            states = null
-//            console.log(msg);
-//            states = msg;
-//            console.log(msg[0].name);
-//        });
-//    }
-
-//    $(document).ready(function () {
-//
-//        var substringMatcher = function (strs) {
-//            return function findMatches(q, cb) {
-//                var matches, substrRegex;
-//
-//                // an array that will be populated with substring matches
-//                matches = [];
-//
-//                // regex used to determine if a string contains the substring `q`
-//                substrRegex = new RegExp(q, 'i');
-//
-//                // iterate through the pool of strings and for any string that
-//                // contains the substring `q`, add it to the `matches` array
-//                $.each(strs, function (i, str) {
-//                    if (substrRegex.test(str)) {
-//                        // the typeahead jQuery plugin expects suggestions to a
-//                        // JavaScript object, refer to typeahead docs for more info
-//                        matches.push({value: str});
-//                    }
-//                });
-//
-//                cb(matches);
-//            };
-//        };
-//
-////    
-//
-//        $('#the-basics .typeahead').typeahead({
-//            hint: true,
-//            highlight: true,
-//            minLength: 1
-//        },
-//        {
-//            name: 'statess',
-//            displayKey: 'value',
-//            source: substringMatcher(statess)
-//        });
-//    });
-</script>
 <script type="text/javascript">
     var centreGot = false;
 
 </script>
 <script>
-    var geocoder;
-    var map;
-    var marker;
-    var placesService;
-    var placesAutocomplete;
-
-    function initialize() {
-        geocoder = new google.maps.Geocoder();
-        var check = " <?= $data->lat ?>";
-        console.log(check);
-
-        var latlng = new google.maps.LatLng((check != ' ' ? '<?= $data->lat ?>' : '13.7500'), (check != ' ' ? '<?= $data->long ?>' : '100.4833'));
-        var mapOptions = {
-            zoom: 10,
-            center: latlng
-        }
-        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        if (check != ' ') {
-            map.setZoom(17);
-            ;
-            var marker = new google.maps.Marker({
-                position: latlng,
-                map: map,
-                draggable: true
-
-            });
-            google.maps.event.addListener(marker, 'dragend', function (event) {
-
-                x = event.latLng.lat();
-                y = event.latLng.lng();
-                updateDatabase(x, y);
-                console.log(x);
-                console.log(y);
-            });
-        }
-        var autocompleteOptions = {
-        }
-        var autocompleteInput = document.getElementById('address');
-
-        placesAutocomplete = new google.maps.places.Autocomplete(autocompleteInput, autocompleteOptions);
-        placesAutocomplete.bindTo('bounds', map);
-
-        google.maps.event.addListener(placesAutocomplete, 'place_changed', function () {
-            codeAddress();
-        });
-
-
-    }
-
-
-
-    function codeAddress() {
-        var address = document.getElementById('address').value;
-        geocoder.geocode({'address': address}, function (results, status, event) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                map.setCenter(results[0].geometry.location);
-                map.setZoom(17);
-                if (marker != null)
-                    marker.setMap(null);
-                marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location,
-                    animation: google.maps.Animation.DROP,
-                    draggable: true
-                });
-                console.log(marker.getPosition());
-                console.log(marker.getPosition().k);
-                updateDatabase(marker.getPosition().k, marker.getPosition().B);
-                google.maps.event.addListener(marker, 'dragend', function (event) {
-
-                    x = event.latLng.lat();
-                    y = event.latLng.lng();
-                    updateDatabase(x, y);
-                    console.log(x);
-                    console.log(y);
-                });
-            } else {
-                alert('Geocode was not successful for the following reason: ' + status);
-            }
-        });
-    }
-    function updateDatabase(newLat, newLng)
-    {
-        var fullpart = "http://cbt.backeyefinder.in.th/stadium/updateLatLng/<?php echo $this->uri->segment(3); ?>";
-
-        $.ajax({
-            type: "post",
-            url: fullpart,
-            data: {newLat: newLat, newLng: newLng}
-        }).done(function (msg) {
-
-            console.log(msg);
-            $("#notija").notify({
-                speed: 500,
-            });
-            $("#notija").notify("create", {
-                title: 'Update Complete',
-                text: 'Lat Lng  this Stadium is Change '
-            });
-        });
-
-
-    }
-
-    google.maps.event.addDomListener(window, 'load', initialize);
-
-
-</script>
-
-<script type="text/javascript">
-    var newsPos = 10;
-    var htmlNews;
-    var mytable;
-    var myarray ={
-                "bPaginate": true,
-                "bLengthChange": false,
-                "bFilter": true,
-                "bSort": true,
-                "bInfo": true,
-                "bAutoWidth": true,
-                'iDisplayLength': 10
-            };
-    function showAddForm() {
-//        alert("show");
-        $('#addForm').show();
-    }
-
     $(document).ready(function (e) {
-        $('#addForm').hide();
-
-        tinymce.init({
-            selector: "textarea#em1",
-            theme: "modern",
-            skin: "light",
-            height: 300,
-            plugins: [
-                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-                "searchreplace wordcount visualblocks visualchars code fullscreen",
-                "insertdatetime media nonbreaking save table contextmenu directionality",
-                "emoticons paste textcolor jbimages"
-            ],
-            toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | jbimages",
-            toolbar2: "print preview media | forecolor backcolor emoticons",
-            image_advtab: true
-        });
-
-        // แสดงช่อง caption เมื่อเลือก รูปแต่อันนี้ทำให้เมื่อคลิกแล้วแสดงช่องอย่างเดียว
-        $('#ct').hide();
-        $('#banner').click(function (e) {
-            $('#ct').slideDown();
-        });
-
-        if ($('#news-table tbody tr').length >= 1) {
-           mytable =  $('#news-table').dataTable({
-                "bPaginate": true,
-                "bLengthChange": false,
-                "bFilter": true,
-                "bSort": true,
-                "bInfo": true,
-                "bAutoWidth": true,
-                'iDisplayLength': 10
-            });
-            append_button_news();
-        }
-
-        $('#news-table_previous,#news-table_next,.sorting').on('click', function () {
-            append_button_news();
-        });
+        $('#advancefun').hide();
     });
-
-    function append_button_news() {
-        $("#news-table tbody tr").each(function (index, element) {
-            if (typeof $(this).find(".dynamic_td").html() == "undefined") {
-                var id = $(this).attr("data-id");
-                var custom_column = '<td class="dynamic_td"><a href="javascript:;" onClick="editNews(\'' + id + '\')">แก้ไข</a></td><td class="dynamic_td"><a href="javascript:;" onClick="deleteNews(\'' + id + '\')"><i class="glyphicon glyphicon-remove-circle"></i></a></td>';
-                $(this).append(custom_column);
-            }
-        });
-
+        function showAdsearch() {
+//        alert("show");
+        $('#advancefun').toggle();
+    
     }
-
-    function submitNews() {
-        if ($.trim($('input[name="news_title"]').val()).length == 0 || $.trim(tinyMCE.activeEditor.getContent()).length == 0) {
-            alert('กรุณากรอกข้อมูลให้ครบถ้วน!');
-            return false;
-        }
-        var val = $('form').serialize();
-        val += '&news_content=' + encodeURIComponent(tinyMCE.activeEditor.getContent());
-        $('#addForm').loadOverStart();
-        
-
-        
-        
-        $.getJSON('http://cbt.backeyefinder.in.th/news/submit_news', val, function (data) {
-            htmlNews = ' ';
-            $('#addForm').loadOverStop();
-            console.log(data);
-            console.log(data[0].news_id);
-            if (data.length != 0) {
-                //addNews();
-                    
-              
-                mytable.fnDestroy();
-                 $('#news-list').prepend(htmlNews); 
-                mytable = $('#news-table').dataTable({
-                "bPaginate": true,
-                "bLengthChange": false,
-                "bFilter": true,
-                "bSort": true,
-                "bInfo": true,
-                "bAutoWidth": true,
-                'iDisplayLength': 10
-            });
-               append_button_news();
-                //mytable.fnAddData(myarray); 
-              
-             //   mytable.fnDraw();
-            
-                $('#addForm').hide();
-                $('#news_title').val('');
-                tinyMCE.activeEditor.setContent('');
-            } else {
-                alert('เกิดข้อผิดพลาด!');
-            }
-        });
+    </script>
+    
 
 
-        return false;
-    }
-    function showNewsData(rs){
-         htmlNews =                         '<tr data-id="'+rs.news_id + '">'+
-                            '<td>' +rs.news_id + '</td>'+
-                             '<td>'+rs.title + '</td>'+
-                             '<td>' + rs.an_date +'</td>'+
-                            '</tr>';
-
-    }
-
-    function appendNews() {
-        $('#loading').removeClass('hide');
-        $.post('/admin/get_news', {start: newsPos}, function (msg) {
-            $('#news-list').append(msg);
-            $('#loading').addClass('hide');
-        });
-        newsPos += 10;
-    }
-
-    function deleteNews(id) {
-        console.log(id);
-         var c = confirm('คุณต้องการลบข่าวนี้จริงหรือไม่?');
-        if (c) {
-            $.post('<?=base_url()?>/news/delete_news', {id: id}, function (msg) {
-                if (msg != 0) {
-                    console.log('OK');
-                    location.href = '<?=base_url()?>stadium/updatestadium/'+$('#st_id').val()+'?type=5';
-                } else {
-                    alert('เกิดข้อผิดพลาด!');
-                }
-            });
-        }
-    }
-
-    function editNews(id) {
-        location.href = '<?=base_url()?>news/editnews/'+id;
-    }
-    function submitUploadForm() {
-        var fd = new FormData(document.getElementById("upload-form"));
-        $.ajax({
-            url: "apiimgup",
-            type: "POST",
-            data: fd,
-            enctype: 'multipart/form-data',
-            processData: false,
-            contentType: false
-        }).done(function (data) {
-            var addImg = '<img src="' + data.toString() + '">';
-            tinyMCE.execCommand('mceInsertContent', true, addImg);
-            $('#upload-form').reset();
-        });
-        return false;
-    }
-
-</script>
 
 
 <?php include 'template/footer_scrpit.php'; ?>

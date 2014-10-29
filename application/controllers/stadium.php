@@ -159,8 +159,11 @@ class stadium extends CI_Controller {
     function addstadium() {
         $userid = $this->session->userdata('id'); // เรียก user_id จาก session 
         $rs = $this->mystadium->showIdMax();
-        $facility = $this->input->post('facility');
-        $fullurl = 'www.cbtonline.com/' . $this->input->post('url') . '';
+        $facility = array (
+          '0','1','2','3','4'  
+        );
+        $fullurl = 'www.cbtonline.com/stadium/' . $this->input->post('url') ;
+       // echo $fullurl;
         foreach ($rs as $r) {
             $maxstadium = $r['stadium_id'] + "1";
         }
@@ -296,7 +299,7 @@ class stadium extends CI_Controller {
         $userid = $this->session->userdata('id');
 
         $facility = $this->input->post('facility');
-        $fullurl = 'www.cbtonline.com/' . $this->input->post('url') . '';
+        $fullurl = 'www.cbtonline.com/stadium/' . $this->input->post('url') ;
 
 
 
@@ -392,7 +395,7 @@ class stadium extends CI_Controller {
         }
         $this->pagination->initialize($config);
         $st = array('data' => $this->mystadium->getstadiumprofile($stId),
-//            'facility' => $this->mystadium->showfacility($stId),
+            'facility' => $this->mystadium->showfacility($stId),
             'court' => $this->mystadium->gettableCourt($stId), //result_array  getTotalcourt
             'total' => $this->mystadium->getTotalcourt($stId),
             'floor' => $this->mystadium->getfloor($stId),
@@ -401,7 +404,7 @@ class stadium extends CI_Controller {
             'img' => $this->img->getGallery($stId)
                 //  'user' => $this->myusers->getUser($id)
         );
-//        print_r($st['data']);
+     // print_r($st['data']);
         $this->load->view('stadium_view', $st);
     }
 

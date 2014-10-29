@@ -246,6 +246,8 @@ class booking extends CI_Controller {
             'stadium_idja' => $this->input->post('stadiumid'),
             'court_idja' => $this->input->post('courtid'),
             'user_idja' => $this->input->post('userid'),
+            'name'=>$this->input->post('bookingname'),
+            'tel'=>$this->input->post('telephone'),
             'notification_user' => 1,
             'notification_owner' => 1,
             'start_time' => $date_inverse . ' ' . $this->input->post('start_time') . ':00',

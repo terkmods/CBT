@@ -18,7 +18,8 @@
                             คอร์ด :<?= $court_send->court_name ?><br>
                             วันที่ : <?= $date ?>  <br>
                             เวลา : <?= $start_time_send ?> - <?= $end_time_send ?> <br>
-                            ชื่อผู้จอง : <?= $user[0]->fname?>  <?= $user[0]->lname?> <br>
+                            ชื่อผู้จอง : <?= $name?> <br>
+                            เบอร์โทร : <?=$tel?><br>
                            รวมเป็นเงิน <strong><?= $sumprice?></strong> บาท<br>
                         </div>
                     </div>

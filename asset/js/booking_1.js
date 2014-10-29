@@ -50,7 +50,7 @@ function RowClick(currenttd, lock) {
             console.log('id->>>'+id);
             
             for (var i = 0; i < id-1 ; i++) {
-                d = new Date(d.getTime()+30  * 60000);  
+                d = new Date(d.getTime()+30* 60000);  
                 console.log('testttttttt->>>>'+d);
             }
             console.log('testttttttt->>>>'+d.getHours());
@@ -250,7 +250,7 @@ function getbooking_new(){
     var date_elements = datesendnaja.split('/');
     date_inverse = date_elements[2] + '-' + date_elements[0] + '-' + date_elements[1];
     //alert(st);
-    alert(date_inverse);
+    //alert(date_inverse);
     $.ajax({
         type: "POST",
         url: fullpart,
@@ -300,6 +300,8 @@ $(function () {
     $(".date-picker").datepicker().on('changeDate', function(e){
         getbooking_new();
     });
+
+       
     var myDate = new Date();
     var prettyDate = (myDate.getMonth() + 1) + '/' + myDate.getDate() + '/' +
             myDate.getFullYear();
@@ -397,7 +399,7 @@ function showTableBook() {
 
         starttime = time2.indexOf(obj.time.open_time);
         endtimeja = time2.indexOf(obj.time.end_time);
-        console.log(obj);
+        
         timeopennaja = time2[starttime] + ' ถึง ' + time2[endtimeja];
         $("#court").html(timeopennaja);
 
@@ -412,27 +414,64 @@ function showTableBook() {
             for (k = 0; k < $('#countcort').val(); k++) {
                 show = show + '<td class="span6 c'+ obj.court[k].court_id +'"  onmousedown="RowClick(this,false);" id="'+ (parseInt(starttime) + 1) +'" value="' + obj.court[k].court_id + '">';
                    
-               if (counterdate < booking.length){
-                    x_start = new Date('2013-01-01 ' +booking[counterdate].start).getTime()/1000;
-                    x_end = new Date('2013-01-01 ' +booking[counterdate].end).getTime()/1000;
-                    y_start = new Date('2013-01-01 ' +time2[starttime]).getTime()/1000;
-                    
-                    if(booking[counterdate].court_id== obj.court[k].court_id && y_start>=x_start && y_start<x_end){
-                            show = show +'xx';
-                            counterdate++;
-                            console.log('counterdate= '+counterdate);
-                    }
+//               if (counterdate < booking.length){
+//                    x_start = new Date('2013-01-01 ' +booking[counterdate].start).getTime()/1000;
+//                    x_end = new Date('2013-01-01 ' +booking[counterdate].end).getTime()/1000;
+//                    y_start = new Date('2013-01-01 ' +time2[starttime]).getTime()/1000;
+//                    
+//                    if(booking[counterdate].court_id== obj.court[k].court_id && y_start>=x_start && y_start<x_end){
+//                            show = show +'xx';
+//                            counterdate++;
+//                            console.log('counterdate= '+counterdate);
+//                    }
+//
+//
+//                    show = show + '</td>';
+//
+//                }
 
 
-                    show = show + '</td>';
-
-                }
+                      show = show + '</td>';
             }
             show = show + '</tr>';
         }
-
-
         $("#newshow").html(show);
+        console.log("booking time");
+        console.log(booking);
+        for (var i = 0; i < booking.length; i++) {
+            var court_id = booking[i].court_id;
+            var end = booking[i].end;
+            var start = booking[i].start;
+            
+            //find td
+            var td_end = 0;
+            var td_start=0;
+            var dEnd = new Date('2013-01-01 '+end);
+            var dStart = new Date('2013-01-01 '+start);
+            console.log("calculate td");
+            while(dEnd.getHours()!=0 || dEnd.getMinutes()!=0){
+                dEnd = new Date(dEnd.getTime()-(30*60000));
+//                console.log(dEnd);
+                td_end++;
+//                console.log(td_end);
+                if(dStart.getHours()!=0 || dStart.getMinutes() !=0){                
+                    dStart = new Date(dStart.getTime()-(30*60000));
+                    td_start++;
+                }    
+        }
+        td_start++;
+        td_end++;
+        console.log(td_start);
+        console.log(td_end);
+            
+            for (var j = td_start; j < td_end; j++) {
+                $("#t"+j).find("td[value='"+court_id+"']").text("ไม่ว่าง");
+            }
+            //replace td in court id
+        }
+
+
+        
         Daytype = obj.time.type;
         $("#selecttime").html(selectja);
         $("#courtselect").val("default");
@@ -455,10 +494,10 @@ function showTableBook() {
     $('#mytablebook, #evening').on('mouseover', 'td', function (e) {
         if ($(this).text() == '') {
             $(this).addClass('hover-bg');
-            $(this).html('คลิกเพื่อจอง');
+            $(this).html('booking');
         }
     }).on('mouseout', 'td', function (e) {
-        if ($(this).text() == 'คลิกเพื่อจอง' || $(this).text() == '') {
+        if ($(this).text() == 'booking' || $(this).text() == '') {
             $(this).removeClass('hover-bg');
             $(this).text('');
         }

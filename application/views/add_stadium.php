@@ -129,149 +129,13 @@ $status = $ow->authenowner_status;
 
                                             </fieldset>
                                         </div>
-                                        <div class="col-md-12" id="time">
-                                            <div id="showtime">
-                                                <div class="col-md-6">
-                                                    Choose your start and end date
-                                                    <select class="form-control" name="typedate[]">
-                                                        <option value="จันทร์-ศุกร์">จันทร์-ศุกร์</option>
-                                                        <option value="เสาร์-อาทิตย์">เสาร์-อาทิตย์</option>
-
-
-                                                    </select>
-
-
-                                                </div>
-                                                <div class="col-md-6">
-                                                    Start-time
-                                                    <select class="form-control" name="opentime[]">
-                                                        <option disabled="">Start Time</option>
-
-                                                        <option value="00.00">00:00</option>
-                                                        <option value="01.00">01:00</option>
-                                                        <option value="02.00">02:00</option>
-                                                        <option value="03.00">03:00</option>
-                                                        <option value="04.00">04:00</option>
-                                                        <option value="05.00">05:00</option>
-                                                        <option value="06.00">06:00</option>
-                                                        <option value="07.00">07:00</option>
-                                                        <option value="08.00">08:00</option>
-                                                        <option value="09.00">09:00</option>
-
-                                                        <?php
-                                                        $time = "10";
-                                                        for ($time; $time <= "24.00"; $time++) {
-                                                            ?>
-                                                            <option value="<?= $time ?>.00"><?= $time ?>:00</option>
-
-                                                        <?php } ?>
-
-                                                    </select>
-                                                    End-time
-                                                    <select class="form-control" name="endtime[]" >
-                                                        <option disabled="">End-Time</option>
-                                                        <option value="00.00">00:00</option>
-                                                        <option value="01.00">01:00</option>
-                                                        <option value="02.00">02:00</option>
-                                                        <option value="03.00">03:00</option>
-                                                        <option value="04.00">04:00</option>
-                                                        <option value="05.00">05:00</option>
-                                                        <option value="06.00">06:00</option>
-                                                        <option value="07.00">07:00</option>
-                                                        <option value="08.00">08:00</option>
-                                                        <option value="09.00">09:00</option>
-
-                                                        <?php
-                                                        $time = "10";
-                                                        for ($time; $time <= "24.00"; $time++) {
-                                                            ?>
-                                                            <option value="<?= $time ?>.00"><?= $time ?>:00</option>
-
-                                                        <?php } ?>
-                                                    </select>
-
-
-                                                </div>
-                                            </div>
-                                            <div id="showtime">
-                                                <div class="col-md-6">
-                                                    Choose your start and end date
-                                                    <select class="form-control" name="typedate[]">
-                                                        <option value="จันทร์-ศุกร์">จันทร์-ศุกร์</option>
-                                                        <option value="เสาร์-อาทิตย์" selected="">เสาร์-อาทิตย์</option>
-
-
-                                                    </select>
-
-
-                                                </div>
-                                                <div class="col-md-6">
-                                                    Start-time
-                                                    <select class="form-control" name="opentime[]">
-                                                        <option disabled="">Start-time</option>
-                                                        <option value="00.00">00:00</option>
-                                                        <option value="01.00">01:00</option>
-                                                        <option value="02.00">02:00</option>
-                                                        <option value="03.00">03:00</option>
-                                                        <option value="04.00">04:00</option>
-                                                        <option value="05.00">05:00</option>
-                                                        <option value="06.00">06:00</option>
-                                                        <option value="07.00">07:00</option>
-                                                        <option value="08.00">08:00</option>
-                                                        <option value="09.00">09:00</option>
-
-                                                        <?php
-                                                        $time = "10";
-                                                        for ($time; $time <= "24.00"; $time++) {
-                                                            ?>
-                                                            <option value="<?= $time ?>.00"><?= $time ?>:00</option>
-
-                                                        <?php } ?>
-                                                    </select>
-                                                    End-time
-                                                    <select class="form-control" name="endtime[]" >
-                                                        <option disabled="">End-Time</option>
-                                                        <option value="00.00">00:00</option>
-                                                        <option value="01.00">01:00</option>
-                                                        <option value="02.00">02:00</option>
-                                                        <option value="03.00">03:00</option>
-                                                        <option value="04.00">04:00</option>
-                                                        <option value="05.00">05:00</option>
-                                                        <option value="06.00">06:00</option>
-                                                        <option value="07.00">07:00</option>
-                                                        <option value="08.00">08:00</option>
-                                                        <option value="09.00">09:00</option>
-
-                                                        <?php
-                                                        $time = "10";
-                                                        for ($time; $time <= "24.00"; $time++) {
-                                                            ?>
-                                                            <option value="<?= $time ?>.00"><?= $time ?>:00</option>
-
-                                                        <?php } ?>
-                                                    </select>
-
-
-                                                </div>
-                                            </div>
-
-                                            <!--                            <div class="col-md-12">
-                                                                            <label><button type="button" class="btn btn-default btn-sm add_field_button" >
-                                                                                    <span class="glyphicon glyphicon-plus-sign"></span> เพิ่มเวลาเปิด-ปิดสนาม 
-                                                                                </button>             </label> 
-                                                                                
-                                                                        </div>-->
-                                            <div class=" input_fields_wrap">
-                                                <div class="col-md-12">
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
 
 
 
 
 
-                                        <legend>Facility</legend>
+<!--                                        <legend>Facility</legend>
                                         <div class="col-md-5">
                                             <div class="checkbox">
                                                 <label>
@@ -308,7 +172,7 @@ $status = $ow->authenowner_status;
                                                 </button>             </label> <input class="form-control" type="text" name="facility[]" >           
 
 
-                                        </div>
+                                        </div>-->
 
 
 

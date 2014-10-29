@@ -61,8 +61,8 @@
                     </div>
                     <div class="panel-body">
                         <ul>
-                            <?php foreach ($facility as $r) { //เรียกจาก $data['facility'] ?>
-                                <li><?php echo $r['facility']; //ใช้ return เป็น result_array            ?></li>
+                            <?php $fa = array('Parking','Food','Bathroom','Lockerroom','Shop');foreach ($facility as $r) { //เรียกจาก $data['facility'] ?>
+                                <li><?php echo $fa[($r['facility'])]; //ใช้ return เป็น result_array            ?></li>
                             <?php } ?>
 
                         </ul>
