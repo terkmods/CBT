@@ -1,6 +1,7 @@
 <?php include 'template/head.php'; ?>
 
 <div class="container" style="padding-top: 30px">
+    
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -11,7 +12,7 @@
 
                             <tbody>
                                 <tr >
-                                    <th></th>
+                                    <th style="width: 200px;"></th>
                                     <?php $i=0;foreach ($comparedata as $r){ ?>
                                     <td><font style="font-size: 22px;font-weight: bold;"><?=$r->stadium_name?></td>
                                     <?php $i++;} ?>
@@ -19,7 +20,7 @@
                                 <tr>
                                     <th class="success">รูปภาพ</th>
                                     <?php foreach ($comparedata as $r){ ?>
-                                    <td><img src="<?php echo base_url()?><?php echo '/asset/images/stadiumpic/'?><?=$r->stadium_path?>" alt="..." style="width: 250px;height: 170px" ></td>
+                                    <td><img src="<?php echo base_url()?><?php echo '/asset/images/'?><?=$r->stadium_path!= null ? 'stadiumpic/' . $r->stadium_path : 'bad.png' ?>"  style="width: 250px;height: 170px" ></td>
                                     <?php } ?>
                                 </tr>
                                 <tr>
@@ -129,7 +130,7 @@
     
 </div>
 
-<div class="container" >
+<!--<div class="container" >
     <div class="row">
         <div class="col-xs-12 col-sm-offset-2 col-sm-10">
             <div class="row">
@@ -331,9 +332,10 @@
 
     .ccfreature {
         text-align: center;
+        padding: 10px;
         
     }        
-</style>
+</style>-->
 <?php include 'template/footer.php'; ?>  
 <?php include 'template/footer_scrpit.php'; ?>
 
