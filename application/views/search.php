@@ -223,7 +223,7 @@
                                                 <img src="<?php echo base_url() ?>asset/images/stadiumpic/<?= $row->stadium_path ?>" alt="" style="width: 220px;height: 170px">
                                                 <div class="caption">
                                                     <h3><?= $row->stadium_name ?></h3>
-                                                    <p>ที่อยู่ : &nbsp;<?= $row->soi ?> <?= $row->road ?> <?= $row->province ?> </p>
+                                                    <p>ที่อยู่ : &nbsp;<?= $row->soi ?> <?= $row->district ?> <?= $row->province ?> </p>
                                                     <p>ราคา: &nbsp;120/ชม.</p>
                                                     <p>เบอโทร: &nbsp;<?= $row->tel != null ? $row->tel : '-'; ?></p>
                                                     <p>

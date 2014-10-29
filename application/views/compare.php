@@ -10,11 +10,11 @@
                         <table class="table table-bordered">
 
                             <tbody>
-                                <tr>
-                                    <th style="width: 15%" class="success" >ชื่อสนาม</th>
-                                    <?php foreach ($comparedata as $r){ ?>
-                                    <td><?=$r->stadium_name?></td>
-                                    <?php } ?>
+                                <tr >
+                                    <th></th>
+                                    <?php $i=0;foreach ($comparedata as $r){ ?>
+                                    <td><font style="font-size: 22px;font-weight: bold;"><?=$r->stadium_name?></td>
+                                    <?php $i++;} ?>
                                 </tr>
                                 <tr>
                                     <th class="success">รูปภาพ</th>
@@ -23,23 +23,21 @@
                                     <?php } ?>
                                 </tr>
                                 <tr>
-                                    <th class="success">อัตราค่าเช่า</th>
-                                    
-     
- 
-                                    <td >555 77 855</td>
-                                    
+                                    <th  class="success">อัตราค่าเช่า</th>
+                                    <?php foreach ($priceavg as $r){ ?>
+                                    <td><?=$r != null ? $r : '-' ?></td>
+                                    <?php } ?>
                                 </tr>
                                 <tr>
                                     <th class="success">เวลาเปิดปิด</th>
                                     <td>
-                                    <?php $idtemp=$time[0]->stadium_id; foreach ($time as $s){ ?>
+                                    <?php $datestadium =array ('Monday','Thuesday','Wednesday','Thuesday','Friday','Staturday','Sunday'); $idtemp=$time[0]->stadium_id; foreach ($time as $s){ ?>
                                         
                                         <?php if($s->stadium_id==$idtemp){ ?>
                                     
                                        
                                                 
-                                                <?=$s->type?>: <?=$s->open_time?>- <?=$s->end_time?> <?php echo"<br>"?>
+                                                <?=$datestadium[($s->type)]?>: <?=$s->open_time?>- <?=$s->end_time?> <?php echo"<br>"?>
                                     
                                         <?php } else { echo "</td><td>"; ?><?=$s->type?>: <?=$s->open_time?>- <?=$s->end_time?> <?php echo"<br>"?>
                                             <?php } ?>
@@ -50,7 +48,7 @@
                                 <tr>
                                     <th class="success">เบอร์โทรศัพท์</th>
                                     <?php foreach ($comparedata as $r){ ?>
-                                    <td><?=$r->tel?></td>
+                                    <td><?=$r->tel != null ? $r->tel : '-' ?></td>
                                     <?php } ?>
                                 </tr>
                                 <tr>
@@ -58,27 +56,59 @@
                                     <?php foreach ($comparedata as $r){ ?>
                                     <td style="width: 40%"> 
                                          <?=$r->soi?> 
-                                        ถนน <?=$r->road?> 
+                                         <?=$r->district?> 
                                         
                                         
                                             <?=$r->province?>
                                     <?php } ?>
                                 </tr>
                                 <tr>
-                                    <th class="success">รายละเอียดสนาม</th>
+                                    <th class="success" style="width: 20px">รายละเอียดสนาม</th>
                                     <?php foreach ($comparedata as $r){ ?>
-                                    <td><?=$r->about_stadium?></td>
+                                    <td><?=$r->about_stadium != null ? $r->about_stadium : '-' ?></td>
                                     <?php } ?>
                                 </tr>
                                 <tr>
                                     <th class="success">กฎของสนาม</th>
                                     <?php foreach ($comparedata as $r){ ?>
-                                    <td ><?=$r->rule?></td>
+                                    <td ><?=$r->rule != null ? $r->rule : '-' ?></td>
                                     <?php } ?>
                                 </tr>
+                                 
                                 <tr>
-                                    <th class="success">สิ่งอำนวยความสะดวก</th>
-                                    <td>llllllllllllllllllll</td>
+                                    
+                                    <th class="success">ที่จอดรภ</th>
+                                   <?php foreach ($facility as $r){ ?>
+                                    <td><?=$r[0] == 1 ? '<i class="mdi-action-done"></i>' : '<i class="mdi-action-highlight-remove"></i>' ?></td>
+                                   <?php } ?>
+                                    
+                                </tr>
+                                <tr>
+                                    <th class="success">ร้านอาหาร</th>
+                                    <?php foreach ($facility as $e){ ?>
+                                    <td><?=$e[1] == 1 ? '<i class="mdi-action-done"></i>' : '<i class="mdi-action-highlight-remove"></i>'?></td>
+                                    <?php } ?>
+                                    
+                                </tr>
+                                <tr>
+                                    <th class="success">ห้องอาบน้ำ</th>
+                                    <?php foreach ($facility as $e){ ?>
+                                    <td><?=$e[2] == 1 ? '<i class="mdi-action-done"></i>' : '<i class="mdi-action-highlight-remove"></i>'?></td>
+                                    <?php } ?>
+                                    
+                                </tr>
+                                <tr>
+                                    <th class="success">ล็อกเกอร์</th>
+                                    <?php foreach ($facility as $e){ ?>
+                                    <td><?=$e[3] == 1 ? '<i class="mdi-action-done"></i>' : '<i class="mdi-action-highlight-remove"></i>'?></td>
+                                    <?php } ?>
+                                    
+                                </tr>
+                                <tr>
+                                    <th class="success">ร้านค้า</th>
+                                    <?php foreach ($facility as $e){ ?>
+                                    <td><?=$e[4] == 1 ? '<i class="mdi-action-done"></i>' : '<i class="mdi-action-highlight-remove"></i>'?></td>
+                                    <?php } ?>
                                     
                                 </tr>
                                 <tr>

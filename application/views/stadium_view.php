@@ -9,7 +9,7 @@
             <div class="col-md-3 profile-pic"><img src="<?= base_url() ?>/asset/images/<?= $data['0']->stadium_path != null ? 'stadiumpic/' . $data['0']->stadium_path : 'bad.png' ?>" width="200" class="img-thumbnail"></div>
             <div class="col-md-3 info"><h3><?= $data['0']->stadium_name ?></h3>
                 <p><span class="glyphicon glyphicon-map-marker"></span>&nbsp<a href="">Bangkok</a>, <a href="#">Thailand</a></p> <p>
-                <p> Phone number :     <?= $data['0']->tel != null ? $data['0']->tel : '-'; ?></p>
+                <p> Phone number :<?= $data['0']->tel != null ? $data['0']->tel : '-'; ?></p>
 
             </div>
             <div class="col-md-4 info">
