@@ -244,7 +244,7 @@ join User on User.user_id = owner.user_id
             $stringsql = $stringsql . " or stadium_id = " . $data[$i];
         }
 
-        $sql = "select * from stadium where stadium_id =" . $data[0] . $stringsql;
+        $sql = "select * from stadium where stadium_id =" . $data[0] . $stringsql." order by stadium_id desc";
 
         $query = $this->db->query($sql)->result(); // row = แถวเดียว result = หลายแถว
         return $query;
@@ -262,15 +262,38 @@ join User on User.user_id = owner.user_id
     }
 
     public function showprice($data) {
+        for ($i = 0; $i < sizeof($data); $i++) {
+            $this->db->select_min('price')->from('court_price')->join('court','court_price.court_id = court.court_id')->where('stadium_id',$data[$i]);
+            $min = $this->db->get()->row();
+            $this->db->select_max('price')->from('court_price')->join('court','court_price.court_id = court.court_id')->where('stadium_id',$data[$i]);
+            $max = $this->db->get()->row();
+            $avgprice[] = $min->price.' - '.$max->price;
+        }
+        
+        return $avgprice;
 
-        $rs = $this->db->select_min('m_f_price')->get('court')->where('stadium_id', '');
-        $rs = $this->db->select_min('st_sun_price')->get('court')->where('stadium_id', '');
-
-
-
-        $query = $this->db->query($sql)->result();
-        return $query;
+        
     }
+    
+    public function showarrfacility($data) {
+        
+        for ($i = 0; $i < sizeof($data); $i++) {
+        
+            $this->db->select('*')->from('facility')->where('stadium_id',$data[$i]);
+            $query = $this->db->get();
+                foreach ($query->result() as $row)
+                {
+                   $res[] = $row->isShow;
+                }
+            $resall[] = $res;
+            $res = null;
+        }
+        
+        return $resall;
+
+        
+    }
+    
 
     public function showSearch($data) {
 

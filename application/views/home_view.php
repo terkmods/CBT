@@ -358,20 +358,21 @@
                                                         <div class="pull-left">
                                                             <span class="fa fa-map-marker icon"> <?= $st->stadium_name ?></span>  
                                                         </div>
-                                                        <div class="pull-right">
+                                                        <div class="pull-right" style="margin-top: 10px;"> 
                                                             โทร  <?= $st->tel != null ? $st->tel : '-' ?>
                                                         </div>
                                                     </div>
                                                     <div>
                                                         <h5><span class="fa fa-map-marker icon"></span>  ซอย <?= $st->soi != null ? $st->soi : '-' ?> ,ถนน <?= $st->road != null ? $st->road : '-' ?></h5>
-                                                        <small><?= $st->district != null ? $st->district : '-' ?>,<?= $st->province != null ? $st->province : '-' ?> </small><a href="<?= base_url() ?>stadium/profile/<?= $st->stadium_id ?>" class="btn btn-default pull-right">More Info</a>
+                                                        <small><?= $st->district != null ? $st->district : '-' ?>,<?= $st->province != null ? $st->province : '-' ?> </small>
                                                     </div>
+                                                    <a href="<?= base_url() ?>stadium/profile/<?= $st->stadium_id ?>" class="btn btn-default pull-right">More Info</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 <?php } ?>
-                                <div class="" style="padding-left: 710px" >
+                                <div class="" style="padding-left: 670px" >
                                     <a href="<?php echo base_url() ?>stadium/allStadium "  class="btn btn-default ">All Stadium</a>
                                 </div>
                             </div>

@@ -491,8 +491,9 @@ class stadium extends CI_Controller {
 
         $detail['comparedata'] = $this->mystadium->showcompare($data);
         $detail['time'] = $this->mystadium->showtime($data);
-        //$detail['price'] = $this->mystadium->showprice($data);
-        //print_r($detail['time']);
+        $detail['facility'] = $this->mystadium->showarrfacility($data);
+        $detail['priceavg'] = $this->mystadium->showprice($data);
+        print_r($detail['facility']);
         $this->load->view("compare", $detail);
     }
 
