@@ -12,146 +12,23 @@
                     <tbody>                                       
 
 
-
+                        <?php $datestadium =array ('Monday','Thuesday','Wednesday','Thuesday','Friday','Staturday','Sunday');$c=0; foreach ($showtime as $t) { ?>
                         <tr>
                             <td>
 
-
-
-
-
-
-                                จันทร์
-
-
-
-
-
+                                <?=$datestadium[($t['type'])]?>
                             </td>
-                            <td><input type="checkbox" name="day[]" value="0" class="checkboxmon" checked="checked"></td>
-                            <td><input type="time" id="txtBoxmon" name="open[]" class="form-control input-sm" value="19:00:00"></td>
-                            <td><input type="time" id="txtBoxmon1" name="close[]" class="form-control input-sm" value="05:00:00"></td>
+                            <td><input type="checkbox" name="day[]" value="0" class="checkbox<?=$c++?>" checked="checked"></td>
+                            <td><input type="time" id="txtBox<?=$c++?>" name="open[]" class="form-control input-sm" value="<?=$t['open_time']?>" step="1800"></td>
+                            <td><input type="time" id="txtBox<?=$c++?>" name="close[]" class="form-control input-sm" value="<?=$t['end_time']?>" step="1800"></td>
 
                         </tr>
+                        <?php }?>
 
 
-                        <tr>
-                            <td>
 
 
-
-
-
-
-
-                                อังคาร
-
-
-
-
-                            </td>
-                            <td><input type="checkbox" name="day[]" class="checkboxtue" value="1" checked></td>
-                            <td><input type="time" name="open[]" id="txtBoxtue" class="form-control input-sm" value="19:00:00"></td>
-                            <td><input type="time" name="close[]" id="txtBoxtue1" class="form-control input-sm" value="05:00:00"></td>
-
-                        </tr>
-
-
-                        <tr>
-                            <td>
-
-
-
-
-
-
-
-
-                                พุธ
-
-
-
-                            </td>
-                            <td><input type="checkbox" name="day[]" class="checkboxwed" value="2" checked></td>
-                            <td><input type="time" name="open[]" id="txtBoxwed" class="form-control input-sm" value="19:00:00"></td>
-                            <td><input type="time" name="close[]" id="txtBoxwed1" class="form-control input-sm" value="05:00:00"></td>
-
-                        </tr>
-
-
-                        <tr>
-                            <td>
-
-
-
-
-
-
-
-
-
-                                พฤหัสบดี
-
-
-                            </td>
-                            <td><input type="checkbox" name="day[]" value="3" class="checkboxthu" checked></td>
-                            <td><input type="time" name="open[]" id="txtBoxthu" class="form-control input-sm" value="19:00:00"></td>
-                            <td><input type="time" name="close[]" id="txtBoxthu1" class="form-control input-sm" value="05:00:00"></td>
-
-                        </tr>
-
-
-                        <tr>
-                            <td>
-
-
-
-
-
-
-
-
-
-
-                                ศุกร์
-
-                            </td>
-                            <td><input type="checkbox" name="day[]" value="4" class="checkboxfri" checked></td>
-                            <td><input type="time" name="open[]" id="txtBoxfri" class="form-control input-sm" value="19:00:00"></td>
-                            <td><input type="time" name="close[]" id="txtBoxfri1" class="form-control input-sm" value="05:00:00"></td>
-
-                        </tr>
-
-
-                        <tr>
-                            <td>
-
-
-
-
-
-
-
-
-
-
-
-                                เสาร์
-                            </td>
-                            <td><input type="checkbox" name="day[]" value="5" class="checkboxsta" checked></td>
-                            <td><input type="time" name="open[]" id="txtBoxsta" class="form-control input-sm" value="19:00:00"></td>
-                            <td><input type="time" name="close[]" id="txtBoxsta1" class="form-control input-sm" value="05:00:00"></td>
-
-                        </tr>
-                        <tr>
-                            <td>
-                                อาทิตย์    
-                            </td>
-                            <td><input type="checkbox" name="day[]" value="6" class="checkboxsun" checked></td>
-                            <td><input type="time" name="open[]" id="txtBoxsun" class="form-control input-sm" value="19:00:00"></td>
-                            <td><input type="time" name="close[]" id="txtBoxsun1"  class="form-control input-sm" value="05:00:00"></td>
-
-                        </tr>
+                   
 
 
                     </tbody>

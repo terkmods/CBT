@@ -16,7 +16,7 @@ var time2 = null;
 var Daytype;
 var val ;
 var booking ; 
-var curdate = $('.date-picker').datepicker('setDate', 'today');
+
 var counterdate =0 ; 
 ///////////////////////
 //////////////////////
@@ -33,12 +33,12 @@ function RowClick(currenttd, lock) {
 
     console.log('Court ID : '+$(currenttd).attr('value'));
     var court = $(currenttd).attr('value');
+    
+    
 
     courtview(court, Daytype);
-
-
-    $("#courtid").val(court);
-    $("#dateid").val($('.date-picker').val());
+     $("#courtid").val(court);
+    $("#dateid").val($('#datepicker').val());
     // console.log(court[1]);
 
     $("#sumpricesend").val(price / 2);
@@ -78,6 +78,33 @@ function RowClick(currenttd, lock) {
 //                                }
 
 }
+function courtview(ct, day) {
+
+    var fullpart = "http://cbt.backeyefinder.in.th/booking/showcourtbook";
+    $.ajax({
+        type: "POST",
+        url: fullpart,
+        data: {courtsend: ct, daytypeja: day}
+    }).done(function (msg) {
+        var obj = JSON.parse(msg);
+        console.log(obj);
+        console.log('price :  '+obj.price.price);
+        document.getElementById("courtja").innerHTML = obj.court.court_name;
+        price = obj.price.price;
+
+        //alert(price);
+        document.getElementById("priceja").innerHTML = price;
+        document.getElementById("sumprice").innerHTML = price / 2 + "(30 นาที )";
+
+    });
+
+
+//
+
+
+
+
+}
 function totalpricechange() {
     var starttime = $("#time_start").val();
     var endtime = $("#time_end").val();
@@ -112,140 +139,16 @@ function clearAll() {
 
     }
 }
-function getbooking(st) {
 
-    $.get('/booking/get_bookings/' + st + '/' + date_inverse + '', function (data) {
-        booking = data;
-        console.log('DATA : => '+ JSON.parse(data));
-        console.log(data[0].start.substring(0, 5));
-
-
-        var indextimefromdb = time2.indexOf(data[0].start.substring(0, 5));
-        console.log(indextimefromdb);
-
-        var time = time2[indextimefromdb];
-        console.log(time);
-//        //find index  
-//        var indexstart_time = [];
-//        var indexend_time = [];
-//        var new_timeja = [];
-//        var i = 0;
-//        for (i = 0; i < data.length; i++) {
-//            console.log("findindex");
-//            var start1 = data[i].start.substring(0, 5);
-//            for (var j = 0; j < time1.length; j++) {
-//                var timefind = time1[j].substring(0, 5);
-//                if (timefind == start1) {
-//                    //console.log("inif");
-//                    indexstart_time[i] = j;
-//                    // console.log(time1[(indexstart_time[i])]);
-//                    // console.log(time1[18]);
-//                    break;
-//                }
-//            }
-//        }
-//        for (i = 0; i < data.length; i++) {
-//            console.log("findindex_end");
-//            var end = data[i].end.substring(0, 5);
-//            for (var j = 0; j < time1.length; j++) {
-//                var timefind = time1[j].substring(8, 14);
-//                if (timefind == end) {
-//                    // console.log("inif_endtime");
-//                    indexend_time[i] = j;
-//                    // console.log(time1[(indexend_time[i])]);
-//                    //console.log(indexend_time[i]);
-//                    break;
-//                }
-//            }
-//        }
-//
-//        console.log("print_index");
-//        console.log(indexend_time);
-//        console.log(indexstart_time);
-//        console.log(time1[indexend_time[1]]);
-//        console.log(time1[indexstart_time[1]]);
-//
-//        ///////////new array time ja //////
-//        for (var i = 0; i < indexstart_time.length; i++) {
-//            for (indexstart_time[i]; indexstart_time[i] <= indexend_time[i]; indexstart_time[i]++) {
-//                new_timeja[new_timeja.length] = time1[indexstart_time[i]];
-//
-//
-//            }
-//
-//
-//        }
-//        console.log(new_timeja);
-//
-//        //////// 
-//        for (var i = 0; i < new_timeja.length; i++) {
-//            console.log("time for db : " + i + "->" + start);
-//            var start = new_timeja[i].substring(0, 5);
-//
-//            //var end = data[i]end.substring(0, 5);
-//            for (var j = 0; j < time1.length; j++) {
-//                //Note// ลบ onclick="loadRequestForm();" ออกจาก td ไป
-//                console.log("time for new_time : " + j + "->" + time);
-//                var time = time1[j].substring(0, 5);
-//
-//                if (time == start) {
-//                    console.log("yes");
-//                    $('#t' + (j + 1)).find('td:eq(1)').html(time == start ? '<b>ไม่ว่าง</b>' : '').addClass('bookline');
-//                }
-////              if (time == end) {
-////            $('#t' + (j + 1)).find('td:eq(1)').html(time == start ? (data[i].description == '' ? '<b>จองโดย:</b> ' + data[i].firstname : '<b>จองโดย:</b> ' + data[i].firstname + ' (' + data[i].description
-////                    + ')') : '').addClass('bookline');
-////            }
-//            }
-//        }
-
-
-
-        //var obj = JSON.parse(data);
-
-//        console.log(datesendnaja);
-//        console.log(data);
-//        // console.log(data[0].end.substring(0, 5));
-//        console.log(data[0].start.substring(0, 5));
-        //console.log(time1[16].substring(8, 14));
-        //  console.log(data.length);
-        var indextimefromdb = [];
-        for (var i = 0; i < data.length; i++) {
-            
-            indextimefromdb = time2.indexOf(data[i].start.substring(0, 5));
-            //console.log(indextimefromdb);
-            var start = time2[indextimefromdb];
-            console.log(start);
-             console.log("time for db : " + i + "->" + start);
-            //var end = data[i]end.substring(0, 5);
-            for (var j = 0; j < time2.length; j++) {
-                //Note// ลบ onclick="loadRequestForm();" ออกจาก td ไป
-                //console.log("time for new_time : " + j + "->" + time);
-                var time = time1[j].substring(0, 5);
-                
-                if (time == start) {
-                    console.log("yes");
-                    console.log('i= >>>>>>'+(i+1));
-                    $('#t' + (j + 1)).find('td:eq('+(i+1)+')').html(time == start ? '<b>ไม่ว่าง</b>' : '').addClass('bookline');
-                    console.log('j = '+(j+1));
-                }
-//              if (time == end) {
-//            $('#t' + (j + 1)).find('td:eq(1)').html(time == start ? (data[i].description == '' ? '<b>จองโดย:</b> ' + data[i].firstname : '<b>จองโดย:</b> ' + data[i].firstname + ' (' + data[i].description
-//                    + ')') : '').addClass('bookline');
-//            }
-            }
-        }
-    }, 'json');
-}
 function getbooking_new(){
         var fullpart = "http://cbt.backeyefinder.in.th/booking/get_bookings";
          var href = window.location.pathname;
     console.log(href);
     var st = href.substr(href.lastIndexOf('/') + 1);
-        val = $('.date-picker').datepicker('getDate').toDateString();
+        val = $('#datepicker').datepicker('getDate').toDateString();
      
      
-    datesendnaja = $('.date-picker').val();
+    datesendnaja = $('#datepicker').val();
     
     var date_elements = datesendnaja.split('/');
     date_inverse = date_elements[2] + '-' + date_elements[0] + '-' + date_elements[1];
@@ -257,7 +160,7 @@ function getbooking_new(){
         data: {st_id: st, datesend: date_inverse}
     }).done(function (msg) {
         console.log('get_bookingNEWWW');
-//        alert(msg);
+  //   alert(msg);
         console.log(JSON.parse(msg));
          booking = JSON.parse(msg);
 //        
@@ -266,40 +169,25 @@ function getbooking_new(){
         
     });
 }
-function courtview(ct, day) {
 
-    var fullpart = "http://cbt.backeyefinder.in.th/booking/showcourtbook";
-    $.ajax({
-        type: "POST",
-        url: fullpart,
-        data: {courtsend: ct, daytypeja: day}
-    }).done(function (msg) {
-        var obj = JSON.parse(msg);
-        console.log(obj);
-        console.log('price :  '+obj.price.price);
-        document.getElementById("courtja").innerHTML = obj.court.court_name;
-        price = obj.price.price;
-
-        //alert(price);
-        document.getElementById("priceja").innerHTML = price;
-        document.getElementById("sumprice").innerHTML = price / 2 + "(30 นาที )";
-
-    });
-
-
-//
-
-
-
-
-}
 
 
 $(function () {
-
-    $(".date-picker").datepicker().on('changeDate', function(e){
-        getbooking_new();
+        $("#datepicker").datepicker({
+       startDate: '+1d',
+       todayHighlight:true,
+       orientation: "bottom right",
+       todayBtn: "linked",
+       
+         
+    }).on('changeDate', function(e){
+         getbooking_new();
     });
+
+
+
+    getbooking_new();
+
 
        
     var myDate = new Date();
@@ -313,39 +201,40 @@ $(function () {
     var starttime = null;
     var show = ' ';
     var showid;
-    //val = $('.date-picker').datepicker('setDate', 'today');
-    showTableBook(curdate.val());
+    val = $('#datepicker').datepicker('setDate', 'today');
+    showTableBook();
     
 
 
 ////////////////////////////////
 //////////////////////////////
-    $('td').on("click", function () {
-        if ($(this).text().indexOf('จองโดย') != -1) {
-            cancel($(this));
-            return false;
-        }
-
-
-        var d = new Date('2013-01-01 00:00');
-        var id = parseInt($(this).parents('tr').attr('id').substr(1), 10);
-
-        for (var i = 0; i < id - 1; i++) {
-            d = new Date(d.getTime() + 30 * 60000);
-        }
-
-        var d2 = new Date(d.getTime() + 30 * 60000);
-
-        var start = addZero(d.getHours()) + ':' + addZero(d.getMinutes());
-        var end = addZero(d2.getHours()) + ':' + addZero(d2.getMinutes());
-
-        $('#time_start').val(addZero(d.getHours()) + ':' + addZero(d.getMinutes()));
-        $('#time_end').val(addZero(d2.getHours()) + ':' + addZero(d2.getMinutes()));
-
-        $('#booking').modal('show');
-
-        return false;
-    });
+//    $('td').on("click", function () {
+//       
+//        if ($(this).text().indexOf('ไม่ว่าง') != -1) {
+//            alert('sss');
+//            return false;
+//        }
+//
+//
+//        var d = new Date('2013-01-01 00:00');
+//        var id = parseInt($(this).parents('tr').attr('id').substr(1), 10);
+//
+//        for (var i = 0; i < id - 1; i++) {
+//            d = new Date(d.getTime() + 30 * 60000);
+//        }
+//
+//        var d2 = new Date(d.getTime() + 30 * 60000);
+//
+//        var start = addZero(d.getHours()) + ':' + addZero(d.getMinutes());
+//        var end = addZero(d2.getHours()) + ':' + addZero(d2.getMinutes());
+//
+//        $('#time_start').val(addZero(d.getHours()) + ':' + addZero(d.getMinutes()));
+//        $('#time_end').val(addZero(d2.getHours()) + ':' + addZero(d2.getMinutes()));
+//
+//        $('#booking').modal('show');
+//
+//        return false;
+//    });
 
 
 
@@ -355,10 +244,10 @@ $(function () {
 
 function showTableBook() {
 
-     val = $('.date-picker').datepicker('getDate').toDateString();
+     val = $('#datepicker').datepicker('getDate').toDateString();
      
      
-    datesendnaja = $('.date-picker').val();
+    datesendnaja = $('#datepicker').val();
     
     var date_elements = datesendnaja.split('/');
     date_inverse = date_elements[2] + '-' + date_elements[0] + '-' + date_elements[1];
@@ -368,7 +257,7 @@ function showTableBook() {
 
 //            var id = <?php echo $this->uri->segment(3); ?>;
     console.log('select   '+datesendnaja);
-    console.log('cureent '+curdate.val());
+    
     val = val.split(' ');
     var weekday = new Array();
     weekday['Mon'] = "จันทร์";
@@ -412,7 +301,7 @@ function showTableBook() {
 
             show = show + '<tr id="t' + (parseInt(starttime) + 1) +'"><td style="width: 110px; text-align: center">' + time1[starttime] + '</td>';
             for (k = 0; k < $('#countcort').val(); k++) {
-                show = show + '<td class="span6 c'+ obj.court[k].court_id +'"  onmousedown="RowClick(this,false);" id="'+ (parseInt(starttime) + 1) +'" value="' + obj.court[k].court_id + '">';
+                show = show + '<td  class="span6 textbooking c'+ obj.court[k].court_id +'"  onclick="RowClick(this,false);" id="'+ (parseInt(starttime) + 1) +'" value="' + obj.court[k].court_id + '">';
                    
 //               if (counterdate < booking.length){
 //                    x_start = new Date('2013-01-01 ' +booking[counterdate].start).getTime()/1000;
@@ -465,7 +354,7 @@ function showTableBook() {
         console.log(td_end);
             
             for (var j = td_start; j < td_end; j++) {
-                $("#t"+j).find("td[value='"+court_id+"']").text("ไม่ว่าง");
+                $("#t"+j).find("td[value='"+court_id+"']").text("ไม่ว่าง").addClass('bookline').removeAttr( "onclick" );
             }
             //replace td in court id
         }
