@@ -251,7 +251,9 @@
             function checksubmit() {
                 var count = $('input[type=checkbox]:checked').length;
                 if(count==0){
-                    alert("ยังไม่ได้เลือกสนามเลยไอ้ควาย");return false;
+                    alert("กรุณาเลือกสนามเพื่อเปรียบเทียบครับ");return false;
+                }else if(count==1){
+                    alert("กรุณาเลือกสนามมากกว่า 1 สนามครับ");return false;
                 }else if(count>4) {
                     alert("เลือกได้ไม่เกิน 4 สนามไอ้ซั๊ซ");return false;      
                 }else{
