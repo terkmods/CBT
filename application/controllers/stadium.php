@@ -216,10 +216,11 @@ class stadium extends CI_Controller {
             'blacklist' => $this->myusers->get_blacklist($id),
             'coach' => $this->mycoach->get_all_coach(),
             'all_news' => $this->news->getallNews($id),
-            'img' => $this->img->getGallery($id)
+            'img' => $this->img->getGallery($id),
+           
         );
 
-        //print_r($data['total']);
+        //print_r($data['showtime']);
         //echo $this->mystadium->settime($id);
        // print_r($data['courtprice']);
         $this->load->view("editstadium", $data);
@@ -279,9 +280,9 @@ class stadium extends CI_Controller {
             $sql = "UPDATE  `backeyefin_cbt`.`stadium_time` SET  `open_time` =  '".$open[$k]."',
             `end_time` =  '".$close[$k]."',
             `isopen` =  '1' WHERE  `stadium_time`.`stadium_id` =".$stId." AND  `stadium_time`.`type` =  '".$day[$r]."'";
-            
+             $this->db->query($sql);
                 }
-                $this->db->query($sql);
+               
                 }
         } else {
             for ($r = 0; $r < count($open); $r++) {

@@ -8,7 +8,7 @@
 
         <!-- Bootstrap -->
         <link href="<?= base_url() ?>asset/css/bootstrap.css" rel="stylesheet">
-        <link href="<?= base_url() ?>asset/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+        <link href="<?= base_url() ?>asset/css/datepicker3.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>asset/css/style.css">
 
         <link href="<?= base_url() ?>asset/css/bootstrap-switch.css" rel="stylesheet">
@@ -80,7 +80,7 @@
 
         </style>
 
-        <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>-->
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
     </head>
     <body>
         <div id="topbar container">

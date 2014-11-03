@@ -117,7 +117,7 @@
 
                             <th style="text-align: center"></th>
                             <?php foreach ($court as $c) { ?>
-                                <td style="text-align: center"><h4><?= $c['court_name'] ?></h4><small><?= $c['type'] ?></small></td>
+                                <td style="text-align: center"><h4>คอร์ด <?= $c['court_name'] ?></h4><small><?= $c['type'] ?></small></td>
                                     <?php } ?>
                         </tr>
                     </thead>
