@@ -39,7 +39,7 @@ class stadium extends CI_Controller {
 
                 foreach ($stID as $r) {
                     $totalcourt[] = $this->mystadium->getTotalcourt($r);
-                    $totalbooking = $this->booking->getbookingDashboard($r, $date);
+                    $totalbookingtoday = $this->booking->getbookingDashboard($r, $date);
                 }
                 $x;
                 for ($i = 0; $i < sizeof($stID); $i++) {
@@ -49,11 +49,29 @@ class stadium extends CI_Controller {
                         $this->db->update('stadium', array('court_check' => 0), array('stadium_id' => $stID[$i]));
                     }
                     $datasend['total'] = $totalcourt;
-                    $datasend['totalbooking'] = $totalbooking;
+                    $datasend['totalbooking'] = $totalbookingtoday;
                 }
                 $datasend['date'] = $date;
                 print_r($datasend['totalbooking']);
-            } else {
+                
+                $curtime = $today = date("Y-m-d").' '.date("h:i:s");
+                foreach ($datasend['totalbooking'] as $das){
+                    $startdash[] = $today = date("Y-m-d").' '.$das->start;
+                    $enddash[] = $today = date("Y-m-d").' '.$das->end;
+                }
+//                print_r($startdash);
+//                print_r($enddash);
+//                echo "The time is " . $datasend['totalbooking'][0]->start;
+                foreach ($datasend['totalbooking'] as $s){
+//                  for($k=0;$k<sizeof($totalbookingtoday);$k++){
+//                      echo $k;
+                      $playingtoday[] = $this->booking->getbookingDashboard_Playing($s->stadium_id,$curtime,date("Y-m-d").' '.$s->end);
+//                }
+                
+                  }
+                  print_r($playingtoday);
+                
+               } else {
                 $this->session->set_flashdata('msg', 'กรุณาเพิ่มสนาม');
             }
 

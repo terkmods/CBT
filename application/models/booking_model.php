@@ -121,5 +121,15 @@ join User ON User.user_id = reserve.user_id
 WHERE reserve.stadium_id =' . $stId . ' and start_time like "' . $today . '%"')->result();
         return $query;
     }
+        function getbookingDashboard_Playing($stId, $start,$end) {
+        $query = $this->db->query('SELECT reserve.reserve_id, reserve.stadium_id, reserve.court_id,  cast(start_time as time) as start,
+             cast(end_time as time) as end, stadium.stadium_name, court.court_name
+,stadium.stadium_path,User.fname,User.lname,User.phone,User.user_id FROM  `reserve` 
+JOIN stadium ON reserve.stadium_id = stadium.stadium_id
+JOIN court ON reserve.court_id = court.court_id
+join User ON User.user_id = reserve.user_id
+WHERE reserve.stadium_id =' . $stId . ' and start_time >= "' . $start . '" and end_time <= "'.$end.'"')->result();
+        return $query;
+    }
 
 }

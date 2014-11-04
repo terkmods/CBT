@@ -52,7 +52,7 @@ include 'template/head.php';
 
 
 
-                                        <?php foreach ($allbooking as $r) { ?>
+                                        <?php foreach ($today_booking as $r) { ?>
                                             <tr>
                                                 <td></td>
                                                 <td><?= $r->reserve_id ?><input type="hidden" name="rId" value="<?= $r->reserve_id ?>"></td>
@@ -61,10 +61,11 @@ include 'template/head.php';
                                                 <td><?= $r->court_name ?></td>
                                                 <td><?= substr($r->start_time, 10, 11) ?>-<?= substr($r->end_time, 10, 11) ?></td>
                                                 <?php
-                                                $date = $r->start_time;
-                                                $date = strtotime($date);
+                                                $date5 = strtotime($r->start_time);
+                                                $date = (strtotime($r->end_time)-strtotime($r->start_time));
+                                                $today = date("H:i:s",$date); 
                                                 ?>
-                                                <td><?= substr($r->end_time, 10, 11) - substr($r->start_time, 10, 11) ?>ชม. <?= date('i', $date) ?> นาที</td>
+                                                <td><?=date("h",strtotime($r->start_time))-date("h",strtotime($r->end_time))  ?>ชม. <?= date('i', $date) ?> นาที</td>
                                                 <td><a href="<?= base_url() ?>booking/cancelbooking/<?= $r->reserve_id ?>" class="form-control btn-danger btn-sm" onclick="del()"> cancel</a>
     <!--                                                    <input type="submit" value="cancel" class="form-control btn-danger btn-sm"></td>-->
                                             </tr>
@@ -109,17 +110,15 @@ include 'template/head.php';
                     show = show + '<tr>' +
                             '<td></td>' +
                             '<td>' + obj[i].reserve_id + '<input type="hidden" name="rId" value="<?= $r->reserve_id ?>"></td>' +
-                            '<td><?= substr($r->start_time, 0, 10) ?></td>' +
-                            ' <td><?= $r->stadium_name ?></td>' +
-                            '  <td><?= $r->court_name ?></td>' +
-                            '   <td><?= substr($r->start_time, 10, 11) ?>-<?= substr($r->end_time, 10, 11) ?></td>' +
-<?php
-$date = $r->start_time;
-$date = strtotime($date);
-?>
-                    '    <td><?= substr($r->end_time, 10, 11) - substr($r->start_time, 10, 11) ?>ชม. <?= date('i', $date) ?> นาที</td>' +
-                            '     <td><a href="<?= base_url() ?>booking/cancelbooking/<?= $r->reserve_id ?>" class="form-control btn-danger btn-sm" onclick="del()"> cancel</a>' +
+                            '<td>'+obj[i].start_time.substring(0,10)+'</td>' +
+                            ' <td>'+obj[i].stadium_name+'</td>' +
+                            '  <td>'+obj[i].court_name+'</td>' +
+                            '   <td>'+obj[i].start_time.substring(10,16)+'-'+obj[i].end_time.substring(10,16)+'</td>' +
+                            '<td>'+(obj[i].end_time.substring(10,13)-obj[i].start_time.substring(10,13))+'ชม. '+(obj[i].end_time.substring(14,16)-obj[i].start_time.substring(14,16))+' นาที</td>'+
+                   
+                                
                             '  </tr>';
+                    console.log(obj[i].end_time.substring(14,16));
                 }
             }
 

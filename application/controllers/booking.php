@@ -262,7 +262,7 @@ class booking extends CI_Controller {
             
         );
         $this->session->set_userdata($data);
-      // print_r($data['stadium_idja']);
+       print_r($data['sumprice']);
        // $this->db->insert("reserve", $data);
         $this->load->view("confrim_booking",$data);
     }
@@ -281,10 +281,12 @@ class booking extends CI_Controller {
            
             
             );
-         //   print_r($datasession);
+         //  print_r($datasession);
         $this->db->insert("reserve", $datasession);
                 $userId = $this->session->userdata('id');
         $datasend['allbooking'] = $this->booking->getAllBooking($userId);
+         $today = date('Y-m-d');
+        $datasend['today_booking'] = $this->booking->getAllBookingja($userId,$today);
         $this->load->view("history_booking",$datasend);
        
       
@@ -292,6 +294,8 @@ class booking extends CI_Controller {
                 function historyBooking() {
         $userId = $this->session->userdata('id');
         $datasend['allbooking'] = $this->booking->getAllBooking($userId);
+                 $today = date('Y-m-d');
+        $datasend['today_booking'] = $this->booking->getAllBookingja($userId,$today);
         //print_r($datasend);
         $this->load->view("history_booking", $datasend);
     }
