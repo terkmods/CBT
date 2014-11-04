@@ -1,30 +1,71 @@
 <?php include 'template/head.php';
 ?>
-<div class="container">
-    <div id="cover">
-<!--        <a role="button" data-toggle="modal" data-target="#uploadimgcover" class="btn"><img src="<?= base_url() ?>/asset/images/<?= $data['0']->cover_path ?>" width="1280"></a>-->
-    </div>
-    <div class="container ">
-        <div class="row">
-            <div class="col-md-3 profile-pic"><img src="<?= base_url() ?>/asset/images/<?= $data['0']->stadium_path != null ? 'stadiumpic/' . $data['0']->stadium_path : 'bad.png' ?>" width="200" class="img-thumbnail"></div>
-            <div class="col-md-3 info"><h3><?= $data['0']->stadium_name ?></h3>
-                <p><span class="glyphicon glyphicon-map-marker"></span>&nbsp<a href="">Bangkok</a>, <a href="#">Thailand</a></p> <p>
-                <p> Phone number :<?= $data['0']->tel != null ? $data['0']->tel : '-'; ?></p>
+<link href="<?= base_url() ?>asset/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
 
-            </div>
-            <div class="col-md-4 info">
-                <div class="row">
-                    <p><a style="margin-top: 55px" class="btn btn-primary btn-lg pull-right" role="button" href="<?= base_url() ?>booking/reserve/<?php echo $this->uri->segment(3); ?>">Book Now</a></p>
+
+    <div class="container ">
+        <div class="row well">
+            <div class="col-md-4 profile-pic">
+                    <img src="<?= base_url() ?>/asset/images/<?= $data['0']->stadium_path != null ? 'stadiumpic/' . $data['0']->stadium_path : 'bad.png' ?>" width="200" class="img-thumbnail" style="margin-left: 30px; margin-top: 10px">
+                </div>
+            <div class="col-md-3 info" style="margin-left: -20px; margin-top: -40px"><h3><?= $data['0']->stadium_name ?></h3>
+                    <p><span class="glyphicon glyphicon-map-marker"></span>&nbsp<a href="">Bangkok</a>, <a href="#">Thailand</a></p> <p>
+                    <p> Phone number :<?= $data['0']->tel != null ? $data['0']->tel : '-'; ?></p>
+                    <p style="margin-top: 65px"><a  class="btn btn-primary btn-lg " role="button" href="<?= base_url() ?>booking/reserve/<?php echo $this->uri->segment(3); ?>">Book Now</a></p>
+
+
+                </div>
+            <div class="col-md-4 info" style="margin-top: -30px">
+                    <div class="row">
+                        <div class="col-md-7">  
+                            <div id="well-rating">
+                                <dl>
+                                    <h4 class="text-center">ให้คะแนน</h4>
+                                    <dt>ความสะอาด</dt>
+                                    <input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs"  >
+                                </dl>
+                                <dl>
+                                    <dt>บริการ</dt>
+                                    <input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs"  >
+                                </dl>
+                                <dl>
+                                    <dt>สถานที่</dt>
+                                    <input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs"  >
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="col-md-4">  
+                            <div id="well-rating">
+                                <dl>
+                                    <h4 class="text-center">คะแนนรวม</h4>
+                                    <dt>ความสะอาด</dt>
+                                    <dd>
+                                        <div>
+                                            <div class="rating-symbol fa fa-star text-primary"></div>
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>บริการ</dt>
+                                </dl>
+                                <dl>
+                                    <dt>สถานที่</dt>
+                                </dl>
+                            </div>
+
+                        </div>
+                            
+                    </div>
                 </div>
             </div>
-        </div>
+        
     </div>
 
     <hr>
 
-    <div class="container">
+    <div class="container" >
         <!--<h4> <a href="#">หน้าหลัก</a> / เพิ่มรายละเอียดสนาม</h4> -->
-        <div class="row">
+        <div class="row" style="margin-top: -30px">
             <div class="col-md-4">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -51,7 +92,8 @@
                         Total court: &nbsp;<?= $total->courtnum != 0 ? $total->courtnum : '-' ?><br>
                         Court price :&nbsp; 120-160 บาท<br>      
 
-                        <?php $datestadium = array('Monday', 'Thuesday', 'Wednesday', 'Thuesday', 'Friday', 'Staturday', 'Sunday');
+                        <?php
+                        $datestadium = array('Monday', 'Thuesday', 'Wednesday', 'Thuesday', 'Friday', 'Staturday', 'Sunday');
                         foreach ($time as $ct) {
                             ?> <?= $datestadium[($ct->type)] ?> : <?= $ct->open_time ?> - <?= $ct->end_time ?><br><?php } ?>
                     </div>
@@ -63,11 +105,12 @@
                     </div>
                     <div class="panel-body">
                         <ul>
-                            <?php $fa = array('Parking', 'Food', 'Bathroom', 'Lockerroom', 'Shop');
+                            <?php
+                            $fa = array('Parking', 'Food', 'Bathroom', 'Lockerroom', 'Shop');
                             foreach ($facility as $r) { //เรียกจาก $data['facility'] 
                                 ?>
-                                <li><?php echo $fa[($r['facility'])]; //ใช้ return เป็น result_array              ?></li>
-<?php } ?>
+                                <li><?php echo $fa[($r['facility'])]; //ใช้ return เป็น result_array                 ?></li>
+                            <?php } ?>
 
                         </ul>
                     </div>
@@ -124,8 +167,8 @@
                         <div class="col-md-6">
                             <div class="list-group">
                                 <?php $o = 0 ?>
-<?php foreach ($annouc as $a) { ?>
-    <?php $o +=1 ?>
+                                <?php foreach ($annouc as $a) { ?>
+                                    <?php $o +=1 ?>
                                     <div class="list-group-item">
                                         <div class="row-action-primary">
                                             <img class="circle" src="<?= base_url() ?>asset/images/<?= $a->type == 1 ? 'AN_icon1.png' : 'AN_icon.png' ?>" alt="icon">
@@ -143,14 +186,14 @@
                                         $o = 0;
                                     }
                                     ?>
-<?php } ?>
+                                <?php } ?>
 
                             </div>
 
 
 
                         </div>
-<?php echo $this->pagination->create_links(); ?>
+                        <?php echo $this->pagination->create_links(); ?>
                     </div>
 
 
@@ -159,18 +202,18 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3>Gallery</h3>
-                                                <div class="row">
-                        <?php if ($img != null) { ?>
-                                                                <ul id="myGallery">
-                            <?php foreach ($img as $i) { ?>
-                                                                                <li><img src="<?= base_url() ?>asset/images/upload/<?= $i->picstadium_path ?>"   >
+                        <div class="row">
+                            <?php if ($img != null) { ?>
+                                <ul id="myGallery">
+                                    <?php foreach ($img as $i) { ?>
+                                        <li><img src="<?= base_url() ?>asset/images/upload/<?= $i->picstadium_path ?>"   >
+                                        <?php } ?>
+                                </ul>
+                            <?php } else { ?>
+                                <p class="text-danger" style="text-align : center"> No gallery </p>
                             <?php } ?>
-                                                                </ul>
-                        <?php } else { ?>
-                                                            <p class="text-danger" style="text-align : center"> No gallery </p>
-<?php } ?>
-                                                </div>
-                        
+                        </div>
+
                     </div>
 
 
@@ -181,24 +224,24 @@
 
 
                             <div class="scroll">
-<!--
-                                                                <div class="pull-left">
-                                                                    <img src="<?= base_url() ?>/asset/images/profile.jpg" class="imgcomment">
-                                                                </div>
-                                                                <div class="pull-left ">
-                                
-                                                                    <img src="<?= base_url() ?>/asset/images/comment.png">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row" style="margin-top: 10px">
-                                                                <div class="pull-left">
-                                                                    <a href="user.html">   <img src="<?= base_url() ?>/asset/images/sporter.jpg" class="imgcomment"></a>
-                                                                </div>
-                                                                <div class="pull-left ">
-                                
-                                                                    <img src="<?= base_url() ?>/asset/images/comment.png">
-                                                                </div>
-                                                            </div>-->
+                                <!--
+                                                                                                <div class="pull-left">
+                                                                                                    <img src="<?= base_url() ?>/asset/images/profile.jpg" class="imgcomment">
+                                                                                                </div>
+                                                                                                <div class="pull-left ">
+                                                                
+                                                                                                    <img src="<?= base_url() ?>/asset/images/comment.png">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="row" style="margin-top: 10px">
+                                                                                                <div class="pull-left">
+                                                                                                    <a href="user.html">   <img src="<?= base_url() ?>/asset/images/sporter.jpg" class="imgcomment"></a>
+                                                                                                </div>
+                                                                                                <div class="pull-left ">
+                                                                
+                                                                                                    <img src="<?= base_url() ?>/asset/images/comment.png">
+                                                                                                </div>
+                                                                                            </div>-->
 
 
 
@@ -218,30 +261,33 @@
 
 
                 </div>
-          
+
             </div>
             <input type="hidden" id="stadiumidja" value="<?= $this->uri->segment(3) ?>">
         </div>
     </div>
-<?php include 'template/modal.php'; ?>
-<?php include 'template/footer.php'; ?>
+    <?php include 'template/modal.php'; ?>
+    <?php include 'template/footer.php'; ?>
+
+    <script src="<?= base_url() ?>asset/js/star-rating.js" type="text/javascript"></script>
     <script type="text/javascript">
-        $(function () {
-            $('#myGallery').galleryView({
-                filmstrip_style: 'showall',
-                filmstrip_position: 'bottom',
-                frame_height: 32,
-                frame_width: 50,
-                transition_interval: 6000,
-                autoplay: true,
-                enable_overlays: true,
-                pan_images: true,
-                panel_animation: 'slide',
-                panel_width: 750
+                            $(function() {
+                                $("#input-rating").rating({showCaption: false});
+                                $('#myGallery').galleryView({
+                                    filmstrip_style: 'showall',
+                                    filmstrip_position: 'bottom',
+                                    frame_height: 32,
+                                    frame_width: 50,
+                                    transition_interval: 6000,
+                                    autoplay: true,
+                                    enable_overlays: true,
+                                    pan_images: true,
+                                    panel_animation: 'slide',
+                                    panel_width: 750
 
 
-            });
-        });
+                                });
+                            });
     </script>
     <script>
         var map;
@@ -267,16 +313,16 @@
             var infowindow = new google.maps.InfoWindow({
                 content: contentString
             });
-            google.maps.event.addListener(marker, 'click', function () {
+            google.maps.event.addListener(marker, 'click', function() {
                 infowindow.open(map, marker);
             });
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
+                navigator.geolocation.getCurrentPosition(function(position) {
                     var pos = new google.maps.LatLng(position.coords.latitude,
                             position.coords.longitude);
                     curlatlng = pos;
 
-                }, function () {
+                }, function() {
                     handleNoGeolocation(true);
                 });
             } else {
@@ -301,7 +347,7 @@
                 destination: end,
                 travelMode: google.maps.TravelMode.DRIVING
             };
-            directionsService.route(request, function (response, status) {
+            directionsService.route(request, function(response, status) {
                 if (status == google.maps.DirectionsStatus.OK) {
                     directionsDisplay.setDirections(response);
                 }
@@ -331,13 +377,13 @@
 
         function showComment() {
             $(".nocom").remove();
-            $.getJSON("http://cbt.backeyefinder.in.th/stadium/showcomment/" + st_id, function (data) {
+            $.getJSON("http://cbt.backeyefinder.in.th/stadium/showcomment/" + st_id, function(data) {
                 $(".nonja").remove();
 
                 if (data.length != 0) {
 
                     console.log(data);
-                    $(data).each(function (k, v) {
+                    $(data).each(function(k, v) {
                         console.log(v.comment_id);
                         html = '                            <div class="bubble-list nonja">' +
                                 '  <div class="bubble clearfix">' +
@@ -364,7 +410,7 @@
 
 
 
-        $(function () {
+        $(function() {
 
             showComment();
             //        var aTable = $('#AllAnnounce').dataTable({
@@ -381,7 +427,7 @@
             ////            var html = '<h1 class="text-muted" style="text-align: center" id="noann">No announement.</h1>';
             ////            $("#AllAnnounce_wrapper table tbody").html(html);
             ////        }
-            $("#addcomment").click(function () {
+            $("#addcomment").click(function() {
 
                 var content = $("#content").val();
                 if (content.length > 0) {
@@ -389,7 +435,7 @@
                         type: "POST",
                         url: "http://cbt.backeyefinder.in.th/stadium/addcomment/" + st_id,
                         data: {content: content}
-                    }).done(function (msg) {
+                    }).done(function(msg) {
                         //                    if($("#noann").length!=0){
                         //                        $("#noann").remove();
                         //                    }
@@ -413,18 +459,19 @@
             var fullname = '${ac.firstname}' + '${ac.lastname}';
             var d = new Date();
             var dateSt = d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2) + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getMilliseconds();
-            $("#newannounce").click(function () {
+            $("#newannounce").click(function() {
                 $(this).hide();
                 $("#formAddAnnouce").slideDown();
             });
 
         });
-        
+
     </script>
 
 
 
-<?php include 'template/footer_scrpit.php'; ?>
+
+    <?php include 'template/footer_scrpit.php'; ?>
 
 </body>
 </html>

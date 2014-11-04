@@ -1,4 +1,6 @@
+
 <script type="text/javascript">
+   
     /* pagination */
     $.fn.pageMe = function (opts) {
         var $this = this,
@@ -116,15 +118,20 @@
     /****/
 </script>
 <script>
-
+$('.submenudrop').hide();
     $('#myTab a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
+    });
+     $('.subdrop').mouseover(function (e) {
+        //alert('hello');
+        $('.submenudrop').toggle();
     });
 
 </script>
 <script>
     $(document).ready(function () {
+        $('.dropdown-submenu > a').submenupicker();
         $("#btn1").click(function () {
             $("#add").append('<input class="form-control" name="facility[]"  type="text" style="margin-top : 10px;"> ');
         });

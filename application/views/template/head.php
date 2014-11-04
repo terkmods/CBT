@@ -10,15 +10,16 @@
         <link href="<?= base_url() ?>asset/css/bootstrap.css" rel="stylesheet">
         <link href="<?= base_url() ?>asset/css/datepicker3.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>asset/css/style.css">
-
-        <link href="<?= base_url() ?>asset/css/bootstrap-switch.css" rel="stylesheet">
+       <link href="<?= base_url() ?>asset/material/css/ripples.min.css" rel="stylesheet">
+        <link href="<?= base_url() ?>asset/material/css/material-wfont.min.css" rel="stylesheet">
+        <!--<link href="<?= base_url() ?>asset/css/bootstrap-switch.css" rel="stylesheet">-->
         <link href="<?= base_url() ?>asset/css/jquery-ui.css" rel="stylesheet">
         <link href="<?= base_url() ?>asset/css/ui.notify.css" rel="stylesheet">
         <link rel="stylesheet" href="<?= base_url() ?>asset/css/jquery.fileupload-ui.css">
+          <link rel="stylesheet" href="<?= base_url() ?>asset/css/bootstrap-submenu.min.css">
 
 
-        <link href="<?= base_url() ?>asset/material/css/ripples.min.css" rel="stylesheet">
-        <link href="<?= base_url() ?>asset/material/css/material-wfont.min.css" rel="stylesheet">
+ 
         <link rel="stylesheet" href="<?php echo base_url() . 'module/DataTables/css/demo_table.css'; ?>" /> 
         <link rel="stylesheet" href="<?php echo base_url() . 'module/loadover/loadover.css'; ?>" />
         <!--<link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'asset/css/ui-lightness/jquery-ui-1.10.3.custom.min.css'; ?>"/>-->
@@ -82,9 +83,11 @@
 
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
     </head>
+    <?=$this->session->userdata('stadium');?>
     <body>
         <div id="topbar container">
             <div class="cont">
+                
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="container-fluid">
                         <!-- Brand and toggle get grouped for better mobile display -->
@@ -98,6 +101,7 @@
                             <a class="navbar-brand" href="<?= base_url() ?>home"><img src="../../../asset/images/logo-white.png"></a>
 
                         </div>
+                        
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -111,14 +115,34 @@
                                 <?php } else { ?>
                                     <li><a href="<?= base_url() ?>stadium"><?php echo $this->session->userdata('profile_url') ?></a></li>
                                 <?php } ?>
-                                <li class="dropdown">
+                                    
+                                   
+                                        
+                                   
+                               <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Black List</a></li>
-                                        <li><a href="#">Privacy</a></li>
+                                    <ul class="dropdown-menu" >
+
+                                        <?php if ($this->session->userdata('role') == "owner") { ?>
+                                            <li><a href="#">Dash board</a></li>
+                                            <li><a href="#">My Booking</a></li>
+                                            <li class="subdrop"><a href="#">Manage Stadium</a></li>
+                                            <li class="divider"></li>
+                                            <?php foreach ($this->session->userdata('stadium') as $row) { ?>
+                                            <li class="submenudrop"><a href="<?php echo base_url() ?>stadium/updatestadium/<?=$row->stadium_id?>"><?=$row->stadium_name?></a></li>
+                                            <?php } ?>
+                                            <li class="submenudrop divider"></li>
+                                        <?php } else { ?>
+                                            <li><a href="#">My Booking</a></li>   
+                                        <?php } ?>
+                                        <li><a href="#">Favorit Stadium</a></li>
+                                        <li><a href="#">Edit Profile</a></li>
                                         <li><a href="<?php if ($this->session->userdata('role') == "owner") { ?><?= base_url() ?>stadium <?php } else { ?>  <?= base_url() ?>users/edituser/<?= $this->session->userdata('id') ?>  <?php } ?>" >
 
                                                 Settings</a></li>
+                                                
+                                       
+
                                         <li class="divider"></li>
                                         <li><a href="<?= base_url() ?>users/logout">Logout</a></li>
                                     </ul>

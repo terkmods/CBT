@@ -74,14 +74,21 @@ class Users extends CI_Controller {
                     'id' => $row->user_id,
                     'role' => $row->type,
                     'logged' => TRUE
+                    
                 );
-                $this->session->set_userdata($data);
+                
+                $userid = $data['id'];
+                $ownerid = $this->getOwnerid($userid);
+                if($ownerid!=null){
+                $data['stadium'] = $this->mystadium->getstadium($ownerid);
+                //print_r($data['stadium']);
+                }
             }
             echo $data['role'];
             if ($data['role'] == "owner") {
                 redirect('stadium');
             }
-
+            $this->session->set_userdata($data);
             redirect('home');
         } else {
             $this->session->set_flashdata('msg_error', 'รหัสผ่านหรืออีเมลไม่ถูกต้องกรุณาตรวจสอบ');
@@ -97,6 +104,18 @@ class Users extends CI_Controller {
     function logout() {
         $this->session->sess_destroy();
         redirect('index.php/users');
+    }
+      function getOwnerid($userid) {
+
+        if ($userid != null) {
+            $query = $this->db->query('SELECT owner.owner_id FROM owner join User  WHERE owner.user_id = User.user_id and User.user_id = ' . $userid)->result();
+            foreach ($query as $r) {
+                $owner_id = $r->owner_id;
+            }
+            return $owner_id;
+        } else {
+            echo 'fail no userid';
+        }
     }
 
     public function register() {
