@@ -86,6 +86,7 @@ class Users extends CI_Controller {
             }
             echo $data['role'];
             if ($data['role'] == "owner") {
+                $this->session->set_userdata($data);
                 redirect('stadium');
             }
             $this->session->set_userdata($data);

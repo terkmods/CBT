@@ -128,7 +128,7 @@ WHERE reserve.stadium_id =' . $stId . ' and start_time like "' . $today . '%"')-
 JOIN stadium ON reserve.stadium_id = stadium.stadium_id
 JOIN court ON reserve.court_id = court.court_id
 join User ON User.user_id = reserve.user_id
-WHERE reserve.stadium_id =' . $stId . ' and start_time >= "' . $start . '" and end_time <= "'.$end.'"')->result();
+WHERE reserve.stadium_id ="'. $stId .'" and ((start_time <= "'.$start.'" and  end_time >= "'.$end.'") or (end_time >= "'.$start.'" and start_time <= "'.$end.'"))')->result();
         return $query;
     }
 

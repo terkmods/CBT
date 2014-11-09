@@ -170,10 +170,10 @@ $num = 1;
     }
 
     console.log(getUrlVars().type);
-    if (getUrlVars().type == 1) {
+    if (getUrlVars().type == 'time') {
 
 
-        $('#myTab li:eq(2) a').tab('show')
+        $('#myTab li:eq(1) a').tab('show')
     } else if (getUrlVars().type == 4) {
 
 

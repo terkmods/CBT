@@ -36,10 +36,11 @@ class stadium extends CI_Controller {
                 $stID[] = $d->stadium_id;
             }
             if ($stID != null) {
-
+                    $curtime = $today = date("Y-m-d").' '.date("h:i:s");
                 foreach ($stID as $r) {
                     $totalcourt[] = $this->mystadium->getTotalcourt($r);
                     $totalbookingtoday = $this->booking->getbookingDashboard($r, $date);
+                  //  $playing = $this->booking->getbookingDashboard_Playing($r, $curtime);
                 }
                 $x;
                 for ($i = 0; $i < sizeof($stID); $i++) {
@@ -54,7 +55,7 @@ class stadium extends CI_Controller {
                 $datasend['date'] = $date;
                 print_r($datasend['totalbooking']);
                 
-                $curtime = $today = date("Y-m-d").' '.date("h:i:s");
+                
                 foreach ($datasend['totalbooking'] as $das){
                     $startdash[] = $today = date("Y-m-d").' '.$das->start;
                     $enddash[] = $today = date("Y-m-d").' '.$das->end;
@@ -238,7 +239,7 @@ class stadium extends CI_Controller {
            
         );
 
-        //print_r($data['showtime']);
+        print_r($data['showtime']);
         //echo $this->mystadium->settime($id);
        // print_r($data['courtprice']);
         $this->load->view("editstadium", $data);
@@ -271,6 +272,17 @@ class stadium extends CI_Controller {
 
         return $data['map'];
     }
+     public function checkisOpen($day,$i){
+        if($day == null){
+            return 0;
+        }
+        for ($n=0 ; $n< count($day) ;$n++){
+            if($day[$n]==$i ){
+                return 1;
+            }
+        }
+        return 0;
+    }
 
     function updatetime($stId) {
         $open = $this->input->post('open');
@@ -278,30 +290,34 @@ class stadium extends CI_Controller {
         $day = $this->input->post('day');
         $check = $this->input->post('check');
             print_r($open);
-            echo '////////////';
-            print_r($close);
-            echo '////////////';
-        
-        print_r($day);
-        echo $check;
+//            echo '////////////';
+//            print_r($close);
+//            echo '////////////';  
+
+            
+//        print_r($day);
+//        echo $check;
         $data = array(
             'stadium_id' => $stId,
             'open_time' => $this->input->post('open'),
             'end_time' => $this->input->post('close'),
             'type' => $this->input->post('type')
         );
+        
+
 
         //echo $data['type']['0'];
         if ($check != 0) {
-            for ($r = 0; $r < count($day); $r++) {
+            
                 for($k =0 ;$k< count($open); $k++){
             $sql = "UPDATE  `backeyefin_cbt`.`stadium_time` SET  `open_time` =  '".$open[$k]."',
             `end_time` =  '".$close[$k]."',
-            `isopen` =  '1' WHERE  `stadium_time`.`stadium_id` =".$stId." AND  `stadium_time`.`type` =  '".$day[$r]."'";
+            `isopen` =  '".  $this->checkisOpen($day,$k)."' WHERE  `stadium_time`.`stadium_id` =".$stId." AND  `stadium_time`.`type` =  '".$k."'";
              $this->db->query($sql);
+             
                 }
                
-                }
+             redirect('stadium/updatestadium/' . $stId . '?type=time');   
         } else {
             for ($r = 0; $r < count($open); $r++) {
                 $sql = "INSERT INTO `backeyefin_cbt`.`stadium_time` (`stadium_id`, `open_time`, `end_time`, `type`, `isopen`)"
@@ -311,6 +327,7 @@ class stadium extends CI_Controller {
         }
 //        $this->updatestadium($stId);
     }
+   
 
     function editstadium($stId) {
 

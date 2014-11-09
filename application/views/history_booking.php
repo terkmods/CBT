@@ -24,11 +24,43 @@ include 'template/head.php';
                     <div class="col-md-9">
                         <div class="row">
                             <div class="col-md-6 col-md-offset-3">
-                                <button  class="btn btn-default " role="button" id="history" value="1" onclick="history()">History</button>
+                                <button  class="btn btn-danger " role="button" id="history" value="1" onclick="history()">History</button>
                                 <button  class="btn btn-success " role="button" id="today" value="2" onclick="today()">Today</button>
 
                                 <button  class="btn btn-primary " role="button" id="futuer" value="3" onclick="futuer()">Comming</button>
 
+                            </div>
+
+                        </div>
+                        <h4 class="text-center"><?=  substr(date(DATE_RFC2822),0,16)?></h4>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">Welcome :  </div>
+                                    <div class="panel-body text-center ">
+                                        <h2>0 <small>การจองวันนี้</small></h2> ตรวจสอบการจองทั้งหมดได้ข้างล่าง
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">สนามจองล่าสุด</div>
+                                    <div class="panel-body text-center">
+                                        <div class="list-group">
+                                            <div class="list-group-item">
+                                                <div class="row-action-primary">
+                                                    <i class="mdi-file-folder"></i>
+                                                </div>
+                                                <div class="row-content">
+                                                    <div class="least-content">15m</div>
+                                                    <h4 class="list-group-item-heading">Tile with a label</h4>
+                                                    <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus.</p>
+                                                </div>
+                                            </div>
+                                            <div class="list-group-separator"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -62,10 +94,10 @@ include 'template/head.php';
                                                 <td><?= substr($r->start_time, 10, 11) ?>-<?= substr($r->end_time, 10, 11) ?></td>
                                                 <?php
                                                 $date5 = strtotime($r->start_time);
-                                                $date = (strtotime($r->end_time)-strtotime($r->start_time));
-                                                $today = date("H:i:s",$date); 
+                                                $date = (strtotime($r->end_time) - strtotime($r->start_time));
+                                                $today = date("H:i:s", $date);
                                                 ?>
-                                                <td><?=date("h",strtotime($r->start_time))-date("h",strtotime($r->end_time))  ?>ชม. <?= date('i', $date) ?> นาที</td>
+                                                <td><?= date("h", strtotime($r->start_time)) - date("h", strtotime($r->end_time)) ?>ชม. <?= date('i', $date) ?> นาที</td>
                                                 <td><a href="<?= base_url() ?>booking/cancelbooking/<?= $r->reserve_id ?>" class="form-control btn-danger btn-sm" onclick="del()"> cancel</a>
     <!--                                                    <input type="submit" value="cancel" class="form-control btn-danger btn-sm"></td>-->
                                             </tr>
@@ -101,7 +133,7 @@ include 'template/head.php';
         }).done(function (msg) {
             var obj = JSON.parse(msg);
 
-           // console.log(obj[0].stadium_id);
+            // console.log(obj[0].stadium_id);
             show = ' ';
 
             console.log(obj);
@@ -110,20 +142,18 @@ include 'template/head.php';
                     show = show + '<tr>' +
                             '<td></td>' +
                             '<td>' + obj[i].reserve_id + '<input type="hidden" name="rId" value="<?= $r->reserve_id ?>"></td>' +
-                            '<td>'+obj[i].start_time.substring(0,10)+'</td>' +
-                            ' <td>'+obj[i].stadium_name+'</td>' +
-                            '  <td>'+obj[i].court_name+'</td>' +
-                            '   <td>'+obj[i].start_time.substring(10,16)+'-'+obj[i].end_time.substring(10,16)+'</td>' +
-                            '<td>'+(obj[i].end_time.substring(10,13)-obj[i].start_time.substring(10,13))+'ชม. '+(obj[i].end_time.substring(14,16)-obj[i].start_time.substring(14,16))+' นาที</td>'+
-                   
-                                
+                            '<td>' + obj[i].start_time.substring(0, 10) + '</td>' +
+                            ' <td>' + obj[i].stadium_name + '</td>' +
+                            '  <td>' + obj[i].court_name + '</td>' +
+                            '   <td>' + obj[i].start_time.substring(10, 16) + '-' + obj[i].end_time.substring(10, 16) + '</td>' +
+                            '<td>' + (obj[i].end_time.substring(10, 13) - obj[i].start_time.substring(10, 13)) + 'ชม. ' + (obj[i].end_time.substring(14, 16) - obj[i].start_time.substring(14, 16)) + ' นาที</td>' +
                             '  </tr>';
-                    console.log(obj[i].end_time.substring(14,16));
+                    console.log(obj[i].end_time.substring(14, 16));
                 }
             }
 
             console.log(show);
-             $("#showbooking").html(show);
+            $("#showbooking").html(show);
         });
     }
     function history() {
@@ -138,23 +168,21 @@ include 'template/head.php';
 
 //            console.log(obj[0].stadium_id);
             show = ' ';
-                 if (obj != null) {
+            if (obj != null) {
                 for (i = 0; i < obj.length; i++) {
                     show = show + '<tr>' +
                             '<td></td>' +
                             '<td>' + obj[i].reserve_id + '<input type="hidden" name="rId" value="<?= $r->reserve_id ?>"></td>' +
-                            '<td>'+obj[i].start_time.substring(0,10)+'</td>' +
-                            ' <td>'+obj[i].stadium_name+'</td>' +
-                            '  <td>'+obj[i].court_name+'</td>' +
-                            '   <td>'+obj[i].start_time.substring(10,16)+'-'+obj[i].end_time.substring(10,16)+'</td>' +
-                            '<td>'+(obj[i].end_time.substring(10,13)-obj[i].start_time.substring(10,13))+'ชม. '+(obj[i].end_time.substring(14,16)-obj[i].start_time.substring(14,16))+' นาที</td>'+
-                   
-                                
+                            '<td>' + obj[i].start_time.substring(0, 10) + '</td>' +
+                            ' <td>' + obj[i].stadium_name + '</td>' +
+                            '  <td>' + obj[i].court_name + '</td>' +
+                            '   <td>' + obj[i].start_time.substring(10, 16) + '-' + obj[i].end_time.substring(10, 16) + '</td>' +
+                            '<td>' + (obj[i].end_time.substring(10, 13) - obj[i].start_time.substring(10, 13)) + 'ชม. ' + (obj[i].end_time.substring(14, 16) - obj[i].start_time.substring(14, 16)) + ' นาที</td>' +
                             '  </tr>';
-                    console.log(obj[i].end_time.substring(14,16));
+                    console.log(obj[i].end_time.substring(14, 16));
                 }
             }
-           // console.log(show);
+            // console.log(show);
             $("#showbooking").html(show);
 
         });
@@ -171,23 +199,21 @@ include 'template/head.php';
 
 //            console.log(obj[0].stadium_id);
             show = ' ';
-                 if (obj != null) {
+            if (obj != null) {
                 for (i = 0; i < obj.length; i++) {
                     show = show + '<tr>' +
                             '<td></td>' +
                             '<td>' + obj[i].reserve_id + '<input type="hidden" name="rId" value="<?= $r->reserve_id ?>"></td>' +
-                            '<td>'+obj[i].start_time.substring(0,10)+'</td>' +
-                            ' <td>'+obj[i].stadium_name+'</td>' +
-                            '  <td>'+obj[i].court_name+'</td>' +
-                            '   <td>'+obj[i].start_time.substring(10,16)+'-'+obj[i].end_time.substring(10,16)+'</td>' +
-                            '<td>'+(obj[i].end_time.substring(10,13)-obj[i].start_time.substring(10,13))+'ชม. '+(obj[i].end_time.substring(14,16)-obj[i].start_time.substring(14,16))+' นาที</td>'+
-                   
-                                
+                            '<td>' + obj[i].start_time.substring(0, 10) + '</td>' +
+                            ' <td>' + obj[i].stadium_name + '</td>' +
+                            '  <td>' + obj[i].court_name + '</td>' +
+                            '   <td>' + obj[i].start_time.substring(10, 16) + '-' + obj[i].end_time.substring(10, 16) + '</td>' +
+                            '<td>' + (obj[i].end_time.substring(10, 13) - obj[i].start_time.substring(10, 13)) + 'ชม. ' + (obj[i].end_time.substring(14, 16) - obj[i].start_time.substring(14, 16)) + ' นาที</td>' +
                             '  </tr>';
-                    console.log(obj[i].end_time.substring(14,16));
+                    console.log(obj[i].end_time.substring(14, 16));
                 }
             }
-           // console.log(show);
+            // console.log(show);
             $("#showbooking").html(show);
 
         });

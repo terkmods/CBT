@@ -18,9 +18,9 @@
 
                                 <?=$datestadium[($t['type'])]?>
                             </td>
-                            <td><input type="checkbox" name="day[]" value="0" class="checkbox<?=$c++?>" checked="checked"></td>
-                            <td><input type="time" id="txtBox<?=$c++?>" name="open[]" class="form-control input-sm" value="<?=$t['open_time']?>" step="1800"></td>
-                            <td><input type="time" id="txtBox<?=$c++?>" name="close[]" class="form-control input-sm" value="<?=$t['end_time']?>" step="1800"></td>
+                            <td><input type="checkbox" name="day[]" value="<?=$c++?>" class="checkbox" <?=$t['isopen']==1 ? 'checked' :' '?>></td>
+                            <td><input type="time" id="txtBox" name="open[]" class="form-control input-sm" value="<?=$t['isopen']==1 ?  $t['open_time']:null?>" step="1800"></td>
+                            <td><input type="time" id="txtBox" name="close[]" class="form-control input-sm" value="<?=$t['isopen']==1 ?  $t['end_time']:null?>" step="1800"></td>
 
                         </tr>
                         <?php }?>

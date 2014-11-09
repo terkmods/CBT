@@ -182,10 +182,10 @@ join User on User.user_id = owner.user_id
         //printf($datar['type']['0']);
         // print_r($datar);
         $n = 0;
-        for ($n; $n < sizeof($data['type']); $n++) {
+        for ($n; $n < 7; $n++) {
 
-            $sql = 'INSERT INTO `backeyefin_cbt`.`stadium_time` (`stadium_id`, `open_time`, `end_time`, `type`)
-                   VALUES ("' . $stId . '",  "' . $data['open_time'][$n] . '",  "' . $data['end_time'][$n] . '",  "' . $data['type'][$n] . '")';
+            $sql = 'INSERT INTO `backeyefin_cbt`.`stadium_time` (`stadium_id`, `open_time`, `end_time`, `type`,`isopen`)
+                   VALUES ("' . $stId . '",  "' . null . '",  "' . null . '",  "' . $n . '","1")';
             $this->db->query($sql);
 
             //$sql = 'INSERT INTO  `backeyefin_cbt`.`stadium_time` (`stadium_id` ,`facility`)
