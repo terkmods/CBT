@@ -124,6 +124,24 @@ body{
    	text-decoration: none;
    	background: #268fcc;
    }
+   .booknow{
+       
+    	position: fixed;
+    	top: 100px;
+    	right: 5px;
+    	width: 130px;
+    	background: #2998d9;
+    	color: #fff;
+    	padding: 8px;
+    	z-index: 999;
+    	box-shadow: 1px 1px 2px #f6f6f6;
+    	text-decoration: none;
+    }
+   .booknow:hover{
+   	color: #f6f6f6;
+   	text-decoration: none;
+   	background: #268fcc;
+   }
  
 
 
