@@ -82,7 +82,7 @@ WHERE reserve.user_id =' . $userId . ' and start_time > "' . $today . '"')->resu
         $this->db->like('start_time', $date, 'after');
         $this->db->order_by("court_id", "asc");
         $this->db->order_by("start_time", "asc");
-        
+
         $query = $this->db->get();
         return $query->result();
     }
@@ -111,14 +111,75 @@ WHERE reserve.stadium_id =' . $stId . ''
         }
     }
 
-    function getbookingDashboard($stId, $today) {
-        $query = $this->db->query('SELECT reserve.reserve_id, reserve.stadium_id, reserve.court_id,  cast(start_time as time) as start,
-             cast(end_time as time) as end, stadium.stadium_name, court.court_name
-,stadium.stadium_path,User.fname,User.lname,User.phone,User.user_id FROM  `reserve` 
+    function getbookingDashboard($owner_id) {
+            $query = $this->db->query('SELECT * 
+FROM  `reserve` 
 JOIN stadium ON reserve.stadium_id = stadium.stadium_id
 JOIN court ON reserve.court_id = court.court_id
-join User ON User.user_id = reserve.user_id
-WHERE reserve.stadium_id =' . $stId . ' and start_time like "' . $today . '%"')->result();
+JOIN User ON User.user_id = reserve.user_id
+WHERE reserve.stadium_id
+IN (
+
+SELECT stadium_id
+FROM stadium
+WHERE owner_id = '.$owner_id.'
+)
+AND DATE( start_time ) = CURDATE( ) ')->result();
+        return $query;
+    }
+
+    function getbookingDashboard_Playing($owner_id) {
+        $query = $this->db->query('SELECT * 
+FROM  `reserve` 
+JOIN stadium ON reserve.stadium_id = stadium.stadium_id
+JOIN court ON reserve.court_id = court.court_id
+JOIN User ON User.user_id = reserve.user_id
+WHERE reserve.stadium_id
+IN (
+
+SELECT stadium_id
+FROM stadium
+WHERE owner_id = '.$owner_id.'
+)
+AND DATE( start_time ) = CURDATE( ) 
+AND CURTIME( ) >= TIME( start_time ) 
+AND CURTIME( ) <= TIME( end_time ) ')->result();
+        return $query;
+    }
+    function getbookingDashboard_Pass($owner_id) {
+        $query = $this->db->query('SELECT * 
+FROM  `reserve` 
+JOIN stadium ON reserve.stadium_id = stadium.stadium_id
+JOIN court ON reserve.court_id = court.court_id
+JOIN User ON User.user_id = reserve.user_id
+WHERE reserve.stadium_id
+IN (
+
+SELECT stadium_id
+FROM stadium
+WHERE owner_id = '.$owner_id.'
+)
+AND DATE( start_time ) = CURDATE( ) 
+
+AND CURTIME( ) > TIME( end_time ) ')->result();
+        return $query;
+    }
+    function getbookingDashboard_comming($owner_id) {
+        $query = $this->db->query('SELECT * 
+FROM  `reserve` 
+JOIN stadium ON reserve.stadium_id = stadium.stadium_id
+JOIN court ON reserve.court_id = court.court_id
+JOIN User ON User.user_id = reserve.user_id
+WHERE reserve.stadium_id
+IN (
+
+SELECT stadium_id
+FROM stadium
+WHERE owner_id = '.$owner_id.'
+)
+AND DATE( start_time ) = CURDATE( ) 
+
+AND CURRENT_TIMESTAMP < start_time ')->result();
         return $query;
     }
 

@@ -14,10 +14,11 @@ var date_elements = null;
 var time1 = null;
 var time2 = null;
 var Daytype;
-var val ;
-var booking ; 
-
-var counterdate =0 ; 
+var val;
+var booking;
+var prettyDate;
+var myDate;
+var counterdate = 0;
 ///////////////////////
 //////////////////////
 function addZero(str) {
@@ -27,55 +28,80 @@ function addZero(str) {
     }
     return a;
 }
+ function msToTime(duration) {
+        var milliseconds = parseInt((duration%1000)/100)
+            , seconds = parseInt((duration/1000)%60)
+            , minutes = parseInt((duration/(1000*60))%60)
+            , hours = parseInt((duration/(1000*60*60))%24);
+
+        hours = (hours < 10) ? "0" + hours : hours;
+        minutes = (minutes < 10) ? "0" + minutes : minutes;
+        seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+        return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+    }
 ////////////////
 function RowClick(currenttd, lock) {
-    console.log('curenttr : '+($(currenttd).attr('id')));
 
-    console.log('Court ID : '+$(currenttd).attr('value'));
+    console.log('curenttr : ' + ($(currenttd).attr('id')));
+
+    console.log('Court ID : ' + $(currenttd).attr('value'));
     var court = $(currenttd).attr('value');
-    
-    
+
+
 
     courtview(court, Daytype);
-     $("#courtid").val(court);
+    $("#courtid").val(court);
     $("#dateid").val($('#datepicker').val());
     // console.log(court[1]);
 
-    $("#sumpricesend").val(price / 2);
+//    $("#sumpricesend").val(price / 2);
     if (window.event.button === 0) {
         if (!window.event.ctrlKey && !window.event.shiftKey) {
 
             var d = new Date('2013-01-01 00:00');
             var id = parseInt($(currenttd).attr('id'));
-            console.log('id->>>'+id);
-            
-            for (var i = 0; i < id-1 ; i++) {
-                d = new Date(d.getTime()+30* 60000);  
-                console.log('testttttttt->>>>'+d);
+            console.log('id->>>' + id);
+
+            for (var i = 0; i < id - 1; i++) {
+                d = new Date(d.getTime() + 30 * 60000);
+                console.log('testttttttt->>>>' + d);
             }
-            console.log('testttttttt->>>>'+d.getHours());
+            console.log('testttttttt->>>>' + d.getHours());
             var d2 = new Date(d.getTime() + 30 * 60000);
-        console.log('testttttttt->>>>'+d2);
+            console.log('testttttttt->>>>' + d2);
+
             var start = addZero(d.getHours()) + ':' + addZero(d.getMinutes());
             var end = addZero(d2.getHours()) + ':' + addZero(d2.getMinutes());
-            
-            console.log('tstarttttt->>>>'+start);
-            
-            $('#time_start').val(start);
-            $('#time_start1').val(start);
-            $('#time_end').val(end);
-            $("#sumpricesend").val(price / 2);
-            $('#booking').modal('show');
-            $("#sumpricesend").val(price / 2);
-            totalpricechange();
-            return false;
+
+            console.log('tstarttttt->>>>' + start);
+//            alert(myDate.getDate()+'-'+$('#datepicker').datepicker('getDate').getDate());
+//                alert(myDate.getTime()/1000+'----'+$('#datepicker').datepicker('getDate').getTime()/1000);
+//                alert(msToTime(myDate.getTime()));
+            if (myDate.getHours() < d.getHours() || (myDate.getHours() > d.getHours() && myDate.getTime() < $('#datepicker').datepicker('getDate').getTime())) {
+                $('#time_start').val(start);
+                $('#time_start1').val(start);
+                $('#time_end').val(end);
+//                   alert(myDate.getTime()+'-'+d.getTime());
+
+
+
+                // $("#sumpricesend").val(price / 2);
+                $('#booking').modal('show');
+                $("#sumpricesend").val(price / 2);
+                totalpricechange();
+                return false;
+
+            } else {
+                alert('ไม่สามารถจองย้อนหลังได้');
+
+            }
         }
     }
 
 
-//                                if (window.event.shiftKey) {
-//                                    selectRowsBetweenIndexes([lastSelectedRow.rowIndex, currenttd.rowIndex])
-//                                }
+
+
 
 }
 function courtview(ct, day) {
@@ -88,14 +114,14 @@ function courtview(ct, day) {
     }).done(function (msg) {
         var obj = JSON.parse(msg);
         console.log(obj);
-        console.log('price :  '+obj.price.price);
+        console.log('price :  ' + obj.price.price);
         document.getElementById("courtja").innerHTML = obj.court.court_name;
         price = obj.price.price;
 
-        //alert(price);
+//        alert(price);
         document.getElementById("priceja").innerHTML = price;
         document.getElementById("sumprice").innerHTML = price / 2 + "(30 นาที )";
-
+        $("#sumpricesend").val(price / 2);
     });
 
 
@@ -140,16 +166,16 @@ function clearAll() {
     }
 }
 
-function getbooking_new(){
-        var fullpart = "http://cbt.backeyefinder.in.th/booking/get_bookings";
-         var href = window.location.pathname;
+function getbooking_new() {
+    var fullpart = "http://cbt.backeyefinder.in.th/booking/get_bookings";
+    var href = window.location.pathname;
     console.log(href);
     var st = href.substr(href.lastIndexOf('/') + 1);
-        val = $('#datepicker').datepicker('getDate').toDateString();
-     
-     
+    val = $('#datepicker').datepicker('getDate').toDateString();
+
+
     datesendnaja = $('#datepicker').val();
-    
+
     var date_elements = datesendnaja.split('/');
     date_inverse = date_elements[2] + '-' + date_elements[0] + '-' + date_elements[1];
     //alert(st);
@@ -160,40 +186,39 @@ function getbooking_new(){
         data: {st_id: st, datesend: date_inverse}
     }).done(function (msg) {
         console.log('get_bookingNEWWW');
-  //   alert(msg);
+        //   alert(msg);
         console.log(JSON.parse(msg));
-         booking = JSON.parse(msg);
+        booking = JSON.parse(msg);
 //        
-        counterdate = 0 ;
-            showTableBook();
-        
+        counterdate = 0;
+        showTableBook();
+
     });
 }
 
 
 
 $(function () {
-        $("#datepicker").datepicker({
-       startDate: '+1d',
-       todayHighlight:true,
-       orientation: "bottom right",
-       todayBtn: "linked",
-       
-         
-    }).on('changeDate', function(e){
-         getbooking_new();
+    myDate = new Date();
+    prettyDate = (myDate.getMonth() + 1) + '/' + myDate.getDate() + '/' +
+            myDate.getFullYear();
+    getbooking_new();
+    $("#datepicker").val(prettyDate);
+    $("#datepicker").datepicker({
+        startDate: '+1d',
+        todayHighlight: true,
+        orientation: "top right",
+    }).on('changeDate', function (e) {
+        getbooking_new();
     });
-
-
 
     getbooking_new();
 
 
-       
-    var myDate = new Date();
-    var prettyDate = (myDate.getMonth() + 1) + '/' + myDate.getDate() + '/' +
-            myDate.getFullYear();
-    $("#date-pik").val(prettyDate);
+
+
+
+
     time1 = ['00:00 - 00:30', '00:30 - 01:00', '01:00 - 01:30', '01:30 - 02:00', '02:00 - 02:30', '02:30 - 03:00', '03:00 - 03:30', '03:30 - 04:00', '04:00 - 04:30', '04:30 - 05:00', '05:00 - 05:30', '05:30 - 06:00', '06:00 - 06:30', '06:30 - 07:00', '07:00 - 07:30', '07:30 - 08:00', '08:00 - 08:30', '08:30 - 09:00', '09:00 - 09:30', '09:30 - 10:00', '10:00 - 10:30', '10:30 - 11:00', '11:00 - 11:30', '11:30 - 12:00'
                 , '12:00 - 12:30', '12:30 - 13:00', '13:00 - 13:30', '13:30 - 14:00', '14:00 - 14:30', '14:30 - 15:00', '15:00 - 15:30', '15:30 - 16:00', '16:00 - 16:30', '16:30 - 17:00', '17:00 - 17:30', '17:30 - 18:00', '18:00 - 18:30', '18:30 - 19:00', '19:00 - 19:30', '19:30 - 20:00', '20:00 - 20:30', '20:30 - 21:00', '21:00 - 21:30', '21:30 - 22:00', '22:00 - 22:30', '22:30 - 23:00', '23:00 - 23:30', '23:30 - 24:00', '24:00 - 0:00'];
     time2 = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30', '03:00', '03:30', '04:00', '04:30', '05:00', '05:30', '06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30'
@@ -203,7 +228,7 @@ $(function () {
     var showid;
     val = $('#datepicker').datepicker('setDate', 'today');
     showTableBook();
-    
+
 
 
 ////////////////////////////////
@@ -244,11 +269,11 @@ $(function () {
 
 function showTableBook() {
 
-     val = $('#datepicker').datepicker('getDate').toDateString();
-     
-     
+    val = $('#datepicker').datepicker('getDate').toDateString();
+
+
     datesendnaja = $('#datepicker').val();
-    
+
     var date_elements = datesendnaja.split('/');
     date_inverse = date_elements[2] + '-' + date_elements[0] + '-' + date_elements[1];
     var href = window.location.pathname;
@@ -256,8 +281,8 @@ function showTableBook() {
     var id = href.substr(href.lastIndexOf('/') + 1);
 
 //            var id = <?php echo $this->uri->segment(3); ?>;
-    console.log('select   '+datesendnaja);
-    
+    console.log('select   ' + datesendnaja);
+
     val = val.split(' ');
     var weekday = new Array();
     weekday['Mon'] = "จันทร์";
@@ -268,7 +293,7 @@ function showTableBook() {
     weekday['Sat'] = "เสาร์";
     weekday['Sun'] = "อาทิตย์";
     dayOfWeek = weekday[val[0]];
-    console.log('sssssss'+val[0]);
+    console.log('sssssss' + val[0]);
     document.getElementById("dayOfWeek").innerHTML = dayOfWeek + ' ที่ ' + val[2] + ' พ.ศ. ' + val[3];
     document.getElementById("datenaja").innerHTML = dayOfWeek + ' ที่ ' + val[2] + ' พ.ศ. ' + val[3];
     console.log(val);
@@ -280,7 +305,7 @@ function showTableBook() {
         url: fullpart,
         data: {date: val[0], stId: id}
     }).done(function (msg) {
-        
+
         //console.log(msg);
         var obj = JSON.parse(msg);
         console.log(obj.time.open_time);
@@ -288,7 +313,7 @@ function showTableBook() {
 
         starttime = time2.indexOf(obj.time.open_time);
         endtimeja = time2.indexOf(obj.time.end_time);
-        
+
         timeopennaja = time2[starttime] + ' ถึง ' + time2[endtimeja];
         $("#court").html(timeopennaja);
 
@@ -299,10 +324,10 @@ function showTableBook() {
 
         for (starttime; starttime < endtimeja; starttime++) {
 
-            show = show + '<tr id="t' + (parseInt(starttime) + 1) +'"><td style="width: 110px; text-align: center">' + time1[starttime] + '</td>';
+            show = show + '<tr id="t' + (parseInt(starttime) + 1) + '"><td style="width: 110px; text-align: center">' + time1[starttime] + '</td>';
             for (k = 0; k < $('#countcort').val(); k++) {
-                show = show + '<td  class="span6 textbooking c'+ obj.court[k].court_id +'"  onclick="RowClick(this,false);" id="'+ (parseInt(starttime) + 1) +'" value="' + obj.court[k].court_id + '">';
-                   
+                show = show + '<td  class="span6 textbooking c' + obj.court[k].court_id + '"  onclick="RowClick(this,false);" id="' + (parseInt(starttime) + 1) + '" value="' + obj.court[k].court_id + '">';
+
 //               if (counterdate < booking.length){
 //                    x_start = new Date('2013-01-01 ' +booking[counterdate].start).getTime()/1000;
 //                    x_end = new Date('2013-01-01 ' +booking[counterdate].end).getTime()/1000;
@@ -320,7 +345,7 @@ function showTableBook() {
 //                }
 
 
-                      show = show + '</td>';
+                show = show + '</td>';
             }
             show = show + '</tr>';
         }
@@ -331,36 +356,36 @@ function showTableBook() {
             var court_id = booking[i].court_id;
             var end = booking[i].end;
             var start = booking[i].start;
-            
+
             //find td
             var td_end = 0;
-            var td_start=0;
-            var dEnd = new Date('2013-01-01 '+end);
-            var dStart = new Date('2013-01-01 '+start);
+            var td_start = 0;
+            var dEnd = new Date('2013-01-01 ' + end);
+            var dStart = new Date('2013-01-01 ' + start);
             console.log("calculate td");
-            while(dEnd.getHours()!=0 || dEnd.getMinutes()!=0){
-                dEnd = new Date(dEnd.getTime()-(30*60000));
+            while (dEnd.getHours() != 0 || dEnd.getMinutes() != 0) {
+                dEnd = new Date(dEnd.getTime() - (30 * 60000));
 //                console.log(dEnd);
                 td_end++;
 //                console.log(td_end);
-                if(dStart.getHours()!=0 || dStart.getMinutes() !=0){                
-                    dStart = new Date(dStart.getTime()-(30*60000));
+                if (dStart.getHours() != 0 || dStart.getMinutes() != 0) {
+                    dStart = new Date(dStart.getTime() - (30 * 60000));
                     td_start++;
-                }    
-        }
-        td_start++;
-        td_end++;
-        console.log(td_start);
-        console.log(td_end);
-            
+                }
+            }
+            td_start++;
+            td_end++;
+            console.log(td_start);
+            console.log(td_end);
+
             for (var j = td_start; j < td_end; j++) {
-                $("#t"+j).find("td[value='"+court_id+"']").text("ไม่ว่าง").addClass('bookline').removeAttr( "onclick" );
+                $("#t" + j).find("td[value='" + court_id + "']").text("ไม่ว่าง").addClass('bookline').removeAttr("onclick");
             }
             //replace td in court id
         }
 
 
-        
+
         Daytype = obj.time.type;
         $("#selecttime").html(selectja);
         $("#courtselect").val("default");
@@ -376,7 +401,7 @@ function showTableBook() {
 
 
     });
-    
+
 
 
 
@@ -392,7 +417,6 @@ function showTableBook() {
         }
     });
 }
-
 
 
 

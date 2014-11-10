@@ -28,7 +28,7 @@ $num = 1;
         <li><a href="<?php echo base_url() ?>users/edituser/<?php echo $this->session->userdata('id'); ?>">Basic Setting</a>
         </li>
         <li>
-            <a href="<?= base_url() ?>stadium">Manage stadium </a>           
+            <a href="<?= base_url() ?>stadium/managestadium">Manage stadium </a>           
         </li>
         
         <li >
@@ -68,36 +68,99 @@ $num = 1;
 
                             </ul>
                             <div class="tab-content"  >
-
+                                
+                               <form  method="post" role="form" action="<?= base_url() ?>stadium/updatefacility/<?= $this->uri->segment(3) ?>">
                                <table class="table table-striped table-hover ">
                                    <thead >
         <tr >
-            <th>#</th>
+       
             <th style="text-align: center">Add</th>
             <th style="text-align: center">Facility Name</th>
-            <th style="text-align: center">Add-on</th>
-            <th style="text-align: center">Edit</th>
+            <th style="text-align: center">Quantity</th>
+            
         </tr>
     </thead>
+   
     <tbody style="text-align: center; ">
-        <?php $data = array('Parking','Food','Bathroom','Lockerroom','Shop'); $j=1;foreach ($facility as $f) { ?>
+        
         <tr>
-            <td><?=$j++?></td>
+            
             <td>     <span class="checkbox">
                     <label>
-                        <input type="checkbox"> Checkbox
+                        <input type="checkbox" <?=$facility['0']['Parking']==0 ? '':'checked'?> name='c1' value="1"> Checkbox
                     </label>
                 </span></td>
-                <td style="vertical-align: middle"><?=$data[($f['facility'])]?></td>
-                <td style="vertical-align: middle"> <label class="control-label"><small>How many you have ?</small> </label><input class="col-md-3 pull-right" type="number" value="<?=$f['addon']?>" > </td>
-                <td style="vertical-align: middle"><a href="" class="btn btn-sm btn-primary">Edit</a></td>
+                <td style="vertical-align: middle">Parking</td>
+                <td style="vertical-align: middle"> <label class="control-label"> </label><input  type="number" value="<?=$facility['0']['Parking_detail']?>" name="quan[]"> </td>
+
         </tr>
-        <?php } ?>
-        
+                <tr>
             
+            <td>     <span class="checkbox">
+                    <label>
+                        <input type="checkbox" <?=$facility['0']['Food']==0 ? '':'checked'?> name='c2' value="1"> Checkbox
+                    </label>
+                </span></td>
+                <td style="vertical-align: middle">Food</td>
+                <td style="vertical-align: middle"> <label class="control-label"> </label><input  type="number" value="<?=$facility['0']['Food']?>" name="quan[]"> </td>
+                
+        </tr>
+                <tr>
+            
+            <td>     <span class="checkbox">
+                    <label>
+                        <input type="checkbox" <?=$facility['0']['Bathroom']==0 ? '':'checked'?> name='c3' value="1"> Checkbox
+                    </label>
+                </span></td>
+                <td style="vertical-align: middle">Bathroom</td>
+                <td style="vertical-align: middle"> <label class="control-label"> </label><input  type="number" value="<?=$facility['0']['Bathroom']?>" name="quan[]"> </td>
+
+        </tr>
+                <tr>
+            
+            <td>     <span class="checkbox">
+                    <label>
+                        <input type="checkbox" <?=$facility['0']['Lockerroom']==0 ? '':'checked'?> name='c4' value="1"> Checkbox
+                    </label>
+                </span></td>
+                <td style="vertical-align: middle">Lockerroom</td>
+                <td style="vertical-align: middle"> <label class="control-label"> </label><input  type="number" value="<?=$facility['0']['Lockerroom']?>" name="quan[]"> </td>
+                
+        </tr>
+         <tr>
+            
+            <td>     <span class="checkbox">
+                    <label>
+                        <input type="checkbox" <?=$facility['0']['Shop']==0 ? '':'checked'?> name='c5' value="1"> Checkbox
+                    </label>
+                </span></td>
+                <td style="vertical-align: middle">Shop</td>
+                <td style="vertical-align: middle"> <label class="control-label"> </label><input  type="number" value="<?=$facility['0']['Shop']?>" name=""> </td>
+    
+        </tr>
+                 <tr>
+            
+            <td>     <span class="checkbox">
+                    <label>
+                        <input type="checkbox" <?=$facility['0']['other']==null ? '':'checked'?> name='c6' value="1"> Checkbox
+                    </label>
+                </span></td>
+                <td style="vertical-align: middle" >Other</td>
+                <td style="vertical-align: middle"> <label class="control-label"> </label><input  type="text" value="<?=$facility['0']['other_detail']?>" placeholder="ex.fitness , name of facility" name="other"> </td>
+    
+        </tr>
+        
+        
+        <tr>
+            <td colspan="3"><input class="pull-right btn btn-info withripple" type="submit" value="Update"></td>
+        </tr>
     </tbody>
+    
+    
+  
 </table>
-                                <div class="col-md-6 col-md-offset-2 well" >
+                                </form>
+<!--                                <div class="col-md-6 col-md-offset-2 well" >
                                 <form class="form-horizontal" >
     <fieldset>
         <legend>Add Other Facility</legend>
@@ -124,7 +187,7 @@ $num = 1;
         </div>
     </fieldset>
 </form>
-                                </div>
+                                </div>-->
       
                                 
                             </div>
@@ -179,7 +242,7 @@ $num = 1;
     </div>
 </div>
 
-<div id="notija" style="display:none">
+<div id="notitest" style="display:none">
     <!-- 
     Later on, you can choose which template to use by referring to the 
     ID assigned to each template.  Alternatively, you could refer
@@ -202,77 +265,7 @@ $num = 1;
 <script type="text/javascript" language="javascript" src="<?php echo base_url() . 'module/DataTables/js/jquery.dataTables.js'; ?>"></script>
 <script type="text/javascript" language="javascript" src="<?php echo base_url() . 'module/loadover/loadover.js'; ?>"></script>
 <script type="text/javascript" src="<?php echo base_url() . 'asset/js/tinymce/tinymce.min.js'; ?>"></script>
-<script>
-    function getUrlVars()
-{
-    var vars = [], hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    for(var i = 0; i < hashes.length; i++)
-    {
-        hash = hashes[i].split('=');
-        vars.push(hash[0]);
-        vars[hash[0]] = hash[1];
-    }
-    return vars;
-}
 
-    console.log(getUrlVars().type);
-        if(getUrlVars().type == 1){
-   
-       
-            $('#myTab li:eq(1) a').tab('show')
-    }else if(getUrlVars().type == 4){
-        
-        
-            $('#myTab li:eq(4) a').tab('show')
-                        $("#notija").notify({
-                speed: 500,
-            });
-            $("#notija").notify("create", {
-                title: 'Add Complete',
-                text: 'Addnoucment is complete '
-            });
-    }else if(getUrlVars().type == 5){
-      
-        
-            $('#myTab li:eq(4) a').tab('show')
-                        $("#notija").notify({
-                speed: 500,
-            });
-            $("#notija").notify("create", {
-                title: 'Delete Complete',
-                text: 'News has been Delete '
-            });
-    }
-    else if(getUrlVars().type == 'gallery'){
-      
-        
-            $('#myTab li:eq(5) a').tab('show')
-                        $("#notija").notify({
-                speed: 500,
-            });
-            $("#notija").notify("create", {
-                title: 'Add Complete',
-                text: 'New picture has been added '
-            });
-    }
-//    $("#input-id").fileinput();
-
-// with plugin options
-    $("#input-id").fileinput({ 'previewFileType': 'any', 'maxFileCount': 2});
-    $("#input-20").fileinput({
-        browseClass: "btn btn-primary btn-block",
-        showCaption: false,
-        showRemove: false,
-        showUpload: false
-    });
-        $("#input-21").fileinput({
-        browseClass: "btn btn-primary btn-block",
-        showCaption: false,
-        showRemove: false,
-        showUpload: false
-    });
-</script>
 
 
 

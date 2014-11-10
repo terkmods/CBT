@@ -491,7 +491,7 @@
     }
 
 </script>
-  <script language="javascript" type="text/javascript" >
+<script language="javascript" type="text/javascript" >
     $(document).ready(function(){
       // add 30 more rows to the table
       var row = $('table#mytable > tbody > tr:first');
