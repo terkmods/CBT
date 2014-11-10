@@ -57,8 +57,8 @@ $num = 1;
                 <div class="container">
 
 
-
-                    <div class="col-md-3 ">
+                        
+<div class="col-md-3 ">
                         <ul class="nav nav-pills nav-stacked" >  
                             <?php if ($this->session->userdata('role') == "owner") { ?>
                                 <li><a href="<?php echo base_url() ?>users/edituser/<?php echo $this->session->userdata('id'); ?>">Basic Setting</a>
@@ -67,7 +67,7 @@ $num = 1;
                                     <a href="<?= base_url() ?>stadium/managestadium">Manage stadium </a>           
                                 </li>
 
-                                <li class="active">
+                                <li>
                                     <a  href="<?= base_url() ?>stadium/updatestadium/<?= $this->uri->segment(3) ?>" >&nbsp;&nbsp;&nbsp;Basic Infomation </a>           
                                 </li>
                                 <li >
@@ -79,7 +79,7 @@ $num = 1;
                                 <li >
                                     <a href="<?= base_url() ?>stadium/blacklist/<?= $this->uri->segment(3) ?>">&nbsp;&nbsp;&nbsp;Blacklist </a>           
                                 </li>
-                                <li>
+                                <li  class="active">
                                     <a href="<?= base_url() ?>stadium/announcement/<?= $this->uri->segment(3) ?>">&nbsp;&nbsp;&nbsp;Announcement</a>
                                 </li>
                                 <li >
@@ -95,35 +95,60 @@ $num = 1;
                         </ul>  
                     </div>
                     <div class="col-md-9">
-                        <div class="row" id="changeja">
-                            <ul class="nav nav-tabs" id="myTab">
+                        <div class="row" >
 
-                                <li class="active"><a href="#p1">Basic Info</a></li>
-                                <li ><a href="#addtime">Service Time</a></li>
-                                <li ><a href="#addcourt">Add court</a></li>
+            <div class="col-md-12" style="padding-bottom:0">
 
-
-
-
-
-
-                            </ul>
-                            <div class="tab-content"  >
-
-                                <?php include 'Tabeditstadium/setting.php'; ?> <!--tab P1-->
-
-
-                                <?php include 'Tabeditstadium/addtime.php'; ?> <!--tab P3-->
-                                <?php include 'Tabeditstadium/addcourt.php'; ?> <!--tab P3-->
-                                <?php include 'Tabeditstadium/mycourt.php'; ?> <!--tab P3-->
-
-
-                            </div>
-
-                            <div style="clear:both; margin-top:20px;"></div>
-
-
+                <form method="post" class="form-horizontal well" style="margin-bottom:0" action="<?=  base_url()?>/news/update_new/<?= $this->uri->segment(3) ?>" enctype="multipart/form-data">
+                    <div class="control-group">
+                        <label class="control-label" for="news_title">หัวข้อ</label>
+                        <div class="controls col-md-12" >
+                            <input type="text" class="span5" name="news_title" id="news_title" value='<?=$dja['0']->title?>'/>
+                          
                         </div>
+                    </div>
+                     <div class="control-group">
+                        <label class="control-label" for="banner">ประเภท</label>
+                        <div class="controls">
+                            <div class="input-append">
+                                <input type="radio" class="span6" name="typeA" value="1" <?=$dja['0']->type==1 ? 'checked':"" ?>>Promotion
+                            <input type="radio" class="span6" name="typeA" value="2" <?=$dja['0']->type==2 ? 'checked':"" ?>>News  
+                            </div>
+                        </div>
+                    </div>
+<!--                    <div class="control-group">
+                        <label class="control-label" for="banner">แบนเนอร์</label>
+                        <div class="controls">
+                            <div class="input-append">
+                                <button class="btn" type="button" id="banner">เลือกรูป</button>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="control-group" id="ct">
+<!--                        <label class="control-label" for="caption">คำบรรยายใต้ภาพ</label>
+                        <div class="controls">
+                            <div class="input-append">
+                                <input type="text" class="span5" name="caption" id="caption"/>
+                            </div>
+                        </div>-->
+<input id="input-21" type="file" class="file"   name="userfile">
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="news_content">เนื้อหา</label>
+                        <div class="controls" >
+                            <textarea rows="12" name="news_content" class="span7" id="em1" ><?=$dja['0']->an_text?>'</textarea>
+                        </div>
+                    </div>   
+                    <div class="control-group">
+                        <div class="controls" id="addNews" >
+                            <input type='hidden' value="<?=$dja['0']->stadium_id?>" name='st_id'> 
+                            <input type="submit" class="btn btn-main span3 btn-primary"  value="แก้ไข!">
+                        </div> 
+                    </div>
+                    <input type="hidden" name="stadium_id" id="st_id" value="<?php echo $this->uri->segment(3); ?>" />
+                </form> 
+            </div>
+        </div>
                     </div>
                 </div>
             </div>
@@ -157,69 +182,69 @@ $num = 1;
 <script type="text/javascript" src="<?php echo base_url() . 'asset/js/tinymce/tinymce.min.js'; ?>"></script>
 <script>
     function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
     {
-        var vars = [], hash;
-        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-        for (var i = 0; i < hashes.length; i++)
-        {
-            hash = hashes[i].split('=');
-            vars.push(hash[0]);
-            vars[hash[0]] = hash[1];
-        }
-        return vars;
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
     }
+    return vars;
+}
 
     console.log(getUrlVars().type);
-    if (getUrlVars().type == 'time') {
-
-
-        $('#myTab li:eq(1) a').tab('show')
-    } else if (getUrlVars().type == 4) {
-
-
-        $('#myTab li:eq(4) a').tab('show')
-        $("#notija").notify({
-            speed: 500,
-        });
-        $("#notija").notify("create", {
-            title: 'Add Complete',
-            text: 'Addnoucment is complete '
-        });
-    } else if (getUrlVars().type == 5) {
-
-
-        $('#myTab li:eq(4) a').tab('show')
-        $("#notija").notify({
-            speed: 500,
-        });
-        $("#notija").notify("create", {
-            title: 'Delete Complete',
-            text: 'News has been Delete '
-        });
+        if(getUrlVars().type == 1){
+   
+       
+            $('#myTab li:eq(1) a').tab('show')
+    }else if(getUrlVars().type == 4){
+        
+        
+            $('#myTab li:eq(4) a').tab('show')
+                        $("#notija").notify({
+                speed: 500,
+            });
+            $("#notija").notify("create", {
+                title: 'Add Complete',
+                text: 'Addnoucment is complete '
+            });
+    }else if(getUrlVars().type == 5){
+      
+        
+            $('#myTab li:eq(4) a').tab('show')
+                        $("#notija").notify({
+                speed: 500,
+            });
+            $("#notija").notify("create", {
+                title: 'Delete Complete',
+                text: 'News has been Delete '
+            });
     }
-    else if (getUrlVars().type == 'gallery') {
-
-
-        $('#myTab li:eq(5) a').tab('show')
-        $("#notija").notify({
-            speed: 500,
-        });
-        $("#notija").notify("create", {
-            title: 'Add Complete',
-            text: 'New picture has been added '
-        });
+    else if(getUrlVars().type == 'gallery'){
+      
+        
+            $('#myTab li:eq(5) a').tab('show')
+                        $("#notija").notify({
+                speed: 500,
+            });
+            $("#notija").notify("create", {
+                title: 'Add Complete',
+                text: 'New picture has been added '
+            });
     }
 //    $("#input-id").fileinput();
 
 // with plugin options
-    $("#input-id").fileinput({'previewFileType': 'any', 'maxFileCount': 2});
+    $("#input-id").fileinput({ 'previewFileType': 'any', 'maxFileCount': 2});
     $("#input-20").fileinput({
         browseClass: "btn btn-primary btn-block",
         showCaption: false,
         showRemove: false,
         showUpload: false
     });
-    $("#input-21").fileinput({
+        $("#input-21").fileinput({
         browseClass: "btn btn-primary btn-block",
         showCaption: false,
         showRemove: false,
@@ -403,15 +428,15 @@ $num = 1;
     var newsPos = 10;
     var htmlNews;
     var mytable;
-    var myarray = {
-        "bPaginate": true,
-        "bLengthChange": false,
-        "bFilter": true,
-        "bSort": true,
-        "bInfo": true,
-        "bAutoWidth": true,
-        'iDisplayLength': 10
-    };
+    var myarray ={
+                "bPaginate": true,
+                "bLengthChange": false,
+                "bFilter": true,
+                "bSort": true,
+                "bInfo": true,
+                "bAutoWidth": true,
+                'iDisplayLength': 10
+            };
     function showAddForm() {
 //        alert("show");
         $('#addForm').show();
@@ -443,7 +468,7 @@ $num = 1;
         });
 
         if ($('#news-table tbody tr').length >= 1) {
-            mytable = $('#news-table').dataTable({
+           mytable =  $('#news-table').dataTable({
                 "bPaginate": true,
                 "bLengthChange": false,
                 "bFilter": true,
@@ -479,10 +504,10 @@ $num = 1;
         var val = $('form').serialize();
         val += '&news_content=' + encodeURIComponent(tinyMCE.activeEditor.getContent());
         $('#addForm').loadOverStart();
+        
 
-
-
-
+        
+        
         $.getJSON('http://cbt.backeyefinder.in.th/news/submit_news', val, function (data) {
             htmlNews = ' ';
             $('#addForm').loadOverStop();
@@ -490,24 +515,24 @@ $num = 1;
             console.log(data[0].news_id);
             if (data.length != 0) {
                 //addNews();
-
-
+                    
+              
                 mytable.fnDestroy();
-                $('#news-list').prepend(htmlNews);
+                 $('#news-list').prepend(htmlNews); 
                 mytable = $('#news-table').dataTable({
-                    "bPaginate": true,
-                    "bLengthChange": false,
-                    "bFilter": true,
-                    "bSort": true,
-                    "bInfo": true,
-                    "bAutoWidth": true,
-                    'iDisplayLength': 10
-                });
-                append_button_news();
+                "bPaginate": true,
+                "bLengthChange": false,
+                "bFilter": true,
+                "bSort": true,
+                "bInfo": true,
+                "bAutoWidth": true,
+                'iDisplayLength': 10
+            });
+               append_button_news();
                 //mytable.fnAddData(myarray); 
-
-                //   mytable.fnDraw();
-
+              
+             //   mytable.fnDraw();
+            
                 $('#addForm').hide();
                 $('#news_title').val('');
                 tinyMCE.activeEditor.setContent('');
@@ -519,12 +544,12 @@ $num = 1;
 
         return false;
     }
-    function showNewsData(rs) {
-        htmlNews = '<tr data-id="' + rs.news_id + '">' +
-                '<td>' + rs.news_id + '</td>' +
-                '<td>' + rs.title + '</td>' +
-                '<td>' + rs.an_date + '</td>' +
-                '</tr>';
+    function showNewsData(rs){
+         htmlNews =                         '<tr data-id="'+rs.news_id + '">'+
+                            '<td>' +rs.news_id + '</td>'+
+                             '<td>'+rs.title + '</td>'+
+                             '<td>' + rs.an_date +'</td>'+
+                            '</tr>';
 
     }
 
@@ -539,12 +564,12 @@ $num = 1;
 
     function deleteNews(id) {
         console.log(id);
-        var c = confirm('คุณต้องการลบข่าวนี้จริงหรือไม่?');
+         var c = confirm('คุณต้องการลบข่าวนี้จริงหรือไม่?');
         if (c) {
-            $.post('<?= base_url() ?>/news/delete_news', {id: id}, function (msg) {
+            $.post('<?=base_url()?>/news/delete_news', {id: id}, function (msg) {
                 if (msg != 0) {
                     console.log('OK');
-                    location.href = '<?= base_url() ?>stadium/updatestadium/' + $('#st_id').val() + '?type=5';
+                    location.href = '<?=base_url()?>stadium/announcement/'+$('#st_id').val();
                 } else {
                     alert('เกิดข้อผิดพลาด!');
                 }
@@ -553,7 +578,7 @@ $num = 1;
     }
 
     function editNews(id) {
-        location.href = '<?= base_url() ?>news/editnews/' + id;
+        location.href = '<?=base_url()?>news/editnews/'+id;
     }
     function submitUploadForm() {
         var fd = new FormData(document.getElementById("upload-form"));
@@ -572,89 +597,6 @@ $num = 1;
         return false;
     }
 
-</script>
-<script>
-    $(document).ready(function () {
-        for (i = 0; i < 7; i++) {
-            $('.checkbox'.i).click(function () {
-                if (this.checked) {
-                    $('#txtBox'.i).removeAttr("disabled");
-                    $('#txtBox'.i).removeAttr("disabled");
-
-                } else {
-                    $("#txtBox".i).attr("disabled", true);
-                    $("#txtBox".i).attr("disabled", true);
-
-                }
-            });
-        }
-        $('.checkboxtue').click(function () {
-            if (this.checked) {
-                $('#txtBoxtue').removeAttr("disabled");
-                $('#txtBoxtue1').removeAttr("disabled");
-
-            } else {
-                $("#txtBoxtue").attr("disabled", true);
-                $("#txtBoxtue1").attr("disabled", true);
-
-            }
-        });
-        $('.checkboxwed').click(function () {
-            if (this.checked) {
-                $('#txtBoxwed').removeAttr("disabled");
-                $('#txtBoxwed1').removeAttr("disabled");
-
-            } else {
-                $("#txtBoxwed").attr("disabled", true);
-                $("#txtBoxwed1").attr("disabled", true);
-
-            }
-        });
-        $('.checkboxthu').click(function () {
-            if (this.checked) {
-                $('#txtBoxthu').removeAttr("disabled");
-                $('#txtBoxthu1').removeAttr("disabled");
-
-            } else {
-                $("#txtBoxthu").attr("disabled", true);
-                $("#txtBoxthu1").attr("disabled", true);
-
-            }
-        });
-        $('.checkboxfri').click(function () {
-            if (this.checked) {
-                $('#txtBoxfri').removeAttr("disabled");
-                $('#txtBoxfri1').removeAttr("disabled");
-
-            } else {
-                $("#txtBoxfri").attr("disabled", true);
-                $("#txtBoxfri1").attr("disabled", true);
-
-            }
-        });
-        $('.checkboxsta').click(function () {
-            if (this.checked) {
-                $('#txtBoxsta').removeAttr("disabled");
-                $('#txtBoxsta1').removeAttr("disabled");
-
-            } else {
-                $("#txtBoxsta").attr("disabled", true);
-                $("#txtBoxsta1").attr("disabled", true);
-
-            }
-        });
-        $('.checkboxsun').click(function () {
-            if (this.checked) {
-                $('#txtBoxsun').removeAttr("disabled");
-                $('#txtBoxsun1').removeAttr("disabled");
-
-            } else {
-                $("#txtBoxsun").attr("disabled", true);
-                $("#txtBoxsun1").attr("disabled", true);
-
-            }
-        });
-    });
 </script>
 
 

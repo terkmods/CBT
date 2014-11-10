@@ -76,8 +76,8 @@ function RowClick(currenttd, lock) {
 
             console.log('tstarttttt->>>>' + start);
 //            alert(myDate.getDate()+'-'+$('#datepicker').datepicker('getDate').getDate());
-                alert(myDate.getTime()/1000+'----'+$('#datepicker').datepicker('getDate').getTime()/1000);
-                alert(msToTime(myDate.getTime()));
+//                alert(myDate.getTime()/1000+'----'+$('#datepicker').datepicker('getDate').getTime()/1000);
+//                alert(msToTime(myDate.getTime()));
             if (myDate.getHours() < d.getHours() || (myDate.getHours() > d.getHours() && myDate.getTime() < $('#datepicker').datepicker('getDate').getTime())) {
                 $('#time_start').val(start);
                 $('#time_start1').val(start);
@@ -417,7 +417,6 @@ function showTableBook() {
         }
     });
 }
-
 
 
 

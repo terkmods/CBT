@@ -28,7 +28,8 @@ class Stadium_model extends CI_Model {
 
         return $query;
     }
-        function getcourtprice($stId) {
+
+    function getcourtprice($stId) {
         $query = $this->db->query('select * from court join court_price on court.court_id = court_price.court_id where court.stadium_id = ' . $stId)->result_array();
         ;
 
@@ -126,22 +127,39 @@ join User on User.user_id = owner.user_id
         }
     }
 
-    public function addfacility($data, $stId) {
-        $datar = array(
-            'facility' => $data['0'],
-        );
-        //print_r($datar);
-        //print_r($data);
-        foreach ($data as $r) {
+    public function addfacility($stId) {
 
 
 
 
-            $sql = 'INSERT INTO  `backeyefin_cbt`.`facility` (`stadium_id`, `facility`, `addon`, `isShow`)
-                VALUES (' . $stId . ',  "' . $r . '","1","1")';
 
-            $this->db->query($sql);
-        }
+
+        $sql = 'INSERT INTO `backeyefin_cbt`.`facility` (`facility_id`, `stadium_id`, `Parking`, `Food`, `Bathroom`, `Lockerroom`, `Shop`, `Parking_detail`, `food_detail`, `bathroom_detail`, `lockerrom_detail`, `shop_detail`,other,other_detail)'
+                . ' VALUES (NULL, ' . $stId . ', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,,0,"");';
+
+        $this->db->query($sql);
+    }
+
+    public function updatefacility($stId, $c, $q) {
+
+        $sql = 'UPDATE `backeyefin_cbt`.`facility` SET `Parking` = '.$c['p'].',
+        `Food` = "'.$c['f'].'",
+        `Bathroom` = "'.$c['b'].'",
+        `Lockerroom` = "'.$c['l'].'",
+        `Shop` = "'.$c['s'].'",
+        `Parking_detail` = "'.$q['0'].'",
+        `bathroom_detail` = "'.$q['1'].'",
+        `lockerrom_detail` = "'.$q['2'].'",
+        `shop_detail` = "'.$q['3'].'mmmmm",
+        `other` = "'.$c['o'].'",
+        `other_detail` = "'.$c['ot'].'" WHERE `facility`.`facility_id` = '.$stId.';';
+        
+      return  $this->db->query($sql);
+//        redirect('stadium/updatefacility/'.$stId.'');
+    }
+
+    public function isfacility() {
+        
     }
 
     public function addcourt($data, $stId) {
@@ -168,11 +186,11 @@ join User on User.user_id = owner.user_id
         }
         $this->db->query($sql);
     }
-    public function addcourtprice($c_id,$price,$i){
-        
-        $sql = "INSERT INTO `backeyefin_cbt`.`court_price` (`court_id`, `price`, `type`) VALUES ('".$c_id."', '".$price."', '".$i."')";
+
+    public function addcourtprice($c_id, $price, $i) {
+
+        $sql = "INSERT INTO `backeyefin_cbt`.`court_price` (`court_id`, `price`, `type`) VALUES ('" . $c_id . "', '" . $price . "', '" . $i . "')";
         $this->db->query($sql);
-       
     }
 
     public function addtime($data, $stId) {
@@ -225,7 +243,7 @@ join User on User.user_id = owner.user_id
     }
 
     function showfacility($stId) {
-        $query = $this->db->query('select facility,addon,isShow from stadium join facility where facility.stadium_id = ' . $stId . ' and stadium.stadium_id = ' . $stId)->result_array();
+        $query = $this->db->query('select * from stadium join facility where facility.stadium_id = ' . $stId . ' and stadium.stadium_id = ' . $stId)->result_array();
         return $query;
     }
 
@@ -244,7 +262,7 @@ join User on User.user_id = owner.user_id
             $stringsql = $stringsql . " or stadium_id = " . $data[$i];
         }
 
-        $sql = "select * from stadium where stadium_id =" . $data[0] . $stringsql." order by stadium_id desc";
+        $sql = "select * from stadium where stadium_id =" . $data[0] . $stringsql . " order by stadium_id desc";
 
         $query = $this->db->query($sql)->result(); // row = แถวเดียว result = หลายแถว
         return $query;
@@ -263,37 +281,31 @@ join User on User.user_id = owner.user_id
 
     public function showprice($data) {
         for ($i = 0; $i < sizeof($data); $i++) {
-            $this->db->select_min('price')->from('court_price')->join('court','court_price.court_id = court.court_id')->where('stadium_id',$data[$i]);
+            $this->db->select_min('price')->from('court_price')->join('court', 'court_price.court_id = court.court_id')->where('stadium_id', $data[$i]);
             $min = $this->db->get()->row();
-            $this->db->select_max('price')->from('court_price')->join('court','court_price.court_id = court.court_id')->where('stadium_id',$data[$i]);
+            $this->db->select_max('price')->from('court_price')->join('court', 'court_price.court_id = court.court_id')->where('stadium_id', $data[$i]);
             $max = $this->db->get()->row();
-            $avgprice[] = $min->price.' - '.$max->price;
+            $avgprice[] = $min->price . ' - ' . $max->price;
         }
-        
-        return $avgprice;
 
-        
+        return $avgprice;
     }
-    
+
     public function showarrfacility($data) {
-        
+
         for ($i = 0; $i < sizeof($data); $i++) {
-        
-            $this->db->select('*')->from('facility')->where('stadium_id',$data[$i]);
+
+            $this->db->select('*')->from('facility')->where('stadium_id', $data[$i]);
             $query = $this->db->get();
-                foreach ($query->result() as $row)
-                {
-                   $res[] = $row->isShow;
-                }
+            foreach ($query->result() as $row) {
+                $res[] = $row->isShow;
+            }
             $resall[] = $res;
             $res = null;
         }
-        
-        return $resall;
 
-        
+        return $resall;
     }
-    
 
     public function showSearch($data) {
 

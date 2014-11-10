@@ -31,6 +31,7 @@ class stadium extends CI_Controller {
                 'ow' => $this->getOwner($userid),
                 'stadium' => $this->mystadium->getstadium($ownerid)
             );
+            
             $stID = null;
             foreach ($datasend['stadium'] as $d) {
                 $stID[] = $d->stadium_id;
@@ -39,7 +40,7 @@ class stadium extends CI_Controller {
                     $curtime = $today = date("Y-m-d").' '.date("h:i:s");
                 foreach ($stID as $r) {
                     $totalcourt[] = $this->mystadium->getTotalcourt($r);
-                    $totalbookingtoday = $this->booking->getbookingDashboard($r, $date);
+                   
                   //  $playing = $this->booking->getbookingDashboard_Playing($r, $curtime);
                 }
                 $x;
@@ -50,27 +51,19 @@ class stadium extends CI_Controller {
                         $this->db->update('stadium', array('court_check' => 0), array('stadium_id' => $stID[$i]));
                     }
                     $datasend['total'] = $totalcourt;
-                    $datasend['totalbooking'] = $totalbookingtoday;
+                    $datasend['totalbooking'] = $this->booking->getbookingDashboard($r, $date);
                 }
-                $datasend['date'] = $date;
-                print_r($datasend['totalbooking']);
                 
-                
-                foreach ($datasend['totalbooking'] as $das){
-                    $startdash[] = $today = date("Y-m-d").' '.$das->start;
-                    $enddash[] = $today = date("Y-m-d").' '.$das->end;
-                }
-//                print_r($startdash);
-//                print_r($enddash);
-//                echo "The time is " . $datasend['totalbooking'][0]->start;
-                foreach ($datasend['totalbooking'] as $s){
-//                  for($k=0;$k<sizeof($totalbookingtoday);$k++){
-//                      echo $k;
-                      $playingtoday[] = $this->booking->getbookingDashboard_Playing($s->stadium_id,$curtime,date("Y-m-d").' '.$s->end);
+                     $datasend['playingtoday'] = $this->booking->getbookingDashboard_Playing($ownerid);
+                     $datasend['todaycomming']= $this->booking->getbookingDashboard_comming($ownerid);
+                     $datasend['todaypass'] = $this->booking->getbookingDashboard_Pass($ownerid);
+                     $datasend['date'] = $curtime;
 //                }
-                
-                  }
-                  print_r($playingtoday);
+                print_r( $datasend['totalbooking']);
+//                print_r($todaycomming);
+//                print_r($datasend['todaypass']);
+                  
+//               
                 
                } else {
                 $this->session->set_flashdata('msg', 'กรุณาเพิ่มสนาม');
@@ -79,7 +72,7 @@ class stadium extends CI_Controller {
 
 
             $this->load->view("dashboard", $datasend);
-            //print_r($datasend);
+            ////print_r($datasend);
         } else {
             echo 'session no';
         }
@@ -114,16 +107,16 @@ class stadium extends CI_Controller {
                     }
                     $datasend['total'] = $totalcourt;
                 }
-                //print_r($x);
+                ////print_r($x);
             } else {
                 $this->session->set_flashdata('msg', 'กรุณาเพิ่มสนาม');
             }
 
-            //print_r($totalcourt);
+            ////print_r($totalcourt);
 
 
             $this->load->view("mg", $datasend);
-            //print_r($datasend);
+            ////print_r($datasend);
         } else {
             echo 'session no';
         }
@@ -168,7 +161,7 @@ class stadium extends CI_Controller {
         if ($userid != null) {
             $query = $this->db->query('SELECT owner.owner_id,owner.authenowner_path,owner.authenowner_status FROM owner join User  '
                             . 'WHERE owner.user_id = User.user_id and User.user_id = ' . $userid)->row();
-            // print_r($query);
+            // //print_r($query);
             return $query;
         } else {
             echo 'fail no userid';
@@ -211,12 +204,12 @@ class stadium extends CI_Controller {
                 'end_time' => $this->input->post('endtime'),
                 'type' => $this->input->post('typedate')
             );
-            //print_r($data2);
+            ////print_r($data2);
             $this->db->insert("stadium", $data);
             $this->mystadium->addtime($data2, $data['stadium_id']);
-            $this->mystadium->addfacility($facility, $data['stadium_id']);
+            $this->mystadium->addfacility($data['stadium_id']);
             $this->session->set_flashdata('msg', 'Successful');
-            redirect('stadium');
+            redirect('stadium/managestadium');
         } else {
             echo 'no user id ja addstadium';
         }
@@ -239,16 +232,16 @@ class stadium extends CI_Controller {
            
         );
 
-        print_r($data['showtime']);
+//        //print_r($data['showtime']);
         //echo $this->mystadium->settime($id);
-       // print_r($data['courtprice']);
+       // //print_r($data['courtprice']);
         $this->load->view("editstadium", $data);
     }
     function facility($stId){
         $data = array(
           'facility' => $this->mystadium->showfacility($stId),  
         );
-        //print_r($data['facility']);
+//        //print_r($data['facility']);
         $this->load->view("facility_view",$data);
     }
 
@@ -289,13 +282,13 @@ class stadium extends CI_Controller {
         $close = $this->input->post('close');
         $day = $this->input->post('day');
         $check = $this->input->post('check');
-            print_r($open);
+//            //print_r($open);
 //            echo '////////////';
-//            print_r($close);
+//            //print_r($close);
 //            echo '////////////';  
 
             
-//        print_r($day);
+//        //print_r($day);
 //        echo $check;
         $data = array(
             'stadium_id' => $stId,
@@ -327,7 +320,34 @@ class stadium extends CI_Controller {
         }
 //        $this->updatestadium($stId);
     }
-   
+    function updatefacility($stId){
+        echo $stId;
+        $quantity = $this->input->post('quan');
+        $checkfacility = array(
+        'Parking' =>  $this->input->post('c1'),
+        'Food' =>  $this->input->post('c2'),
+        'Bathroom' =>  $this->input->post('c3'),
+        'Lockerroom' =>  $this->input->post('c4'),
+        'Shop' =>  $this->input->post('c5'),
+         'Parking_detail'=>   $quantity['0'],
+           'bathroom_detail'=>   $quantity['1'],
+                    'lockerrom_detail'=>   $quantity['2'],
+           'shop_detail'=>   $quantity['3'],
+            'other'=>$this->input->post('c6'),
+            'other_detail' =>$this->input->post('other'),
+                );
+        
+       // echo $this->input->post('inputcheck2');
+//        //print_r($checkfacility);
+//        //print_r($quantity);
+        $this->db->where('stadium_id', $stId);
+        $this->db->update('facility', $checkfacility); 
+//        echo    $this->mystadium->updatefacility($stId,$checkfacility,$quantity);
+//        redirect('stadium/updatefacility/'.$stId.'');
+         $this->session->set_flashdata('msg', 'Update Facility Complete');
+        $this->facility($stId);
+    }
+            
 
     function editstadium($stId) {
 
@@ -389,7 +409,7 @@ class stadium extends CI_Controller {
     function test() {
         $facility = $this->input->post('facility');
         $this->mystadium->addfacility($facility, 3);
-        print_r($facility);
+//        //print_r($facility);
     }
 
     function profile($stId) {
@@ -440,7 +460,7 @@ class stadium extends CI_Controller {
             'img' => $this->img->getGallery($stId)
                 //  'user' => $this->myusers->getUser($id)
         );
-     // print_r($st['data']);
+     // //print_r($st['data']);
         $this->load->view('stadium_view', $st);
     }
 
@@ -513,7 +533,7 @@ class stadium extends CI_Controller {
         for($i=0;$i<count($price);$i++){
             $this->mystadium->addcourtprice($maxstadium,$price[$i],$i);
         }
-        // print_r($dataprice);
+        // //print_r($dataprice);
 //        $this->db->update("court", $dataprice, array('court_id' => $maxstadium));
         // $this->mystadium->addcourttime($dataprice, $data['stadium_id']);
         $this->session->set_flashdata('msg', 'เพิ่มคอร์ดเรียบร้อย');
@@ -522,14 +542,14 @@ class stadium extends CI_Controller {
 
     function compare() {
         $data = $this->input->post('compare');
-        // print_r($data);
+        // //print_r($data);
 //        $sql = "select * form stadium where stadium_id =" $data
 
         $detail['comparedata'] = $this->mystadium->showcompare($data);
         $detail['time'] = $this->mystadium->showtime($data);
         $detail['facility'] = $this->mystadium->showarrfacility($data);
         $detail['priceavg'] = $this->mystadium->showprice($data);
-       // print_r($detail['facility']);
+       // //print_r($detail['facility']);
         $this->load->view("compare", $detail);
     }
 
@@ -542,14 +562,14 @@ class stadium extends CI_Controller {
             'ow' => $this->getOwner($userid),
             'stadium' => $this->mystadium->getstadium($ownerid)
         );
-        // print_r($datasend);
+        // //print_r($datasend);
         $this->load->view('history_stadium_booking', $datasend);
     }
 
     function search() {
         $data = array($this->input->post('optionsRadios'), $this->input->post('value2'), $this->input->post('value3'));
         $detail['result_Search'] = $this->mystadium->showSearch($data);
-        print_r($detail);
+//        //print_r($detail);
         $this->load->view('result_search');
     }
 
@@ -559,7 +579,7 @@ class stadium extends CI_Controller {
             $datasend ['province'] = $this->mystadium->getprovince();
             $datasend ['district'] = $this->mystadium->getdistrict();
             $this->load->view('search', $datasend);
-            //print_r($datasend);
+            ////print_r($datasend);
         } else {
             redirect('index.php');
         }

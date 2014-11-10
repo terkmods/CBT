@@ -59,38 +59,41 @@ $num = 1;
 
                         
 <div class="col-md-3 ">
-    <ul class="nav nav-pills nav-stacked" >  
-        <?php if($this->session->userdata('role') == "owner"){ ?>
-        <li><a href="<?php echo base_url() ?>users/edituser/<?php echo $this->session->userdata('id'); ?>">Basic Setting</a>
-        </li>
-        <li>
-            <a href="<?= base_url() ?>stadium">Manage stadium </a>           
-        </li>
-        
-        <li >
-            <a  href="<?= base_url() ?>stadium/updatestadium/<?=$this->uri->segment(3)?>" >&nbsp;&nbsp;&nbsp;Basic Infomation </a>           
-        </li>
-        
-        <li >
-            <a href="<?= base_url() ?>stadium/coach/<?=$this->uri->segment(3)?>">&nbsp;&nbsp;&nbsp;Coach </a>           
-        </li>
-        <li >
-            <a href="<?= base_url() ?>stadium/blacklist/<?=$this->uri->segment(3)?>">&nbsp;&nbsp;&nbsp;Blacklist </a>           
-        </li>
-        <li class="active">
-            <a href="<?= base_url() ?>stadium/announcement/<?=$this->uri->segment(3)?>">&nbsp;&nbsp;&nbsp;Announcement</a>
-        </li>
-        <li >
-            <a href="<?= base_url() ?>stadium/gallery/<?=$this->uri->segment(3)?>">&nbsp;&nbsp;&nbsp;Gallery </a>           
-        </li>
-        
-        <li><a href="<?= base_url() ?>stadium/historyBooking">History Booking stadium </a></li>
-        
-            <?php }?>
-        
-        
-    </ul>  
-</div>
+                        <ul class="nav nav-pills nav-stacked" >  
+                            <?php if ($this->session->userdata('role') == "owner") { ?>
+                                <li><a href="<?php echo base_url() ?>users/edituser/<?php echo $this->session->userdata('id'); ?>">Basic Setting</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url() ?>stadium/managestadium">Manage stadium </a>           
+                                </li>
+
+                                <li>
+                                    <a  href="<?= base_url() ?>stadium/updatestadium/<?= $this->uri->segment(3) ?>" >&nbsp;&nbsp;&nbsp;Basic Infomation </a>           
+                                </li>
+                                <li >
+                                    <a href="<?= base_url() ?>stadium/facility/<?= $this->uri->segment(3) ?>">&nbsp;&nbsp;&nbsp;Facility </a>           
+                                </li>
+                                <li >
+                                    <a href="<?= base_url() ?>stadium/coach/<?= $this->uri->segment(3) ?>">&nbsp;&nbsp;&nbsp;Coach </a>           
+                                </li>
+                                <li >
+                                    <a href="<?= base_url() ?>stadium/blacklist/<?= $this->uri->segment(3) ?>">&nbsp;&nbsp;&nbsp;Blacklist </a>           
+                                </li>
+                                <li  class="active">
+                                    <a href="<?= base_url() ?>stadium/announcement/<?= $this->uri->segment(3) ?>">&nbsp;&nbsp;&nbsp;Announcement</a>
+                                </li>
+                                <li >
+                                    <a href="<?= base_url() ?>stadium/gallery/<?= $this->uri->segment(3) ?>">&nbsp;&nbsp;&nbsp;Gallery </a>           
+                                </li>
+
+
+                                <li><a href="<?= base_url() ?>stadium/historyBooking">History Booking stadium </a></li>
+
+                            <?php } ?>
+
+
+                        </ul>  
+                    </div>
                     <div class="col-md-9">
                         <div class="row" id="changeja">
                             <ul class="nav nav-tabs" id="myTab">
@@ -205,7 +208,7 @@ $num = 1;
                     </div>   
                     <div class="control-group">
                         <div class="controls" id="addNews" >
-                            <input type="submit" class="btn btn-main span3"  value="เพิ่ม!">
+                            <input type="submit" class="btn btn-main span3 btn-primary"  value="เพิ่ม!">
                         </div> 
                     </div>
                     <input type="hidden" name="stadium_id" id="st_id" value="<?php echo $this->uri->segment(3); ?>" />

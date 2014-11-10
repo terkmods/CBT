@@ -57,7 +57,9 @@ class News extends CI_Controller {
     }
     function editnews($id){
        
-       $data =  $this->news->getNewsSelect(id);
+       $data['dja'] =  $this->news->getNewsSelect($id);
+       print_r($data['dja']);
+       $this->load->view('editnews_view',$data);
          //redirect('stadium/updatestadium/' . $id_new.'?type=6');
     }
     function  delete_news(){
@@ -83,6 +85,21 @@ class News extends CI_Controller {
             log_message("error", $err->getMessage());
             return show_error($err->getMessage());
         }
+    }
+    function  update_new($stId){
+                $data = array(
+            'title' => $this->input->post('news_title'),
+            'an_text' => stripcslashes($this->input->post('news_content')),
+            
+               
+            'type'=>  $this->input->post('typeA')
+           // 'path_news' => $upload['file_name']
+                
+        );
+                
+                        $this->db->where('news_id', $stId);
+        $this->db->update('announcement', $data); 
+        redirect('stadium/announcement/' . $this->input->post('st_id'));
     }
 
 }
