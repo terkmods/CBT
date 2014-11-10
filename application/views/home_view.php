@@ -141,77 +141,71 @@
 
     </head>
     <body>
-        <div id="topbar container">
-            <div class="cont">
-                <nav class="navbar navbar-default" role="navigation">
-                    <div class="container-fluid">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-header">
-                            <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                              <span class="sr-only">Toggle navigation</span>
-                              <span class="icon-bar"></span>
-                              <span class="icon-bar"></span>
-                              <span class="icon-bar"></span>
-                            </button>-->
-                            <a class="navbar-brand" href="<?= base_url() ?>home"><img src="../../../asset/images/logo-white.png"></a>
-
-                        </div>
-
-                        <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#">Notifications <span class="badge"> 10</span></a></li>
-
-                                <?php if ($this->session->userdata('role') == "coach") { ?>
-                                    <li><a href="<?= base_url() ?>users/coachProfile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
-                                <?php } else if ($this->session->userdata('role') == "user") { ?> 
-                                    <li><a href="<?= base_url() ?>users/profile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
-                                <?php } else { ?>
-                                    <li><a href="<?= base_url() ?>stadium"><?php echo $this->session->userdata('profile_url') ?></a></li>
-                                <?php } ?>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
-                                    <ul class="dropdown-menu" >
-
-                                        <?php if ($this->session->userdata('role') == "owner") { ?>
-                                            <li><a href="#">Dash board</a></li>
-                                            <li><a href="#">My Booking</a></li>
-                                            <li class="subdrop"><a href="#">Manage Stadium</a></li>
-                                            <li class="divider"></li>
-                                            <?php foreach ($this->session->userdata('stadium') as $row) { ?>
-                                            <li class="submenudrop"><a href="<?php echo base_url() ?>stadium/updatestadium/<?=$row->stadium_id?>"><?=$row->stadium_name?></a></li>
-                                            <?php } ?>
-                                            <li class="submenudrop divider"></li>
-                                        <?php } else { ?>
-                                            <li><a href="#">My Booking</a></li>   
-                                        <?php } ?>
-                                        <li><a href="#">Favorit Stadium</a></li>
-                                        <li><a href="#">Edit Profile</a></li>
-                                        <li><a href="<?php if ($this->session->userdata('role') == "owner") { ?><?= base_url() ?>stadium <?php } else { ?>  <?= base_url() ?>users/edituser/<?= $this->session->userdata('id') ?>  <?php } ?>" >
-
-                                                Settings</a></li>
-                                                
-                                       
-
-                                        <li class="divider"></li>
-                                        <li><a href="<?= base_url() ?>users/logout">Logout</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            
-
-
-
-                        </div><!-- /.navbar-collapse -->
-                    </div><!-- /.container-fluid -->
-                </nav>
-
+        <div class="navbar navbar-default">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="<?= base_url() ?>home"><img src="../../../asset/images/logo-white.png"></a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+             
+                
+                <ul class="nav navbar-nav navbar-right">
+                     <li><a href="#"><span class="mdi-social-notifications-on"></span><span class="badge" id="noti"> 10</span></a></li>
+        
+        <?php if ($this->session->userdata('role') == "coach") { ?>
+                                                <li><a href="<?= base_url() ?>users/coachProfile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
+        <?php } else if ($this->session->userdata('role') == "user") { ?> 
+                                                <li><a href="<?= base_url() ?>users/profile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
+        <?php } else { ?>
+                                                <li><a href="<?= base_url() ?>stadium"><?php echo $this->session->userdata('profile_url') ?></a></li>
+        <?php } ?>
+                                            
+                    <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
+                                            <ul class="dropdown-menu" >
+        
+        <?php if ($this->session->userdata('role') == "owner") { ?>
+                                                        <li><a href="#">Dash board</a></li>
+                                                        <li><a href="#">My Booking</a></li>
+                                                        <li class="subdrop"><a href="#">Manage Stadium</a></li>
+                                                        <li class="divider"></li>
+            <?php foreach ($this->session->userdata('stadium') as $row) { ?>
+                                                            <li class="submenudrop"><a href="<?php echo base_url() ?>stadium/updatestadium/<?= $row->stadium_id ?>"><?= $row->stadium_name ?></a></li>
+            <?php } ?>
+                                                        <li class="submenudrop divider"></li>
+        <?php } else { ?>
+                                                        <li><a href="#">My Booking</a></li>   
+        <?php } ?>
+                                                <li><a href="#">Favorit Stadium</a></li>
+                                                <li><a href="#">Edit Profile</a></li>
+                                                <li><a href="<?php if ($this->session->userdata('role') == "owner") { ?><?= base_url() ?>stadium <?php } else { ?>  <?= base_url() ?>users/edituser/<?= $this->session->userdata('id') ?>  <?php } ?>" >
+        
+                                                        Settings</a></li>
+                                                        
+                                               
+        
+                                                <li class="divider"></li>
+                                                <li><a href="<?= base_url() ?>users/logout">Logout</a></li>
+                                            </ul>
+                                        </li>
+                </ul>
             </div>
         </div>
-        <div style="clear:both;"></div>
-
 
         <div style="clear:both;"></div>
+        <script>
+            if(window.EventSource){
+		var eventSource = new EventSource("<?php echo base_url('notification/total_noti');?>");
+ 		eventSource.addEventListener('total_noti', function(event) {
+// 				console.log(event.data);
+$("#noti").html(event.data);
+		   }, false);
+               }
+            </script>
 
         <div class="container">
             <div class="row" style="

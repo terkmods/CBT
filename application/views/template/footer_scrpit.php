@@ -131,7 +131,7 @@ $('.submenudrop').hide();
 </script>
 <script>
     $(document).ready(function () {
-        $('.dropdown-submenu > a').submenupicker();
+      
         $("#btn1").click(function () {
             $("#add").append('<input class="form-control" name="facility[]"  type="text" style="margin-top : 10px;"> ');
         });

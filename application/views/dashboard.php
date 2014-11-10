@@ -37,7 +37,7 @@ $status = $ow->authenowner_status;
                                 <div class="panel panel-success">
                                     <div class="panel-heading">Welcome :  </div>
                                     <div class="panel-body text-center ">
-                                        <h2>0 <small>การจองวันนี้</small></h2> ตรวจสอบการจองทั้งหมดได้ข้างล่าง
+                                        <h2><?=count($totalbooking)?><small>การจองวันนี้</small></h2> ตรวจสอบการจองทั้งหมดได้ข้างล่าง
                                     </div>
                                 </div>
                             </div>
@@ -228,9 +228,9 @@ $status = $ow->authenowner_status;
         series: [{
             name: 'Population',
             data: [
-              
-                ['Shanghai', 23.7],
-               
+                <?php    foreach ($todayprice as $r){?>
+                ['<?=$r->stadium_name?>', <?=$r->count!=null ? $r->count : '0'?>],
+                <?php }?>
             ],
             dataLabels: {
                 enabled: true,

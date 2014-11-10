@@ -281,8 +281,26 @@ class booking extends CI_Controller {
            
             
             );
+        $noti = array(
+          
+            'user_id' =>$this->session->userdata('user_idja'),
+            'stadium_id'=>$this->session->userdata('stadium_idja'),
+            'text' => 'has booking you stadium',
+            'link'=>''
+            
+        );
          //  print_r($datasession);
         $this->db->insert("reserve", $datasession);
+        $this->db->insert("notification",$noti);
+        $lastinsertid = $this->db->insert_id() ;
+        $userid = $this->mystadium->getstadiumprofile($this->session->userdata('stadium_idja'));
+        
+        $notirecive = array (
+            'user_id'=>$userid['0']->user_id,
+        
+        );
+        $this->db->insert("recive_noti",$notirecive);
+        
                 $userId = $this->session->userdata('id');
         $datasend['allbooking'] = $this->booking->getAllBooking($userId);
          $today = date('Y-m-d');
