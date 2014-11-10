@@ -14,24 +14,24 @@
                                 <tr >
                                     <th style="width: 200px;"></th>
                                     <?php $i=0;foreach ($comparedata as $r){ ?>
-                                    <td><font style="font-size: 22px;font-weight: bold;"><?=$r->stadium_name?></td>
+                                    <td style="text-align: center"><font style="font-size: 22px;font-weight: bold;"><?=$r->stadium_name?></td>
                                     <?php $i++;} ?>
                                 </tr>
                                 <tr>
                                     <th class="success">รูปภาพ</th>
                                     <?php foreach ($comparedata as $r){ ?>
-                                    <td><img src="<?php echo base_url()?><?php echo '/asset/images/'?><?=$r->stadium_path!= null ? 'stadiumpic/' . $r->stadium_path : 'bad.png' ?>"  style="width: 250px;height: 170px" ></td>
+                                    <td style="text-align: center"><img src="<?php echo base_url()?><?php echo '/asset/images/'?><?=$r->stadium_path!= null ? 'stadiumpic/' . $r->stadium_path : 'bad.png' ?>"  style="width: 250px;height: 170px" ></td>
                                     <?php } ?>
                                 </tr>
                                 <tr>
                                     <th  class="success">อัตราค่าเช่า</th>
                                     <?php foreach ($priceavg as $r){ ?>
-                                    <td><?=$r != null ? $r : '-' ?></td>
+                                    <td style="text-align: center"><?=$r != null ? $r : '-' ?></td>
                                     <?php } ?>
-                                </tr>
+                                </tr> 
                                 <tr>
                                     <th class="success">เวลาเปิดปิด</th>
-                                    <td>
+                                    <td style="text-align: center">
                                     <?php $datestadium =array ('Monday','Thuesday','Wednesday','Thuesday','Friday','Staturday','Sunday'); $idtemp=$time[0]->stadium_id; foreach ($time as $s){ ?>
                                         
                                         <?php if($s->stadium_id==$idtemp){ ?>
@@ -49,13 +49,13 @@
                                 <tr>
                                     <th class="success">เบอร์โทรศัพท์</th>
                                     <?php foreach ($comparedata as $r){ ?>
-                                    <td><?=$r->tel != null ? $r->tel : '-' ?></td>
+                                    <td style="text-align: center"><?=$r->tel != null ? $r->tel : '-' ?></td>
                                     <?php } ?>
                                 </tr>
                                 <tr>
                                     <th class="success">ที่อยู่</th>
                                     <?php foreach ($comparedata as $r){ ?>
-                                    <td style="width: 40%"> 
+                                    <td style="width: 40%;text-align: center"> 
                                          <?=$r->soi?> 
                                          <?=$r->district?> 
                                         
@@ -66,13 +66,13 @@
                                 <tr>
                                     <th class="success" style="width: 20px">รายละเอียดสนาม</th>
                                     <?php foreach ($comparedata as $r){ ?>
-                                    <td><?=$r->about_stadium != null ? $r->about_stadium : '-' ?></td>
+                                    <td style="text-align: center"><?=$r->about_stadium != null ? $r->about_stadium : '-' ?></td>
                                     <?php } ?>
                                 </tr>
                                 <tr>
                                     <th class="success">กฎของสนาม</th>
                                     <?php foreach ($comparedata as $r){ ?>
-                                    <td ><?=$r->rule != null ? $r->rule : '-' ?></td>
+                                    <td style="text-align: center" ><?=$r->rule != null ? $r->rule : '-' ?></td>
                                     <?php } ?>
                                 </tr>
                                  
@@ -80,42 +80,42 @@
                                     
                                     <th class="success">ที่จอดรภ</th>
                                    <?php foreach ($facility as $r){ ?>
-                                    <td><?=$r[0] == 1 ? '<i class="mdi-action-done"></i>' : '<i class="mdi-action-highlight-remove"></i>' ?></td>
+                                    <td style="text-align: center"><?=$r[0]->Parking == 1 ? '<i class="mdi-action-done"></i>' : '<i class="mdi-action-highlight-remove"></i>' ?>&nbsp<span class="label label-info pull-right"><?=$r[0] -> Parking_detail?> ea</span></td>
                                    <?php } ?>
                                     
                                 </tr>
                                 <tr>
                                     <th class="success">ร้านอาหาร</th>
                                     <?php foreach ($facility as $e){ ?>
-                                    <td><?=$e[1] == 1 ? '<i class="mdi-action-done"></i>' : '<i class="mdi-action-highlight-remove"></i>'?></td>
+                                    <td style="text-align: center"><?=$e[0]->Food == 1 ? '<i class="mdi-action-done"></i>' : '<i class="mdi-action-highlight-remove"></i>'?>&nbsp<span class="label label-info pull-right"><?=$e[0] -> food_detail?> ea</span> </td>
                                     <?php } ?>
                                     
                                 </tr>
                                 <tr>
                                     <th class="success">ห้องอาบน้ำ</th>
                                     <?php foreach ($facility as $e){ ?>
-                                    <td><?=$e[2] == 1 ? '<i class="mdi-action-done"></i>' : '<i class="mdi-action-highlight-remove"></i>'?></td>
+                                    <td style="text-align: center"><?=$e[0] ->Bathroom ? '<i class="mdi-action-done"></i>' : '<i class="mdi-action-highlight-remove"></i>'?>&nbsp<span class="label label-info pull-right"><?=$e[0] -> bathroom_detail?> ea</span></td>
                                     <?php } ?>
                                     
                                 </tr>
                                 <tr>
                                     <th class="success">ล็อกเกอร์</th>
                                     <?php foreach ($facility as $e){ ?>
-                                    <td><?=$e[3] == 1 ? '<i class="mdi-action-done"></i>' : '<i class="mdi-action-highlight-remove"></i>'?></td>
+                                    <td style="text-align: center"><?=$e[0] ->Lockerroom ? '<i class="mdi-action-done"></i>' : '<i class="mdi-action-highlight-remove"></i>'?>&nbsp<span class="label label-info pull-right"><?=$e[0] -> lockerrom_detail?> ea</span></td>
                                     <?php } ?>
                                     
                                 </tr>
                                 <tr>
                                     <th class="success">ร้านค้า</th>
                                     <?php foreach ($facility as $e){ ?>
-                                    <td><?=$e[4] == 1 ? '<i class="mdi-action-done"></i>' : '<i class="mdi-action-highlight-remove"></i>'?></td>
+                                    <td style="text-align: center"><?=$e[0] ->Shop ? '<i class="mdi-action-done"></i>' : '<i class="mdi-action-highlight-remove"></i>'?>&nbsp<span class="label label-info pull-right"><?=$e[0] -> shop_detail?> ea</span></td>
                                     <?php } ?>
                                     
                                 </tr>
                                 <tr>
                                     <th class="success"></th>
                                     <?php foreach ($comparedata as $r){ ?>
-                                    <td><a href="<?php echo base_url()?><?php echo 'stadium/profile/'?><?=$r->stadium_id?>"><button type="button" class="btn btn-info">More Info!</button></a>
+                                    <td ><a href="<?php echo base_url()?><?php echo 'stadium/profile/'?><?=$r->stadium_id?>"><button type="button" class="btn btn-info">More Info!</button></a>
                                     <a href="<?= base_url() ?>booking/reserve/<?=$r->stadium_id?>"><button type="button" class="btn btn-danger">Book Now!</button></a></td>
                                     <?php } ?>
                                 </tr>

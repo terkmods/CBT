@@ -246,6 +246,8 @@ join User on User.user_id = owner.user_id
         $query = $this->db->query('select * from stadium join facility where facility.stadium_id = ' . $stId . ' and stadium.stadium_id = ' . $stId)->result_array();
         return $query;
     }
+    
+    
 
     public function delstadium($stId) {
         foreach ($stId as $r) {
@@ -298,11 +300,11 @@ join User on User.user_id = owner.user_id
             $this->db->select('*')->from('facility')->where('stadium_id', $data[$i]);
             $query = $this->db->get();
             foreach ($query->result() as $row) {
-                $res[] = $row->isShow;
+                $res[] = $row;
             }
             $resall[] = $res;
             $res = null;
-        }
+        } 
 
         return $resall;
     }

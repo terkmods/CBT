@@ -10,30 +10,21 @@ include 'template/head.php';
 $num = 1;
 $status = $ow->authenowner_status;
 ?>
-
 <div class="container">
     <h4> <a href="#"></a> Owner System </h4>
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">DashBoard</div>
             <div class="panel-body">
-
-
-
-
                 <div class="container">
-
-
 <?php include 'template/sideSetting.php'; ?>
                     <div class="col-md-9" >
                         
                         <ul class="nav nav-tabs" id="myTab">
-
                             <li class="active"><a href="<?php echo base_url() ?>stadium/add">DashBoard</a></li>
-
                         </ul>
                         <div class="row" style="margin-top: 10;">
-                        <div class="col-md-4" >
+                        <div class="col-md-4" > 
                                 <div class="panel panel-success">
                                     <div class="panel-heading">Welcome :  </div>
                                     <div class="panel-body text-center ">
@@ -65,7 +56,6 @@ $status = $ow->authenowner_status;
                                             <div class="panel-body">
                                                 <?php foreach ($playingtoday as $b) { ?>
                                                 <div class="list-group-item">
-
                                                     <div class="row-picture">
                                                         <img class="circle" src="<?php echo base_url() ?>asset/images/<?= $b->stadium_path != null ? 'stadiumpic/' . $b->stadium_path . '' : 'bad.png' ?>" alt="icon">
                                                     </div>
@@ -92,7 +82,6 @@ $status = $ow->authenowner_status;
                                             <div class="panel-body">
                                                 <?php foreach ($todaycomming as $b) { ?>
                                                 <div class="list-group-item">
-
                                                     <div class="row-picture">
                                                         <img class="circle" src="<?php echo base_url() ?>asset/images/<?= $b->stadium_path != null ? 'stadiumpic/' . $b->stadium_path . '' : 'bad.png' ?>" alt="icon">
                                                     </div>
@@ -109,10 +98,6 @@ $status = $ow->authenowner_status;
                                             </div>
                                         </div>
                                         <?php }?>
-
-
-
-
                                         <div class="list-group-separator"></div>
                                         <?php if($todaypass!=null){ ?>
                                                                           <div class="panel panel-danger">
@@ -122,7 +107,6 @@ $status = $ow->authenowner_status;
                                             <div class="panel-body">
                                                 <?php foreach ($todaypass as $b) { ?>
                                                 <div class="list-group-item">
-
                                                     <div class="row-picture">
                                                         <img class="circle" src="<?php echo base_url() ?>asset/images/<?= $b->stadium_path != null ? 'stadiumpic/' . $b->stadium_path . '' : 'bad.png' ?>" alt="icon">
                                                     </div>
@@ -144,32 +128,17 @@ $status = $ow->authenowner_status;
                                             </div>
                                         </div>
 <?php }?>
-
-
-
                                         <div class="list-group-separator"></div>
-
                                 </div>
                             </div>
-
-
                         </div>
-
-
-
-
-
                     </div>
                 </div>
-
                 <div style="clear:both; margin-top:20px;"></div>
-
-
             </div>
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="actionbooking" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -249,9 +218,7 @@ $status = $ow->authenowner_status;
     });
 });
     </script>
-
 <?php include 'template/footer_scrpit.php'; ?>
-
 </body>
 </html>
 
