@@ -246,8 +246,8 @@ class Users extends CI_Controller {
             'authenowner_path' => $upload['file_name']
         );
         $owner = $this->myusers->getOwnerId($this->session->userdata('id'));
-        print_r($owner);
-        print_r($upload['file_name']);
+//        print_r($owner);
+//        print_r($upload['file_name']);
         $this->db->update('owner', $data, array('owner_id' => $owner->owner_id));
         $this->session->set_flashdata('msg', 'upload Complete');
         redirect('stadium');

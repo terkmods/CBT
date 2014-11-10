@@ -227,7 +227,7 @@ class booking extends CI_Controller {
             'user' => $this->users->getUser($this->session->userdata('id')),
             'date' => $datestring
         );
-        print_r($st['date']);
+//        print_r($st['date']);
       echo  mdate($datestring);
         $this->load->view('booking_view_1', $st);
     }
@@ -262,7 +262,7 @@ class booking extends CI_Controller {
             
         );
         $this->session->set_userdata($data);
-       print_r($data['sumprice']);
+//       print_r($data['sumprice']);
        // $this->db->insert("reserve", $data);
         $this->load->view("confrim_booking",$data);
     }
@@ -281,8 +281,26 @@ class booking extends CI_Controller {
            
             
             );
+        $noti = array(
+          
+            'user_id' =>$this->session->userdata('user_idja'),
+            'stadium_id'=>$this->session->userdata('stadium_idja'),
+            'text' => 'has booking you stadium',
+            'link'=>''
+            
+        );
          //  print_r($datasession);
         $this->db->insert("reserve", $datasession);
+        $this->db->insert("notification",$noti);
+        $lastinsertid = $this->db->insert_id() ;
+        $userid = $this->mystadium->getstadiumprofile($this->session->userdata('stadium_idja'));
+        
+        $notirecive = array (
+            'user_id'=>$userid['0']->user_id,
+        
+        );
+        $this->db->insert("recive_noti",$notirecive);
+        
                 $userId = $this->session->userdata('id');
         $datasend['allbooking'] = $this->booking->getAllBooking($userId);
          $today = date('Y-m-d');
@@ -348,7 +366,7 @@ class booking extends CI_Controller {
         $today = date("Y-m-d");
         $userId = $this->session->userdata('id');
      $bookToday = $this->booking->getAllBooking_today($userId,$today);  
-     print_r($bookToday);
+//     print_r($bookToday);
      echo $userId;
      echo $today;
     }

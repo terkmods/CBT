@@ -51,17 +51,18 @@ class stadium extends CI_Controller {
                         $this->db->update('stadium', array('court_check' => 0), array('stadium_id' => $stID[$i]));
                     }
                     $datasend['total'] = $totalcourt;
-                    $datasend['totalbooking'] = $this->booking->getbookingDashboard($r, $date);
+                    $datasend['totalbooking'] = $this->booking->getbookingDashboard($ownerid);
                 }
                 
                      $datasend['playingtoday'] = $this->booking->getbookingDashboard_Playing($ownerid);
                      $datasend['todaycomming']= $this->booking->getbookingDashboard_comming($ownerid);
                      $datasend['todaypass'] = $this->booking->getbookingDashboard_Pass($ownerid);
+                     $datasend['todayprice'] = $this->booking->getSumpricetoday($userid);
                      $datasend['date'] = $curtime;
 //                }
-                print_r( $datasend['totalbooking']);
+//                print_r( $datasend['totalbooking']);
 //                print_r($todaycomming);
-//                print_r($datasend['todaypass']);
+//                print_r($datasend['todayprice']);
                   
 //               
                 

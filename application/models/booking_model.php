@@ -182,5 +182,16 @@ AND DATE( start_time ) = CURDATE( )
 AND CURRENT_TIMESTAMP < start_time ')->result();
         return $query;
     }
+    function getSumpricetoday($usid){
+         $query = $this->db->query( 'select s.stadium_name, stat.count
+from (select stadium_id,stadium_name from stadium where owner_id = (select owner_id from owner where user_id= '.$usid.')) s left join
+(select stadium_id, sum(sumprice) as count
+from reserve
+where stadium_id in (select stadium_id from stadium where owner_id = (select owner_id from owner where user_id= '.$usid.'))
+AND DATE( start_time ) = CURDATE( )
+group by stadium_id) stat
+on s.stadium_id = stat.stadium_id')->result();
+          return $query;
+    }
 
 }

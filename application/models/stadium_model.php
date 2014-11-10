@@ -331,4 +331,5 @@ WHERE stadium.lat IS NOT NULL  ')->result_array();
         echo json_encode($query);
     }
 
+
 }

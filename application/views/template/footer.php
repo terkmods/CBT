@@ -51,4 +51,4 @@
 
         <!-- Third, add the GalleryView Javascript and CSS files -->
         <script type="text/javascript" src="<?= base_url() ?>asset/GalleryView/js/jquery.galleryview-3.0-dev.js"></script>
-        <script src="<?= base_url() ?>asset/js/bootstrap-submenu.min.js" defer></script>
+        
