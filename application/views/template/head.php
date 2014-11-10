@@ -68,7 +68,7 @@
                 width: 401px;
             }
             #directions-panel {
-                height: 100%;
+/*                height: 100%;*/
                 float: right;
                 width: 390px;
                 overflow: auto;
@@ -230,4 +230,5 @@
 $("#noti").html(event.data);
 		   }, false);
                }
-            </script>
+            </script> 
+           

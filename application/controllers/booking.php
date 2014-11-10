@@ -371,4 +371,5 @@ class booking extends CI_Controller {
      echo $today;
     }
 
+    
 }

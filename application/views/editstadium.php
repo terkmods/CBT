@@ -174,16 +174,23 @@ $num = 1;
 
 
         $('#myTab li:eq(1) a').tab('show')
-    } else if (getUrlVars().type == 4) {
+         $("#notija").notify({
+            speed: 500,
+        });
+        $("#notija").notify("create", {
+            title: 'Update Complete',
+            text: 'Time is Updated '
+        });
+    } else if (getUrlVars().type == 1) {
 
 
-        $('#myTab li:eq(4) a').tab('show')
+        $('#myTab li:eq(2) a').tab('show')
         $("#notija").notify({
             speed: 500,
         });
         $("#notija").notify("create", {
             title: 'Add Complete',
-            text: 'Addnoucment is complete '
+            text: 'Add Court  is complete '
         });
     } else if (getUrlVars().type == 5) {
 

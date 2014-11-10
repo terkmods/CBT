@@ -60,6 +60,7 @@ class stadium extends CI_Controller {
                      $datasend['todayprice'] = $this->booking->getSumpricetoday($userid);
                      $datasend['date'] = $curtime;
 //                }
+//                
 //                print_r( $datasend['totalbooking']);
 //                print_r($todaycomming);
 //                print_r($datasend['todayprice']);
@@ -235,7 +236,7 @@ class stadium extends CI_Controller {
 
 //        //print_r($data['showtime']);
         //echo $this->mystadium->settime($id);
-       // //print_r($data['courtprice']);
+        print_r($data['courtprice']);
         $this->load->view("editstadium", $data);
     }
     function facility($stId){
@@ -461,7 +462,7 @@ class stadium extends CI_Controller {
             'img' => $this->img->getGallery($stId)
                 //  'user' => $this->myusers->getUser($id)
         );
-     // //print_r($st['data']);
+//      print_r($st['facility']);
         $this->load->view('stadium_view', $st);
     }
 

@@ -193,5 +193,6 @@ group by stadium_id) stat
 on s.stadium_id = stat.stadium_id')->result();
           return $query;
     }
-
+ 
+   
 }

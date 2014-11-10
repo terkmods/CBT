@@ -13,7 +13,7 @@
 
         <link href="<?= base_url() ?>asset/css/bootstrap-switch.css" rel="stylesheet">
         <link href="<?= base_url() ?>asset/css/ui.notify.css" rel="stylesheet">
-                <link href="<?= base_url() ?>asset/material/css/ripples.min.css" rel="stylesheet">
+        <link href="<?= base_url() ?>asset/material/css/ripples.min.css" rel="stylesheet">
         <link href="<?= base_url() ?>asset/material/css/material-wfont.min.css" rel="stylesheet">
 
         <style type="text/css">
@@ -151,61 +151,61 @@
                 <a class="navbar-brand" href="<?= base_url() ?>home"><img src="../../../asset/images/logo-white.png"></a>
             </div>
             <div class="navbar-collapse collapse navbar-responsive-collapse">
-             
-                
+
+
                 <ul class="nav navbar-nav navbar-right">
-                     <li><a href="#"><span class="mdi-social-notifications-on"></span><span class="badge" id="noti"> 10</span></a></li>
-        
-        <?php if ($this->session->userdata('role') == "coach") { ?>
-                                                <li><a href="<?= base_url() ?>users/coachProfile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
-        <?php } else if ($this->session->userdata('role') == "user") { ?> 
-                                                <li><a href="<?= base_url() ?>users/profile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
-        <?php } else { ?>
-                                                <li><a href="<?= base_url() ?>stadium"><?php echo $this->session->userdata('profile_url') ?></a></li>
-        <?php } ?>
-                                            
+                    <li><a href="#"><span class="mdi-social-notifications-on"></span><span class="badge" id="noti"> 10</span></a></li>
+
+                    <?php if ($this->session->userdata('role') == "coach") { ?>
+                        <li><a href="<?= base_url() ?>users/coachProfile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
+                    <?php } else if ($this->session->userdata('role') == "user") { ?> 
+                        <li><a href="<?= base_url() ?>users/profile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
+                    <?php } else { ?>
+                        <li><a href="<?= base_url() ?>stadium"><?php echo $this->session->userdata('profile_url') ?></a></li>
+                    <?php } ?>
+
                     <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
-                                            <ul class="dropdown-menu" >
-        
-        <?php if ($this->session->userdata('role') == "owner") { ?>
-                                                        <li><a href="#">Dash board</a></li>
-                                                        <li><a href="#">My Booking</a></li>
-                                                        <li class="subdrop"><a href="#">Manage Stadium</a></li>
-                                                        <li class="divider"></li>
-            <?php foreach ($this->session->userdata('stadium') as $row) { ?>
-                                                            <li class="submenudrop"><a href="<?php echo base_url() ?>stadium/updatestadium/<?= $row->stadium_id ?>"><?= $row->stadium_name ?></a></li>
-            <?php } ?>
-                                                        <li class="submenudrop divider"></li>
-        <?php } else { ?>
-                                                        <li><a href="#">My Booking</a></li>   
-        <?php } ?>
-                                                <li><a href="#">Favorit Stadium</a></li>
-                                                <li><a href="#">Edit Profile</a></li>
-                                                <li><a href="<?php if ($this->session->userdata('role') == "owner") { ?><?= base_url() ?>stadium <?php } else { ?>  <?= base_url() ?>users/edituser/<?= $this->session->userdata('id') ?>  <?php } ?>" >
-        
-                                                        Settings</a></li>
-                                                        
-                                               
-        
-                                                <li class="divider"></li>
-                                                <li><a href="<?= base_url() ?>users/logout">Logout</a></li>
-                                            </ul>
-                                        </li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
+                        <ul class="dropdown-menu" >
+
+                            <?php if ($this->session->userdata('role') == "owner") { ?>
+                                <li><a href="#">Dash board</a></li>
+                                <li><a href="#">My Booking</a></li>
+                                <li class="subdrop"><a href="#">Manage Stadium</a></li>
+                                <li class="divider"></li>
+                                <?php foreach ($this->session->userdata('stadium') as $row) { ?>
+                                    <li class="submenudrop"><a href="<?php echo base_url() ?>stadium/updatestadium/<?= $row->stadium_id ?>"><?= $row->stadium_name ?></a></li>
+                                <?php } ?>
+                                <li class="submenudrop divider"></li>
+                            <?php } else { ?>
+                                <li><a href="#">My Booking</a></li>   
+                            <?php } ?>
+                            <li><a href="#">Favorit Stadium</a></li>
+                            <li><a href="#">Edit Profile</a></li>
+                            <li><a href="<?php if ($this->session->userdata('role') == "owner") { ?><?= base_url() ?>stadium <?php } else { ?>  <?= base_url() ?>users/edituser/<?= $this->session->userdata('id') ?>  <?php } ?>" >
+
+                                    Settings</a></li>
+
+
+
+                            <li class="divider"></li>
+                            <li><a href="<?= base_url() ?>users/logout">Logout</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
 
         <div style="clear:both;"></div>
         <script>
-            if(window.EventSource){
-		var eventSource = new EventSource("<?php echo base_url('notification/total_noti');?>");
- 		eventSource.addEventListener('total_noti', function(event) {
+            if (window.EventSource) {
+                var eventSource = new EventSource("<?php echo base_url('notification/total_noti'); ?>");
+                eventSource.addEventListener('total_noti', function (event) {
 // 				console.log(event.data);
-$("#noti").html(event.data);
-		   }, false);
-               }
-            </script>
+                    $("#noti").html(event.data);
+                }, false);
+            }
+        </script>
 
         <div class="container">
             <div class="row" style="
@@ -345,6 +345,108 @@ $("#noti").html(event.data);
                             <div id="map-canvas"></div> 
                         </div>
                     </div>
+                    <div class="text-center">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Search Stadium</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <div class="form-group">
+                                        <!--    <label class="control-label">Input addons</label>-->
+                                        <div class="input-group">
+                                            <span class="input-group-addon glyphicon glyphicon-search"></span>
+                                            <input type="text" class="form-control">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-primary" type="button">Search</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-success" type="button" onclick="showAdsearch(this)">Advance Search</button> 
+
+                                </div>
+                                <div id="advancefun" class="row">
+                                    <div class="col-md-6">
+                                        <div class="checkbox ">
+                                            <label >
+                                                <input type="checkbox"  id='experience' > เขต              
+                                            </label>
+                                            <div class="pull-right">
+                                                <select class="form-control" id='year'>
+                                                                                       Select Districts 
+                                    <?php foreach ($district as $row) { ?>
+                                        <option><?= $row->district ?></option>
+                                    <?php } ?>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                         <div class="checkbox ">
+                                            <label>
+                                                <input type="checkbox"  id='experience'> จังหวัด              
+                                            </label>
+                                            <div class="pull-right">
+                                                <select class="form-control" id='year'>
+                                                    <option value='1'>1 years</option>
+                                                    <option value='2'>2 years</option>
+                                                    <option value='3'>3 years</option>
+                                                    <option value='4'>more than 3 years</option>
+
+                                                </select>
+                                            </div>
+                                        </div> <div class="checkbox ">
+                                            <label>
+                                                <input type="checkbox"  id='experience'> ราคา              
+                                            </label>
+                                            <div class="pull-right">
+                                                <select class="form-control" id='year'>
+                                                    <option value='1'> <100</option>
+                                                    <option value='2'>100-200</option>
+                                                    <option value='3'>200-300</option>
+                                                    <option value='4'>more than 3000 Baht</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!--แบ่ง-->
+                                    <div class="col-md-6">
+                                        <div class="checkbox ">
+                                            <label>
+                                                <input type="checkbox"  id='experience'> Experience              
+                                            </label>
+                                            <div class="pull-right">
+                                                <select class="form-control" id='year'>
+                                                    <option value='1'>1 years</option>
+                                                    <option value='2'>2 years</option>
+                                                    <option value='3'>3 years</option>
+                                                    <option value='4'>more than 3 years</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                         <div class="checkbox ">
+                                            <label>
+                                                <input type="checkbox"  id='experience'> Experience              
+                                            </label>
+                                            <div class="pull-right">
+                                                <select class="form-control" id='year'>
+                                                    <option value='1'>1 years</option>
+                                                    <option value='2'>2 years</option>
+                                                    <option value='3'>3 years</option>
+                                                    <option value='4'>more than 3 years</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>     
+
+                        </div>
+                    </div>
 
 
 
@@ -476,9 +578,9 @@ $("#noti").html(event.data);
                         eachmaker(v);
                     });
                 });
-                
-                                                google.maps.event.addListener(mk, 'click', function () {
-  alert("hello");
+
+                google.maps.event.addListener(mk, 'click', function () {
+                    alert("hello");
                 });
             }
 
@@ -549,6 +651,42 @@ $("#noti").html(event.data);
 
 
             google.maps.event.addDomListener(window, 'load', initialize);
+
+        </script>
+        <script>
+            $(document).ready(function (e) {
+                $('#advancefun').hide();
+
+            });
+            function showAdsearch() {
+//        alert("show");
+                $('#advancefun').toggle();
+
+            }
+            function searchcoach() {
+                name = $('#nameofcoach').val();
+                exp = $('#experience').is(':checked');
+                exp_detail = $('#year').val();
+
+                award = $('#award').is(':checked');
+                award_detail = $('#award_year').val();
+
+                price = $('#price').is(':checked');
+                price_detail = $('#price1').val();
+
+                sex = $('#sex').is(':checked');
+                sex_detail = $('#sex1').val();
+                console.log(name);
+                console.log(exp);
+                console.log(award);
+                console.log(price);
+                console.log(sex);
+                console.log('-----');
+                console.log(exp_detail);
+                console.log(award_detail);
+                console.log(price_detail);
+                console.log(sex_detail);
+            }
 
         </script>
         <?php include 'template/footer_scrpit.php'; ?>
