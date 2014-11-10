@@ -58,7 +58,7 @@ class News extends CI_Controller {
     function editnews($id){
        
        $data['dja'] =  $this->news->getNewsSelect($id);
-       print_r($data['dja']);
+//       print_r($data['dja']);
        $this->load->view('editnews_view',$data);
          //redirect('stadium/updatestadium/' . $id_new.'?type=6');
     }

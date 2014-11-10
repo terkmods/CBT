@@ -227,7 +227,7 @@ class booking extends CI_Controller {
             'user' => $this->users->getUser($this->session->userdata('id')),
             'date' => $datestring
         );
-        print_r($st['date']);
+//        print_r($st['date']);
       echo  mdate($datestring);
         $this->load->view('booking_view_1', $st);
     }
@@ -262,7 +262,7 @@ class booking extends CI_Controller {
             
         );
         $this->session->set_userdata($data);
-       print_r($data['sumprice']);
+//       print_r($data['sumprice']);
        // $this->db->insert("reserve", $data);
         $this->load->view("confrim_booking",$data);
     }
@@ -366,7 +366,7 @@ class booking extends CI_Controller {
         $today = date("Y-m-d");
         $userId = $this->session->userdata('id');
      $bookToday = $this->booking->getAllBooking_today($userId,$today);  
-     print_r($bookToday);
+//     print_r($bookToday);
      echo $userId;
      echo $today;
     }
