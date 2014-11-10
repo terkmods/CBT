@@ -8,7 +8,7 @@ class stadium extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('stadium_model', 'mystadium');
-        $this->load->model('user_model', 'myusers');
+        $this->load->model('user_model', 'myusers'); 
         $this->load->model('coach_model', 'mycoach');
         $this->load->model('news_model', 'news');
         $this->load->model('gallery_model', 'img');
@@ -548,8 +548,9 @@ class stadium extends CI_Controller {
         $detail['comparedata'] = $this->mystadium->showcompare($data);
         $detail['time'] = $this->mystadium->showtime($data);
         $detail['facility'] = $this->mystadium->showarrfacility($data);
+        
         $detail['priceavg'] = $this->mystadium->showprice($data);
-       // //print_r($detail['facility']);
+        print_r($detail['facility']);
         $this->load->view("compare", $detail);
     }
 
