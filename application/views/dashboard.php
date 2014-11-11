@@ -112,15 +112,15 @@ $status = $ow->authenowner_status;
                                                     </div>
                                                     <div class="row-content">
                                                         <div class="action-secondary">
-                                                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#actionbooking">
-   more info
-</button>
-                                                        
+                                                        <button type="button" class="btn btn-primary btn-xs viewdetail" data-toggle="modal" data-target="#actionbooking" data-pic="<?= $b->stadium_path != null ? 'stadiumpic/' . $b->stadium_path . '' : 'bad.png' ?>" data-sname="<?= $b->stadium_name ?>"
+                                                                data-court="<?= $b->court_name ?>" data-time="<?= $b->start_time ?> - <?= $b->end_time ?>"  data-jong="<?= $b->fname ?> <?= $b->lname ?>" data-tel="<?= $b->phone ?>">
+                                                                more info
+                                                        </button>
                                                         </div>
                                                         <h4 class="list-group-item-heading">สนาม : <?= $b->stadium_name ?> <small>คอร์ด : <?= $b->court_name ?></small> </h4>
-                                                        <p class="list-group-item-text">เวลา  <?= $b->start_time ?> - <?= $b->end_time ?></p>
-                                                        <p class="list-group-item-text">ผู้จอง <?= $b->fname ?> <?= $b->lname ?> โทร : <?= $b->phone ?></p>
-                                                        <p class="list-group-item-text">โทร : <?= $b->phone ?></p>
+                                                        <p class="list-group-item-text">เวลา  <?= substr("$b->start_time",10) ?> - <?= substr("$b->end_time", 10) ?></p>
+<!--                                                        <p class="list-group-item-text">ผู้จอง <?= $b->fname ?> <?= $b->lname ?> โทร : <?= $b->phone ?></p>
+                                                        <p class="list-group-item-text">โทร : <?= $b->phone ?></p>-->
                                                     </div>
                                                 </div>
                                                 <div class="list-group-separator"></div>
@@ -139,23 +139,41 @@ $status = $ow->authenowner_status;
         </div>
     </div>
 </div>
-<div class="modal fade" id="actionbooking" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">stadiumname</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+
+  <div class="modal " id="actionbooking" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog de ">
+        <div class="modal-content" style="background-color: #f5f5f5">
+            <form id="addcontent" action="" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Details</h4>
+                </div>
+                <div class="modal-body" style="background-color: white;padding-top:30px;">
+                    <div class="row">
+                        <div class="col-md-5 img-responsive" style="margin-top: 5px;margin-left: 5px" >
+                            <img id="path"  src="" class="img-thumbnail">
+                        </div>
+                        <div class="col-md-6 " >
+                            <legend style="text-align: left" id="sname" > </legend>
+                            <h5>คอร์ด : <span id="court"></span></h5>
+                            <h5>วันที่ :<span id="date"></span></h5>
+                            <h5>เวลา :<span id="stime"></span> <span  id="etime"></span></h5>
+                            <h5>ผู้จอง : <a href="" id="name"> </a></h5>
+                            <h5>เบอร์ติดต่อ :<span id="tel"></span></h5>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding-bottom: 15px;margin-top: -10px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
 </div>
+    
 <?php include 'template/modal.php'; ?>
 <?php include 'template/footer.php'; ?>
 <script src="<?= base_url() ?>asset/js/highchart/highcharts.js"></script>
@@ -218,6 +236,35 @@ $status = $ow->authenowner_status;
     });
 });
     </script>
+    <script>
+    $(document).on("click", ".viewdetail", function () {
+        
+        
+       
+        var path = $(this).data("pic");
+        var sname = $(this).data("sname");
+        var name = $(this).data("jong");
+        var tel = $(this).data("tel");
+        var time = $(this).data("time");
+        var date = time.substr(0, 10);
+        var stime = time.substr(10, 12);
+        var etime = time.substr(32);
+        var court = $(this).data("court");
+        console.log(path);
+        console.log(sname);
+        
+        document.getElementById("path").setAttribute("src", '<?= base_url() ?>asset/images/'+path+'');
+        $('#sname').html(sname);
+        $('#name').html(name);
+        $('#tel').html(tel);
+        $('#time').html(time);
+        $('#stime').html(stime);
+        $('#etime').html(etime);
+        $('#date').html(date);
+        $('#court').html(court);
+        
+    });
+</script>
 <?php include 'template/footer_scrpit.php'; ?>
 </body>
 </html>

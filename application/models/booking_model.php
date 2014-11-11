@@ -159,11 +159,13 @@ SELECT stadium_id
 FROM stadium
 WHERE owner_id = '.$owner_id.'
 )
+
 AND DATE( start_time ) = CURDATE( ) 
 
-AND CURTIME( ) > TIME( end_time ) ')->result();
+AND CURTIME( ) > TIME( end_time ) order by start_time desc')->result();
         return $query;
     }
+    
     function getbookingDashboard_comming($owner_id) {
         $query = $this->db->query('SELECT * 
 FROM  `reserve` 

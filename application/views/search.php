@@ -65,7 +65,7 @@
                 }else if(count==1){
                     alert("กรุณาเลือกสนามมากกว่า 1 สนามครับ");return false;
                 }else if(count>4) {
-                    alert("เลือกได้ไม่เกิน 4 สนามไอ้ซั๊ซ");return false;      
+                    alert("เลือกได้ไม่เกิน 4 สนามครับ");return false;      
                 }else{
                     return true;
                 }
