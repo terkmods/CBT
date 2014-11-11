@@ -451,7 +451,9 @@ class stadium extends CI_Controller {
         if ($uri == null) {
             $uri = 0;
         }
+        
         $this->pagination->initialize($config);
+        $userid = $this->session->userdata('id');
         $st = array('data' => $this->mystadium->getstadiumprofile($stId),
             'facility' => $this->mystadium->showfacility($stId),
             'court' => $this->mystadium->gettableCourt($stId), //result_array  getTotalcourt
@@ -459,10 +461,12 @@ class stadium extends CI_Controller {
             'floor' => $this->mystadium->getfloor($stId),
             'time' => $this->mystadium->gettimeprofile($stId),
             'annouc' => $this->news->NewsView($stId, $config['per_page'], $uri),
-            'img' => $this->img->getGallery($stId)
+            'img' => $this->img->getGallery($stId),
+            'fav' => $this->mystadium->getfav($userid,$stId),
+            'rating'=> $this->mystadium->getrating($userid,$stId)
                 //  'user' => $this->myusers->getUser($id)
         );
-//      print_r($st['facility']);
+      print_r($st['rating']);
         $this->load->view('stadium_view', $st);
     }
 
@@ -675,6 +679,39 @@ class stadium extends CI_Controller {
 
 
         $this->load->view("coach", $data);
+    }
+    function addfav(){
+         $userid = $this->session->userdata('id');
+         $stadium_id = $this->input->post('stid');
+         $data = array(
+           'user_id'=>$userid,
+             'stadium_id'=>$stadium_id
+         );
+         echo $this->db->insert('favorite_stadium',$data);
+         //echo $userid;
+         //echo $stadium_id;
+    }
+    function unfav(){
+         $userid = $this->session->userdata('id');
+         $stadium_id = $this->input->post('stid');
+         $data = array(
+           'user_id'=>$userid,
+             'stadium_id'=>$stadium_id
+         );
+         echo $this->db->delete('favorite_stadium',$data);
+         //echo $userid;
+         //echo $stadium_id;
+    }
+    function giverating(){
+         $userid = $this->session->userdata('id');
+         $stadium_id = $this->input->post('stid');
+         $point = $this->input->post('pt');
+         $data = array(
+           'user_id'=>$userid,
+           'stadium_id'=>$stadium_id,
+             'point'=>$point
+         );
+         echo $this->db->insert('rating',$data);
     }
 
 }

@@ -330,6 +330,22 @@ WHERE stadium.lat IS NOT NULL  ')->result_array();
         $query = $this->db->query($sql)->result();
         echo json_encode($query);
     }
+    public function getfav($userid,$stId){
+       $query =  $this->db->get_where('favorite_stadium',array('user_id'=>$userid,'stadium_id'=>$stId));
+       return $query->row();
+    }
+    public function getAllfav($userid){
+        $sql = 'SELECT * 
+FROM  `favorite_stadium` 
+JOIN stadium ON favorite_stadium.`stadium_id` = stadium.stadium_id
+WHERE favorite_stadium.`user_id` ='.$userid.'';
+        $query = $this->db->query($sql)->result();
+        return $query;
+    }
+    public function getrating($userid,$stId){
+         $query =  $this->db->get_where('rating',array('user_id'=>$userid,'stadium_id'=>$stId));
+       return $query->row();
+    }
 
 
 }

@@ -170,11 +170,12 @@ class Users extends CI_Controller {
     public function profile($id) {
         $profile = array(
             'data' => $this->myusers->getUser($id),
-            'img' => $this->img->getGalleryUser($id)
+            'img' => $this->img->getGalleryUser($id),
+            'fav'=> $this->mystadium->getAllfav($id)
                 //'map' => $this->geolocation()
         );
 
-
+//        print_r($profile['fav']);
         $this->load->view('User_view', $profile);
     }
 
