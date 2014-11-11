@@ -135,7 +135,7 @@
                             <?php if ($img != null) { ?>
                                 <ul id="myGallery">
                                     <?php foreach ($img as $i) { ?>
-                                        <li><img src="<?= base_url() ?>asset/images/upload/<?= $i->picstadium_path ?>"   >
+                                        <li><img src="<?= base_url() ?>asset/images/upload/<?= $i->picuser_path ?>"   >
                                         <?php } ?>
                                 </ul>
                             <?php } else { ?>
@@ -165,6 +165,23 @@
 <script type="text/javascript">
     var centreGot = false;
 </script>
+    <script type="text/javascript">
+                            $(function() {
+                                
+                                $('#myGallery').galleryView({
+                                    filmstrip_style: 'showall',
+                                    filmstrip_position: 'bottom',
+                                    frame_height: 32,
+                                    frame_width: 50,
+                                    transition_interval: 6000,
+                                    autoplay: true,
+                                    enable_overlays: true,
+                                    pan_images: true,
+                                    panel_animation: 'slide',
+                                    panel_width: 350
+                                });
+                            });
+    </script>
 <script>
     var geocoder;
     var map;

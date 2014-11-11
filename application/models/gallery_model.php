@@ -21,4 +21,13 @@ class Gallery_model extends CI_Model {
     return $query->result();
     
     }
+    
+    function getGalleryUser($usId){
+        $cause = array(
+          'user_id'=>$usId  
+        );
+    $query=   $this->db->get_where('gallery_user',$cause);
+    return $query->result();
+    
+    }
 }

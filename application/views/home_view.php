@@ -349,7 +349,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Search Stadium</h3>
-                            </div>
+                            </div>  
                             <div class="panel-body">
                                 <div class="col-md-6 col-md-offset-3">
                                     <div class="form-group">
@@ -373,7 +373,7 @@
                                             </label>
                                             <div class="pull-right">
                                                 <select class="form-control" id='year'>
-                                                                                       Select Districts 
+                                                                                        
                                     <?php foreach ($district as $row) { ?>
                                         <option><?= $row->district ?></option>
                                     <?php } ?>
@@ -387,11 +387,9 @@
                                             </label>
                                             <div class="pull-right">
                                                 <select class="form-control" id='year'>
-                                                    <option value='1'>1 years</option>
-                                                    <option value='2'>2 years</option>
-                                                    <option value='3'>3 years</option>
-                                                    <option value='4'>more than 3 years</option>
-
+                                                   <?php foreach ($province as $row) { ?>
+                                        <option><?= $row->province ?></option>
+                                    <?php } ?>
                                                 </select>
                                             </div>
                                         </div> <div class="checkbox ">
@@ -403,7 +401,7 @@
                                                     <option value='1'> <100</option>
                                                     <option value='2'>100-200</option>
                                                     <option value='3'>200-300</option>
-                                                    <option value='4'>more than 3000 Baht</option>
+                                                    <option value='4'>more than 300 Baht</option>
 
                                                 </select>
                                             </div>
@@ -411,36 +409,25 @@
 
                                     </div>
                                     <!--แบ่ง-->
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 pull-left">
                                         <div class="checkbox ">
                                             <label>
-                                                <input type="checkbox"  id='experience'> Experience              
+                                                <input type="checkbox"  id='experience'> ที่จอดรถ              
                                             </label>
-                                            <div class="pull-right">
-                                                <select class="form-control" id='year'>
-                                                    <option value='1'>1 years</option>
-                                                    <option value='2'>2 years</option>
-                                                    <option value='3'>3 years</option>
-                                                    <option value='4'>more than 3 years</option>
-
-                                                </select>
-                                            </div>
+                                            
                                         </div>
                                          <div class="checkbox ">
                                             <label>
-                                                <input type="checkbox"  id='experience'> Experience              
+                                                <input type="checkbox"  id='experience'> ร้านค้า              
                                             </label>
-                                            <div class="pull-right">
-                                                <select class="form-control" id='year'>
-                                                    <option value='1'>1 years</option>
-                                                    <option value='2'>2 years</option>
-                                                    <option value='3'>3 years</option>
-                                                    <option value='4'>more than 3 years</option>
-
-                                                </select>
-                                            </div>
+                                            
                                         </div>
-
+                                          <div class="checkbox ">
+                                            <label>
+                                                <input type="checkbox"  id='experience'> ร้านอาหาร              
+                                            </label>
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>     

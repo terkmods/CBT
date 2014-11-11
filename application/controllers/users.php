@@ -11,6 +11,7 @@ class Users extends CI_Controller {
         $this->load->model('stadium_model', 'mystadium');
         $this->load->library('session');
         $this->load->library('form_validation');
+                $this->load->model('gallery_model', 'img');
         $this->load->helper(array('url', 'html', 'form'));
            $this->load->library('googlemaps');
     }
@@ -169,6 +170,7 @@ class Users extends CI_Controller {
     public function profile($id) {
         $profile = array(
             'data' => $this->myusers->getUser($id),
+            'img' => $this->img->getGalleryUser($id)
                 //'map' => $this->geolocation()
         );
 
@@ -327,6 +329,43 @@ centreGot = true;';
     
      function test() {
         $this->load->view('feeds');
+    }
+    
+        function gallery() {
+            $userid = $this->session->userdata('id');
+        $data = array(
+            'img' => $this->img->getGalleryUser($userid)
+        );
+//        print_r($data['img']);
+        $this->load->view("gallery_user", $data);
+    }
+    
+     function uploadGallery() {
+         $stId = $this->session->userdata('id');
+        $config['upload_path'
+                ] = "./asset/images/upload";
+        $config['allowed_types'] = '*';
+        $config['max_size'] = '10000';
+
+        //$userid = $this->session->userdata('id');
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload()) {
+            $error = array('error' => $this->upload->display_errors());
+
+            $this->load->view('upload_form', $error);
+        } else {
+
+            $upload = $this->upload->data();
+        }
+
+        $data = array(
+            'picuser_path' => $upload['file_name'],
+            'user_id' => $stId,
+
+        );
+//        $this->db->update('picture_stadium', $data, array('stadium_id' => $stId));
+        $this->db->insert("gallery_user", $data);
+        redirect('users/gallery/' . $stId . '?type=gallery');
     }
     
     

@@ -18,6 +18,8 @@ class Home extends CI_Controller {
         $id = $userid = $this->session->userdata('id');
         $datasend ['stadium'] = $this->mystadium->getLaststadium();
         $datasend['user'] = $this->myusers->getUser($id);
+        $datasend ['province'] = $this->mystadium->getprovince();
+            $datasend ['district'] = $this->mystadium->getdistrict();
 //        $datasend['latlng'] = $this->mystadium->getLatLngAll();
      //print_r($datasend['latlng']);
         $this->load->view('home_view',$datasend);
