@@ -155,7 +155,7 @@ JOIN User ON User.user_id = reserve.user_id
 WHERE reserve.stadium_id
 IN (
 
-SELECT stadium_id
+SELECT stadium_id 
 FROM stadium
 WHERE owner_id = '.$owner_id.'
 )
