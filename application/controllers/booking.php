@@ -264,6 +264,8 @@ class booking extends CI_Controller {
         $this->session->set_userdata($data);
 //       print_r($data['sumprice']);
        // $this->db->insert("reserve", $data);
+//       $test = $this->check_bookings();
+//       print_r($test);
         $this->load->view("confrim_booking",$data);
     }
     function bookja(){
@@ -354,6 +356,20 @@ class booking extends CI_Controller {
         
         echo json_encode($data);
        // echo 'eeeeee';
+    }
+        public function check_bookings() {
+        $c_id = $this->input->post('stid');
+        $date = $this->input->post('date');
+        $start = $this->input->post('start');
+        $end = $this->input->post('end');
+        $ct_id = $this->input->post('ct');
+        $data = $this->booking->check_bookings($c_id, $date,$start,$end,$ct_id);
+//        $data = $this->booking->get_bookings_stadium($c_id);
+//        print_r($data);
+        //print_r($data);
+//        echo $c_id;
+        echo $data;
+//        return $data;
     }
     function showstadiumbook(){
         $stId = $this->input->post("stadiumsend");

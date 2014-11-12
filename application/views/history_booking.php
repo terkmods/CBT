@@ -32,6 +32,7 @@ include 'template/head.php';
                             </div>
 
                         </div>
+                        <div id='todaybooking'>
                         <h4 class="text-center"><?=  substr(date(DATE_RFC2822),0,16)?></h4>
                         <div class="row">
                             <div class="col-md-4">
@@ -87,7 +88,7 @@ include 'template/head.php';
                                         <?php foreach ($today_booking as $r) { ?>
                                             <tr>
                                                 <td></td>
-                                                <td><?= $r->reserve_id ?><input type="hidden" name="rId" value="<?= $r->reserve_id ?>"></td>
+                                                <td><?= $r->reserve_id ?><input type="hidden" name="rId" value="<?= $r->reserve_id ?>" ></td>
                                                 <td><?= substr($r->start_time, 0, 10) ?></td>
                                                 <td><?= $r->stadium_name ?></td>
                                                 <td><?= $r->court_name ?></td>
@@ -109,7 +110,10 @@ include 'template/head.php';
 
                         </div>
 
-
+                        </div>
+                        <div id="commingbooking">
+                            gggggggg
+                        </div>
                     </div>
                 </div>
 
@@ -123,6 +127,11 @@ include 'template/head.php';
 <?php include 'template/modal.php'; ?>
 <?php include 'template/footer.php'; ?>
 <script>
+                $(document).ready(function (e) {
+                $('#commingbooking').hide();
+                alert('gg');
+
+                });
     function today() {
         var x = document.getElementById("today").value;
         var fullpart = "http://cbt.backeyefinder.in.th/booking/historyBookingajax";
@@ -141,7 +150,7 @@ include 'template/head.php';
                 for (i = 0; i < obj.length; i++) {
                     show = show + '<tr>' +
                             '<td></td>' +
-                            '<td>' + obj[i].reserve_id + '<input type="hidden" name="rId" value="<?= $r->reserve_id ?>"></td>' +
+                            '<td>' + obj[i].reserve_id + '<input type="hidden" name="rId" value="'+obj[i].reserve_id+'"></td>' +
                             '<td>' + obj[i].start_time.substring(0, 10) + '</td>' +
                             ' <td>' + obj[i].stadium_name + '</td>' +
                             '  <td>' + obj[i].court_name + '</td>' +
@@ -172,7 +181,7 @@ include 'template/head.php';
                 for (i = 0; i < obj.length; i++) {
                     show = show + '<tr>' +
                             '<td></td>' +
-                            '<td>' + obj[i].reserve_id + '<input type="hidden" name="rId" value="<?= $r->reserve_id ?>"></td>' +
+                            '<td>' + obj[i].reserve_id + '<input type="hidden" name="rId" value="'+obj[i].reserve_id+'"></td>' +
                             '<td>' + obj[i].start_time.substring(0, 10) + '</td>' +
                             ' <td>' + obj[i].stadium_name + '</td>' +
                             '  <td>' + obj[i].court_name + '</td>' +
@@ -203,7 +212,7 @@ include 'template/head.php';
                 for (i = 0; i < obj.length; i++) {
                     show = show + '<tr>' +
                             '<td></td>' +
-                            '<td>' + obj[i].reserve_id + '<input type="hidden" name="rId" value="<?= $r->reserve_id ?>"></td>' +
+                            '<td>' + obj[i].reserve_id + '<input type="hidden" name="rId" value=""'+obj[i].reserve_id+'""></td>' +
                             '<td>' + obj[i].start_time.substring(0, 10) + '</td>' +
                             ' <td>' + obj[i].stadium_name + '</td>' +
                             '  <td>' + obj[i].court_name + '</td>' +

@@ -470,7 +470,7 @@
         rtl: false,
         size: 'md',
         showClear: true,
-       showCaption: false,
+       showCaption: true,
         defaultCaption: '{rating} Stars',
         starCaptions: {
             0.5: 'Half Star',

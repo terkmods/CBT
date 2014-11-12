@@ -74,57 +74,22 @@
             <div class="col-md-4">
                 
                 <h4>Favorit Stadiums</h4>
+                
                         <div class="list-group">
+                            <?php foreach ($fav as $f) { ?>
                             <div class="list-group-item">
                                 <div class="row-picture">
-                                    <img class="circle" src="http://lorempixel.com/56/56/people/1" alt="icon">
+                                    <img class="circle" src="<?= base_url() ?>/asset/images/<?= $f->stadium_path != null ? 'stadiumpic/' . $f->stadium_path : 'bad.png' ?>" alt="icon">
                                 </div>
                                 <div class="row-content">
-                                    <h4 class="list-group-item-heading">Cs Stadium</h4>
-                                    <p class="list-group-item-text">บางบอน กรุงเทพมหานคร</p>
+                                    <h4 class="list-group-item-heading"><a href="<?=base_url()?>stadium/profile/<?=$f->stadium_id?>"><?=$f->stadium_name?></a></h4>
+                                    <p class="list-group-item-text"><?=$f->district?>,<?=$f->province?> </p>
+                                     <p class="list-group-item-text">โทร : <?=$f->tel!=null ? $f->tel:'-'?> </p>
                                 </div>
                             </div>
                             <div class="list-group-separator"></div>
-                            <div class="list-group-item">
-                                <div class="row-picture">
-                                    <img class="circle" src="http://lorempixel.com/56/56/people/1" alt="icon">
-                                </div>
-                                <div class="row-content">
-                                    <h4 class="list-group-item-heading">Cs Stadium</h4>
-                                    <p class="list-group-item-text">บางบอน กรุงเทพมหานคร</p>
-                                </div>
-                            </div>
-                            <div class="list-group-separator"></div>
-                            <div class="list-group-item">
-                                <div class="row-picture">
-                                    <img class="circle" src="http://lorempixel.com/56/56/people/1" alt="icon">
-                                </div>
-                                <div class="row-content">
-                                    <h4 class="list-group-item-heading">Cs Stadium</h4>
-                                    <p class="list-group-item-text">บางบอน กรุงเทพมหานคร</p>
-                                </div>
-                            </div>
-                            <div class="list-group-separator"></div>
-                            <div class="list-group-item">
-                                <div class="row-picture">
-                                    <img class="circle" src="http://lorempixel.com/56/56/people/1" alt="icon">
-                                </div>
-                                <div class="row-content">
-                                    <h4 class="list-group-item-heading">Cs Stadium</h4>
-                                    <p class="list-group-item-text">บางบอน กรุงเทพมหานคร</p>
-                                </div>
-                            </div>
-                            <div class="list-group-separator"></div>
-                            <div class="list-group-item">
-                                <div class="row-picture">
-                                    <img class="circle" src="http://lorempixel.com/56/56/people/1" alt="icon">
-                                </div>
-                                <div class="row-content">
-                                    <h4 class="list-group-item-heading">Cs Stadium</h4>
-                                    <p class="list-group-item-text">บางบอน กรุงเทพมหานคร</p>
-                                </div>
-                            </div>
-                            <div class="list-group-separator"></div>
+                            <?php } ?>
+                            
                         </div>
                     
 
@@ -158,7 +123,7 @@
 
     </div>
 </div>
-</div>
+
 
 <?php include 'template/footer.php'; ?>
 
