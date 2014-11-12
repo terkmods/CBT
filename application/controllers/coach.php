@@ -43,36 +43,11 @@ class Coach extends CI_Controller {
         );
 
 
-        $this->load->view('User_view', $profile);
+        $this->load->view('coach_view', $profile);
+    }
+    public function editcoach(){
+        $this->load->view("edit_coach");
     }
     
-    public function editProfile($id) {
-        $profile = array(
-            'data' => $this->myusers->getUser($id)
-        );
-        //print_r($profile['data']);
-        $this->load->view("edit_user", $profile);
-    }
     
-      public function updatecoach($userId) {
-        $data = array(
-            'user_id' => $userId,
-            'fname' => $this->input->post('fname'),
-            'lname' => $this->input->post('lname'),
-            'gender' => $this->input->post('gender'),
-            'birthdate' => $this->input->post('birthdate'),
-            'Style' => $this->input->post('style'),
-            'club' => $this->input->post('club'),
-            'address' => $this->input->post('address'),
-            'phone' => $this->input->post('phone'),
-            'facebook' => $this->input->post('facebook'),
-            'twitter' => $this->input->post('twitter'),
-            'googleplus' => $this->input->post('googleplus'),
-            'instagram' => $this->input->post('instargram'),
-            'aboutme' => $this->input->post('aboutme')
-        );
-        $this->db->update('User', $data, array('user_id' => $userId));
-        $this->edituser($userId);
-    }
-
 }

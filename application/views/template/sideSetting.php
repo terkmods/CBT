@@ -4,9 +4,7 @@
 <div class="col-md-3 ">
     <ul class="nav nav-pills nav-stacked" >  
         <?php if($this->session->userdata('role') == "owner"){ ?>
-                <li <?php if($type == "stadium" && $type2 == Null ){?><?="class = 'active'"; }?>
-            
-            >
+                <li <?php if($type == "stadium" && $type2 == Null ){?><?="class = 'active'"; }?>>
             <a href="<?= base_url() ?>stadium">DashBoard </a>           
         </li>
         <li <?php if($type == "users" ){?><?="class = 'active'"; }?>  ><a href="<?php echo base_url() ?>users/edituser/<?php echo $this->session->userdata('id'); ?>">Basic Setting</a>
@@ -36,10 +34,15 @@
         <?php } ?>
         <li <?php if($type2 == "historyBooking" ){?><?="class = 'active'"; }?> ><a href="<?= base_url() ?>stadium/historyBooking">History Booking stadium </a></li>
         
-            <?php }else{?>
+            <?php }else if($this->session->userdata('role') == "user"){?>
         
         <li <?php if($type == "users" && $type2 =="edituser" ){?><?="class = 'active'"; }?> ><a href="<?php echo base_url() ?>users/edituser/<?php echo $this->session->userdata('id'); ?>">Basic Setting</a></li>
         
+        <li <?php if($type == "booking" ){?><?="class = 'active'"; }?>><a href="<?= base_url() ?>booking/historybooking">History Reserve</a></li>
+        <li <?php if($type2 == "gallery" ){?><?="class = 'active'"; }?>><a href="<?= base_url() ?>users/gallery">Gallery</a></li>
+        <?php }else{?>
+         <li <?php if($type == "users" && $type2 =="edituser" ){?><?="class = 'active'"; }?> ><a href="<?php echo base_url() ?>users/edituser/<?php echo $this->session->userdata('id'); ?>">Basic Setting</a></li>
+        <li <?php if($type2 == "editcoach" ){?><?="class = 'active'"; }?>><a href="<?= base_url() ?>coach/editcoach">Coach Information</a></li>
         <li <?php if($type == "booking" ){?><?="class = 'active'"; }?>><a href="<?= base_url() ?>booking/historybooking">History Reserve</a></li>
         <li <?php if($type2 == "gallery" ){?><?="class = 'active'"; }?>><a href="<?= base_url() ?>users/gallery">Gallery</a></li>
         <?php }?>

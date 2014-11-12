@@ -82,7 +82,7 @@
                                        
                                         <label for="inputPassword3" class="col-sm-2 control-label">Birth Date</label>
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control" name="birthdate" value="<?= $data['0']->birthdate; ?>" >
+                                            <input type="date" class="form-control" name="birthdate" value="<?= $data['0']->birthdate; ?>" >
                                         </div>                             
                                     </div>
 

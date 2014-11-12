@@ -351,89 +351,189 @@
                                 <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Search Stadium</h3>
                             </div>  
                             <div class="panel-body">
-                                <div class="col-md-6 col-md-offset-3">
-                                    <div class="form-group">
-                                        <!--    <label class="control-label">Input addons</label>-->
-                                        <div class="input-group">
-                                            <span class="input-group-addon glyphicon glyphicon-search"></span>
-                                            <input type="text" class="form-control">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-primary" type="button">Search</button>
-                                            </span>
+                                <div class="col-md-12">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <!--    <label class="control-label">Input addons</label>-->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon glyphicon glyphicon-search"></span>
+                                                    <input type="text" class="form-control">
+
+                                                    <span class="input-group-btn">  
+                                                        <button class="btn btn-primary" type="button">Search</button>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-md-12">
+
+                                    <div class="col-md-5 col-md-offset-1">
+
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon  ">District</span>
+                                                <select class="form-control">
+                                                    <option>เลือกทุกเขต</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-5">
+
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon ">Province</span>
+                                                <select class="form-control">
+                                                    <option>เลือกทุกจังหวัด</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="col-md-6 col-md-offset-3">
                                     <button class="btn btn-success" type="button" onclick="showAdsearch(this)">Advance Search</button> 
 
                                 </div>
-                                <div id="advancefun" class="row">
-                                    <div class="col-md-6">
+                            </div>
+
+                            <div id="advancefun" class="row">
+<!--                                <div class="col-md-12 ">
+                                    <h4>ช่วงเวลาที่ต้องการจอง</h4>
+
+                                    <div class="col-md-3 col-md-offset-1">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon " >Date</span>
+                                                <input  type="date" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon ">ช่วงเวลา</span>
+                                                <input  type="time" class="form-control">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <input  type="time" class="form-control">
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                </div>-->
+                                <div class="col-md-12">
+                                    <div class="col-md-2">
                                         <div class="checkbox ">
                                             <label >
-                                                <input type="checkbox"  id='experience' > เขต              
-                                            </label>
-                                            <div class="pull-right">
-                                                <select class="form-control" id='year'>
-                                                                                        
-                                    <?php foreach ($district as $row) { ?>
-                                        <option><?= $row->district ?></option>
-                                    <?php } ?>
-
-                                                </select>
-                                            </div>
+                                                <input type="checkbox"  id='experience' >   ปูน             
+                                            </label>    
                                         </div>
-                                         <div class="checkbox ">
-                                            <label>
-                                                <input type="checkbox"  id='experience'> จังหวัด              
-                                            </label>
-                                            <div class="pull-right">
-                                                <select class="form-control" id='year'>
-                                                   <?php foreach ($province as $row) { ?>
-                                        <option><?= $row->province ?></option>
-                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div> <div class="checkbox ">
-                                            <label>
-                                                <input type="checkbox"  id='experience'> ราคา              
-                                            </label>
-                                            <div class="pull-right">
-                                                <select class="form-control" id='year'>
-                                                    <option value='1'> <100</option>
-                                                    <option value='2'>100-200</option>
-                                                    <option value='3'>200-300</option>
-                                                    <option value='4'>more than 300 Baht</option>
-
-                                                </select>
-                                            </div>
-                                        </div>
-
                                     </div>
-                                    <!--แบ่ง-->
-                                    <div class="col-md-6 pull-left">
+                                    <div class="col-md-2">
                                         <div class="checkbox ">
                                             <label>
-                                                <input type="checkbox"  id='experience'> ที่จอดรถ              
+                                                <input type="checkbox"  id='experience'> พื้นปาร์เก้             
                                             </label>
-                                            
-                                        </div>
-                                         <div class="checkbox ">
+                                        </div> 
+                                    </div> 
+                                    <div class="col-md-2">
+                                        <div class="checkbox ">
                                             <label>
-                                                <input type="checkbox"  id='experience'> ร้านค้า              
+                                                <input type="checkbox"  id='experience'> พื้นยาง             
                                             </label>
-                                            
-                                        </div>
-                                          <div class="checkbox ">
-                                            <label>
-                                                <input type="checkbox"  id='experience'> ร้านอาหาร              
-                                            </label>
-                                            
                                         </div>
                                     </div>
-                                </div>
-                            </div>     
+                                    <div class="col-md-2">
+                                        <div class="checkbox">
+                                            <label >
+                                                <input type="checkbox"  id='experience' >   ที่จอดรถ              
+                                            </label>    
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="checkbox ">
+                                            <label >
+                                                <input type="checkbox"  id='experience' >   ห้องอาบน้ำ              
+                                            </label>    
+                                        </div>
+                                    </div>
 
-                        </div>
+                                    <div class="col-md-2">
+                                        <div class="checkbox ">
+                                            <label>
+                                                <input type="checkbox"  id='experience'> ร้านอาหาร            
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="checkbox ">
+                                            <label >
+                                                <input type="checkbox"  id='experience' >   ซ่อมไม้แบตมินตัน              
+                                            </label>    
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="checkbox ">
+                                            <label>
+                                                <input type="checkbox"  id='experience'> ร้านอุปกรณ์กีฬา          
+                                            </label>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <!--                                    <div class="checkbox ">
+                                    
+                                                                            <label >
+                                                                                <input type="checkbox"  id='experience' > เขต              
+                                                                            </label>    
+                                    
+                                    
+                                                                            
+                                                                        </div>
+                                                                        <div class="checkbox ">
+                                                                            <label>
+                                                                                <input type="checkbox"  id='experience'> จังหวัด              
+                                                                            </label>
+                                                                            
+                                                                        </div> 
+                                                                        <div class="checkbox ">
+                                                                            <label>
+                                                                                <input type="checkbox"  id='experience'> ราคา              
+                                                                            </label>
+                                                                            <div class="pull-right">
+                                                                                <select class="form-control" id='year'>
+                                                                                    <option value='1'> <100</option>
+                                                                                    <option value='2'>100-200</option>
+                                                                                    <option value='3'>200-300</option>
+                                                                                    <option value='4'>more than 300 Baht</option>
+                                    
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>-->
+
+                                </div>
+                                <!--แบ่ง-->
+
+                            </div>
+                        </div>     
+
                     </div>
+
 
 
 
@@ -502,9 +602,9 @@
             });
             </script>-->
         <script>
-// The following example creates complex markers to indicate beaches near
-// Sydney, NSW, Australia. Note that the anchor is set to
-// (0,32) to correspond to the base of the flagpole.
+            // The following example creates complex markers to indicate beaches near
+            // Sydney, NSW, Australia. Note that the anchor is set to
+            // (0,32) to correspond to the base of the flagpole.
             var map;
             var infowindow1;
             var mk;
@@ -646,7 +746,7 @@
 
             });
             function showAdsearch() {
-//        alert("show");
+                //        alert("show");
                 $('#advancefun').toggle();
 
             }
