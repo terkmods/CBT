@@ -19,6 +19,7 @@ var booking;
 var prettyDate;
 var myDate;
 var counterdate = 0;
+var endtimeja ;
 ///////////////////////
 //////////////////////
 function addZero(str) {
@@ -28,18 +29,18 @@ function addZero(str) {
     }
     return a;
 }
- function msToTime(duration) {
-        var milliseconds = parseInt((duration%1000)/100)
-            , seconds = parseInt((duration/1000)%60)
-            , minutes = parseInt((duration/(1000*60))%60)
-            , hours = parseInt((duration/(1000*60*60))%24);
+function msToTime(duration) {
+    var milliseconds = parseInt((duration % 1000) / 100)
+            , seconds = parseInt((duration / 1000) % 60)
+            , minutes = parseInt((duration / (1000 * 60)) % 60)
+            , hours = parseInt((duration / (1000 * 60 * 60)) % 24);
 
-        hours = (hours < 10) ? "0" + hours : hours;
-        minutes = (minutes < 10) ? "0" + minutes : minutes;
-        seconds = (seconds < 10) ? "0" + seconds : seconds;
+    hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
 
-        return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
-    }
+    return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+}
 ////////////////
 function RowClick(currenttd, lock) {
 
@@ -94,6 +95,63 @@ function RowClick(currenttd, lock) {
 
             } else {
                 alert('ไม่สามารถจองย้อนหลังได้');
+
+            }
+        }
+    }
+
+
+
+
+
+}
+function Rowover(currenttd) {
+
+    console.log('curenttr : ' + ($(currenttd).attr('id')));
+
+    console.log('Court ID : ' + $(currenttd).attr('value'));
+    var court = $(currenttd).attr('value');
+
+
+
+    courtview(court, Daytype);
+    $("#courtid").val(court);
+    $("#dateid").val($('#datepicker').val());
+    // console.log(court[1]);
+
+//    $("#sumpricesend").val(price / 2);
+    if (window.event.button === 0) {
+        if (!window.event.ctrlKey && !window.event.shiftKey) {
+
+            var d = new Date('2013-01-01 00:00');
+            var id = parseInt($(currenttd).attr('id'));
+            console.log('id->>>' + id);
+
+            for (var i = 0; i < id - 1; i++) {
+                d = new Date(d.getTime() + 30 * 60000);
+                console.log('testttttttt->>>>' + d);
+            }
+            console.log('testttttttt->>>>' + d.getHours());
+            var d2 = new Date(d.getTime() + 30 * 60000);
+            console.log('testttttttt->>>>' + d2);
+
+            var start = addZero(d.getHours()) + ':' + addZero(d.getMinutes());
+            var end = addZero(d2.getHours()) + ':' + addZero(d2.getMinutes());
+
+            console.log('tstarttttt->>>>' + start);
+//            alert(myDate.getDate()+'-'+$('#datepicker').datepicker('getDate').getDate());
+//                alert(myDate.getTime()/1000+'----'+$('#datepicker').datepicker('getDate').getTime()/1000);
+//                alert(msToTime(myDate.getTime()));
+            var mydate1 = myDate.getTime();
+            var yourdate = $('#datepicker').datepicker('getDate').getTime();
+            if (myDate.getHours() < d.getHours() || (myDate.getHours() > d.getHours() && myDate.getTime() < $('#datepicker').datepicker('getDate').getTime())) {
+//            if(mydate1 > yourdate && (myDate.getHours())){
+                return false;
+
+            } else {
+                
+                return true;
+                
 
             }
         }
@@ -199,6 +257,7 @@ function getbooking_new() {
 
 
 $(function () {
+    
     myDate = new Date();
     prettyDate = (myDate.getMonth() + 1) + '/' + myDate.getDate() + '/' +
             myDate.getFullYear();
@@ -231,38 +290,59 @@ $(function () {
 
 
 
-////////////////////////////////
-//////////////////////////////
-//    $('td').on("click", function () {
-//       
-//        if ($(this).text().indexOf('ไม่ว่าง') != -1) {
-//            alert('sss');
-//            return false;
-//        }
-//
-//
-//        var d = new Date('2013-01-01 00:00');
-//        var id = parseInt($(this).parents('tr').attr('id').substr(1), 10);
-//
-//        for (var i = 0; i < id - 1; i++) {
-//            d = new Date(d.getTime() + 30 * 60000);
-//        }
-//
-//        var d2 = new Date(d.getTime() + 30 * 60000);
-//
-//        var start = addZero(d.getHours()) + ':' + addZero(d.getMinutes());
-//        var end = addZero(d2.getHours()) + ':' + addZero(d2.getMinutes());
-//
-//        $('#time_start').val(addZero(d.getHours()) + ':' + addZero(d.getMinutes()));
-//        $('#time_end').val(addZero(d2.getHours()) + ':' + addZero(d2.getMinutes()));
-//
-//        $('#booking').modal('show');
-//
-//        return false;
-//    });
-
-
-
+$('#time_end').change(function(){
+                        var fullpart = "http://cbt.backeyefinder.in.th/booking/check_bookings";
+                         var st = $('#time_start').val()+':00';
+                         var ed = $('#time_end').val()+':00';
+                         var st_id = $('#st_id_select').val()
+                         var ct_id = $('#courtid').val()
+                         var allprice = $('#sumpricesend').val();
+                         var ed_st = time2[endtimeja]+':00';
+//                        alert(time2[endtimeja]);
+                            console.log(st);
+                            console.log(ed);
+                            console.log(st_id);
+                            console.log(date_inverse);
+                           
+                            $.ajax({
+                                type: "post",
+                                url: fullpart,
+                                data: {stid: st_id, date: date_inverse,start: st, end:ed,ct:ct_id }
+                            }).done(function (msg) {
+                                $('#too').tooltip();
+//                                var obj = JSON.parse(msg);
+                                console.log(msg);
+                                
+                                if(msg>0 || allprice <0 || ed> ed_st){
+                                    show = '<button type="submit" id="too" value="Book Now" class="btn btn-primary disabled" data-toggle="tooltip" data-placement="top" title="" data-original-title="Can nott booking :time error">Book Now</button><button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>';
+                                    $('#buttonbooking').html(show);
+                                    
+                                    $("#notija").notify({
+                                        speed: 500,
+                                    });
+                                    if(msg>0){
+                                    $("#notija").notify("create", {
+                                        title: 'Can not Booking',
+                                        text: 'This time  ' + $('#time_end').val() + ' has already Bookig'
+                                    });}else if(allprice<0){
+                                    $("#notija").notify("create", {
+                                        title: 'Can not Booking',
+                                        text: 'Price   ' + allprice + ' is wrong'
+                                    });
+                                    }else{
+                                       $("#notija").notify("create", {
+                                        title: 'Can not Booking',
+                                        text: 'Over Time, This Stadium is closed : '+ed_st+''
+                                    }); 
+                                    }
+                                    
+                                }else if(msg==0){
+                                     show = '<button type="submit" id="too" value="Book Now" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Can nott booking :time error">Book Now</button><button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>';
+                                    $('#buttonbooking').html(show);
+                                }
+//                               
+                            });
+});
 
 
 });
@@ -326,7 +406,7 @@ function showTableBook() {
 
             show = show + '<tr id="t' + (parseInt(starttime) + 1) + '"><td style="width: 110px; text-align: center">' + time1[starttime] + '</td>';
             for (k = 0; k < $('#countcort').val(); k++) {
-                show = show + '<td  class="span6 textbooking c' + obj.court[k].court_id + '"  onclick="RowClick(this,false);" id="' + (parseInt(starttime) + 1) + '" value="' + obj.court[k].court_id + '">';
+                show = show + '<td  class="span6 textbooking c' + obj.court[k].court_id + '"  onclick="RowClick(this,false);" id="' + (parseInt(starttime) + 1) + '"  value="' + obj.court[k].court_id + '">';
 
 //               if (counterdate < booking.length){
 //                    x_start = new Date('2013-01-01 ' +booking[counterdate].start).getTime()/1000;
@@ -406,15 +486,27 @@ function showTableBook() {
 
 
     $('#mytablebook, #evening').on('mouseover', 'td', function (e) {
+        var id = $(this).attr('id');
+        if(Rowover(id)){
+           if ($(this).text() == '') {
+            $(this).addClass('bookline');
+            $(this).html('Can not Booking');
+        }
+        }else{
         if ($(this).text() == '') {
             $(this).addClass('hover-bg');
             $(this).html('booking');
         }
+    }
     }).on('mouseout', 'td', function (e) {
         if ($(this).text() == 'booking' || $(this).text() == '') {
             $(this).removeClass('hover-bg');
             $(this).text('');
+        }else if ($(this).text() == 'Can not Booking' || $(this).text() == '') {
+            $(this).removeClass('bookline');
+            $(this).text('');
         }
+        
     });
 }
 

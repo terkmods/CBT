@@ -22,19 +22,28 @@
             <div class="row">
                 <div class="col-md-7">  
                     <div id="well-rating">
-                        
-                            <h4 class="text-center">Rating</h4>
-                            <!--<input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs"  >-->
-                            <input id="input-rating" type="number"  min=0 max=5 step=1 data-size="xs" >
-                        Result : <span id="kv-caption"></span><br> 
-                        
-                        <button type="submit" class="btn btn-primary btn-raised <?=$rating!=null ? 'disabled':''?>" onclick="giverating()">Vote</button>
 
+                        <h4 class="text-center">Rating</h4>
+                        <!--<input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs"  >-->
+                        <input id="input-rating" type="number"  min=0 max=5 step=1 data-size="xs" >
+                        Point : <span id="kv-caption"></span><br> 
+
+                        <p id='rat'>  <button type="submit" class="btn btn-primary btn-raised " onclick="giverating()">Vote</button> </p>
+                        <?php if ($rating != null) { ?>
+                            <input type="hidden" id="point" value="<?= $rating->point ?>">
+                        <?php } ?>
                     </div>
                 </div>
-                <div class="col-md-4">  
+                <div class="col-md-4" style="margin-left: 30px;margin-top: 20px;">  
 
-
+                    <div class="well well-sm text-center">
+                        <h4>Result</h4>
+                        <h2 id='apoint'><?= $avgpoint->avgpoint ?></h2>
+                        <small>point</small>
+                        <hr>
+                        from 
+                        <h5 id='pepole'><?= $avgpoint->count ?> people </h5>
+                    </div>
                 </div>
 
             </div>
@@ -54,14 +63,23 @@
                     <h3 class="panel-title">Located</h3>
                 </div>
                 <div class="panel-body">
-                    House no. :&nbsp;<?= $data['0']->address_no != null ? $data['0']->address_no : '-'; ?><br>
-
-                    Alley :&nbsp;<?= $data['0']->soi != null ? $data['0']->soi : '-'; ?><br>
-                    Road :&nbsp;<?= $data['0']->road != null ? $data['0']->road : '-'; ?><br>
-                    District :&nbsp;<?= $data['0']->district != null ? $data['0']->district : '-'; ?><br>
-                    Subdistrict :&nbsp;<?= $data['0']->subdistrict != null ? $data['0']->subdistrict : '-'; ?><br>
-                    Province :&nbsp;<?= $data['0']->province != null ? $data['0']->province : '-'; ?> <br>
-                    Zip code :&nbsp;<?= $data['0']->zipcode != null ? $data['0']->zipcode : '-'; ?> 
+                    <dl class="dl-horizontal">
+                        <dt>House no :</dt>
+                        <dd><?= $data['0']->address_no != null ? $data['0']->address_no : '-'; ?></dd>
+                        <dt>Alley :</dt>
+                        <dd><?= $data['0']->soi != null ? $data['0']->soi : '-'; ?></dd>
+                         <dt>Road :</dt>
+                        <dd><?= $data['0']->road != null ? $data['0']->road : '-'; ?></dd>
+                        <dt>District :</dt>
+                        <dd><?= $data['0']->district != null ? $data['0']->district : '-'; ?></dd>
+                        <dt>Subdistrict :</dt>
+                        <dd><?= $data['0']->subdistrict != null ? $data['0']->subdistrict : '-'; ?></dd>
+                        <dt>Province :</dt>
+                        <dd><?= $data['0']->province != null ? $data['0']->province : '-'; ?></dd>
+                        <dt>Zip code :</dt>
+                        <dd><?= $data['0']->zipcode != null ? $data['0']->zipcode : '-'; ?> </dd>
+                    </dl>
+    
                 </div>
             </div>
 
@@ -70,14 +88,26 @@
                     <h3 class="panel-title">Stadium Detail</h3>
                 </div>
                 <div class="panel-body">
-                    Floor type : <?php if ($floor != NULL) { ?><?php foreach ($floor as $ct) { ?> <?= $ct->type ?> <?php } ?><?php } else { ?> - <?php } ?>   <br>
-                    Total court: &nbsp;<?= $total->courtnum != 0 ? $total->courtnum : '-' ?><br>
-                    Court price :&nbsp; 120-160 บาท<br>      
+                    <dl class="dl-horizontal">
+                        <dt>Floor type</dt>
+                        <dd><?php if ($floor != NULL) { ?><?php foreach ($floor as $ct) { ?> <?= $ct->type ?> <?php } ?><?php } else { ?> - <?php } ?> </dd>
+                        <dt>Total court</dt>
+                        <dd><?= $total->courtnum != 0 ? $total->courtnum : '-' ?></dd>
+                        <dt>Court price</dt>
+                        <dd><?= $total->courtnum != 0 ? $avgprice['0'] : '-' ?></dd>
+                    </dl>
+                         
+                    <table class="table table-condensed">
+                        <tbody>
+                            <?php
+                            $datestadium = array('Monday', 'Thuesday', 'Wednesday', 'Thuesday', 'Friday', 'Staturday', 'Sunday');
+                            foreach ($time as $ct) {?> 
 
-                    <?php
-                    $datestadium = array('Monday', 'Thuesday', 'Wednesday', 'Thuesday', 'Friday', 'Staturday', 'Sunday');
-                    foreach ($time as $ct) {
-                        ?> <?= $datestadium[($ct->type)] ?> : <?= $ct->open_time ?> - <?= $ct->end_time ?><br><?php } ?>
+
+                            <tr>
+                                <th><?= $datestadium[($ct->type)] ?></th><td>open</td><td><?= $ct->open_time ?></td><td>close</td><td><?= $ct->end_time ?></td></tr>
+                        <?php } ?>
+                        </tbody></table>
                 </div>
             </div>
 
@@ -93,7 +123,7 @@
                             <li><span class="<?php echo $r['Parking'] == 1 ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'; ?>"> Parking</span><span class="label label-info pull-right"><?= $r['Parking_detail'] ?> ea </span></li>
                             <li><span class="<?php echo $r['Food'] == 1 ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'; ?>"> Food</span><span class="label label-info pull-right"><?= $r['food_detail'] ?> ea </span></li>
                             <li><span class="<?php echo $r['Bathroom'] == 1 ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'; ?>"> Bathroom</span><span class="label label-info pull-right"><?= $r['bathroom_detail'] ?> ea </span></li>
-                            <li><span class="<?php echo $r['Lockerroom'] == 1 ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'; ?>"> Locker Room</span><span class="label label-info pull-right"><?= $r['lockerrom_detail'] ?> ea </span></li>
+                            <li><span class="<?php echo $r['Lockerroom'] == 1 ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'; ?>"> Racket String Repair</span><span class="label label-info pull-right"><?= $r['lockerrom_detail'] ?> ea </span></li>
                             <li><span class="<?php echo $r['Shop'] == 1 ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'; ?>"> Shop</span><span class="label label-info pull-right"><?= $r['shop_detail'] ?> ea </span></li>
                             <li><span class="<?php echo $r['other'] == 1 ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'; ?>"> Other</span><p class="pull-right"><?= $r['other_detail'] ?></p></li>
                         <?php } ?>
@@ -121,7 +151,7 @@
                         <span class="glyphicon glyphicon-user"></span> <?= $data['0']->fname ?>   <?= $data['0']->lname ?>
                     </p>
                     <p>
-                        <span class="glyphicon glyphicon-phone"></span> <?= $data['0']->tel != null ? $data['0']->phone : '-'; ?>
+                        <span class="glyphicon glyphicon-phone"></span> <?= $data['0']->phone != null ? $data['0']->phone : '-'; ?>
                     </p>
                     <p>
                         Status <span class="label label-success"><span class="glyphicon glyphicon-ok"></span>&nbsp; <?= $data['0']->authenowner_status != null ? $data['0']->authenowner_status : '-'; ?></span>
@@ -274,20 +304,26 @@
 
 <script src="<?= base_url() ?>asset/js/star-rating.js" type="text/javascript"></script>
 <script type="text/javascript">
-    var  rating =null ;
+                        var rating = null;
                         $(function () {
-                            
-                            $("#input-rating").rating({
-                                starCaptions: {1: "Very Poor", 2: "Poor", 3: "Ok", 4: "Good", 5: "Very Good"},
-                            starCaptionClasses: {1: "text-danger", 2: "text-warning", 3: "text-info", 4: "text-primary", 5: "text-success"},
-                              captionElement: "#kv-caption"
+                            if ($('#point').val() == null) {
+                                $("#input-rating").rating({
+                                    starCaptions: {1: "Very Poor", 2: "Poor", 3: "Ok", 4: "Good", 5: "Very Good"},
+                                    starCaptionClasses: {1: "text-danger", 2: "text-warning", 3: "text-info", 4: "text-primary", 5: "text-success"},
+                                    captionElement: "#kv-caption"
                                 });
-                            
-        
+                            } else {
+                                $("#input-rating").rating({
+                                    starCaptions: {1: "Very Poor", 2: "Poor", 3: "Ok", 4: "Good", 5: "Very Good"},
+                                    starCaptionClasses: {1: "text-danger", 2: "text-warning", 3: "text-info", 4: "text-primary", 5: "text-success"},
+                                    captionElement: "#kv-caption",
+                                });
+                                $('#input-rating').rating('update', $('#point').val());
+                            }
                             $('#input-rating').on('rating.change', function (event, value, caption) {
                                 console.log(value);
                                 console.log(caption);
-                                rating = value ;
+                                rating = value;
                             });
                             $('#myGallery').galleryView({
                                 filmstrip_style: 'showall',
@@ -302,26 +338,30 @@
                                 panel_width: 750
                             });
                         });
-                        function giverating(){
-                            var fullpart = "http://cbt.backeyefinder.in.th/stadium/giverating";
+                        function giverating() {
+                            var fullpart = "http://cbt.backeyefinder.in.th/stadium/giverating/<?= $this->uri->segment(3) ?>";
                             var st_id = <?= $data['0']->stadium_id ?>;
                             //console.log(st_id);
                             $.ajax({
                                 type: "post",
                                 url: fullpart,
-                                data: {stid: st_id,pt: rating}
+                                data: {stid: st_id, pt: rating}
                             }).done(function (msg) {
 
-                                console.log(msg);
+                                console.log(JSON.parse(msg));
+                                var obj = JSON.parse(msg);
+//                                alert(obj.avgpoint);
                                 if (msg != null) {
-                                    show = '<button type="button"  class="btn btn-lg class="btn btn-primary btn-raised disable" role="button" onclick="unfav() ">VOTE</button>'
-                                    $('#fav').html(show);
+                                    show = '<button type="button"  class="btn btn-primary btn-raised" role="button"  onclick="giverating()">VOTED</button>'
+                                    $('#rat').html(show);
+                                    $('#apoint').html(obj.avgpoint);
+                                    $('#pepole').html(obj.count + ' people');
                                     $("#notija").notify({
                                         speed: 500,
                                     });
                                     $("#notija").notify("create", {
                                         title: 'Add Complete',
-                                        text: 'you give  '+rating+' point'
+                                        text: 'you give  ' + rating + ' point'
                                     });
                                 } else {
                                     alert('error');

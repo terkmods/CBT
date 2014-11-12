@@ -463,10 +463,12 @@ class stadium extends CI_Controller {
             'annouc' => $this->news->NewsView($stId, $config['per_page'], $uri),
             'img' => $this->img->getGallery($stId),
             'fav' => $this->mystadium->getfav($userid,$stId),
-            'rating'=> $this->mystadium->getrating($userid,$stId)
+            'rating'=> $this->mystadium->getrating($userid,$stId),
+            'avgpoint'=>  $this->mystadium->getAVGpoint($stId),
+            'avgprice'=>$this->mystadium->showpriceAVG($stId)
                 //  'user' => $this->myusers->getUser($id)
         );
-      print_r($st['rating']);
+//      print_r($st['avgprice']);
         $this->load->view('stadium_view', $st);
     }
 
@@ -702,7 +704,7 @@ class stadium extends CI_Controller {
          //echo $userid;
          //echo $stadium_id;
     }
-    function giverating(){
+    function giverating($stId){
          $userid = $this->session->userdata('id');
          $stadium_id = $this->input->post('stid');
          $point = $this->input->post('pt');
@@ -711,7 +713,12 @@ class stadium extends CI_Controller {
            'stadium_id'=>$stadium_id,
              'point'=>$point
          );
-         echo $this->db->insert('rating',$data);
+            $this->db->delete('rating',array('user_id'=>$userid));
+          $this->db->insert('rating',$data);
+          $datasend= array(
+                
+          ); 
+          echo json_encode($this->mystadium->getAVGpoint($stId));
     }
 
 }

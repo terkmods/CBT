@@ -87,6 +87,30 @@ WHERE reserve.user_id =' . $userId . ' and start_time > "' . $today . '"')->resu
         return $query->result();
     }
 
+    public function check_bookings($c_id, $date, $start, $end,$ct_id) {
+        $sql = 'SELECT * 
+FROM  `reserve` 
+WHERE reserve.stadium_id ="' . $c_id . '"
+    and court_id = "'.$ct_id.'"
+AND DATE( start_time ) = "' . $date . '"
+AND (
+(
+TIME( start_time ) >  "'.$start.'"
+AND TIME( end_time ) <  "'.$end.'"
+)
+OR (
+TIME( start_time ) <  "'.$start.'"
+AND TIME( end_time ) >  "'.$end.'"
+)
+OR (
+TIME( end_time ) =  "'.$end.'"
+)
+)
+';
+          $query = $this->db->query($sql);
+        return $query->num_rows();
+    }
+
     function get_bookings_stadium($stId) {
         $sql = 'SELECT reserve_id, court.court_id, reserve.stadium_id, User.user_id, CAST( start_time AS TIME ) AS 
 START , CAST( end_time AS TIME ) AS 
@@ -112,7 +136,7 @@ WHERE reserve.stadium_id =' . $stId . ''
     }
 
     function getbookingDashboard($owner_id) {
-            $query = $this->db->query('SELECT * 
+        $query = $this->db->query('SELECT * 
 FROM  `reserve` 
 JOIN stadium ON reserve.stadium_id = stadium.stadium_id
 JOIN court ON reserve.court_id = court.court_id
@@ -122,7 +146,7 @@ IN (
 
 SELECT stadium_id
 FROM stadium
-WHERE owner_id = '.$owner_id.'
+WHERE owner_id = ' . $owner_id . '
 )
 AND DATE( start_time ) = CURDATE( ) ')->result();
         return $query;
@@ -139,13 +163,14 @@ IN (
 
 SELECT stadium_id
 FROM stadium
-WHERE owner_id = '.$owner_id.'
+WHERE owner_id = ' . $owner_id . '
 )
 AND DATE( start_time ) = CURDATE( ) 
 AND CURTIME( ) >= TIME( start_time ) 
 AND CURTIME( ) <= TIME( end_time ) ')->result();
         return $query;
     }
+
     function getbookingDashboard_Pass($owner_id) {
         $query = $this->db->query('SELECT * 
 FROM  `reserve` 
@@ -157,13 +182,14 @@ IN (
 
 SELECT stadium_id
 FROM stadium
-WHERE owner_id = '.$owner_id.'
+WHERE owner_id = ' . $owner_id . '
 )
 AND DATE( start_time ) = CURDATE( ) 
 
 AND CURTIME( ) > TIME( end_time ) ')->result();
         return $query;
     }
+
     function getbookingDashboard_comming($owner_id) {
         $query = $this->db->query('SELECT * 
 FROM  `reserve` 
@@ -175,24 +201,24 @@ IN (
 
 SELECT stadium_id
 FROM stadium
-WHERE owner_id = '.$owner_id.'
+WHERE owner_id = ' . $owner_id . '
 )
 AND DATE( start_time ) = CURDATE( ) 
 
 AND CURRENT_TIMESTAMP < start_time ')->result();
         return $query;
     }
-    function getSumpricetoday($usid){
-         $query = $this->db->query( 'select s.stadium_name, stat.count
-from (select stadium_id,stadium_name from stadium where owner_id = (select owner_id from owner where user_id= '.$usid.')) s left join
+
+    function getSumpricetoday($usid) {
+        $query = $this->db->query('select s.stadium_name, stat.count
+from (select stadium_id,stadium_name from stadium where owner_id = (select owner_id from owner where user_id= ' . $usid . ')) s left join
 (select stadium_id, sum(sumprice) as count
 from reserve
-where stadium_id in (select stadium_id from stadium where owner_id = (select owner_id from owner where user_id= '.$usid.'))
+where stadium_id in (select stadium_id from stadium where owner_id = (select owner_id from owner where user_id= ' . $usid . '))
 AND DATE( start_time ) = CURDATE( )
 group by stadium_id) stat
 on s.stadium_id = stat.stadium_id')->result();
-          return $query;
+        return $query;
     }
- 
-   
+
 }

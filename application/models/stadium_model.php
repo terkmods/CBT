@@ -142,19 +142,19 @@ join User on User.user_id = owner.user_id
 
     public function updatefacility($stId, $c, $q) {
 
-        $sql = 'UPDATE `backeyefin_cbt`.`facility` SET `Parking` = '.$c['p'].',
-        `Food` = "'.$c['f'].'",
-        `Bathroom` = "'.$c['b'].'",
-        `Lockerroom` = "'.$c['l'].'",
-        `Shop` = "'.$c['s'].'",
-        `Parking_detail` = "'.$q['0'].'",
-        `bathroom_detail` = "'.$q['1'].'",
-        `lockerrom_detail` = "'.$q['2'].'",
-        `shop_detail` = "'.$q['3'].'mmmmm",
-        `other` = "'.$c['o'].'",
-        `other_detail` = "'.$c['ot'].'" WHERE `facility`.`facility_id` = '.$stId.';';
-        
-      return  $this->db->query($sql);
+        $sql = 'UPDATE `backeyefin_cbt`.`facility` SET `Parking` = ' . $c['p'] . ',
+        `Food` = "' . $c['f'] . '",
+        `Bathroom` = "' . $c['b'] . '",
+        `Lockerroom` = "' . $c['l'] . '",
+        `Shop` = "' . $c['s'] . '",
+        `Parking_detail` = "' . $q['0'] . '",
+        `bathroom_detail` = "' . $q['1'] . '",
+        `lockerrom_detail` = "' . $q['2'] . '",
+        `shop_detail` = "' . $q['3'] . 'mmmmm",
+        `other` = "' . $c['o'] . '",
+        `other_detail` = "' . $c['ot'] . '" WHERE `facility`.`facility_id` = ' . $stId . ';';
+
+        return $this->db->query($sql);
 //        redirect('stadium/updatefacility/'.$stId.'');
     }
 
@@ -246,8 +246,6 @@ join User on User.user_id = owner.user_id
         $query = $this->db->query('select * from stadium join facility where facility.stadium_id = ' . $stId . ' and stadium.stadium_id = ' . $stId)->result_array();
         return $query;
     }
-    
-    
 
     public function delstadium($stId) {
         foreach ($stId as $r) {
@@ -304,7 +302,7 @@ join User on User.user_id = owner.user_id
             }
             $resall[] = $res;
             $res = null;
-        } 
+        }
 
         return $resall;
     }
@@ -330,22 +328,43 @@ WHERE stadium.lat IS NOT NULL  ')->result_array();
         $query = $this->db->query($sql)->result();
         echo json_encode($query);
     }
-    public function getfav($userid,$stId){
-       $query =  $this->db->get_where('favorite_stadium',array('user_id'=>$userid,'stadium_id'=>$stId));
-       return $query->row();
+
+    public function getfav($userid, $stId) {
+        $query = $this->db->get_where('favorite_stadium', array('user_id' => $userid, 'stadium_id' => $stId));
+        return $query->row();
     }
-    public function getAllfav($userid){
+
+    public function getAllfav($userid) {
         $sql = 'SELECT * 
 FROM  `favorite_stadium` 
 JOIN stadium ON favorite_stadium.`stadium_id` = stadium.stadium_id
-WHERE favorite_stadium.`user_id` ='.$userid.'';
+WHERE favorite_stadium.`user_id` =' . $userid . '';
         $query = $this->db->query($sql)->result();
         return $query;
     }
-    public function getrating($userid,$stId){
-         $query =  $this->db->get_where('rating',array('user_id'=>$userid,'stadium_id'=>$stId));
-       return $query->row();
+
+    public function getrating($userid, $stId) {
+        $query = $this->db->get_where('rating', array('user_id' => $userid, 'stadium_id' => $stId));
+        return $query->row();
     }
 
+    public function getAVGpoint($stId) {
+        $sql = 'SELECT stadium_id, avg(point) as avgpoint , count(*) as count
+FROM `rating` 
+WHERE stadium_id = ' . $stId . '';
+    
+    $query = $this->db->query($sql)->row();
+        return $query;
+    }
+        public function showpriceAVG($stId) {
+        
+            $this->db->select_min('price')->from('court_price')->join('court', 'court_price.court_id = court.court_id')->where('stadium_id', $stId);
+            $min = $this->db->get()->row();
+            $this->db->select_max('price')->from('court_price')->join('court', 'court_price.court_id = court.court_id')->where('stadium_id', $stId);
+            $max = $this->db->get()->row();
+            $avgprice[] = $min->price . ' - ' . $max->price;
+        
 
+        return $avgprice;
+    }
 }

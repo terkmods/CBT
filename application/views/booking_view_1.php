@@ -157,6 +157,23 @@
     </div>
 
 </div>
+<div id="notija" style="display:none">
+    <!-- 
+    Later on, you can choose which template to use by referring to the 
+    ID assigned to each template.  Alternatively, you could refer
+    to each template by index, so in this example, "basic-tempate" is
+    index 0 and "advanced-template" is index 1.
+    -->
+    <div id="basic-template">
+        <a class="ui-notify-cross ui-notify-close " href="#">x</a>
+        <h1>#{title}</h1>
+        <p>#{text}</p>
+    </div>
+
+    <div id="advanced-template">
+        <!-- ... you get the idea ... -->
+    </div>
+</div>
 <!--bookingnaja-->
 <!--Modalll jaa up cover na--> 
 
@@ -242,7 +259,7 @@
 
 
                     <input type="hidden" name="userid" value="<?= $user['0']->user_id ?>">
-                    <input type="hidden" name="stadiumid" value="<?= $data['0']->stadium_id ?>">
+                    <input type="hidden" id='st_id_select' name="stadiumid" value="<?= $data['0']->stadium_id ?>">
         <!--                    <input type="hidden" id="courtid" value="<?= $user['0']->court_id ?>">-->
                     <input type="hidden" id="tr_id">
                     <input type="hidden" id="courtid" name="courtid" >
@@ -251,8 +268,8 @@
                     <input type="hidden" id="sumpricesend" name="allprice">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="submit" value="Book Now" class="btn btn-primary">Book Now</button>
+                    
+                    <div id='buttonbooking'><button type="submit"  value="Book Now" class="btn btn-primary" >Book Now</button><button type="button" class="btn btn-danger" data-dismiss="modal">Close</button></div>
                 </div>
             </div><!-- /.modal-content -->
         </form>
@@ -295,16 +312,26 @@
     </div>
     <input type="hidden" id="countcort" value="<?= count($court) ?>">
 </footer>
-
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.js" type="text/javascript"></script>
+
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="<?= base_url() ?>asset/js/bootstrap.min.js"></script>
 <script src="<?= base_url() ?>asset/js/bootstrap-datepicker.js"></script>
-<script src="<?= base_url() ?>asset/js/bootstrap-switch.js"></script>
-<script src="<?= base_url() ?>asset/js/booking_1.js"></script>
-<script src="<?= base_url() ?>asset/js/table-fixed-header.js"></script>
 
+<!--<script src="<?= base_url() ?>asset/js/jquery-ui.js"></script>-->
+<script src="<?= base_url() ?>asset/js/jquery.notify.js"></script>
+
+    <script src="<?= base_url() ?>asset/material/js/ripples.min.js"></script>
+    <script src="<?= base_url() ?>asset/material/js/material.min.js"></script>
+    
+         
+<script src="<?= base_url() ?>asset/js/booking_1.js"></script>
+
+
+
+<script src="<?= base_url() ?>asset/js/table-fixed-header.js"></script>
 <script type="text/javascript">
                                     /* pagination */
                                     $.fn.pageMe = function (opts) {

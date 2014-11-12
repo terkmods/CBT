@@ -123,7 +123,7 @@ $num = 1;
                         <input type="checkbox" <?=$facility['0']['Lockerroom']==0 ? '':'checked'?> name='c4' value="1"> Checkbox
                     </label>
                 </span></td>
-                <td style="vertical-align: middle">Lockerroom</td>
+                <td style="vertical-align: middle">Racket string repair</td>
                 <td style="vertical-align: middle"> <label class="control-label"> </label><input  type="number" value="<?=$facility['0']['Lockerroom']?>" name="quan[]"> </td>
                 
         </tr>
