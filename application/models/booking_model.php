@@ -20,7 +20,7 @@ class Booking_model extends CI_Model {
     }
 
     function getAllBooking($userId) {
-        $query = $this->db->query('SELECT reserve.reserve_id, reserve.stadium_id, reserve.court_id, reserve.start_time, reserve.end_time, stadium.stadium_name, court.court_name
+        $query = $this->db->query('SELECT *
 FROM  `reserve` 
 JOIN stadium ON reserve.stadium_id = stadium.stadium_id
 JOIN court ON reserve.court_id = court.court_id
@@ -42,7 +42,7 @@ WHERE reserve.user_id =' . $userId . ' and start_time ' . $today . ' current_tim
     }
 
     function getAllBookingja($userId, $today) {
-        $query = $this->db->query('SELECT reserve.reserve_id, reserve.stadium_id, reserve.court_id, reserve.start_time, reserve.end_time, stadium.stadium_name, court.court_name
+        $query = $this->db->query('SELECT *
 FROM  `reserve` 
 JOIN stadium ON reserve.stadium_id = stadium.stadium_id
 JOIN court ON reserve.court_id = court.court_id

@@ -316,11 +316,19 @@ join User on User.user_id = owner.user_id
     }
 
     public function getLatLngAll() {
-        $query = $this->db->query('SELECT stadium_name, court.stadium_id,lat,stadium.long,address_no,soi,road,district,province,tel,stadium_path
-FROM  `stadium` join court on stadium.stadium_id = court.stadium_id 
+        $query = $this->db->query('SELECT stadium_name,lat,stadium.long,address_no,soi,road,district,province,tel,stadium_path
+FROM  `stadium` 
 WHERE stadium.lat IS NOT NULL  ')->result_array();
 
         echo json_encode($query);
+    }
+
+    public function getLatLngAll_for_nbl() {
+        $query = $this->db->query('SELECT stadium_name, lat,stadium.long,address_no,soi,road,district,province,tel,stadium_path
+FROM  `stadium` 
+WHERE stadium.lat IS NOT NULL  ')->result_array();
+
+        return $query;
     }
 
     public function getComment($sId) {
@@ -352,19 +360,21 @@ WHERE favorite_stadium.`user_id` =' . $userid . '';
         $sql = 'SELECT stadium_id, avg(point) as avgpoint , count(*) as count
 FROM `rating` 
 WHERE stadium_id = ' . $stId . '';
-    
-    $query = $this->db->query($sql)->row();
+
+        $query = $this->db->query($sql)->row();
         return $query;
     }
-        public function showpriceAVG($stId) {
-        
-            $this->db->select_min('price')->from('court_price')->join('court', 'court_price.court_id = court.court_id')->where('stadium_id', $stId);
-            $min = $this->db->get()->row();
-            $this->db->select_max('price')->from('court_price')->join('court', 'court_price.court_id = court.court_id')->where('stadium_id', $stId);
-            $max = $this->db->get()->row();
-            $avgprice[] = $min->price . ' - ' . $max->price;
-        
+
+    public function showpriceAVG($stId) {
+
+        $this->db->select_min('price')->from('court_price')->join('court', 'court_price.court_id = court.court_id')->where('stadium_id', $stId);
+        $min = $this->db->get()->row();
+        $this->db->select_max('price')->from('court_price')->join('court', 'court_price.court_id = court.court_id')->where('stadium_id', $stId);
+        $max = $this->db->get()->row();
+        $avgprice[] = $min->price . ' - ' . $max->price;
+
 
         return $avgprice;
     }
+
 }

@@ -5,6 +5,7 @@
  * and open the template in the editor.
  */
 ?>
+
 <?php
 include 'template/head.php';
 ?>
@@ -38,8 +39,8 @@ include 'template/head.php';
                             <div class="col-md-4">
                                 <div class="panel panel-success">
                                     <div class="panel-heading">Welcome :  </div>
-                                    <div class="panel-body text-center ">
-                                        <h2>0 <small>การจองวันนี้</small></h2> ตรวจสอบการจองทั้งหมดได้ข้างล่าง
+                                    <div class="panel-body text-center " id="countallbook">
+                                        <h2><?=count($today_booking)?> <small>การจองวันนี้</small></h2> ตรวจสอบการจองทั้งหมดได้ข้างล่าง
                                     </div>
                                 </div>
                             </div>
@@ -50,12 +51,15 @@ include 'template/head.php';
                                         <div class="list-group">
                                             <div class="list-group-item">
                                                 <div class="row-action-primary">
-                                                    <i class="mdi-file-folder"></i>
+                                                    <img class="circle" src="<?= base_url() ?>/asset/images/<?= $allbooking['0']->stadium_path != null ? 'stadiumpic/' . $allbooking['0']->stadium_path : 'bad.png' ?>" alt="icon">
                                                 </div>
-                                                <div class="row-content">
-                                                    <div class="least-content">15m</div>
-                                                    <h4 class="list-group-item-heading">Tile with a label</h4>
-                                                    <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus.</p>
+                                                <div class="row-content text-left">
+                                                    <div class="least-content">คอร์ด : <?= $allbooking['0']->court_name ?></div>
+                                                    <h4 class="list-group-item-heading"><?=$allbooking['0']->stadium_name?></h4>
+                                                    <p class="list-group-item-text">วัน : <small><?= substr($allbooking['0']->start_time, 0, 10) ?></small> </p>
+                                                       <p class="list-group-item-text">เวลา  <?= substr($allbooking['0']->start_time, 10, 11) ?>-<?= substr($allbooking['0']->end_time, 10, 11) ?></p>
+<!--+                                                        <p class="list-group-item-text">ผู้จอง <?= $allbooking['0']->fname ?> <?= $allbooking['0']->lname ?></p>-->
+                                                        <p class="list-group-item-text">โทร : <?= $allbooking['0']->tel !=null ? $allbooking['0']->tel:'-'  ?></p>
                                                 </div>
                                             </div>
                                             <div class="list-group-separator"></div>
@@ -98,7 +102,7 @@ include 'template/head.php';
                                                 $date = (strtotime($r->end_time) - strtotime($r->start_time));
                                                 $today = date("H:i:s", $date);
                                                 ?>
-                                                <td><?= date("h", strtotime($r->start_time)) - date("h", strtotime($r->end_time)) ?>ชม. <?= date('i', $date) ?> นาที</td>
+                                                <td><?= date("h", strtotime($r->end_time)) - date("h", strtotime($r->start_time)) ?>ชม. <?= date('i', $date) ?> นาที</td>
                                                 <td><a href="<?= base_url() ?>booking/cancelbooking/<?= $r->reserve_id ?>" class="form-control btn-danger btn-sm" onclick="del()"> cancel</a>
     <!--                                                    <input type="submit" value="cancel" class="form-control btn-danger btn-sm"></td>-->
                                             </tr>
@@ -129,7 +133,7 @@ include 'template/head.php';
 <script>
                 $(document).ready(function (e) {
                 $('#commingbooking').hide();
-                alert('gg');
+//                alert('gg');
 
                 });
     function today() {
@@ -186,13 +190,15 @@ include 'template/head.php';
                             ' <td>' + obj[i].stadium_name + '</td>' +
                             '  <td>' + obj[i].court_name + '</td>' +
                             '   <td>' + obj[i].start_time.substring(10, 16) + '-' + obj[i].end_time.substring(10, 16) + '</td>' +
-                            '<td>' + (obj[i].end_time.substring(10, 13) - obj[i].start_time.substring(10, 13)) + 'ชม. ' + (obj[i].end_time.substring(14, 16) - obj[i].start_time.substring(14, 16)) + ' นาที</td>' +
+                            '<td>' + (obj[i].end_time.substring(10, 13) - obj[i].start_time.substring(10, 13)) + 'ชม. ' + ((obj[i].end_time.substring(14, 16) - obj[i].start_time.substring(14, 16))< 0 ? '30':(obj[i].end_time.substring(14, 16) - obj[i].start_time.substring(14, 16))) + ' นาที</td>' +
                             '  </tr>';
                     console.log(obj[i].end_time.substring(14, 16));
                 }
             }
+            showallbook =  '<h2>'+obj.length+'<small>การจองที่ผ่านมา</small></h2> ตรวจสอบการจองทั้งหมดได้ข้างล่าง';
             // console.log(show);
             $("#showbooking").html(show);
+            $('#countallbook').html(showallbook);
 
         });
     }
@@ -217,14 +223,15 @@ include 'template/head.php';
                             ' <td>' + obj[i].stadium_name + '</td>' +
                             '  <td>' + obj[i].court_name + '</td>' +
                             '   <td>' + obj[i].start_time.substring(10, 16) + '-' + obj[i].end_time.substring(10, 16) + '</td>' +
-                            '<td>' + (obj[i].end_time.substring(10, 13) - obj[i].start_time.substring(10, 13)) + 'ชม. ' + (obj[i].end_time.substring(14, 16) - obj[i].start_time.substring(14, 16)) + ' นาที</td>' +
+                            '<td>' + (obj[i].end_time.substring(10, 13) - obj[i].start_time.substring(10, 13)) + 'ชม. ' + ((obj[i].end_time.substring(14, 16) - obj[i].start_time.substring(14, 16))< 0 ? '30':(obj[i].end_time.substring(14, 16) - obj[i].start_time.substring(14, 16))) + ' นาที</td>' +
                             '  </tr>';
                     console.log(obj[i].end_time.substring(14, 16));
                 }
             }
+            showallbook =  '<h2>'+obj.length+'<small>การจองที่กำลังจะถึง</small></h2> ตรวจสอบการจองทั้งหมดได้ข้างล่าง';
             // console.log(show);
             $("#showbooking").html(show);
-
+            $('#countallbook').html(showallbook);
         });
     }
 </script>

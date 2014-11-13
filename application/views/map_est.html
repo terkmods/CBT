@@ -108,14 +108,30 @@
         <jsp:include page="fragment/customer-footer.jsp"/>
         <jsp:include page="fragment/customer-end.jsp"/>
         <script>
+            public static double calDistance(double x1,double y1,double x2,double y2){
+        int R = 6371; // km
+        double φ1 = Math.toRadians(x1);
+        double φ2 = Math.toRadians(x2);
+        double Δφ = Math.toRadians(x2-x1);
+        double Δλ = Math.toRadians(y2-y1);
+        double a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                Math.cos(φ1) * Math.cos(φ2) *
+                Math.sin(Δλ/2) * Math.sin(Δλ/2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        return R * c * 1000;
+    }
+            </script>
+        <script>
             var markers = [];
             function search(x,y,radius){
                 removeResultSearch();
                 $('#h1-loader').removeClass('hidden').hide().slideDown(500);
-                $.getJSON('http://cbt.backeyefinder.in.th/home/test',function(json){
+                isSearch=true;
+                $.getJSON('apisrsbl?x='+x+'&y='+y+'&radius='+radius,function(json){
+                    isSearch=false;
                     $('#h1-loader').slideUp(500);
                     $(json).each(function(k,v){
-                        console.log(v);
+                        addRestaurant(v);
                     });
                 });
             }
@@ -165,22 +181,33 @@
                                 '</div>'+
                             '</div>';
                 google.maps.event.addListener(marker, 'click', function() {
-                    new google.maps.InfoWindow({content: htmlForMap}).open(map,marker);
+                    infoWindow.setContent(htmlForMap);
+                    infoWindow.open(map,marker);
                 });
-                var htmlForList =  '<div class="col-sm-12 col-xs-6 well">'+
-                                '<div class="col-sm-4">'+
-                                    '<img src="'+rs.picPath+'" class="img-responsive">'+
+                var htmlForList =  
+                        '<div class="col-md-3 col-xs-6">'+
+                            '<div class="well fix-h-400">'+
+                                '<div class="col-xs-12  fix-h-150" style="overflow-y: hidden;">'+
+                                    '<a href="cvrs?id='+rs.id+'">'+
+                                        '<img src="'+rs.picPath+'" class="img-responsive img-full">'+
+                                    '</a>'+
                                 '</div>'+
-                                '<div class="col-sm-8">'+
-                                    '<h3 class="text-center">ร้าน "'+rs.name+'"</h3>'+
+                                '<div class="col-xs-12">'+
+                                    '<h4 class="text-center"><a href="cvrs?id='+rs.id+'">'+rs.name+'</a></h4>'+
+                                    '<div class="text-center">'+
+                                        '<input type="hidden" class="rating" data-filled="fa fa-star text-primary" data-empty="fa fa-star-o text-primary" value="'+(rs.rating-1)+'" disabled>'+
+                                    '</div>'+
+                                    (rs.tel!=null?'<h6 class="help-block"><i class="fa fa-phone"></i> '+rs.tel+'<h6>':'')+
+                                    (rs.email!=null?'<h6 class="help-block"><i class="fa fa-envelope"></i> '+rs.email+'<h6>':'')+
+                                    (rs.website!=null?'<h6 class="help-block"><i class="fa fa-globe"></i> '+rs.website+'<h6>':'')+
+                                    (rs.detail!=null?'<p>'+rs.detail+'</p>':'')+
                                 '</div>'+
-                                '<div class="text-center">'+cuisineImg+"</div>"+
-                                '<h6 class="help-block">'+rs.detail+"</h6>"+
-                                '<a href="cvrs?id='+rs.id+'" class="btn btn-primary btn-block"><i class="fa fa-arrow-right"></i> เข้าสู่หน้าร้าน</button>';
-                            '</div>';
+                            '</div>'+
+                        '</div>';
                 $(htmlForList).insertBefore($('#span-result-search'));
                 markers.push(marker);
             }
+            
             function removeResultSearch(){
                 for (var i = 0; i < markers.length; i++) {
                     markers[i].setMap(null);
