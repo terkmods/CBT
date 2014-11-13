@@ -40,7 +40,11 @@
                             include 'guestmem.php';
                         }
                         ?>
-
+                        <?php
+                            echo'<font color=red>';
+                            echo $this->session->flashdata('msg_error');
+                            echo '</font>'
+                            ?>
                     </div>
                 </div>
             </div>

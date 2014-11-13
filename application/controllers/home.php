@@ -15,6 +15,7 @@ class Home extends CI_Controller {
     }
 
     function index() {
+        if($this->session->userdata('id')!=null){
         $id = $userid = $this->session->userdata('id');
         $datasend ['stadium'] = $this->mystadium->getLaststadium();
         $datasend['user'] = $this->myusers->getUser($id);
@@ -22,7 +23,8 @@ class Home extends CI_Controller {
             $datasend ['district'] = $this->mystadium->getdistrict();
 //        $datasend['latlng'] = $this->mystadium->getLatLngAll();
      //print_r($datasend['latlng']);
-        $this->load->view('home_view',$datasend);
+        $this->load->view('home_view_1',$datasend);}else{
+        $this->load->view('index');}
     
     }
     function test(){

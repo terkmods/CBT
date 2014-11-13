@@ -85,7 +85,7 @@ class Users extends CI_Controller {
                 //print_r($data['stadium']);
                 }
             }
-            echo $data['role'];
+//            echo $data['role'];
             if ($data['role'] == "owner") {
                 $this->session->set_userdata($data);
                 redirect('stadium');
@@ -94,7 +94,7 @@ class Users extends CI_Controller {
             redirect('home');
         } else {
             $this->session->set_flashdata('msg_error', 'รหัสผ่านหรืออีเมลไม่ถูกต้องกรุณาตรวจสอบ');
-            redirect('users');
+            $this->load->view('index');
         }
 
         //} else {

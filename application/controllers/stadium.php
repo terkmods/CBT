@@ -8,7 +8,7 @@ class stadium extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('stadium_model', 'mystadium');
-        $this->load->model('user_model', 'myusers'); 
+        $this->load->model('user_model', 'myusers');
         $this->load->model('coach_model', 'mycoach');
         $this->load->model('news_model', 'news');
         $this->load->model('gallery_model', 'img');
@@ -31,17 +31,17 @@ class stadium extends CI_Controller {
                 'ow' => $this->getOwner($userid),
                 'stadium' => $this->mystadium->getstadium($ownerid)
             );
-            
+
             $stID = null;
             foreach ($datasend['stadium'] as $d) {
                 $stID[] = $d->stadium_id;
             }
             if ($stID != null) {
-                    $curtime = $today = date("Y-m-d").' '.date("h:i:s");
+                $curtime = $today = date("Y-m-d") . ' ' . date("h:i:s");
                 foreach ($stID as $r) {
                     $totalcourt[] = $this->mystadium->getTotalcourt($r);
-                   
-                  //  $playing = $this->booking->getbookingDashboard_Playing($r, $curtime);
+
+                    //  $playing = $this->booking->getbookingDashboard_Playing($r, $curtime);
                 }
                 $x;
                 for ($i = 0; $i < sizeof($stID); $i++) {
@@ -53,21 +53,19 @@ class stadium extends CI_Controller {
                     $datasend['total'] = $totalcourt;
                     $datasend['totalbooking'] = $this->booking->getbookingDashboard($ownerid);
                 }
-                
-                     $datasend['playingtoday'] = $this->booking->getbookingDashboard_Playing($ownerid);
-                     $datasend['todaycomming']= $this->booking->getbookingDashboard_comming($ownerid);
-                     $datasend['todaypass'] = $this->booking->getbookingDashboard_Pass($ownerid);
-                     $datasend['todayprice'] = $this->booking->getSumpricetoday($userid);
-                     $datasend['date'] = $curtime;
+
+                $datasend['playingtoday'] = $this->booking->getbookingDashboard_Playing($ownerid);
+                $datasend['todaycomming'] = $this->booking->getbookingDashboard_comming($ownerid);
+                $datasend['todaypass'] = $this->booking->getbookingDashboard_Pass($ownerid);
+                $datasend['todayprice'] = $this->booking->getSumpricetoday($userid);
+                $datasend['date'] = $curtime;
 //                }
 //                
 //                print_r( $datasend['totalbooking']);
 //                print_r($todaycomming);
 //                print_r($datasend['todayprice']);
-                  
 //               
-                
-               } else {
+            } else {
                 $this->session->set_flashdata('msg', 'กรุณาเพิ่มสนาม');
             }
 
@@ -76,7 +74,7 @@ class stadium extends CI_Controller {
             $this->load->view("dashboard", $datasend);
             ////print_r($datasend);
         } else {
-            echo 'session no';
+            $this->load->view('index');
         }
     }
 
@@ -120,7 +118,7 @@ class stadium extends CI_Controller {
             $this->load->view("mg", $datasend);
             ////print_r($datasend);
         } else {
-            echo 'session no';
+            $this->load->view('index');
         }
     }
 
@@ -141,7 +139,7 @@ class stadium extends CI_Controller {
 
             $this->load->view("add_stadium", $datasend);
         } else {
-            echo 'session no';
+            $this->load->view('index');
         }
     }
 
@@ -154,7 +152,7 @@ class stadium extends CI_Controller {
             }
             return $owner_id;
         } else {
-            echo 'fail no userid';
+//            echo 'fail no userid';
         }
     }
 
@@ -166,18 +164,18 @@ class stadium extends CI_Controller {
             // //print_r($query);
             return $query;
         } else {
-            echo 'fail no userid';
+//            echo 'fail no userid';
         }
     }
 
     function addstadium() {
         $userid = $this->session->userdata('id'); // เรียก user_id จาก session 
         $rs = $this->mystadium->showIdMax();
-        $facility = array (
-          '0','1','2','3','4'  
+        $facility = array(
+            '0', '1', '2', '3', '4'
         );
-        $fullurl = 'www.cbtonline.com/stadium/' . $this->input->post('url') ;
-       // echo $fullurl;
+        $fullurl = 'www.cbtonline.com/stadium/' . $this->input->post('url');
+        // echo $fullurl;
         foreach ($rs as $r) {
             $maxstadium = $r['stadium_id'] + "1";
         }
@@ -213,7 +211,7 @@ class stadium extends CI_Controller {
             $this->session->set_flashdata('msg', 'Successful');
             redirect('stadium/managestadium');
         } else {
-            echo 'no user id ja addstadium';
+            $this->load->view('index');
         }
     }
 
@@ -224,14 +222,13 @@ class stadium extends CI_Controller {
             'data' => $this->mystadium->setstadium($id), //row
 //            'facility' => $this->mystadium->showfacility($id), //result_array
             'showtime' => $this->mystadium->getTime($id), //result_array  
-            'courtprice' => $this->mystadium->getcourtprice($id), 
-            'court' => $this->mystadium->gettableCourt($id),//result_array  getTotalcourt
+            'courtprice' => $this->mystadium->getcourtprice($id),
+            'court' => $this->mystadium->gettableCourt($id), //result_array  getTotalcourt
             'total' => $this->mystadium->getTotalcourt($id), //result_array  getTotalcourt
             'blacklist' => $this->myusers->get_blacklist($id),
             'coach' => $this->mycoach->get_all_coach(),
             'all_news' => $this->news->getallNews($id),
             'img' => $this->img->getGallery($id),
-           
         );
 
 //        //print_r($data['showtime']);
@@ -239,12 +236,13 @@ class stadium extends CI_Controller {
         print_r($data['courtprice']);
         $this->load->view("editstadium", $data);
     }
-    function facility($stId){
+
+    function facility($stId) {
         $data = array(
-          'facility' => $this->mystadium->showfacility($stId),  
+            'facility' => $this->mystadium->showfacility($stId),
         );
 //        //print_r($data['facility']);
-        $this->load->view("facility_view",$data);
+        $this->load->view("facility_view", $data);
     }
 
     function locatestadium() {
@@ -267,12 +265,13 @@ class stadium extends CI_Controller {
 
         return $data['map'];
     }
-     public function checkisOpen($day,$i){
-        if($day == null){
+
+    public function checkisOpen($day, $i) {
+        if ($day == null) {
             return 0;
         }
-        for ($n=0 ; $n< count($day) ;$n++){
-            if($day[$n]==$i ){
+        for ($n = 0; $n < count($day); $n++) {
+            if ($day[$n] == $i) {
                 return 1;
             }
         }
@@ -288,8 +287,6 @@ class stadium extends CI_Controller {
 //            echo '////////////';
 //            //print_r($close);
 //            echo '////////////';  
-
-            
 //        //print_r($day);
 //        echo $check;
         $data = array(
@@ -298,21 +295,20 @@ class stadium extends CI_Controller {
             'end_time' => $this->input->post('close'),
             'type' => $this->input->post('type')
         );
-        
+
 
 
         //echo $data['type']['0'];
         if ($check != 0) {
-            
-                for($k =0 ;$k< count($open); $k++){
-            $sql = "UPDATE  `backeyefin_cbt`.`stadium_time` SET  `open_time` =  '".$open[$k]."',
-            `end_time` =  '".$close[$k]."',
-            `isopen` =  '".  $this->checkisOpen($day,$k)."' WHERE  `stadium_time`.`stadium_id` =".$stId." AND  `stadium_time`.`type` =  '".$k."'";
-             $this->db->query($sql);
-             
-                }
-               
-             redirect('stadium/updatestadium/' . $stId . '?type=time');   
+
+            for ($k = 0; $k < count($open); $k++) {
+                $sql = "UPDATE  `backeyefin_cbt`.`stadium_time` SET  `open_time` =  '" . $open[$k] . "',
+            `end_time` =  '" . $close[$k] . "',
+            `isopen` =  '" . $this->checkisOpen($day, $k) . "' WHERE  `stadium_time`.`stadium_id` =" . $stId . " AND  `stadium_time`.`type` =  '" . $k . "'";
+                $this->db->query($sql);
+            }
+
+            redirect('stadium/updatestadium/' . $stId . '?type=time');
         } else {
             for ($r = 0; $r < count($open); $r++) {
                 $sql = "INSERT INTO `backeyefin_cbt`.`stadium_time` (`stadium_id`, `open_time`, `end_time`, `type`, `isopen`)"
@@ -322,34 +318,34 @@ class stadium extends CI_Controller {
         }
 //        $this->updatestadium($stId);
     }
-    function updatefacility($stId){
-        echo $stId;
+
+    function updatefacility($stId) {
+//        echo $stId;
         $quantity = $this->input->post('quan');
         $checkfacility = array(
-        'Parking' =>  $this->input->post('c1'),
-        'Food' =>  $this->input->post('c2'),
-        'Bathroom' =>  $this->input->post('c3'),
-        'Lockerroom' =>  $this->input->post('c4'),
-        'Shop' =>  $this->input->post('c5'),
-         'Parking_detail'=>   $quantity['0'],
-           'bathroom_detail'=>   $quantity['1'],
-                    'lockerrom_detail'=>   $quantity['2'],
-           'shop_detail'=>   $quantity['3'],
-            'other'=>$this->input->post('c6'),
-            'other_detail' =>$this->input->post('other'),
-                );
-        
-       // echo $this->input->post('inputcheck2');
+            'Parking' => $this->input->post('c1'),
+            'Food' => $this->input->post('c2'),
+            'Bathroom' => $this->input->post('c3'),
+            'Lockerroom' => $this->input->post('c4'),
+            'Shop' => $this->input->post('c5'),
+            'Parking_detail' => $quantity['0'],
+            'bathroom_detail' => $quantity['1'],
+            'lockerrom_detail' => $quantity['2'],
+            'shop_detail' => $quantity['3'],
+            'other' => $this->input->post('c6'),
+            'other_detail' => $this->input->post('other'),
+        );
+
+        // echo $this->input->post('inputcheck2');
 //        //print_r($checkfacility);
 //        //print_r($quantity);
         $this->db->where('stadium_id', $stId);
-        $this->db->update('facility', $checkfacility); 
+        $this->db->update('facility', $checkfacility);
 //        echo    $this->mystadium->updatefacility($stId,$checkfacility,$quantity);
 //        redirect('stadium/updatefacility/'.$stId.'');
-         $this->session->set_flashdata('msg', 'Update Facility Complete');
+        $this->session->set_flashdata('msg', 'Update Facility Complete');
         $this->facility($stId);
     }
-            
 
     function editstadium($stId) {
 
@@ -357,7 +353,7 @@ class stadium extends CI_Controller {
         $userid = $this->session->userdata('id');
 
         $facility = $this->input->post('facility');
-        $fullurl = 'www.cbtonline.com/stadium/' . $this->input->post('url') ;
+        $fullurl = 'www.cbtonline.com/stadium/' . $this->input->post('url');
 
 
 
@@ -451,7 +447,7 @@ class stadium extends CI_Controller {
         if ($uri == null) {
             $uri = 0;
         }
-        
+
         $this->pagination->initialize($config);
         $userid = $this->session->userdata('id');
         $st = array('data' => $this->mystadium->getstadiumprofile($stId),
@@ -462,10 +458,10 @@ class stadium extends CI_Controller {
             'time' => $this->mystadium->gettimeprofile($stId),
             'annouc' => $this->news->NewsView($stId, $config['per_page'], $uri),
             'img' => $this->img->getGallery($stId),
-            'fav' => $this->mystadium->getfav($userid,$stId),
-            'rating'=> $this->mystadium->getrating($userid,$stId),
-            'avgpoint'=>  $this->mystadium->getAVGpoint($stId),
-            'avgprice'=>$this->mystadium->showpriceAVG($stId)
+            'fav' => $this->mystadium->getfav($userid, $stId),
+            'rating' => $this->mystadium->getrating($userid, $stId),
+            'avgpoint' => $this->mystadium->getAVGpoint($stId),
+            'avgprice' => $this->mystadium->showpriceAVG($stId)
                 //  'user' => $this->myusers->getUser($id)
         );
 //      print_r($st['avgprice']);
@@ -535,11 +531,11 @@ class stadium extends CI_Controller {
             'type' => $this->input->post('type')
         );
         $this->db->insert("court", $data);
-        
-        
+
+
         $price = $this->input->post('price1');
-        for($i=0;$i<count($price);$i++){
-            $this->mystadium->addcourtprice($maxstadium,$price[$i],$i);
+        for ($i = 0; $i < count($price); $i++) {
+            $this->mystadium->addcourtprice($maxstadium, $price[$i], $i);
         }
         // //print_r($dataprice);
 //        $this->db->update("court", $dataprice, array('court_id' => $maxstadium));
@@ -556,23 +552,25 @@ class stadium extends CI_Controller {
         $detail['comparedata'] = $this->mystadium->showcompare($data);
         $detail['time'] = $this->mystadium->showtime($data);
         $detail['facility'] = $this->mystadium->showarrfacility($data);
-        
+
         $detail['priceavg'] = $this->mystadium->showprice($data);
-        print_r($detail['facility']);
+//        print_r($detail['facility']);
         $this->load->view("compare", $detail);
     }
 
     function historyBooking() {
         $userid = $this->session->userdata('id');
         $ownerid = $this->getOwnerid($userid);
+        if ($userid != null) {
 
-
-        $datasend = array(
-            'ow' => $this->getOwner($userid),
-            'stadium' => $this->mystadium->getstadium($ownerid)
-        );
-        // //print_r($datasend);
-        $this->load->view('history_stadium_booking', $datasend);
+            $datasend = array(
+                'ow' => $this->getOwner($userid),
+                'stadium' => $this->mystadium->getstadium($ownerid)
+            );
+            // //print_r($datasend);
+            $this->load->view('history_stadium_booking', $datasend);
+        } else
+            $this->load->view('index');
     }
 
     function search() {
@@ -674,51 +672,51 @@ class stadium extends CI_Controller {
     function coach($id) {
         $data = array(
             'data' => $this->mystadium->setstadium($id), //row
-
             'coach' => $this->mycoach->get_all_coach()
-
         );
 
 
         $this->load->view("coach", $data);
     }
-    function addfav(){
-         $userid = $this->session->userdata('id');
-         $stadium_id = $this->input->post('stid');
-         $data = array(
-           'user_id'=>$userid,
-             'stadium_id'=>$stadium_id
-         );
-         echo $this->db->insert('favorite_stadium',$data);
-         //echo $userid;
-         //echo $stadium_id;
+
+    function addfav() {
+        $userid = $this->session->userdata('id');
+        $stadium_id = $this->input->post('stid');
+        $data = array(
+            'user_id' => $userid,
+            'stadium_id' => $stadium_id
+        );
+        echo $this->db->insert('favorite_stadium', $data);
+        //echo $userid;
+        //echo $stadium_id;
     }
-    function unfav(){
-         $userid = $this->session->userdata('id');
-         $stadium_id = $this->input->post('stid');
-         $data = array(
-           'user_id'=>$userid,
-             'stadium_id'=>$stadium_id
-         );
-         echo $this->db->delete('favorite_stadium',$data);
-         //echo $userid;
-         //echo $stadium_id;
+
+    function unfav() {
+        $userid = $this->session->userdata('id');
+        $stadium_id = $this->input->post('stid');
+        $data = array(
+            'user_id' => $userid,
+            'stadium_id' => $stadium_id
+        );
+        echo $this->db->delete('favorite_stadium', $data);
+        //echo $userid;
+        //echo $stadium_id;
     }
-    function giverating($stId){
-         $userid = $this->session->userdata('id');
-         $stadium_id = $this->input->post('stid');
-         $point = $this->input->post('pt');
-         $data = array(
-           'user_id'=>$userid,
-           'stadium_id'=>$stadium_id,
-             'point'=>$point
-         );
-            $this->db->delete('rating',array('user_id'=>$userid));
-          $this->db->insert('rating',$data);
-          $datasend= array(
-                
-          ); 
-          echo json_encode($this->mystadium->getAVGpoint($stId));
+
+    function giverating($stId) {
+        $userid = $this->session->userdata('id');
+        $stadium_id = $this->input->post('stid');
+        $point = $this->input->post('pt');
+        $data = array(
+            'user_id' => $userid,
+            'stadium_id' => $stadium_id,
+            'point' => $point
+        );
+        $this->db->delete('rating', array('user_id' => $userid));
+        $this->db->insert('rating', $data);
+        $datasend = array(
+        );
+        echo json_encode($this->mystadium->getAVGpoint($stId));
     }
 
 }

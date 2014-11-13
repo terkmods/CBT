@@ -221,8 +221,9 @@ class booking extends CI_Controller {
 
     function reserve($stId) {
         $datestring = "%Y-%m-%d";
+        if($this->session->userdata('id')!=null){
         $st = array(
-            'data' => $this->mystadium->getstadiumprofile($stId),
+           'data' => $this->mystadium->getstadiumprofile($stId),
             'court' => $this->mystadium->gettableCourt($stId),
             'total' => $this->mystadium->getTotalcourt($stId),
             'courtprice' => $this->mystadium->getcourtprice($stId), 
@@ -230,8 +231,10 @@ class booking extends CI_Controller {
             'date' => $datestring
         );
 //        print_r($st['date']);
-      echo  mdate($datestring);
+//      echo  mdate($datestring);
+        
         $this->load->view('booking_view_1', $st);
+        }else $this->load->view('index');
     }
 
     function doBooking() {
@@ -309,17 +312,22 @@ class booking extends CI_Controller {
         $datasend['allbooking'] = $this->booking->getAllBooking($userId);
          $today = date('Y-m-d');
         $datasend['today_booking'] = $this->booking->getAllBookingja($userId,$today);
+        print_r($datasend['today_booking']);
         $this->load->view("history_booking",$datasend);
        
       
     }
                 function historyBooking() {
         $userId = $this->session->userdata('id');
+        if($userId!=null){
         $datasend['allbooking'] = $this->booking->getAllBooking($userId);
                  $today = date('Y-m-d');
         $datasend['today_booking'] = $this->booking->getAllBookingja($userId,$today);
         //print_r($datasend);
+//                print_r($datasend['allbooking']);
+
         $this->load->view("history_booking", $datasend);
+        }else            $this->load->view('index');
     }
      function historyBookingajax() {
         $userId = $this->session->userdata('id');
