@@ -33,6 +33,7 @@
         </li>
         <?php } ?>
         <li <?php if($type2 == "historyBooking" ){?><?="class = 'active'"; }?> ><a href="<?= base_url() ?>stadium/historyBooking">History Booking stadium </a></li>
+        <li <?php if($type == "booking"&& $type2 == "historybooking" ){?><?="class = 'active'"; }?> ><a href="<?= base_url() ?>booking/historybooking">My Booking </a></li>
         
             <?php }else if($this->session->userdata('role') == "user"){?>
         

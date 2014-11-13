@@ -63,7 +63,8 @@
                             <div class="clear"></div>
                             <div class="btn-group top-mar col-md-8 pull-right">
                                 <select class="btn btn-default btn-lg dropdown-toggle col-md-12" type="button" data-toggle="dropdown" name="value2">
-                                    Select Districts 
+                                     
+                                    <option>Select Districts</option>
                                     <?php foreach ($district as $row) { ?>
                                         <option><?= $row->district ?></option>
                                     <?php } ?>
@@ -73,7 +74,7 @@
 
                             <div class="btn-group top-mar col-md-8 pull-right">
                                 <select class="btn btn-default btn-lg dropdown-toggle col-md-12" type="button" data-toggle="dropdown" name="value3">
-                                    Choose one of the following <span class="caret"></span>
+                                    <option>Select Province</option>
                                     <?php foreach ($province as $row) { ?>
                                         <option><?= $row->province ?></option>
                                     <?php } ?>

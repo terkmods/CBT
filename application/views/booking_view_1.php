@@ -125,9 +125,71 @@
                         <li> <img src="<?= base_url() ?>/asset/images/<?= $data['0']->stadium_path != null ? 'stadiumpic/' . $data['0']->stadium_path : 'bad.png' ?>" width="200" class="img-thumbnail"></li>
 
                         <li>สนาม : <?= $data['0']->stadium_name ?></li>
+                        <li>จำนวนคอร์ด :  <?= $total->courtnum ?> court</li>
                         <li>โทรศัพท์: <?= $data['0']->tel != null ? $data['0']->tel : '-' ?></li>
 
                     </ul>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Rule</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><?= $data['0']->rule ?></li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Court Price</h3>
+                </div>
+                <div class="panel-body" style="overflow-x: scroll">
+                <table class=" table table-striped table-hover ">
+                    <thead style="text-align: center">
+
+                        <tr>
+                            <th style="text-align: center"></th>
+<th style="text-align: center">Mon</th>
+<th style="text-align: center">Tue</th>
+<th style="text-align: center">Wed</th>
+<th style="text-align: center">Thu</th>
+<th style="text-align: center">Fri</th>
+<th style="text-align: center">Sat</th>
+<th style="text-align: center">Sun</th>
+
+<!--                            <th style="text-align: center"></th>-->
+
+                      
+                    </thead>
+                    <tbody>
+                                                    <?php foreach ($court as $c) { ?>
+                        <tr>
+                                <td style="text-align: center">คอร์ด <?= $c['court_name'] ?><small><?= $c['type'] ?></small></td>
+                                       <?php
+                        $i = 0;
+                        $k = 0;
+                        $html = null;
+                        
+                        for ($i; $i< 7 ;$i++) {
+                           
+                            $html = $html . ' <td> ' . $courtprice[$i]['price'] . ' Bath</td>';
+                        } 
+                        $html = $html . '</tr >';?>
+                                <?= $html ?> 
+                                
+                                
+                                    
+                        </tr>
+                                    <?php } ?>
+                      
+                        
+<!--                        <td><a href=" <?php echo base_url() ?>stadium/delcourt/<?= $ct['court_id'] ?>/<?= $ct['stadium_id'] ?> " class="btn btn-danger btn-sm ">Cancle</a></td>-->
+                     
+                    </tbody>
+                </table>
                 </div>
             </div>
         </div>

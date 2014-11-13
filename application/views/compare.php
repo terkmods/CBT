@@ -20,7 +20,7 @@
                                 <tr>
                                     <th class="success">รูปภาพ</th>
                                     <?php foreach ($comparedata as $r){ ?>
-                                    <td style="text-align: center"><img src="<?php echo base_url()?><?php echo '/asset/images/'?><?=$r->stadium_path!= null ? 'stadiumpic/' . $r->stadium_path : 'bad.png' ?>"  style="width: 250px;height: 170px" ></td>
+                                    <td style="text-align: center"><a href="<?php echo base_url()?><?php echo 'stadium/profile/'?><?=$r->stadium_id?>"><img src="<?php echo base_url()?><?php echo '/asset/images/'?><?=$r->stadium_path!= null ? 'stadiumpic/' . $r->stadium_path : 'bad.png' ?>"  style="width: 250px;height: 170px" ></a></td>
                                     <?php } ?>
                                 </tr>
                                 <tr>
@@ -31,20 +31,22 @@
                                 </tr> 
                                 <tr>
                                     <th class="success">เวลาเปิดปิด</th>
-                                    <td style="text-align: center">
+                                    <td >
+                                        <dl class="dl-horizontal">
                                     <?php $datestadium =array ('Monday','Thuesday','Wednesday','Thuesday','Friday','Staturday','Sunday'); $idtemp=$time[0]->stadium_id; foreach ($time as $s){ ?>
                                         
                                         <?php if($s->stadium_id==$idtemp){ ?>
                                     
                                        
                                                 
-                                                <?=$datestadium[($s->type)]?>: <?=$s->open_time?>- <?=$s->end_time?> <?php echo"<br>"?>
-                                    
-                                        <?php } else { echo "</td><td>"; ?><?=$s->type?>: <?=$s->open_time?>- <?=$s->end_time?> <?php echo"<br>"?>
+                                            <dt style="width: 130px"><?=$datestadium[($s->type)]?>: </dt> <dd><?=$s->open_time?>- <?=$s->end_time?></dd> 
+                                            
+                                        <?php } else { echo "</td><td><dl class='dl-horizontal'>"; ?><dt style="width: 130px"><?=$datestadium[($s->type)]?>:</dt><dd> <?=$s->open_time?>- <?=$s->end_time?></dd> 
                                             <?php } ?>
                                          <?php $idtemp = $s->stadium_id ; ?>
                                     <?php } ?>
-                                    
+                                        </dl>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th class="success">เบอร์โทรศัพท์</th>

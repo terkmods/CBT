@@ -308,11 +308,19 @@ join User on User.user_id = owner.user_id
     }
 
     public function showSearch($data) {
-
-
-        $sql = "SELECT * FROM `stadium` WHERE district='" . $data[1] . "' and province='" . $data[2] . "'";
+        if($data[1]=="Select Districts"&&$data[2]=="Select Province"){
+            $sql = "SELECT * FROM `stadium` ";
+            $query = $this->db->query($sql)->result();
+            return $query;
+        }else if($data[1]!="Select Districts"&&$data[2]!="Select Province"){$sql = "SELECT * FROM `stadium` WHERE district='" . $data[1] . "' and province='" . $data[2] . "'";
         $query = $this->db->query($sql)->result();
         return $query;
+        }else{
+        $sql = "SELECT * FROM `stadium` WHERE  province='" . $data[2] . "'";
+        $query = $this->db->query($sql)->result();
+        return $query;
+        
+        }
     }
 
     public function getLatLngAll() {
@@ -367,4 +375,6 @@ WHERE stadium_id = ' . $stId . '';
 
         return $avgprice;
     }
+    
+    
 }

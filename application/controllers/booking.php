@@ -224,6 +224,8 @@ class booking extends CI_Controller {
         $st = array(
             'data' => $this->mystadium->getstadiumprofile($stId),
             'court' => $this->mystadium->gettableCourt($stId),
+            'total' => $this->mystadium->getTotalcourt($stId),
+            'courtprice' => $this->mystadium->getcourtprice($stId), 
             'user' => $this->users->getUser($this->session->userdata('id')),
             'date' => $datestring
         );
