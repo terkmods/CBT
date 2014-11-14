@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>asset/css/style.css">
         <link href="<?= base_url() ?>asset/material/css/ripples.min.css" rel="stylesheet">
         <link href="<?= base_url() ?>asset/material/css/material-wfont.min.css" rel="stylesheet">
-        <!--<link href="<?= base_url() ?>asset/css/bootstrap-switch.css" rel="stylesheet">-->
+        <link href="<?= base_url() ?>asset/css/bootstrap-switch.css" rel="stylesheet">
         <link href="<?= base_url() ?>asset/css/jquery-ui.css" rel="stylesheet">
         <link href="<?= base_url() ?>asset/css/ui.notify.css" rel="stylesheet">
         <link rel="stylesheet" href="<?= base_url() ?>asset/css/jquery.fileupload-ui.css">
@@ -21,7 +21,7 @@
 
 
         <link rel="stylesheet" href="<?php echo base_url() . 'module/DataTables/css/demo_table.css'; ?>" />
-        <!--<link rel="stylesheet" href="<?php echo base_url() . 'css/plugins/dataTables.bootstrap.css'; ?>" />--> 
+        <!--<link rel="stylesheet" href="<?php echo base_url() . 'asset/css/datatable_css.css'; ?>" />--> 
         <link rel="stylesheet" href="<?php echo base_url() . 'module/loadover/loadover.css'; ?>" />
         <!--<link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'asset/css/ui-lightness/jquery-ui-1.10.3.custom.min.css'; ?>"/>-->
         <link href="<?= base_url() ?>asset/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />

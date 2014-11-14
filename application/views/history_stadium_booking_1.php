@@ -48,19 +48,7 @@ $num = 1;
                                                     <img class="circle  img-responsive" src="<?= base_url() ?>/asset/images/bad.png" alt="icon">
                                                 </div>
 
-                                                <!--                                            <div class="list-group-item">
-                                                                                                <div class="row-action-primary">
-                                                                                                    <img class="circle" src="<?= base_url() ?>/asset/images/<?= $allbooking['0']->stadium_path != null ? 'stadiumpic/' . $allbooking['0']->stadium_path : 'bad.png' ?>" alt="icon">
-                                                                                                </div>
-                                                                                                <div class="row-content text-left">
-                                                                                                    <div class="least-content">คอร์ด : <?= $allbooking['0']->court_name ?></div>
-                                                                                                    <h4 class="list-group-item-heading"><?= $allbooking['0']->stadium_name ?></h4>
-                                                                                                    <p class="list-group-item-text">วัน : <small><?= substr($allbooking['0']->start_time, 0, 10) ?></small> </p>
-                                                                                                       <p class="list-group-item-text">เวลา  <?= substr($allbooking['0']->start_time, 10, 11) ?>-<?= substr($allbooking['0']->end_time, 10, 11) ?></p>
-                                                +                                                        <p class="list-group-item-text">ผู้จอง <?= $allbooking['0']->fname ?> <?= $allbooking['0']->lname ?></p>
-                                                                                                        <p class="list-group-item-text">โทร : <?= $allbooking['0']->tel != null ? $allbooking['0']->tel : '-' ?></p>
-                                                                                                </div>
-                                                                                            </div>-->
+                                                                                
 
                                             </div>
                                         </div>
@@ -84,14 +72,37 @@ $num = 1;
                                             <td><a href="http://cbt.backeyefinder.in.th/users/profile/<?= $a->user_id ?>"><?= $a->fname ?></a></td>
                                             <td><?= $a->tel ?></td>
                                             <td><?= $a->sumprice ?></td>
-                                            <td><?= $a->status ?></td>
+                                            <td > <?php if($a->status ==0){ ?>
+                                            <span class="label label-success">Active</span>
+                                            <?php } else if($a->status ==1) {?>
+                                            <span class="label label-warning">Warning</span>
+                                            <?php } else{?>
+                                            <span class="label label-danger">Blacklist</span>
+                                            <?php } ?>
+                                            </td>
+    <!--                                            <td>
+
+    <div class="btn-group btn-toggle"> 
+      <button class="btn btn-xs btn-default pre" data-bookid="<?= $a->user_id ?>">Present</button>
+    <button class="btn btn-xs btn-primary active" data-bookid="<?= $a->user_id ?>">Absent</button>
+    </div>
+
+                                            </td>-->
                                             <td>
-
-  <div class="btn-group btn-toggle"> 
-      <button class="btn btn-xs btn-default" >Present</button>
-    <button class="btn btn-xs btn-primary active">Absent</button>
-  </div>
-
+                                                
+                                                <form class="form">
+                    <label>
+                        <input type="radio" class="options" name="optionsRadios" id="optionsRadios1" value="option1" <?=$a->iscome == 1 ? 'checked':''?> data-bookid="<?= $a->reserve_id ?>" data-userid="<?= $a->user_id ?>" data-ch="1">
+                        Present
+                    </label>
+               
+               
+                    <label>
+                        <input type="radio" class="options" name="optionsRadios" id="optionsRadios2" value="option2" <?=$a->iscome == 2 ? 'checked':''?> data-bookid="<?= $a->reserve_id ?>" data-ch="2" data-userid="<?= $a->user_id ?>">
+                        Absent
+                    </label>
+                                                </form>
+            
                                             </td>
 
 
@@ -104,6 +115,23 @@ $num = 1;
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div id="notija" style="display:none">
+    <!-- 
+    Later on, you can choose which template to use by referring to the 
+    ID assigned to each template.  Alternatively, you could refer
+    to each template by index, so in this example, "basic-tempate" is
+    index 0 and "advanced-template" is index 1.
+    -->
+    <div id="basic-template">
+        <a class="ui-notify-cross ui-notify-close " href="#">x</a>
+        <h1>#{title}</h1>
+        <p>#{text}</p>
+    </div>
+
+    <div id="advanced-template">
+        <!-- ... you get the idea ... -->
     </div>
 </div>
 
@@ -173,20 +201,24 @@ when the page first loads -->
     myDate = new Date();
     var currentdate = (myDate.getMonth() + 1) + '/' + myDate.getDate() + '/' +
             myDate.getFullYear();
+    var dy;
     $(document).ready(function (e) {
 
         $('#datepicker').datepicker({todayBtn: "linked",
             todayHighlight: true
         });
+        dy = datetoDB(currentdate);
 
 
 
         $('#datepicker').datepicker()
                 .on('changeDate', function (e) {
                     var dateselect = $('#datepicker').datepicker('getDate').toLocaleDateString();
-                    alert(datetoDB(dateselect));
+                    dy = datetoDB(dateselect);
+                    showbook();
                 });
                 
+
         if ($('#news-table tbody tr').length >= 1) {
             mytable = $('#news-table').dataTable({
                 "bPaginate": true,
@@ -197,7 +229,7 @@ when the page first loads -->
                 "bAutoWidth": true,
                 'iDisplayLength': 10
             });
-           
+
         }
     });
     function datetoDB(datesendnaja) {
@@ -205,6 +237,20 @@ when the page first loads -->
         date_inverse = date_elements[2] + '-' + date_elements[0] + '-' + date_elements[1];
         return date_inverse;
     }
+    function showbook(){
+//         console.log(dy);
+                $.ajax({
+                    type: "POST",
+                    url: "http://cbt.backeyefinder.in.th/booking/getbookday/" ,
+                    data: {d: dy  }
+                }).done(function (msg) {
+
+                    console.log(msg);  
+//                    var obj = JSON.parse(msg);
+//                    console.log(obj);
+
+                });
+            }
 
 </script>
 
@@ -216,36 +262,7 @@ when the page first loads -->
         e.preventDefault();
         $(this).tab('show');
     });</script>
-<script>
-    $(document).ready(function () {
-        $("#btn1").click(function () {
-            $("#add").append('<input class="form-control" name="facility[]"  type="text" style="margin-top : 10px;"> ');
-        });
-        $("#btn2").click(function () {
-            $("#add").append('<div id="delja"><div class="col-lg-10 col-md-offset-2" ><div class="col-md-6" style="margin-top:10px ;padding: 0; "> <select class="form-control" name="typedate[]">' +
-                    '<option value="ทุกวัน">ทุกวัน</option>' +
-                    '         <option value="เสาร์-อาทิตย์">เสาร์-อาทิตย์</option>' +
-                    '        <option value="จันทร์-ศุกร์">จันทร์-ศุกร์</option>' +
-                    '</select> </div>' +
-                    '<div class="col-md-3" style="margin-top:10px ;padding:  0; ">' +
-                    '   <input type="number" class="form-control" id="inputPassword1" placeholder="ราคา/ชม. " name="price[]"></div>' +
-                    '      <div class="col-md-1" style="margin-top:15px ;">' +
-                    '    <button type="button" class="btn btn-danger btn-sm" id="btn3">' +
-                    '   <span class="glyphicon glyphicon-remove-circle"></span>  ' +
-                    '                  </button> ' +
-                    '</div>' +
-                    '</div></div>');
-        });
-        $(document).on('click', '#btn3', function () { // ตรวจสอบตลอดเวลา เป็น dynamic 
-            $(this).parent().parent().remove();
-        });
-        $("#btn4").click(function () {
-            $("#time").append($('#showtime').html()); // แสดง ทั้ง div
-        });
-        $(document).on('click', '#btn5', function () { // ตรวจสอบตลอดเวลา เป็น dynamic 
-            $(this).next().remove();
-        });
-    });</script>
+
 
 
 <script>
@@ -254,31 +271,69 @@ when the page first loads -->
     }
 </script>
 <script>
-    $('.btn-toggle').click(function() {
-    $(this).find('.btn').toggleClass('active');  
-    
-    if ($(this).find('.btn-primary').size()>0) {
-    	$(this).find('.btn').toggleClass('btn-primary');
-    }
-    if ($(this).find('.btn-danger').size()>0) {
-    	$(this).find('.btn').toggleClass('btn-danger');
-    }
-    if ($(this).find('.btn-success').size()>0) {
-    	$(this).find('.btn').toggleClass('btn-success');
-    }
-    if ($(this).find('.btn-info').size()>0) {
-    	$(this).find('.btn').toggleClass('btn-info');
-    }
-    
-    $(this).find('.btn').toggleClass('btn-default');
-       alert($(this["options"]).val()); 
-});
+    $('.btn-toggle').click(function () {
+        $(this).find('.btn').toggleClass('active');
 
-$('form').submit(function(){
-	alert($(this["options"]).val());
-    return false;
-});
-    </script>
+        if ($(this).find('.btn-primary').size() > 0) {
+            $(this).find('.btn').toggleClass('btn-primary');
+//        alert($(this).find('.pre').data("bookid"));
+        }
+        if ($(this).find('.btn-danger').size() > 0) {
+            $(this).find('.btn').toggleClass('btn-danger');
+        }
+        if ($(this).find('.btn-success').size() > 0) {
+            $(this).find('.btn').toggleClass('btn-success');
+        }
+        if ($(this).find('.btn-info').size() > 0) {
+            $(this).find('.btn').toggleClass('btn-info');
+        }
+
+        $(this).find('.btn').toggleClass('btn-default');
+
+
+    });
+
+    $('.form .options').change(function () {
+//        alert($(this).data("bookid"));
+        re_id = $(this).data("bookid");
+        checkselect = $(this).data("ch");
+        uId = $(this).data("userid");
+//        alert(checkselect);
+         $.ajax({
+                    type: "POST",
+                    url: "http://cbt.backeyefinder.in.th/booking/updatecome/" ,
+                    data: {re_id: re_id,ch : checkselect,uid : uId }
+                }).done(function (msg) {
+
+                    console.log(msg);  
+                    var obj = JSON.parse(msg);
+                    console.log(obj);
+                                    $("#notija").notify({
+                                        speed: 500,
+                                    });
+
+                                    $("#notija").notify("create", {
+                                        title: 'Complete',
+                                        text: obj['0'].fname+' is '+(checkselect ==1? 'Present' : 'Absent')
+                                    });
+//                                    if(obj['0'].status==0){
+//                                        htmlstatus= '<span class="label label-success">Active</span>';
+//                                    }else if(obj['0'].status==1){
+//                                        htmlstatus= '<span class="label label-warning">Warning</span>';
+//                                    }else{
+//                                        htmlstatus = '<span class="label label-danger">Baned</span>';
+//                                    }
+//                                    $('.st').html(htmlstatus);
+                });
+        return false;
+    });
+
+
+//$(document).on("click", ".pre", function () {
+//    alert($(this).data("bookid"));
+//});
+
+</script>
 </body>
 </html>
 

@@ -233,5 +233,21 @@ group by stadium_id) stat
 on s.stadium_id = stat.stadium_id')->result();
         return $query;
     }
+      function getbookingDay($owner_id,$d) {
+        $query = $this->db->query('SELECT * 
+FROM  `reserve` 
+JOIN stadium ON reserve.stadium_id = stadium.stadium_id
+JOIN court ON reserve.court_id = court.court_id
+JOIN User ON User.user_id = reserve.user_id  
+WHERE reserve.stadium_id
+IN (
+
+SELECT stadium_id
+FROM stadium
+WHERE owner_id = ' . $owner_id . '
+) 
+AND DATE( start_time ) = '.$d)->result();
+        return $query;
+    }
 
 }

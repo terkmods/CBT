@@ -569,7 +569,7 @@ class stadium extends CI_Controller {
                 'stadium' => $this->mystadium->getstadium($ownerid),
                 'allhis'=> $this->booking->getbookingDashboard($ownerid)
             );
-             print_r($datasend['allhis']);
+//             print_r($datasend['allhis']);
             $this->load->view('history_stadium_booking_1', $datasend);
         } else
             $this->load->view('index');

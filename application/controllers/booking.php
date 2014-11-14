@@ -17,25 +17,23 @@ class booking extends CI_Controller {
     function showcourtbook() {
         $court = $this->input->post('courtsend');
         $day = $this->input->post('daytypeja');
-        
+
         $courtId = $court;
-        $cause_court = array('court_id' => $courtId,'type'=>$day);
+        $cause_court = array('court_id' => $courtId, 'type' => $day);
         $cause2 = array('court_id' => $courtId);
         $query = $this->db->get_where('court', $cause2)->row();
         $querycourt = $this->db->get_where('court_price', $cause_court)->row();
-        
+
         $datasend = array(
-          'court'=>  $query,
+            'court' => $query,
             'price' => $querycourt
         );
         echo json_encode($datasend);
     }
 
-    
-    
-    function showTablebookNew(){
+    function showTablebookNew() {
         $date = $this->input->post('date');
-     
+
         $stId = $this->input->post('stId');
 
         $indexstartime = null;
@@ -43,35 +41,33 @@ class booking extends CI_Controller {
         $indexstartime1 = null;
         $indexendtime1 = null;
         //$day = substr($date,0,3);
-        $type=null;
+        $type = null;
         $dayofweek = array(
-                'Mon','Tue','Wed','Thu','Fri','Sat','Sun'
-            );
-        for($i=0;$i<count($dayofweek);$i++){
-            if($dayofweek[$i]==$date){
+            'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'
+        );
+        for ($i = 0; $i < count($dayofweek); $i++) {
+            if ($dayofweek[$i] == $date) {
                 $type = $i;
                 break;
             }
         }
         $cause = array('type' => $type, 'stadium_id' => $stId);
         $cause2 = array('stadium_id' => $stId);
-        
+
         $time3 = $this->db->get_where('stadium_time', $cause)->row();
         $court = $this->db->get_where('court', $cause2)->result_array();
-       
+
         $time = array(
             '00:00 - 00:30', '00:30 - 01:00', '01:00 - 01:30', '01:30 - 02:00', '02:00 - 02:30', '02:30 - 03:00', '03:00 - 03:30', '03:30 - 04:00', '04:00 - 04:30', '04:30 - 05:00', '05:00 - 05:30', '05:30 - 06:00', '06:00 - 06:30', '06:30 - 07:00', '07:00 - 07:30', '07:30 - 08:00', '08:00 - 08:30', '08:30 - 09:00', '09:00 - 09:30', '09:30 - 10:00', '10:00 - 10:30', '10:30 - 11:00', '11:00 - 11:30', '11:30 - 12:00'
             , '12:00 - 12:30', '12:30 - 13:00', '13:00 - 13:30', '13:30 - 14:00', '14:00  - 14:30', '14:30 - 15:00', '15:00 - 15:30', '15:30 - 16:00', '16:00 - 16:30', '16:30 - 17:00', '17:00 - 17:30', '17:30 - 18:00', '18:00 - 18:30', '18:30 - 19:00', '19:00 - 19:30', '19:30 - 20:00', '20:00 - 20:30', '20:30 - 21:00', '21:00 - 21:30', '21:30 - 22:00', '22:00 - 22:30', '22:30 - 23:00', '23:00 - 23:30', '23:30 - 24:00', '24:00 - 00:00');
-        
+
         $data = array(
-          'time'=> $time3,
-            'court'=>$this->mystadium->gettableCourt($stId),
-            
+            'time' => $time3,
+            'court' => $this->mystadium->gettableCourt($stId),
         );
         echo json_encode($data);
-        
     }
-            
+
     function showTablebook() {
         $date = $this->input->post('date');
         $stId = $this->input->post('stId');
@@ -81,12 +77,12 @@ class booking extends CI_Controller {
         $indexstartime1 = null;
         $indexendtime1 = null;
         //$day = substr($date,0,3);
-        $type=null;
+        $type = null;
         $dayofweek = array(
-                'Mon','Tue','Wed','Thu','Fri','Sat','Sun'
-            );
-        for($i=0;$i<count($dayofweek);$i++){
-            if($dayofweek[$i]==$date){
+            'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'
+        );
+        for ($i = 0; $i < count($dayofweek); $i++) {
+            if ($dayofweek[$i] == $date) {
                 $type = $i;
                 break;
             }
@@ -221,27 +217,28 @@ class booking extends CI_Controller {
 
     function reserve($stId) {
         $datestring = "%Y-%m-%d";
-        if($this->session->userdata('id')!=null){
-        $st = array(
-           'data' => $this->mystadium->getstadiumprofile($stId),
-            'court' => $this->mystadium->gettableCourt($stId),
-            'total' => $this->mystadium->getTotalcourt($stId),
-            'courtprice' => $this->mystadium->getcourtprice($stId), 
-            'user' => $this->users->getUser($this->session->userdata('id')),
-            'date' => $datestring
-        );
+        if ($this->session->userdata('id') != null) {
+            $st = array(
+                'data' => $this->mystadium->getstadiumprofile($stId),
+                'court' => $this->mystadium->gettableCourt($stId),
+                'total' => $this->mystadium->getTotalcourt($stId),
+                'courtprice' => $this->mystadium->getcourtprice($stId),
+                'user' => $this->users->getUser($this->session->userdata('id')),
+                'date' => $datestring
+            );
 //        print_r($st['date']);
 //      echo  mdate($datestring);
-        
-        $this->load->view('booking_view_1', $st);
-        }else $this->load->view('index');
+
+            $this->load->view('booking_view_1', $st);
+        } else
+            $this->load->view('index');
     }
 
     function doBooking() {
         $d = $this->input->post('dateid');
         $date_elements = explode("/", $d);
         $date_inverse = $date_elements[2] . '-' . $date_elements[0] . '-' . $date_elements[1];
-                $rs = $this->booking->showIdMax();
+        $rs = $this->booking->showIdMax();
 
         foreach ($rs as $r) {
             $max = $r['reserve_id'] + "1";
@@ -251,106 +248,100 @@ class booking extends CI_Controller {
             'stadium_idja' => $this->input->post('stadiumid'),
             'court_idja' => $this->input->post('courtid'),
             'user_idja' => $this->input->post('userid'),
-            'name'=>$this->input->post('bookingname'),
-            'tel'=>$this->input->post('telephone'),
+            'name' => $this->input->post('bookingname'),
+            'tel' => $this->input->post('telephone'),
             'notification_user' => 1,
             'notification_owner' => 1,
             'start_time' => $date_inverse . ' ' . $this->input->post('start_time') . ':00',
             'end_time' => $date_inverse . ' ' . $this->input->post('end_time') . ':00',
             'sumprice' => $this->input->post('allprice'),
-            'stadium_send'=>$this->mystadium->getstadiumprofile($this->input->post('stadiumid'))  ,
-            'court_send'=>$this->mystadium->getonecourt($this->input->post('courtid')),
-            'start_time_send' =>  $this->input->post('start_time') . ':00',
+            'stadium_send' => $this->mystadium->getstadiumprofile($this->input->post('stadiumid')),
+            'court_send' => $this->mystadium->getonecourt($this->input->post('courtid')),
+            'start_time_send' => $this->input->post('start_time') . ':00',
             'end_time_send' => $this->input->post('end_time') . ':00',
-            'date'=>$d,
-             'user' => $this->users->getUser($this->input->post('userid'))
-            
+            'date' => $d,
+            'user' => $this->users->getUser($this->input->post('userid'))
         );
         $this->session->set_userdata($data);
 //       print_r($data['sumprice']);
-       // $this->db->insert("reserve", $data);
+        // $this->db->insert("reserve", $data);
 //       $test = $this->check_bookings();
 //       print_r($test);
-        $this->load->view("confrim_booking",$data);
+        $this->load->view("confrim_booking", $data);
     }
-    function bookja(){
-        
-        $datasession = array (
-                      'reserve_id' => $this->session->userdata('reserve_id'),
+
+    function bookja() {
+
+        $datasession = array(
+            'reserve_id' => $this->session->userdata('reserve_id'),
             'stadium_id' => $this->session->userdata('stadium_idja'),
             'court_id' => $this->session->userdata('court_idja'),
             'user_id' => $this->session->userdata('user_idja'),
             'notification_user' => 1,
             'notification_owner' => 1,
-            'start_time' =>  $this->session->userdata('start_time') ,
-            'end_time' =>  $this->session->userdata('end_time'),
+            'start_time' => $this->session->userdata('start_time'),
+            'end_time' => $this->session->userdata('end_time'),
             'sumprice' => $this->session->userdata('sumprice')
-           
-            
-            );
+        );
         $noti = array(
-          
-            'user_id' =>$this->session->userdata('user_idja'),
-            'stadium_id'=>$this->session->userdata('stadium_idja'),
+            'user_id' => $this->session->userdata('user_idja'),
+            'stadium_id' => $this->session->userdata('stadium_idja'),
             'text' => 'has booking you stadium',
-            'link'=>''
-            
+            'link' => ''
         );
-         //  print_r($datasession);
+        //  print_r($datasession);
         $this->db->insert("reserve", $datasession);
-        $this->db->insert("notification",$noti);
-        $lastinsertid = $this->db->insert_id() ;
+        $this->db->insert("notification", $noti);
+        $lastinsertid = $this->db->insert_id();
         $userid = $this->mystadium->getstadiumprofile($this->session->userdata('stadium_idja'));
-        
-        $notirecive = array (
-            'user_id'=>$userid['0']->user_id,
-        
+
+        $notirecive = array(
+            'user_id' => $userid['0']->user_id,
         );
-        $this->db->insert("recive_noti",$notirecive);
-        
-                $userId = $this->session->userdata('id');
-        $datasend['allbooking'] = $this->booking->getAllBooking($userId);
-         $today = date('Y-m-d');
-        $datasend['today_booking'] = $this->booking->getAllBookingja($userId,$today);
-        print_r($datasend['today_booking']);
-        $this->load->view("history_booking",$datasend);
-       
-      
-    }
-                function historyBooking() {
+        $this->db->insert("recive_noti", $notirecive);
+
         $userId = $this->session->userdata('id');
-        if($userId!=null){
         $datasend['allbooking'] = $this->booking->getAllBooking($userId);
-                 $today = date('Y-m-d');
-        $datasend['today_booking'] = $this->booking->getAllBookingja($userId,$today);
-        //print_r($datasend);
+        $today = date('Y-m-d');
+        $datasend['today_booking'] = $this->booking->getAllBookingja($userId, $today);
+        print_r($datasend['today_booking']);
+        $this->load->view("history_booking", $datasend);
+    }
+
+    function historyBooking() {
+        $userId = $this->session->userdata('id');
+        if ($userId != null) {
+            $datasend['allbooking'] = $this->booking->getAllBooking($userId);
+            $today = date('Y-m-d');
+            $datasend['today_booking'] = $this->booking->getAllBookingja($userId, $today);
+            //print_r($datasend);
 //                print_r($datasend['allbooking']);
 
-        $this->load->view("history_booking", $datasend);
-        }else            $this->load->view('index');
+            $this->load->view("history_booking", $datasend);
+        } else
+            $this->load->view('index');
     }
-     function historyBookingajax() {
+
+    function historyBookingajax() {
         $userId = $this->session->userdata('id');
         $type = $this->input->post('type');
         $today = date('Y-m-d');
-        if($type==2){
-            $datasend = $this->booking->getAllBookingja($userId,$today);
+        if ($type == 2) {
+            $datasend = $this->booking->getAllBookingja($userId, $today);
+        } else if ($type == 1) {
+
+            $datasend = $this->booking->getAllBookingna($userId, $today);
+        } else if ($type == 3) {
+
+            $datasend = $this->booking->getAllBookingyo($userId, $today);
         }
-               else if($type==1){
-            
-             $datasend = $this->booking->getAllBookingna($userId,$today);
-        }
-         else if($type==3){
-            
-             $datasend = $this->booking->getAllBookingyo($userId,$today);
-        }
-       
-        
-      echo json_encode ($datasend);
-       // print_r($datasend);
+
+
+        echo json_encode($datasend);
+        // print_r($datasend);
         //$this->load->view("history_booking", $datasend);
     }
-    
+
     function cancelbooking($id) {
 
         $this->db->delete('reserve', array('reserve_id' => $id));
@@ -363,17 +354,18 @@ class booking extends CI_Controller {
         $data = $this->booking->get_bookings($c_id, $date);
 //        $data = $this->booking->get_bookings_stadium($c_id);
 //        print_r($data);
-        
+
         echo json_encode($data);
-       // echo 'eeeeee';
+        // echo 'eeeeee';
     }
-        public function check_bookings() {
+
+    public function check_bookings() {
         $c_id = $this->input->post('stid');
         $date = $this->input->post('date');
         $start = $this->input->post('start');
         $end = $this->input->post('end');
         $ct_id = $this->input->post('ct');
-        $data = $this->booking->check_bookings($c_id, $date,$start,$end,$ct_id);
+        $data = $this->booking->check_bookings($c_id, $date, $start, $end, $ct_id);
 //        $data = $this->booking->get_bookings_stadium($c_id);
 //        print_r($data);
         //print_r($data);
@@ -381,21 +373,89 @@ class booking extends CI_Controller {
         echo $data;
 //        return $data;
     }
-    function showstadiumbook(){
+
+    function showstadiumbook() {
         $stId = $this->input->post("stadiumsend");
 //        echo json_encode($stId);
-        $query =  $this->booking->get_bookings_stadium($stId);
+        $query = $this->booking->get_bookings_stadium($stId);
         echo json_encode($query);
         //print_r($query);
     }
-    function get_booking_today(){
+
+    function get_booking_today() {
         $today = date("Y-m-d");
         $userId = $this->session->userdata('id');
-     $bookToday = $this->booking->getAllBooking_today($userId,$today);  
+        $bookToday = $this->booking->getAllBooking_today($userId, $today);
 //     print_r($bookToday);
-     echo $userId;
-     echo $today;
+        echo $userId;
+        echo $today;
     }
 
+    function updatecome() {
+        $rId = $this->input->post('re_id');
+        $check = $this->input->post('ch');
+        $userId = $this->input->post('uid');
+        $iscome = 0;
+                $noti = array(
+            'user_id' => $userId,
+            'stadium_id' => $this->session->userdata('stadium_idja'),
+            'text' => 'has booking you stadium',
+            'link' => ''
+        );
+        if ($check == 2) {
+            $iscome = 2;
+            $this->db->where('user_id', $userId);
+            $this->db->set('status', 'status+1', FALSE);
+            $this->db->update('User');
+            
+            //Notija//
+//            $this->db->insert("notification", $noti);
+//            $lastinsertid = $this->db->insert_id();
+//            $userid = $this->mystadium->getstadiumprofile($this->session->userdata('stadium_idja'));
+//
+//            $notirecive = array(
+//                'user_id' => $userid['0']->user_id,
+//            );
+//            $this->db->insert("recive_noti", $notirecive);
+            //
+        } else {
+            $iscome = 1;
+            $this->db->where('user_id', $userId);
+            $this->db->set('status', 'status-1', FALSE);
+            $this->db->update('User');
+        }
+
+        $data = array(
+            'iscome' => $iscome
+        );
+
+        $this->db->update('reserve', $data, array('reserve_id' => $rId));
+        
+        $usersend = $this->users->getUser($userId);
+        echo json_encode($usersend);
+    }
+        function getOwnerid($userid) {
+
+        if ($userid != null) {
+            $query = $this->db->query('SELECT owner.owner_id FROM owner join User  WHERE owner.user_id = User.user_id and User.user_id = ' . $userid)->result();
+            foreach ($query as $r) {
+                $owner_id = $r->owner_id;
+            }
+            return $owner_id;
+        } else {
+//            echo 'fail no userid';
+        }
+    }
     
+    function getbookday(){
+        $date = $this->input->post('d');
+         $userid = $this->session->userdata('id');
+        $ownerid = $this->getOwnerid($userid);
+      $data =   $this->booking->getbookingDay($ownerid,$date);
+      echo $ownerid;
+      echo $date;
+//      echo json_encode($data);
+        
+    }
+
 }
