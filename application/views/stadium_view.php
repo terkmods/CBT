@@ -182,6 +182,7 @@
                     <h3>Announcement</h3>
                     <div class="col-md-6">
                         <div class="list-group">
+                            
                             <?php $o = 0 ?>
                             <?php foreach ($annouc as $a) { ?>
                                 <?php $o +=1 ?>
@@ -191,7 +192,7 @@
                                     </div>
                                     <div class="row-content">
                                         <div class="action-secondary"><span class="label <?= $a->type == 1 ? 'label-danger' : 'label-success' ?>"><?= $a->type == 1 ? 'Promotion' : 'News' ?></span></div>
-                                        <h4 class="list-group-item-heading"><?= $a->title ?></h4>
+                                        <h4 class="list-group-item-heading"><a href="#" class="viewdetail" data-toggle="modal" data-target="#announcement" data-title='<?= $a->title ?>' data-text="<?= $a->an_text ?>"><?= $a->title ?></a></h4>
                                         <p class="list-group-item-text"><?= $a->an_date ?></p>
                                     </div>
                                 </div>
@@ -299,6 +300,25 @@
         <!-- ... you get the idea ... -->
     </div>
 </div>
+
+<div class="modal fade" id="announcement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 id="title"></h3>
+      </div>
+      <div class="modal-body">
+          <p id="text">&nbsp;&nbsp;&nbsp;&nbsp;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 <?php include 'template/modal.php'; ?>
 <?php include 'template/footer.php'; ?>
 
@@ -577,7 +597,20 @@
         });
     });
 </script>
+<script>
+    $(document).on("click", ".viewdetail", function () {
 
+
+
+        var title = $(this).data("title");
+        var text = $(this).data("text");
+
+
+        $('#title').html(title);
+        $('#text').html(text);
+
+    });
+</script>
 
 
 

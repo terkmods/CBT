@@ -317,7 +317,7 @@ class booking extends CI_Controller {
        
       
     }
-                function historyBooking() {
+    function historyBooking() {
         $userId = $this->session->userdata('id');
         if($userId!=null){
         $datasend['allbooking'] = $this->booking->getAllBooking($userId);

@@ -24,7 +24,7 @@ class Booking_model extends CI_Model {
 FROM  `reserve` 
 JOIN stadium ON reserve.stadium_id = stadium.stadium_id
 JOIN court ON reserve.court_id = court.court_id
-WHERE reserve.user_id =' . $userId)->result();
+WHERE reserve.user_id =' . $userId.' order by reserve_id desc')->result();
 
 
         return $query;
