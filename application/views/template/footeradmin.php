@@ -38,7 +38,7 @@
         console.log(path);
         document.getElementById("path").setAttribute("src", '<?= base_url() ?>asset/images/evidence/'+path+'');
         
-        
+        document.getElementById("ownerid").setAttribute("value", $(this).data("bookid"));
     });
 </script>
 

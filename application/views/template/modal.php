@@ -159,7 +159,7 @@
 <div class="modal fade bs-example-modal-lg" id="viewAlthen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" style="background-color: #f5f5f5">
-            <form id="addcontent" action="" method="post" enctype="multipart/form-data">
+            <form id="addcontent" action="<?=base_url()?>admin/approve" method="post" enctype="multipart/form-data">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">Authentication </h4>
@@ -180,24 +180,24 @@
                             <h5 style="text-align: left">Stadium : <span id="name" class="pull-right">Pulling all of the stadium that the owner had</span></h5>  
                             <h5 style="text-align: left">Authentication Date :<span id="date" class="pull-right">2014-09-08 22:50:43</span></h5>
                             <br>
-                            
+                            <input type="hidden"  id="ownerid" value="" name="owid">
                             <legend style="font-style: italic;text-align: left">Change Status</legend>
                              <div class="col-md-3" style="margin-left: -15px">
                                  
                                  <h5 style="text-align: left">Status :</h5>
                              </div>
                             <div class="col-md-4" style="margin-left: -65px">
-                            <select class="form-control "  >
+                            <select class="form-control " name="change"  >
                                 
                                 <option id="status"></option>
-                                <option>Reject</option>
-                                <option>Approve</option>                                                   
+                                <option value="99">Reject</option>
+                                <option value="2">Approve</option>                                                   
                             </select>
                             </div> 
                               <br>  
                             <br>
                              <h5 style="text-align: left">Massage</h5>
-                            <textarea class="form-control" rows="3"></textarea>
+                            <textarea class="form-control" rows="3" name="reason"></textarea>
                             <br>
                         </div>
                     </div>
@@ -205,6 +205,7 @@
                 <div class="modal-footer" style="text-align: center">
                     <span id="ajaxscript"></span>
                     <button id="close_modal" type="button" class="btn1 btn1-danger" data-dismiss="modal" style="width: 20%">Close</button>
+                    <input type="submit" value="Send" class="btn btn-default">
                 </div>
             </form>
         </div>

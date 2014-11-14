@@ -20,7 +20,8 @@
 
 
 
-        <link rel="stylesheet" href="<?php echo base_url() . 'module/DataTables/css/demo_table.css'; ?>" /> 
+        <link rel="stylesheet" href="<?php echo base_url() . 'module/DataTables/css/demo_table.css'; ?>" />
+        <!--<link rel="stylesheet" href="<?php echo base_url() . 'css/plugins/dataTables.bootstrap.css'; ?>" />--> 
         <link rel="stylesheet" href="<?php echo base_url() . 'module/loadover/loadover.css'; ?>" />
         <!--<link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'asset/css/ui-lightness/jquery-ui-1.10.3.custom.min.css'; ?>"/>-->
         <link href="<?= base_url() ?>asset/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />

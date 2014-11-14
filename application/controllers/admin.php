@@ -5,6 +5,7 @@ class Admin extends CI_Controller {
     parent::__construct();
             $this->load->model('user_model', 'myusers');           
         $this->load->model('stadium_model', 'mystadium');
+         $this->load->helper('date');
     }
     
     public function index(){
@@ -33,9 +34,9 @@ class Admin extends CI_Controller {
     
     public function owner_ap(){
          $owner = array(
-               'data'=> $this->myusers->getOwner()
+               'data'=> $this->myusers->getOwner_AP()
                 );
-               
+//                print_r($owner);
        $this->load->view('admin_owner_ap',$owner);
     }
     
@@ -44,6 +45,37 @@ class Admin extends CI_Controller {
                'data'=> $this->myusers->getBlacklist()
                 );
         $this->load->view('admin_blacklist',$blacklist);
+    }
+    public function approve(){
+        $status = $this->input->post('change');
+        $reason = $this->input->post('reason');
+        $ownerid = $this->input->post('owid');
+        $today = date('Y-m-d');
+        $data = array(
+            'authenowner_status' => $status,
+                'autherowner_date' =>$today,
+            'reason'=>$reason
+        );
+        
+         $this->db->update('owner', $data, array('owner_id' => $ownerid));
+         
+         if($status==2){
+                    $datastadium = array(
+            'stadium_display' => 1
+        );
+             $this->db->update('stadium', $datastadium, array('owner_id' => $ownerid)); 
+         }
+          if($status==2){
+                    $datastadium = array(
+            'stadium_display' => 1
+        );
+             $this->db->update('stadium', $datastadium, array('owner_id' => $ownerid)); 
+         } if($status==99){
+                    $datastadium = array(
+            'stadium_display' => 0
+        );
+             $this->db->update('stadium', $datastadium, array('owner_id' => $ownerid)); 
+         }
     }
     
 }

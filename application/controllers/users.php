@@ -246,14 +246,29 @@ class Users extends CI_Controller {
             $upload = $this->upload->data();
         }
         $data = array(
-            'authenowner_path' => $upload['file_name']
+            'authenowner_path' => $upload['file_name'],
+                'authenowner_status'=>1
+        );
+        $datastadium = array(
+            'stadium_display' => 0
         );
         $owner = $this->myusers->getOwnerId($this->session->userdata('id'));
 //        print_r($owner);
 //        print_r($upload['file_name']);
         $this->db->update('owner', $data, array('owner_id' => $owner->owner_id));
+        $this->db->update('stadium', $datastadium, array('owner_id' => $owner->owner_id)); 
+        
         $this->session->set_flashdata('msg', 'upload Complete');
-        redirect('stadium');
+        redirect('stadium/managestadium');
+    }
+    function changestatus(){
+        $owner = $this->myusers->getOwnerId($this->session->userdata('id'));
+             $data = array(
+        
+                'authenowner_status'=> 6
+        );
+        $this->db->update('owner', $data, array('owner_id' => $owner->owner_id));
+        redirect('stadium/managestadium');
     }
 
     function coach() {

@@ -43,7 +43,14 @@ class User_model extends CI_Model {
     }
 
     function getOwner() {
-        $sql = $this->db->query('select * from User join owner where User.user_id = owner.user_id')->result();
+        $sql = $this->db->query('select * from User join owner on User.user_id = owner.user_id')->result();
+        return $sql;
+    }
+        function getOwner_AP() {
+        $sql = $this->db->query('SELECT * 
+FROM User
+JOIN owner ON User.user_id = owner.user_id
+WHERE owner.authenowner_status =  "1" ')->result();
         return $sql;
     }
     

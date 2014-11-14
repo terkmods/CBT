@@ -86,6 +86,18 @@ WHERE reserve.user_id =' . $userId . ' and start_time > "' . $today . '"')->resu
         $query = $this->db->get();
         return $query->result();
     }
+        public function get_booking_his($c_id, $date) {
+        $this->db->select('court_id, cast(start_time as time) as start, cast(end_time as time) as end, start_time');
+        $this->db->from('reserve');
+        $this->db->join('stadium', 'reserve.owner_id = stadium.owner.id');
+        $this->db->where('stadium.owner_id', $c_id);
+        $this->db->like('start_time', $date, 'after');
+        $this->db->order_by("court_id", "asc");
+        $this->db->order_by("start_time", "asc");
+
+        $query = $this->db->get();
+        return $query->result();
+    }
 
     public function check_bookings($c_id, $date, $start, $end,$ct_id) {
         $sql = 'SELECT * 

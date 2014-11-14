@@ -125,7 +125,7 @@ class reg extends CI_Controller {
                 'phone' => $this->input->post('tel'),
                 'status' => 'ok',
                 'profile_url' => $this->input->post('url'),
-                'authenowner_status' => 'no',
+                'authenowner_status' => '0',
                 'path_pic'=> $this->input->post('path'), // แก้ตอนอัพโหลดรูปด้วยจ้าา เปลี่ยน path นะ
                 'logged'=> TRUE
             );
