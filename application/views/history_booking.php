@@ -51,8 +51,9 @@ include 'template/head.php';
                                         <div class="list-group">
                                             <div class="list-group-item">
                                                 <div class="row-action-primary">
-                                                    <img class="circle" src="<?= base_url() ?>/asset/images/<?= $allbooking['0']->stadium_path != null ? 'stadiumpic/' . $allbooking['0']->stadium_path : 'bad.png' ?>" alt="icon">
-                                                </div>
+                                                    <a href="<?= base_url() ?>stadium/profile/<?=$allbooking['0']->stadium_id?>" ><img class="circle" src="<?= base_url() ?>/asset/images/<?= $allbooking['0']->stadium_path != null ? 'stadiumpic/' . $allbooking['0']->stadium_path : 'bad.png' ?>" alt="icon">
+                                                    </a>
+                                                        </div>
                                                 <div class="row-content text-left">
                                                     <div class="least-content">คอร์ด : <?= $allbooking['0']->court_name ?></div>
                                                     <h4 class="list-group-item-heading"><?=$allbooking['0']->stadium_name?></h4>
@@ -94,7 +95,7 @@ include 'template/head.php';
                                                 <td></td>
                                                 <td><?= $r->reserve_id ?><input type="hidden" name="rId" value="<?= $r->reserve_id ?>" ></td>
                                                 <td><?= substr($r->start_time, 0, 10) ?></td>
-                                                <td><?= $r->stadium_name ?></td>
+                                                <td><a href="<?= base_url() ?>stadium/profile/<?=$allbooking['0']->stadium_id?>" ><?= $r->stadium_name ?></a></td>
                                                 <td><?= $r->court_name ?></td>
                                                 <td><?= substr($r->start_time, 10, 11) ?>-<?= substr($r->end_time, 10, 11) ?></td>
                                                 <?php
@@ -156,7 +157,7 @@ include 'template/head.php';
                             '<td></td>' +
                             '<td>' + obj[i].reserve_id + '<input type="hidden" name="rId" value="'+obj[i].reserve_id+'"></td>' +
                             '<td>' + obj[i].start_time.substring(0, 10) + '</td>' +
-                            ' <td>' + obj[i].stadium_name + '</td>' +
+                            ' <td><a href="<?= base_url() ?>stadium/profile/<?=$allbooking['0']->stadium_id?>" >' + obj[i].stadium_name + '</a></td>' +
                             '  <td>' + obj[i].court_name + '</td>' +
                             '   <td>' + obj[i].start_time.substring(10, 16) + '-' + obj[i].end_time.substring(10, 16) + '</td>' +
                             '<td>' + (obj[i].end_time.substring(10, 13) - obj[i].start_time.substring(10, 13)) + 'ชม. ' + (obj[i].end_time.substring(14, 16) - obj[i].start_time.substring(14, 16)) + ' นาที</td>' +
@@ -164,9 +165,10 @@ include 'template/head.php';
                     console.log(obj[i].end_time.substring(14, 16));
                 }
             }
-
+            showallbook =  '<h2>'+obj.length+'<small>การจองในวันนี</small></h2> ตรวจสอบการจองทั้งหมดได้ข้างล่าง';
             console.log(show);
             $("#showbooking").html(show);
+            $('#countallbook').html(showallbook);
         });
     }
     function history() {
@@ -187,7 +189,7 @@ include 'template/head.php';
                             '<td></td>' +
                             '<td>' + obj[i].reserve_id + '<input type="hidden" name="rId" value="'+obj[i].reserve_id+'"></td>' +
                             '<td>' + obj[i].start_time.substring(0, 10) + '</td>' +
-                            ' <td>' + obj[i].stadium_name + '</td>' +
+                            ' <td> <a href="<?= base_url() ?>stadium/profile/<?=$allbooking['0']->stadium_id?>" >' + obj[i].stadium_name + '</a></td>' +
                             '  <td>' + obj[i].court_name + '</td>' +
                             '   <td>' + obj[i].start_time.substring(10, 16) + '-' + obj[i].end_time.substring(10, 16) + '</td>' +
                             '<td>' + (obj[i].end_time.substring(10, 13) - obj[i].start_time.substring(10, 13)) + 'ชม. ' + ((obj[i].end_time.substring(14, 16) - obj[i].start_time.substring(14, 16))< 0 ? '30':(obj[i].end_time.substring(14, 16) - obj[i].start_time.substring(14, 16))) + ' นาที</td>' +

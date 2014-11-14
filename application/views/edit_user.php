@@ -72,10 +72,12 @@
                                         <label for="inputPassword3" class="col-sm-2 control-label">Gender</label>
                                         <div class="col-sm-2">
                                           
-                                        <select class="form-control" name="gender"  >                                                                                   
-                                            <option>male</option>
-                                            <option>female</option>                                                                                                                                   
-                                        </select>
+                                                <select class="form-control" name="gender"  <?= $data['0']->gender == NULL ? '' : 'disabled'; ?>>   
+                                            
+                                                    <option <?= $data['0']->gender == "male" ? 'selected' : ' '; ?>>male</option>
+                                                    <option <?= $data['0']->gender == "female" ? 'selected' : ' '; ?>>female</option>                                                                                                                                   
+                                                </select>
+                                            
                                         </div>
                                         
                                            
@@ -89,7 +91,13 @@
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-2 control-label">Style</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="style" value="<?= $data['0']->Style; ?>" >
+                                            <select class="form-control" id="select" name="style" >
+                                                    
+                                                    <option <?= $data['0']->Style == "Offence" ? 'selected' : ' '; ?>>Offence</option>
+                                                    <option <?= $data['0']->Style == "Defence" ? 'selected' : ' '; ?>>Defence</option>
+                                                    <option <?= $data['0']->Style == "Mix style" ? 'selected' : ' '; ?>>Mix style</option>
+                                            </select>
+<!--                                            <input type="text" class="form-control" name="style" value="<?= $data['0']->Style; ?>" >-->
                                         </div>
                                     </div>
                                     <div class="form-group">

@@ -234,7 +234,7 @@
                                     <li><a href="<?= base_url() ?>coach/editProfile/<?= $user['0']->user_id ?>">Edit Profile</a></li>
                                 <? } ?>
 
-                                <li><a href="<?= base_url() ?>booking/historybooking">History Reserve </a></li>
+                                <li><a href="<?= base_url() ?>booking/historybooking">My Booking </a></li>
                                 <li><a href="<?= base_url() ?>stadium/allStadium">Search</a></li>
 
                             </ul>

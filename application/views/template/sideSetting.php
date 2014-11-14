@@ -39,12 +39,12 @@
         
         <li <?php if($type == "users" && $type2 =="edituser" ){?><?="class = 'active'"; }?> ><a href="<?php echo base_url() ?>users/edituser/<?php echo $this->session->userdata('id'); ?>">Basic Setting</a></li>
         
-        <li <?php if($type == "booking" ){?><?="class = 'active'"; }?>><a href="<?= base_url() ?>booking/historybooking">History Reserve</a></li>
+        <li <?php if($type == "booking" ){?><?="class = 'active'"; }?>><a href="<?= base_url() ?>booking/historybooking">My Booking</a></li>
         <li <?php if($type2 == "gallery" ){?><?="class = 'active'"; }?>><a href="<?= base_url() ?>users/gallery">Gallery</a></li>
         <?php }else{?>
          <li <?php if($type == "users" && $type2 =="edituser" ){?><?="class = 'active'"; }?> ><a href="<?php echo base_url() ?>users/edituser/<?php echo $this->session->userdata('id'); ?>">Basic Setting</a></li>
         <li <?php if($type2 == "editcoach" ){?><?="class = 'active'"; }?>><a href="<?= base_url() ?>coach/editcoach">Coach Information</a></li>
-        <li <?php if($type == "booking" ){?><?="class = 'active'"; }?>><a href="<?= base_url() ?>booking/historybooking">History Reserve</a></li>
+        <li <?php if($type == "booking" ){?><?="class = 'active'"; }?>><a href="<?= base_url() ?>booking/historybooking">My Booking</a></li>
         <li <?php if($type2 == "gallery" ){?><?="class = 'active'"; }?>><a href="<?= base_url() ?>users/gallery">Gallery</a></li>
         <?php }?>
     </ul>  

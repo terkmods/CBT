@@ -298,8 +298,18 @@ class booking extends CI_Controller {
         $notirecive = array(
             'user_id' => $userid['0']->user_id,
         );
-        $this->db->insert("recive_noti", $notirecive);
-
+        $this->db->insert("recive_noti",$notirecive);
+        
+                $userId = $this->session->userdata('id');
+        $datasend['allbooking'] = $this->booking->getAllBooking($userId);
+         $today = date('Y-m-d');
+        $datasend['today_booking'] = $this->booking->getAllBookingja($userId,$today);
+        print_r($datasend['today_booking']);
+        $this->load->view("history_booking",$datasend);
+       
+      
+    }
+    function historyBooking() {
         $userId = $this->session->userdata('id');
         $datasend['allbooking'] = $this->booking->getAllBooking($userId);
         $today = date('Y-m-d');
