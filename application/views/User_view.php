@@ -40,7 +40,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="panel panel-primary">
+<!--                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title"><span class="glyphicon glyphicon-heart"> </span> Favorite Coach</h3>
                     </div>
@@ -53,7 +53,7 @@
                                                                 
                         
                     </div>
-                </div>
+                </div>-->
             </div>
             <!--            <div class="col-md-3" >
                             <div class="panel panel-primary"> 
