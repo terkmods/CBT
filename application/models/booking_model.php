@@ -231,7 +231,7 @@ where stadium_id in (select stadium_id from stadium where owner_id = (select own
 AND DATE( start_time ) = CURDATE( )
 group by stadium_id) stat
 on s.stadium_id = stat.stadium_id')->result();
-        return $query;
+        return $query; 
     }
       function getbookingDay($owner_id,$d) {
         $query = $this->db->query('SELECT * 
@@ -246,7 +246,7 @@ SELECT stadium_id
 FROM stadium
 WHERE owner_id = ' . $owner_id . '
 ) 
-AND DATE( start_time ) = '.$d)->result();
+AND DATE( start_time ) = "'.$d.'"')->result();
         return $query;
     }
 

@@ -87,7 +87,7 @@ $num = 1;
             
             <td>     <span class="checkbox">
                     <label>
-                        <input type="checkbox" <?=$facility['0']['Parking']==0 ? '':'checked'?> name='c1' value="1"> Checkbox
+                        <input type="checkbox" <?=$facility['0']['Parking']==0 ? '':'checked'?> name='c1' value="1"> 
                     </label>
                 </span></td>
                 <td style="vertical-align: middle">Parking</td>
@@ -98,7 +98,7 @@ $num = 1;
             
             <td>     <span class="checkbox">
                     <label>
-                        <input type="checkbox" <?=$facility['0']['Food']==0 ? '':'checked'?> name='c2' value="1"> Checkbox
+                        <input type="checkbox" <?=$facility['0']['Food']==0 ? '':'checked'?> name='c2' value="1"> 
                     </label>
                 </span></td>
                 <td style="vertical-align: middle">Food</td>
@@ -109,7 +109,7 @@ $num = 1;
             
             <td>     <span class="checkbox">
                     <label>
-                        <input type="checkbox" <?=$facility['0']['Bathroom']==0 ? '':'checked'?> name='c3' value="1"> Checkbox
+                        <input type="checkbox" <?=$facility['0']['Bathroom']==0 ? '':'checked'?> name='c3' value="1"> 
                     </label>
                 </span></td>
                 <td style="vertical-align: middle">Bathroom</td>
@@ -120,7 +120,7 @@ $num = 1;
             
             <td>     <span class="checkbox">
                     <label>
-                        <input type="checkbox" <?=$facility['0']['Lockerroom']==0 ? '':'checked'?> name='c4' value="1"> Checkbox
+                        <input type="checkbox" <?=$facility['0']['Lockerroom']==0 ? '':'checked'?> name='c4' value="1"> 
                     </label>
                 </span></td>
                 <td style="vertical-align: middle">Racket string repair</td>
@@ -131,7 +131,7 @@ $num = 1;
             
             <td>     <span class="checkbox">
                     <label>
-                        <input type="checkbox" <?=$facility['0']['Shop']==0 ? '':'checked'?> name='c5' value="1"> Checkbox
+                        <input type="checkbox" <?=$facility['0']['Shop']==0 ? '':'checked'?> name='c5' value="1"> 
                     </label>
                 </span></td>
                 <td style="vertical-align: middle">Shop</td>
@@ -142,7 +142,7 @@ $num = 1;
             
             <td>     <span class="checkbox">
                     <label>
-                        <input type="checkbox" <?=$facility['0']['other']==null ? '':'checked'?> name='c6' value="1"> Checkbox
+                        <input type="checkbox" <?=$facility['0']['other']==0 ? '':'checked'?> name='c6' value="1"> 
                     </label>
                 </span></td>
                 <td style="vertical-align: middle" >Other</td>
@@ -242,7 +242,7 @@ $num = 1;
     </div>
 </div>
 
-<div id="notitest" style="display:none">
+<div id="notija" style="display:none">
     <!-- 
     Later on, you can choose which template to use by referring to the 
     ID assigned to each template.  Alternatively, you could refer
@@ -262,9 +262,7 @@ $num = 1;
 
 
 <?php include 'template/footer.php'; ?>
-<script type="text/javascript" language="javascript" src="<?php echo base_url() . 'module/DataTables/js/jquery.dataTables.js'; ?>"></script>
-<script type="text/javascript" language="javascript" src="<?php echo base_url() . 'module/loadover/loadover.js'; ?>"></script>
-<script type="text/javascript" src="<?php echo base_url() . 'asset/js/tinymce/tinymce.min.js'; ?>"></script>
+
 
 
 
@@ -273,6 +271,30 @@ $num = 1;
 
 
 <script>
+    function getUrlVars()
+    {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i = 0; i < hashes.length; i++)
+        {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+
+    console.log(getUrlVars().type);
+    if (getUrlVars().type == 'facility') {
+        
+         $("#notija").notify({
+            speed: 500,
+        });
+        $("#notija").notify("create", {
+            title: 'Update Complete',
+            text: 'Facility is Updated '
+        });
+    }
     $(document).on("click", ".viewdetail", function () {
         
         

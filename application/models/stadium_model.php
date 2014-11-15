@@ -16,7 +16,7 @@ class Stadium_model extends CI_Model {
     }
 
     function getstadium($ownerid) {
-        $query = $this->db->query('select * from stadium where owner_id = ' . $ownerid)->result();
+        $query = $this->db->query('select * from stadium where owner_id = ' . $ownerid.' and stadium_display = 1')->result();
         ;
 
         return $query;
@@ -60,13 +60,13 @@ join User on User.user_id = owner.user_id
     }
 
     function getallstadium() {
-        $query = $this->db->query('SELECT * FROM `stadium` ORDER BY stadium_id DESC  ')->result();
+        $query = $this->db->query('SELECT * FROM `stadium`  where stadium_display = 1 ORDER BY stadium_id DESC ')->result();
         ;
         return $query;
     }
 
     function getLaststadium() {
-        $query = $this->db->query('SELECT * FROM `stadium` ORDER BY stadium_id DESC LIMIT 0 , 6  ')->result();
+        $query = $this->db->query('SELECT * FROM `stadium` where stadium_display = 1 ORDER BY stadium_id DESC LIMIT 0 , 6  ')->result();
         ;
         return $query;
     }
@@ -134,8 +134,8 @@ join User on User.user_id = owner.user_id
 
 
 
-        $sql = 'INSERT INTO `backeyefin_cbt`.`facility` (`facility_id`, `stadium_id`, `Parking`, `Food`, `Bathroom`, `Lockerroom`, `Shop`, `Parking_detail`, `food_detail`, `bathroom_detail`, `lockerrom_detail`, `shop_detail`,other,other_detail)'
-                . ' VALUES (NULL, ' . $stId . ', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,,0,"");';
+        $sql = 'INSERT INTO `backeyefin_cbt`.`facility` (`facility_id`, `stadium_id`, `Parking`, `Food`, `Bathroom`, `Lockerroom`, `Shop`, `Parking_detail`, `food_detail`, `bathroom_detail`, `lockerrom_detail`, `shop_detail`,other)'
+                . ' VALUES (NULL, ' . $stId . ', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0);';
 
         $this->db->query($sql);
     }
@@ -321,6 +321,32 @@ join User on User.user_id = owner.user_id
         return $query;
         
         }
+    }
+    public function showSearchAdvance($data) { 
+            $sql = "SELECT * 
+            FROM stadium join facility  join court
+            WHERE stadium.stadium_id = facility.stadium_id  and stadium.stadium_id = court.stadium_id";
+            if($data['0']!=null) $sql=$sql." and stadium_name like '%".$data['0']."%' ";
+            if($data['1']!="all") $sql=$sql." and district = '".$data['1']."' ";
+            if($data['2']!='all') $sql=$sql." and province = '".$data['2']. "' ";
+            if($data['3']!=null||$data['4']!=null||$data['5']!=NULL){
+                $sql=$sql." and type in (";
+                if($data['3']!=NULL) $sql=$sql."'พื้นปูน',";
+                if($data['4']!=NULL) $sql=$sql."'พื้นยาง',";
+                if($data['5']!=NULL) $sql=$sql."'พื้นปาร์เก้'";
+                $sql=$sql."'')";
+            }
+            if($data['6']!=null) {$sql=$sql." and parking ='".$data['6']. "'";}
+       
+            if($data['7']!=null) $sql=$sql." and food ='".$data['7']. "'";
+            if($data['8']!=null) $sql=$sql." and bathroom ='".$data['8']. "'";
+            if($data['9']!=null) $sql=$sql." and lockerroom ='".$data['9']. "'";
+            if($data['10']!=null) $sql=$sql." and shop ='".$data['10']. "'";
+            $sql = $sql." group by stadium.stadium_id";
+            
+            $query = $this->db->query($sql)->result();
+            return $query;
+        
     }
 
     public function getLatLngAll() {

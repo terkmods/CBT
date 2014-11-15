@@ -31,46 +31,23 @@ class stadium extends CI_Controller {
                 'ow' => $this->getOwner($userid),
                 'stadium' => $this->mystadium->getstadium($ownerid)
             );
-
+            
             $stID = null;
             foreach ($datasend['stadium'] as $d) {
                 $stID[] = $d->stadium_id;
             }
             if ($stID != null) {
                 $curtime = $today = date("Y-m-d") . ' ' . date("h:i:s");
-                foreach ($stID as $r) {
-                    $totalcourt[] = $this->mystadium->getTotalcourt($r);
-
-                    //  $playing = $this->booking->getbookingDashboard_Playing($r, $curtime);
-                }
-                $x;
-                for ($i = 0; $i < sizeof($stID); $i++) {
-                    if ($totalcourt[$i]->courtnum != 0) {
-                        $this->db->update('stadium', array('court_check' => 1), array('stadium_id' => $stID[$i]));
-                    } else if ($totalcourt[$i]->courtnum == 0) {
-                        $this->db->update('stadium', array('court_check' => 0), array('stadium_id' => $stID[$i]));
-                    }
-                    $datasend['total'] = $totalcourt;
-                    $datasend['totalbooking'] = $this->booking->getbookingDashboard($ownerid);
-                }
-
+        
+               $datasend['todayprice'] = $this->booking->getSumpricetoday($userid);
+            } else {
+                $this->session->set_flashdata('msg', 'กรุณาเพิ่มสนาม');
+            }    
+            $totalbooking = $this->booking->getbookingDashboard($ownerid);
+                $datasend['totalbooking'] = $totalbooking;
                 $datasend['playingtoday'] = $this->booking->getbookingDashboard_Playing($ownerid);
                 $datasend['todaycomming'] = $this->booking->getbookingDashboard_comming($ownerid);
                 $datasend['todaypass'] = $this->booking->getbookingDashboard_Pass($ownerid);
-                $datasend['todayprice'] = $this->booking->getSumpricetoday($userid);
-                $datasend['date'] = $curtime;
-//                }
-//                
-//                ////print_r( $datasend['totalbooking']);
-//                ////print_r($todaycomming);
-//                ////print_r($datasend['todayprice']);
-//               
-            } else {
-                $this->session->set_flashdata('msg', 'กรุณาเพิ่มสนาม');
-            }
-
-
-
             $this->load->view("dashboard", $datasend);
             ////////print_r($datasend);
         } else {
@@ -196,7 +173,9 @@ class stadium extends CI_Controller {
                 'province' => $this->input->post('province'),
                 'zipcode' => $this->input->post('zip'),
                 'rule' => $this->input->post('rule'),
-                'stadium_display' => 1,
+                'lat'=>$this->input->post('lat'),
+                'long'=>$this->input->post('lng'),
+                'stadium_display' => 1
             );
             $data2 = array(
                 'stadium_id' => $maxstadium,
@@ -240,7 +219,9 @@ class stadium extends CI_Controller {
     function facility($stId) {
         $data = array(
             'facility' => $this->mystadium->showfacility($stId),
+            
         );
+
 //        //////print_r($data['facility']);
         $this->load->view("facility_view", $data);
     }
@@ -341,10 +322,11 @@ class stadium extends CI_Controller {
 //        //////print_r($quantity);
         $this->db->where('stadium_id', $stId);
         $this->db->update('facility', $checkfacility);
-//        echo    $this->mystadium->updatefacility($stId,$checkfacility,$quantity);
-//        redirect('stadium/updatefacility/'.$stId.'');
         $this->session->set_flashdata('msg', 'Update Facility Complete');
-        $this->facility($stId);
+//        echo    $this->mystadium->updatefacility($stId,$checkfacility,$quantity);
+        redirect('stadium/facility/'.$stId.'?type=facility');
+        
+//        $this->facility($stId g);
     }
 
     function editstadium($stId) {
@@ -580,6 +562,22 @@ class stadium extends CI_Controller {
         $detail['result_search'] = $this->mystadium->showSearch($data);
 //       ////print_r($data);
         $this->load->view('result_search', $detail);
+    }
+    function searchAdvance() {
+        $data = array($this->input->post('value1'), $this->input->post('value2'), $this->input->post('value3'),
+            $this->input->post('floortype'),$this->input->post('floortype2'),$this->input->post('floortype3'), 
+            $this->input->post('f1'),$this->input->post('f2'),$this->input->post('f3'),
+            $this->input->post('f4'),$this->input->post('f5'),);
+        //$test = $this->input->post('value3');
+        //echo $test;
+     //print_r($data);
+//        echo $data['0']; 
+        $detail['data'] = $data;
+        $detail['result_search'] = $this->mystadium->showSearchAdvance($data); 
+        $detail ['province'] = $this->mystadium->getprovince();
+            $detail ['district'] = $this->mystadium->getdistrict();
+         print_r($detail);
+         $this->load->view('result_search', $detail);
     }
 
     function allStadium() {

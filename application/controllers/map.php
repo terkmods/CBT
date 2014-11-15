@@ -86,5 +86,8 @@ class map extends CI_Controller {
 
         
     }
+    function nearbyStadium(){
+        $this->load->view('nearby_stadium_view');
+    }
 
 }

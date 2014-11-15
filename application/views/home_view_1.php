@@ -148,50 +148,60 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?= base_url() ?>home"><img src="../../../asset/images/logo-white.png"></a>
+                <a class="navbar-brand" href="<?= base_url() ?>"><img src="../../../asset/images/logo-white.png"></a>
             </div>
             <div class="navbar-collapse collapse navbar-responsive-collapse">
-
-
+             
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="http://cbt.backeyefinder.in.th/home">Home</a></li>
+                    <li><a href="http://cbt.backeyefinder.in.th/stadium/allStadium">Search</a></li>
+                    <li><a href="http://cbt.backeyefinder.in.th/map/nearbystadium">Nearby Stadium</a></li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="mdi-social-notifications-on"></span><span class="badge" id="noti"> 10</span></a></li>
-
-                    <?php if ($this->session->userdata('role') == "coach") { ?>
-                        <li><a href="<?= base_url() ?>users/coachProfile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
-                    <?php } else if ($this->session->userdata('role') == "user") { ?> 
-                        <li><a href="<?= base_url() ?>users/profile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
-                    <?php } else { ?>
-                        <li><a href="<?= base_url() ?>stadium"><?php echo $this->session->userdata('profile_url') ?></a></li>
-                    <?php } ?>
-
+                     
+        <?php if($this->session->userdata('role') ==null) { ?>
+                      <li><a href="<?php echo base_url()?>reg">Register</a></li>
+                                <li><a href="#" role="button" data-toggle="modal" data-target="#myModal">Sign in</a></li>
+                                <li><a href="#">Contact Us</a></li>
+        <?php } else { ?>
+                     <li><a href="#"><span class="mdi-social-notifications-on"></span><span class="badge" id="noti"> </span></a></li>
+        <?php if ($this->session->userdata('role') == "coach") { ?>
+                                                <li><a href="<?= base_url() ?>users/coachProfile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
+        <?php } else if ($this->session->userdata('role') == "user") { ?> 
+                                                <li><a href="<?= base_url() ?>users/profile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
+        <?php } else { ?>
+                                                <li><a href="<?= base_url() ?>stadium"><?php echo $this->session->userdata('profile_url') ?></a></li>
+        <?php } ?>
+                                            
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
-                        <ul class="dropdown-menu" >
-
-                            <?php if ($this->session->userdata('role') == "owner") { ?>
-                                <li><a href="#">Dash board</a></li>
-                                <li><a href="#">My Booking</a></li>
-                                <li class="subdrop"><a href="#">Manage Stadium</a></li>
-                                <li class="divider"></li>
-                                <?php foreach ($this->session->userdata('stadium') as $row) { ?>
-                                    <li class="submenudrop"><a href="<?php echo base_url() ?>stadium/updatestadium/<?= $row->stadium_id ?>"><?= $row->stadium_name ?></a></li>
-                                <?php } ?>
-                                <li class="submenudrop divider"></li>
-                            <?php } else { ?>
-                                <li><a href="#">My Booking</a></li>   
-                            <?php } ?>
-                            <li><a href="#">Favorit Stadium</a></li>
-                            <li><a href="#">Edit Profile</a></li>
-                            <li><a href="<?php if ($this->session->userdata('role') == "owner") { ?><?= base_url() ?>stadium <?php } else { ?>  <?= base_url() ?>users/edituser/<?= $this->session->userdata('id') ?>  <?php } ?>" >
-
-                                    Settings</a></li>
-
-
-
-                            <li class="divider"></li>
-                            <li><a href="<?= base_url() ?>users/logout">Logout</a></li>
-                        </ul>
-                    </li>
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
+                                            <ul class="dropdown-menu" >
+        
+        <?php if ($this->session->userdata('role') == "owner") { ?>
+                                                        <li><a href="#">Dash board</a></li>
+                                                        <li><a href="#">My Booking</a></li>
+                                                        <li class="subdrop"><a href="#">Manage Stadium</a></li>
+                                                        <li class="divider"></li>
+            <?php foreach ($this->session->userdata('stadium') as $row) { ?>
+                                                            <li class="submenudrop"><a href="<?php echo base_url() ?>stadium/updatestadium/<?= $row->stadium_id ?>"><?= $row->stadium_name ?></a></li>
+            <?php } ?>
+                                                        <li class="submenudrop divider"></li>
+        <?php } else { ?>
+                                                        <li><a href="#">My Booking</a></li>   
+        <?php } ?>
+                                                <li><a href="#">Favorit Stadium</a></li>
+                                                <li><a href="#">Edit Profile</a></li>
+                                                <li><a href="<?php if ($this->session->userdata('role') == "owner") { ?><?= base_url() ?>stadium <?php } else { ?>  <?= base_url() ?>users/edituser/<?= $this->session->userdata('id') ?>  <?php } ?>" >
+        
+                                                        Settings</a></li>
+                                                        
+                                               
+        
+                                                <li class="divider"></li>
+                                                <li><a href="<?= base_url() ?>users/logout">Logout</a></li>
+        <?php } ?>
+                                            </ul>
+                                        </li>
                 </ul>
             </div>
         </div>
@@ -216,6 +226,7 @@
                             <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Welcome</h3>
                         </div>
                         <div class="panel-body">
+                            <?php if($user!=null){ ?>
                             <ul class="nav nav-pills nav-stacked">
                                 <li><img  src="<?= base_url() ?>asset<?= $user['0']->profilepic_path != null ? '/images/profilepic/' . $user['0']->profilepic_path . '' : '/images/profil.jpg' ?>" class="img-thumbnail" style="width: 50%;"></li>
                                 <?php if ($this->session->userdata('role') == "user") { ?>
@@ -238,6 +249,14 @@
                                 <li><a href="<?= base_url() ?>stadium/allStadium">Search</a></li>
 
                             </ul>
+                            <?php }else{?>
+                            <form action="<?php echo base_url()?>users/dologin" method="post"> 
+                             <input type="text" class="form-control input-lg top-mar" placeholder="Email" name="email">
+                            <input type="password"  class="form-control input-lg top-mar" name="pass" placeholder="Password">
+                               
+                            <button type="submit" name="submit" class="btn btn-primary">Login</button>
+                            </form>
+                                <?php } ?>
                         </div>
                     </div>
                     <div class="row text-center">
@@ -297,52 +316,14 @@
 
 
                 <div class="col-md-9">
-                    <!--                                        <div class="row">
-                                                                <div class="col-xs-12 col-sm-6 col-lg-6">
-                                                                    <div class="box">
-                                                                        <div class="icon">
-                                                                            <div class="image"><span class="glyphicon glyphicon-list-alt btn-lg white"></span></div>
-                                                                            <div class="info">
-                                                                                <h3 class="title">Tasks</h3>
-                                                                                <p>
-                                                                                    12 pending tasks awaiting approval and review.
-                                                                                </p>
-                                                                                <div class="more">
-                                                                                    <a href="#" title="Title Link"><i class="fa fa-plus"></i> Details
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="space"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xs-12 col-sm-6 col-lg-6">
-                                                                    <div class="box">
-                                                                        <div class="icon">
-                                                                            <div class="image"><span class="glyphicon glyphicon-envelope btn-lg white"></span></div>
-                                                                            <div class="info">
-                                                                                <h3 class="title">Messages</h3>
-                                                                                <p>
-                                                                                    7 new messages over the past 24 hours. 
-                                                                                </p>
-                                                                                <div class="more">
-                                                                                    <a href="#" title="Title Link"><i class="fa fa-plus"></i> Details
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="space"></div>
-                                                                    </div>
-                                                                </div>
-                                                               
-                                                            </div>  เก็บไว้ก่อน !-->
+                    
                     <div class="text-center">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Nearby Stadium</h3>
                             </div>
                             <div class="panel-body"></div>     
-                            <div id="map-canvas"></div> 
+                            <div id="map-canvas" ></div> 
                         </div>
                     </div>
                     <div class="text-center">
@@ -550,7 +531,7 @@
                                             <div class="row padall" id="clickme">
                                                 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                                     <span></span>
-                                                    <img src="<?php echo base_url() ?>asset/images/<?= $st->stadium_path != null ? 'stadiumpic/' . $st->stadium_path . '' : 'bad.png' ?>" />
+                                                    <img class="img-responsive"src="<?php echo base_url() ?>asset/images/<?= $st->stadium_path != null ? 'stadiumpic/' . $st->stadium_path . '' : 'bad.png' ?>" />
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
                                                     <div class="clearfix">
@@ -571,8 +552,8 @@
                                         </div>
                                     </div>
                                 <?php } ?>
-                                <div class="" style="padding-left: 670px" >
-                                    <a href="<?php echo base_url() ?>stadium/allStadium "  class="btn btn-default ">All Stadium</a>
+                                <div class="col-md-12 pull-right" >
+                                    <div class="pull-right"><a href="<?php echo base_url() ?>stadium/allStadium "  class="btn btn-default ">All Stadium</a></div>
                                 </div>
                             </div>
                         </div>

@@ -298,18 +298,8 @@ class booking extends CI_Controller {
         $notirecive = array(
             'user_id' => $userid['0']->user_id,
         );
-        $this->db->insert("recive_noti",$notirecive);
-        
-                $userId = $this->session->userdata('id');
-        $datasend['allbooking'] = $this->booking->getAllBooking($userId);
-         $today = date('Y-m-d');
-        $datasend['today_booking'] = $this->booking->getAllBookingja($userId,$today);
-        print_r($datasend['today_booking']);
-        $this->load->view("history_booking",$datasend);
-       
-      
-    }
-    function historyBooking() {
+        $this->db->insert("recive_noti", $notirecive);
+
         $userId = $this->session->userdata('id');
         $datasend['allbooking'] = $this->booking->getAllBooking($userId);
         $today = date('Y-m-d');
@@ -406,7 +396,7 @@ class booking extends CI_Controller {
         $check = $this->input->post('ch');
         $userId = $this->input->post('uid');
         $iscome = 0;
-                $noti = array(
+        $noti = array(
             'user_id' => $userId,
             'stadium_id' => $this->session->userdata('stadium_idja'),
             'text' => 'has booking you stadium',
@@ -417,7 +407,7 @@ class booking extends CI_Controller {
             $this->db->where('user_id', $userId);
             $this->db->set('status', 'status+1', FALSE);
             $this->db->update('User');
-            
+
             //Notija//
 //            $this->db->insert("notification", $noti);
 //            $lastinsertid = $this->db->insert_id();
@@ -427,7 +417,7 @@ class booking extends CI_Controller {
 //                'user_id' => $userid['0']->user_id,
 //            );
 //            $this->db->insert("recive_noti", $notirecive);
-            //
+        //
         } else {
             $iscome = 1;
             $this->db->where('user_id', $userId);
@@ -440,11 +430,12 @@ class booking extends CI_Controller {
         );
 
         $this->db->update('reserve', $data, array('reserve_id' => $rId));
-        
+
         $usersend = $this->users->getUser($userId);
         echo json_encode($usersend);
     }
-        function getOwnerid($userid) {
+
+    function getOwnerid($userid) {
 
         if ($userid != null) {
             $query = $this->db->query('SELECT owner.owner_id FROM owner join User  WHERE owner.user_id = User.user_id and User.user_id = ' . $userid)->result();
@@ -456,15 +447,18 @@ class booking extends CI_Controller {
 //            echo 'fail no userid';
         }
     }
-    
-    function getbookday(){
+
+    function getbookday() {
         $date = $this->input->post('d');
-         $userid = $this->session->userdata('id');
+        $userid = $this->session->userdata('id');
         $ownerid = $this->getOwnerid($userid);
-      $data =   $this->booking->getbookingDay($ownerid,$date);
-      echo $ownerid;
-      echo $date;
-//      echo json_encode($data);
+        $data = $this->booking->getbookingDay($ownerid, $date);
+//      echo $ownerid;
+//      echo $date;
+        echo json_encode($data);
+    }
+
+    function cancelbook() {
         
     }
 

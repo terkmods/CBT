@@ -8,7 +8,11 @@
 <?php
 include 'template/head.php';
 $num = 1;
+
 $status = $ow->authenowner_status;
+$isopen = null;
+
+    $isopen = $ow->authenowner_status;
 ?>
 <div class="container">
     <h4> <a href="#"></a> Owner System </h4>
@@ -31,9 +35,39 @@ $status = $ow->authenowner_status;
                                         <h2><?= count($totalbooking) ?><small>การจองวันนี้</small></h2> ตรวจสอบการจองทั้งหมดได้ข้างล่าง
                                     </div>
                                 </div>
+                                <?php if ($isopen == 1) { ?>
+                                <div class="alert alert-dismissable alert-warning">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <strong>Please wating !</strong> admin will approve <a data-toggle="modal" href="#viewAlthenwating" class="alert-link">Click here to more info</a>
+                                </div>
+                            <?php } else if($isopen == 0) { ?>
+                                <div class="alert alert-dismissable alert-danger">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <strong>Please upload !</strong> the evidence to open the stadium <a data-toggle="modal" href="#approve" class="alert-link">Click here to upload</a>
+                                </div>
+                            <?php } else if($isopen == 2) { ?>
+                                <div class="alert alert-dismissable alert-success">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Well done!</strong> You successfully Click <a href="http://cbt.backeyefinder.in.th/users/changestatus" class="alert-link">this to close</a>.
+</div>
+                            <?php } else if($isopen == 99){?>
+                            <div class="alert alert-dismissable alert-danger">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <strong>Reject!</strong> the evidence have something wrong please <a data-toggle="modal" href="#viewAlthenReject" class="alert-link">Check this</a>
+                                </div>
+                            <?php } else{?>
+                        
+                            <?php }?>
                             </div>
                             <div class="col-md-8">
+                                <?php if ($stadium == NULL) { ?> 
+                                <div class="alert alert-dismissable alert-danger text-center">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>No Stadium</strong> <a href="http://cbt.backeyefinder.in.th/stadium/managestadium" class="alert-link">Please Add stadium</a> and try it again.
+</div>
+                                <?php } else{ ?>
                                 <div id="container" style="min-width: 500px; height: 400px; margin: 0 auto"></div>
+                                <?php }?>
                             </div>
                         </div>
                         <div class="list-group" style="margin-top: 10;">
@@ -269,9 +303,12 @@ $status = $ow->authenowner_status;
         var play = $(this).data("play");
         console.log(path);
         console.log(sname);
-
+        var htmlmodal ='';
+        var aaa='';
+        
         if (play == 3) {
-            var htmlmodal = '<hr>'+'<div class="form-group">' +
+            
+             htmlmodal = '<hr>'+'<div class="form-group">' +
                     '<label for="select" class="col-lg-3 control-label" style="margin-left: -15px">Status: </label>' +
                     '<div class="col-lg-5" style="margin-bottom: 20px">' +
                     '<select class="form-control" id="select" style="margin-top: -3px;margin-left: -9px;">' +
@@ -280,13 +317,17 @@ $status = $ow->authenowner_status;
                     '</select>' +
                     '</div>' +
                     '</div>';
+//            alert('xxxx');
             $('#modalshow').html(htmlmodal);
             
-            var aaa = '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+'<button type="button" class="btn btn-primary">Submit</button>';
+             aaa = '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+'<button type="button" class="btn btn-primary">Submit</button>';
             $('#modalsubmit').html(aaa);
 
         } else {
-            var aaa = '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+'<button type="button" class="btn btn-warning ">Cancle Reserve</a>';
+//            $('#modalshow').hide();
+$('#modalshow').html("");
+//            alert('sss');
+             aaa = '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+'<button type="button" class="btn btn-warning ">Cancle Reserve</button>';
             $('#modalsubmit').html(aaa);
 
         }

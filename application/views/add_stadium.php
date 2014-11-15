@@ -113,7 +113,7 @@ $status = $ow->authenowner_status;
                                             <input type="text" class=" form-control input-small top-mar" placeholder="PROVINCE" name="province" required>
                                             <small style="color: gray">zip code*</small>
                                             <input type="text" class=" form-control input-small top-mar" placeholder="ZIP CODE" name="zip" required>
-                                            
+
                                         </fieldset>
 
                                     </div>
@@ -129,56 +129,17 @@ $status = $ow->authenowner_status;
 
                                             </fieldset>
                                         </div>
-                                        
+                                        <div class="col-md-12" style="padding-top: 20px">
+
+                                            Pin on the map to located your stadium
+
+
+                                            <input id="address" type="text"   placeholder="Enter a location">
 
 
 
-
-
-<!--                                        <legend>Facility</legend>
-                                        <div class="col-md-5">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="facility[]" value="ห้องอาบน้ำ"> ห้องอาบน้ำ
-                                                </label>
-
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="facility[]" value="อาหาร"> อาหาร
-                                                </label>
-
-                                            </div>
+                                            <div id="map-canvas" ></div> 
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="facility[]" value="ร้านค้า"> ร้านค้า
-                                                </label>
-
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="facility[]" value="ที่จอดรถ"> ที่จอดรถ
-                                                </label>
-
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-7 form-group" id="add">
-
-                                            <label><button type="button" class="btn btn-default btn-sm" id="btn1">
-                                                    <span class="glyphicon glyphicon-plus-sign"></span> Add other Facility 
-                                                </button>             </label> <input class="form-control" type="text" name="facility[]" >           
-
-
-                                        </div>-->
-
-
-
-
-
-
 
                                     </div>
                                 </div>
@@ -189,11 +150,13 @@ $status = $ow->authenowner_status;
 
 
                                 <div class="modal-footer" >
-<!--                                    <button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>-->
+                                    <!--                                    <button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>-->
                                     <button type="submit" name="submit" class="btn btn-primary">Add</button>
 
 
                                 </div>
+                                <input type="hidden" id="lat" name="lat" >
+                                <input type="hidden" id="lng" name="lng" >
                             </form>
 
 
@@ -233,7 +196,105 @@ $status = $ow->authenowner_status;
     });
 </script>
 
-<?php include 'template/footer_scrpit.php'; ?>
 
+<script>
+    var geocoder;
+    var map;
+    var mk;
+    var placesService;
+    var placesAutocomplete;
+
+
+
+    function initialize() {
+        geocoder = new google.maps.Geocoder();
+
+
+        var latlng = new google.maps.LatLng(13.7500, 100.4833);
+        var mapOptions = {
+            zoom: 12,
+            center: latlng
+        }
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+        var autocompleteOptions = {
+        }
+        var autocompleteInput = document.getElementById('address');
+
+        placesAutocomplete = new google.maps.places.Autocomplete(autocompleteInput, autocompleteOptions);
+        placesAutocomplete.bindTo('bounds', map);
+        google.maps.event.addListener(map, "click", function (event) {
+            if (mk != null)
+                mk.setMap(null);
+            mk = new google.maps.Marker({position: event.latLng, map: map, draggable: true, animation: google.maps.Animation.DROP});
+            x = event.latLng.lat();
+            y = event.latLng.lng();
+            console.log(x + ',' + y);
+            $('#lat').val(x);
+            $('#lng').val(y);
+            google.maps.event.addListener(mk, 'dragend', function (event) {
+
+                x = event.latLng.lat();
+                y = event.latLng.lng();
+//                    updateDatabase(x, y);
+                console.log(x);
+                console.log(y);
+                $('#lat').val(x);
+                $('#lng').val(y);
+            });
+        });
+
+        google.maps.event.addListener(placesAutocomplete, 'place_changed', function () {
+            if (mk != null)
+                mk.setMap(null);
+            codeAddress();
+        });
+
+
+
+
+    }
+
+
+
+    function codeAddress() {
+        var address = document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function (results, status, event) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                map.setZoom(17);
+                if (mk != null)
+                    mk.setMap(null);
+                mk = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location,
+                    animation: google.maps.Animation.DROP,
+                    draggable: true
+                });
+                console.log(mk.getPosition());
+                console.log(mk.getPosition().k);
+//                updateDatabase(mk.getPosition().k, mk.getPosition().B);
+                google.maps.event.addListener(mk, 'dragend', function (event) {
+
+                    x = event.latLng.lat();
+                    y = event.latLng.lng();
+//                    updateDatabase(x, y);
+                    console.log(x);
+                    console.log(y);
+                    $('#lat').val(x);
+                    $('#lng').val(y);
+                });
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+
+</script>
+<?php include 'template/footer_scrpit.php'; ?>
 </body>
 </html>

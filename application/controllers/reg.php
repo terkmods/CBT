@@ -30,6 +30,7 @@ class reg extends CI_Controller {
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
+        
         $this->load->view('Register');
     }
 
@@ -73,16 +74,17 @@ class reg extends CI_Controller {
                 'email' => $this->input->post('email'),
                 'password' => $this->input->post('pass'),
                 'phone' => $this->input->post('tel'),
-                'status' => 'ok',
+                'status' => '1',
                 'profile_url' => $this->input->post('url'),
-                'authenowner_status' => 'no',
+                'authenowner_status' => '0',
                 'path_pic'=> $this->input->post('path'), // แก้ตอนอัพโหลดรูปด้วยจ้าา เปลี่ยน path นะ
                 'logged'=> TRUE
             );
             $this->db->insert("owner", $dataowner);
-            $this->session->set_userdata($datasend);
-            
-            $this->load->view('index');
+//            $this->session->set_userdata($datasend);
+            $this->session->set_flashdata('msg', 'Register Complete');
+            redirect('reg/secessful');
+//            $this->load->view('login_view');
             
         } else if ($typereg == "user") {
               $datasend = array(
@@ -100,42 +102,13 @@ class reg extends CI_Controller {
             );
           
             $this->db->insert("User", $data);
-            $this->session->set_userdata($datasend);
-            $this->load->view('index');
-        }else if ($typereg == "coach") {
-            $this->db->insert("User", $data);
-
-            $rs = $this->coach->showIdCoachMax();
-
-            foreach ($rs as $r) {
-                $maxcoach = $r['coach_id'] + "1";
-            }
-
-            $datacoach = array(
-                'user_id' => $max,
-                'coach_id' => $maxcoach
-                
-            );
-            $datasend = array(
-                'coach_id' => $maxcoach,
-                'id' => $max,
-                'role' => $this->input->post('typeuser'),
-                'email' => $this->input->post('email'),
-                'password' => $this->input->post('pass'),
-                'phone' => $this->input->post('tel'),
-                'status' => 'ok',
-                'profile_url' => $this->input->post('url'),
-                'authenowner_status' => '0',
-                'path_pic'=> $this->input->post('path'), // แก้ตอนอัพโหลดรูปด้วยจ้าา เปลี่ยน path นะ
-                'logged'=> TRUE
-            );
-            $this->db->insert("coach", $datacoach);
-            $this->session->set_userdata($datasend);
-            
-            $this->load->view('index');
-        
+            $this->session->set_flashdata('msg', 'Register Complete');
+            redirect('reg/secessful');
         }
         
+    }
+    public function secessful(){
+         $this->load->view('login_view');
     }
 
 }

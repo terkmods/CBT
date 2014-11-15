@@ -34,7 +34,7 @@
                 </label>
             </div>
             
-            <button type="button" class="next_button form-control" value="History booking" disabled="" onclick="location.href='<?=base_url()?>/booking/bookja'">Confrim Reserve</button>
+            <button type="button" class="next_button form-control" value="History booking" disabled="" onclick="location.href='<?=base_url()?>booking/bookja'">Confrim Reserve</button>
             </div>
                 
                 

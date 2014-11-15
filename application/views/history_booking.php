@@ -37,17 +37,18 @@ include 'template/head.php';
                         <h4 class="text-center"><?=  substr(date(DATE_RFC2822),0,16)?></h4>
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="panel panel-success">
-                                    <div class="panel-heading">Welcome :  </div>
+                                <div class="panel panel-success" id="headcr">
+                                    <div class="panel-heading" id="headding">Today  </div>
                                     <div class="panel-body text-center " id="countallbook">
-                                        <h2><?=count($today_booking)?> <small>การจองวันนี้</small></h2> ตรวจสอบการจองทั้งหมดได้ข้างล่าง
+                                        <h2><?=count($today_booking)?> <small>booking</small></h2> Check your all booking down below 
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-8">
                                 <div class="panel panel-info">
-                                    <div class="panel-heading">สนามจองล่าสุด</div>
+                                    <div class="panel-heading">Recently booking</div>
                                     <div class="panel-body text-center">
+                                        <?php if($allbooking!=null) { ?>
                                         <div class="list-group">
                                             <div class="list-group-item">
                                                 <div class="row-action-primary">
@@ -65,6 +66,13 @@ include 'template/head.php';
                                             </div>
                                             <div class="list-group-separator"></div>
                                         </div>
+                                        <?php } else{?>
+                                        <div class="alert alert-dismissable alert-warning">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <h4>No Booking!</h4>
+    <p>Please booking some Stadium , <a href="http://cbt.backeyefinder.in.th/stadium/allStadium" class="alert-link">to see your booking history</a>.</p>
+</div>
+                                        <?php }?>
                                     </div>
                                 </div>
                             </div>
@@ -165,10 +173,15 @@ include 'template/head.php';
                     console.log(obj[i].end_time.substring(14, 16));
                 }
             }
-            showallbook =  '<h2>'+obj.length+'<small>การจองในวันนี</small></h2> ตรวจสอบการจองทั้งหมดได้ข้างล่าง';
+            showallbook =  '<h2>'+obj.length+'<small>booking</small></h2> Check your all booking down below';
             console.log(show);
             $("#showbooking").html(show);
             $('#countallbook').html(showallbook);
+            $('#headding').html('Today');
+          
+            $('#headcr').removeClass('panel-info');
+            $('#headcr').removeClass('panel-danger');
+            $('#headcr').addClass('panel-success');
         });
     }
     function history() {
@@ -197,10 +210,14 @@ include 'template/head.php';
                     console.log(obj[i].end_time.substring(14, 16));
                 }
             }
-            showallbook =  '<h2>'+obj.length+'<small>การจองที่ผ่านมา</small></h2> ตรวจสอบการจองทั้งหมดได้ข้างล่าง';
+            showallbook =  '<h2>'+obj.length+'<small>booking</small></h2> Check your all booking down below';
             // console.log(show);
             $("#showbooking").html(show);
             $('#countallbook').html(showallbook);
+            $('#headding').html('History');
+                 $('#headcr').removeClass('panel-info');
+            $('#headcr').removeClass('panel-success');
+            $('#headcr').addClass('panel-danger');
 
         });
     }
@@ -230,10 +247,14 @@ include 'template/head.php';
                     console.log(obj[i].end_time.substring(14, 16));
                 }
             }
-            showallbook =  '<h2>'+obj.length+'<small>การจองที่กำลังจะถึง</small></h2> ตรวจสอบการจองทั้งหมดได้ข้างล่าง';
+            showallbook =  '<h2>'+obj.length+'<small>booking</small></h2> Check your all booking down below';
             // console.log(show);
             $("#showbooking").html(show);
             $('#countallbook').html(showallbook);
+             $('#headding').html('Comming');
+                   $('#headcr').removeClass('panel-danger');
+            $('#headcr').removeClass('panel-success');
+            $('#headcr').addClass('panel-info');
         });
     }
 </script>

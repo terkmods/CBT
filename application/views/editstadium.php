@@ -302,6 +302,7 @@ $num = 1;
     var marker;
     var placesService;
     var placesAutocomplete;
+    var mk;
 
     function initialize() {
         geocoder = new google.maps.Geocoder();
@@ -317,13 +318,13 @@ $num = 1;
         if (check != ' ') {
             map.setZoom(17);
             ;
-            var marker = new google.maps.Marker({
+             mk = new google.maps.Marker({
                 position: latlng,
                 map: map,
                 draggable: true
 
             });
-            google.maps.event.addListener(marker, 'dragend', function (event) {
+            google.maps.event.addListener(mk, 'dragend', function (event) {
 
                 x = event.latLng.lat();
                 y = event.latLng.lng();
@@ -331,6 +332,24 @@ $num = 1;
                 console.log(x);
                 console.log(y);
             });
+            google.maps.event.addListener(map, "click", function (event) {
+            if (mk != null)
+                mk.setMap(null);
+            mk = new google.maps.Marker({position: event.latLng, map: map, draggable: true, animation: google.maps.Animation.DROP});
+            x = event.latLng.lat();
+            y = event.latLng.lng();
+            console.log(x + ',' + y);
+     
+            google.maps.event.addListener(mk, 'dragend', function (event) {
+
+                x = event.latLng.lat();
+                y = event.latLng.lng();
+                    updateDatabase(x, y);
+                console.log(x);
+                console.log(y);
+                
+            });
+        });
         }
         var autocompleteOptions = {
         }
@@ -342,6 +361,8 @@ $num = 1;
         google.maps.event.addListener(placesAutocomplete, 'place_changed', function () {
             codeAddress();
         });
+          
+              
 
 
     }

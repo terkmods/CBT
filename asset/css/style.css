@@ -3,6 +3,7 @@ body{
     font-family: 'Lato', sans-serif;
 }
 /*homepage*/
+
 #body-home{
     background: url(../../asset/images/bg-home.png) no-repeat center center;
     background-size: 100%;
@@ -40,6 +41,7 @@ body{
 .top-ul li a:hover{
     color: #e3f1f9;
 }
+
 .clear{
     clear: both;
 }
@@ -321,4 +323,48 @@ white-space: nowrap;
 }
 .dl-horizontal dd {
 margin-left: 110px;
+}
+
+/* ADDED STYLES */
+
+.navbar-default{
+	background-color: transparent !important;
+border-color: transparent !important;
+}
+a.menulink{
+	color: #fff !important;
+	font-size: 18px;
+}
+a.menulink:hover{
+	color: #e3f1f9 !important;
+}
+.alert-home{
+	font-size: 18px;
+	font-weight: 100;
+	color: #fff;
+	float: left;
+	margin-top: 10px;
+}
+.home-clear{
+	float: left;
+}
+
+@media all and (max-width: 768px) and (min-width: 320px){
+	.home-clear{
+		clear: both;
+	}
+	#body-home{
+    background: url(../../asset/images/bg-home.png) no-repeat top center;
+    background-size: 100%;
+}
+#regiseter{
+    background: url(../../asset/images/bg-home.png) no-repeat top center;
+    background-size: 100%;
+}
+.top-home{
+    background: url(../../asset/images/dark-top.png);
+    min-height: 50px;
+    padding: 5px 0px;
+}
+
 }

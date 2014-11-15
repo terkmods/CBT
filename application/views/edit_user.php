@@ -21,7 +21,7 @@
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-2 control-label">Profile picture</label>
                                         <div class ="col-md-5">
-                                            <img src="<?= base_url() ?>asset/images/profilepic/<?= $data['0']->profilepic_path; ?>" width="200" alt="" class="img-thumbnail top-mar">
+                                            <img src="<?= base_url() ?>asset/images/<?= $data['0']->profilepic_path!=null ? 'profilepic/'.$data['0']->profilepic_path:'profil.jpg' ?>" width="200" alt="" class="img-thumbnail top-mar">
                                          
                                             <br>
                                             <div style="padding-top: 5px ">
@@ -52,7 +52,13 @@
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-2 control-label">Status</label>
                                         <div class="col-sm-2">
-                                            <input type="text" class="form-control" name="status" value="<?= $data['0']->status; ?>" disabled>
+                                            <?php if ($data['0']->status == 0) { ?>
+                                                    <span class="label label-success">Active</span>
+                                                <?php } else if ($data['0']->status == 1) { ?>
+                                                    <span class="label label-warning">Warning</span>
+                                                <?php } else { ?>
+                                                    <span class="label label-danger">Blacklist</span>
+                                                <?php } ?>
                                         </div>
                                     </div>
                                     <hr>

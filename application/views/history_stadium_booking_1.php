@@ -48,7 +48,7 @@ $num = 1;
                                                     <img class="circle  img-responsive" src="<?= base_url() ?>/asset/images/bad.png" alt="icon">
                                                 </div>
 
-                                                                                
+
 
                                             </div>
                                         </div>
@@ -60,7 +60,7 @@ $num = 1;
                         </div>
                         <div class="row">
                             <table class="table table-bordered  table-condensedy" id="news-table">
-                                <thead><tr><th>ReserveID</th><th>Stadium</th><th>Court name</th><th>Date</th><th>Time reserve</th><th>Reserve by</th><th>Tel number</th><th>Total price</th><th>Status</th></tr></thead>
+                                <thead><tr><th>ReserveID</th><th>Stadium</th><th>Court name</th><th>Date</th><th>Time reserve</th><th>Reserve by</th><th>Phone number</th><th>Total price</th><th>User Status</th></tr></thead>
                                 <tbody id="runtime">
                                     <?php foreach ($allhis as $a) { ?>
                                         <tr>
@@ -72,37 +72,31 @@ $num = 1;
                                             <td><a href="http://cbt.backeyefinder.in.th/users/profile/<?= $a->user_id ?>"><?= $a->fname ?></a></td>
                                             <td><?= $a->tel ?></td>
                                             <td><?= $a->sumprice ?></td>
-                                            <td > <?php if($a->status ==0){ ?>
-                                            <span class="label label-success">Active</span>
-                                            <?php } else if($a->status ==1) {?>
-                                            <span class="label label-warning">Warning</span>
-                                            <?php } else{?>
-                                            <span class="label label-danger">Blacklist</span>
-                                            <?php } ?>
+                                            <td > <?php if ($a->status == 0) { ?>
+                                                    <span class="label label-success">Active</span>
+                                                <?php } else if ($a->status == 1) { ?>
+                                                    <span class="label label-warning">Warning</span>
+                                                <?php } else { ?>
+                                                    <span class="label label-danger">Blacklist</span>
+                                                <?php } ?>
+                                                    
                                             </td>
-    <!--                                            <td>
 
-    <div class="btn-group btn-toggle"> 
-      <button class="btn btn-xs btn-default pre" data-bookid="<?= $a->user_id ?>">Present</button>
-    <button class="btn btn-xs btn-primary active" data-bookid="<?= $a->user_id ?>">Absent</button>
-    </div>
-
-                                            </td>-->
                                             <td>
-                                                
+
                                                 <form class="form">
-                    <label>
-                        <input type="radio" class="options" name="optionsRadios" id="optionsRadios1" value="option1" <?=$a->iscome == 1 ? 'checked':''?> data-bookid="<?= $a->reserve_id ?>" data-userid="<?= $a->user_id ?>" data-ch="1">
-                        Present
-                    </label>
-               
-               
-                    <label>
-                        <input type="radio" class="options" name="optionsRadios" id="optionsRadios2" value="option2" <?=$a->iscome == 2 ? 'checked':''?> data-bookid="<?= $a->reserve_id ?>" data-ch="2" data-userid="<?= $a->user_id ?>">
-                        Absent
-                    </label>
+                                                    <label>
+                                                        <input type="radio" class="options" name="optionsRadios" id="optionsRadios1" value="option1" <?= $a->iscome == 1 ? 'checked' : '' ?> data-bookid="<?= $a->reserve_id ?>" data-userid="<?= $a->user_id ?>" data-ch="1">
+                                                        Present
+                                                    </label>
+
+
+                                                    <label>
+                                                        <input type="radio" class="options" name="optionsRadios" id="optionsRadios2" value="option2" <?= $a->iscome == 2 ? 'checked' : '' ?> data-bookid="<?= $a->reserve_id ?>" data-ch="2" data-userid="<?= $a->user_id ?>">
+                                                        Absent
+                                                    </label>
                                                 </form>
-            
+<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom">Bottom</button>
                                             </td>
 
 
@@ -202,6 +196,8 @@ when the page first loads -->
     var currentdate = (myDate.getMonth() + 1) + '/' + myDate.getDate() + '/' +
             myDate.getFullYear();
     var dy;
+    var htmlshow = '';
+    iscome();
     $(document).ready(function (e) {
 
         $('#datepicker').datepicker({todayBtn: "linked",
@@ -216,8 +212,9 @@ when the page first loads -->
                     var dateselect = $('#datepicker').datepicker('getDate').toLocaleDateString();
                     dy = datetoDB(dateselect);
                     showbook();
+                   
                 });
-                
+
 
         if ($('#news-table tbody tr').length >= 1) {
             mytable = $('#news-table').dataTable({
@@ -231,45 +228,158 @@ when the page first loads -->
             });
 
         }
+        
+        
     });
     function datetoDB(datesendnaja) {
         var date_elements = datesendnaja.split('/');
         date_inverse = date_elements[2] + '-' + date_elements[0] + '-' + date_elements[1];
         return date_inverse;
     }
-    function showbook(){
+    function showbook() {
+        
 //         console.log(dy);
-                $.ajax({
-                    type: "POST",
-                    url: "http://cbt.backeyefinder.in.th/booking/getbookday/" ,
-                    data: {d: dy  }
-                }).done(function (msg) {
+        $.ajax({
+            type: "POST",
+            url: "http://cbt.backeyefinder.in.th/booking/getbookday/",
+            data: {d: dy}
+        }).done(function (msg) {
 
-                    console.log(msg);  
-//                    var obj = JSON.parse(msg);
-//                    console.log(obj);
-
+//                    console.log(msg);  
+            var obj = JSON.parse(msg);
+            console.log(obj);
+            htmlshow = ' ';
+            if (obj.length > 0) {
+                $(obj).each(function (k, v) {
+                    table(v);
                 });
-            }
+            } else
+                $('#runtime').html('No booking');
 
-</script>
-
-
-
-
-<script>
-    $('#myTab a').click(function (e) {
-        e.preventDefault();
-        $(this).tab('show');
-    });</script>
-
-
-
-<script>
-    function del() {
-        alert("Are you sure to Delete");
+        });
     }
+    function daysBetween(first, second) {
+
+        // Copy date parts of the timestamps, discarding the time parts.
+        var one = new Date(first.getFullYear(), first.getMonth(), first.getDate());
+        var two = new Date(second.getFullYear(), second.getMonth(), second.getDate());
+
+        // Do the math.
+        var millisecondsPerDay = 1000 * 60 * 60 * 24;
+        var millisBetween = two.getTime() - one.getTime();
+        var days = millisBetween / millisecondsPerDay;
+
+        // Round down.
+        return Math.floor(days);
+    }
+    function iscome(){
+        $(document).on('change', '.form .options', function() {
+               
+        
+//        alert($(this).data("bookid"));
+        re_id = $(this).data("bookid");
+        checkselect = $(this).data("ch");
+        uId = $(this).data("userid");
+//        alert(checkselect);
+        $.ajax({
+            type: "POST",
+            url: "http://cbt.backeyefinder.in.th/booking/updatecome/",
+            data: {re_id: re_id, ch: checkselect, uid: uId}
+        }).done(function (msg) {
+
+            console.log(msg);
+            var obj = JSON.parse(msg);
+            console.log(obj);
+            $("#notija").notify({
+                speed: 500,
+            });
+
+            $("#notija").notify("create", {
+                title: 'Complete',
+                text: obj['0'].fname + ' is ' + (checkselect == 1 ? 'Present' : 'Absent')
+            });
+//                                    if(obj['0'].status==0){
+//                                        htmlstatus= '<span class="label label-success">Active</span>';
+//                                    }else if(obj['0'].status==1){
+//                                        htmlstatus= '<span class="label label-warning">Warning</span>';
+//                                    }else{
+//                                        htmlstatus = '<span class="label label-danger">Baned</span>';
+//                                    }
+//                                    $('.st').html(htmlstatus);
+        });
+        return false;
+    });
+    }
+    function table(rs) {
+
+        htmlshow = htmlshow + '<tr>' +
+                '   <td>' + rs.reserve_id + '</td>' +
+                '   <td><a href="http://cbt.backeyefinder.in.th/stadium/profile/' + rs.stadium_id + '">' + rs.stadium_name + '</a></td>' +
+                '  <td>' + rs.court_name + '</td>' +
+                '   <td>' + rs.start_time.substr(0, 10) + '</td>' +
+                '  <td>' + rs.start_time.substr(10, 15) + '-' + rs.end_time.substr(10, 15) + '</td>' +
+                '  <td><a href="http://cbt.backeyefinder.in.th/users/profile/' + rs.user_id + '">' + rs.fname + '</a></td>' +
+                ' <td>' + rs.tel + '</td>' +
+                '  <td>' + rs.sumprice + '</td><td>';
+        if (rs.status == 0) {
+        
+            htmlshow = htmlshow + '  <span class="label label-success">Active</span>';
+        } else if (rs.status == 1) {
+            
+            htmlshow = htmlshow + '  <span class="label label-warning">Warning</span>';
+        } else {
+            htmlshow = htmlshow + '<span class="label label-danger">Blacklist</span>';
+        }
+        htmlshow = htmlshow + ' </td><td>';
+        
+        var t = rs.start_time.split(/[- :]/);
+        var d = new Date(t[0], t[1] - 1, t[2], t[3], t[4], t[5]);
+        if(daysBetween(myDate, d)>0){ //future 
+           htmlshow = htmlshow +'<button type="button" class="btn btn-warning " onclick="del()"><span class="glyphicon glyphicon-remove"></span></button>';
+           
+        }else{
+            htmlshow = htmlshow +'<form class="form">'+
+                                                   ' <label>'+
+                                                      '  <input type="radio" class="options" name="optionsRadios" id="optionsRadios1" '+
+                                                         '   value="option1" '+(rs.iscome==1 ? 'checked' : ' ')+''+
+                                                         '   data-bookid="'+ rs.reserve_id +'" data-userid="'+ rs.user_id +'" data-ch="1">'+
+                                                      '  Present'+
+                                                   ' </label>'+
+
+                                                  '  <label>'+
+                                                       ' <input type="radio" class="options" name="optionsRadios" id="optionsRadios2" '+
+                                                      '  value="option2" '+(rs.iscome==2 ? 'checked' : ' ')+ ''+
+                                                        '    data-bookid="'+ rs.reserve_id +'" data-ch="2" data-userid="'+ rs.user_id +'">'+
+                                                      '  Absent'+
+                                                   ' </label>'+
+                                                '</form>';
+        }
+
+
+
+        htmlshow = htmlshow + ' </td></tr>';
+
+
+
+//        console.log(htmlshow);
+        $('#runtime').html(htmlshow);
+        
+    }
+    function del() {
+     $(document).on('change', '.form .options', function() {
+        confirm("Are you sure to Cancel"+$(this).data("bookid"));
+    });
+    }
+
+
 </script>
+
+
+
+
+
+
+
 <script>
     $('.btn-toggle').click(function () {
         $(this).find('.btn').toggleClass('active');
@@ -293,40 +403,7 @@ when the page first loads -->
 
     });
 
-    $('.form .options').change(function () {
-//        alert($(this).data("bookid"));
-        re_id = $(this).data("bookid");
-        checkselect = $(this).data("ch");
-        uId = $(this).data("userid");
-//        alert(checkselect);
-         $.ajax({
-                    type: "POST",
-                    url: "http://cbt.backeyefinder.in.th/booking/updatecome/" ,
-                    data: {re_id: re_id,ch : checkselect,uid : uId }
-                }).done(function (msg) {
-
-                    console.log(msg);  
-                    var obj = JSON.parse(msg);
-                    console.log(obj);
-                                    $("#notija").notify({
-                                        speed: 500,
-                                    });
-
-                                    $("#notija").notify("create", {
-                                        title: 'Complete',
-                                        text: obj['0'].fname+' is '+(checkselect ==1? 'Present' : 'Absent')
-                                    });
-//                                    if(obj['0'].status==0){
-//                                        htmlstatus= '<span class="label label-success">Active</span>';
-//                                    }else if(obj['0'].status==1){
-//                                        htmlstatus= '<span class="label label-warning">Warning</span>';
-//                                    }else{
-//                                        htmlstatus = '<span class="label label-danger">Baned</span>';
-//                                    }
-//                                    $('.st').html(htmlstatus);
-                });
-        return false;
-    });
+    
 
 
 //$(document).on("click", ".pre", function () {
