@@ -514,6 +514,10 @@
 
 
                 </div>
+                </div>
+            </div>
+        </div>
+        
 
                 <?php include 'template/modal.php'; ?>
 
