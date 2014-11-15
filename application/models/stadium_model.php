@@ -72,13 +72,13 @@ join User on User.user_id = owner.user_id
     }
 
     function getprovince() {
-        $query = $this->db->query('SELECT distinct province FROM `stadium`')->result();
+        $query = $this->db->query('SELECT distinct province FROM `stadium` where stadium_display = 1')->result();
         ;
         return $query;
     }
 
     function getdistrict() {
-        $query = $this->db->query('SELECT distinct district FROM `stadium` ')->result();
+        $query = $this->db->query('SELECT distinct district FROM `stadium` where stadium_display = 1')->result();
         ;
         return $query;
     }
@@ -322,7 +322,8 @@ join User on User.user_id = owner.user_id
         
         }
     }
-    public function showSearchAdvance($data) { 
+    
+     public function showSearchAdvance($data) { 
             $sql = "SELECT * 
             FROM stadium join facility  join court
             WHERE stadium.stadium_id = facility.stadium_id  and stadium.stadium_id = court.stadium_id";
@@ -348,6 +349,7 @@ join User on User.user_id = owner.user_id
             return $query;
         
     }
+
 
     public function getLatLngAll() {
         $query = $this->db->query('SELECT stadium_name,lat,stadium.long,address_no,soi,road,district,province,tel,stadium_path

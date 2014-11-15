@@ -18,10 +18,7 @@
         <li <?php if($type3 != NULL ){?><?="class = 'active'"; }?> >
             <a  href="<?= base_url() ?>stadium">&nbsp;&nbsp;&nbsp;Basic Infomation </a>           
         </li>
-        
-        <li >
-            <a href="<?= base_url() ?>stadium">&nbsp;&nbsp;&nbsp;Coach </a>           
-        </li>
+   
         <li >
             <a href="<?= base_url() ?>stadium">&nbsp;&nbsp;&nbsp;Blacklist </a>           
         </li>

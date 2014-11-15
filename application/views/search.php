@@ -1,5 +1,4 @@
 <?php include 'template/head.php'; ?>
-
 <div style="clear:both;"></div>
 
 
@@ -13,67 +12,91 @@
                     <h3 class="panel-title"><span class="glyphicon glyphicon-search"> </span>  Search</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group">
-                        <legend class="text-center">ประเภทพื้น</legend>
-                        <div class="checkbox" style="padding-left: initial">
-                            <label >
-                                <input type="checkbox"  id='experience' >   พื้นปูน             
-                            </label>  
-                            <label >
-                                <input type="checkbox"  id='experience' >   พื้นยาง             
-                            </label>  
-                            <label >
-                                <input type="checkbox"  id='experience' >   พื้นปาร์เก้            
-                            </label>  
-
+                    <form class="form-horizontal" method="post" action="<?php echo base_url() ?>stadium/searchAdvance">
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-lg-4 control-label">Keyword</label>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="inputEmail" name="value1" placeholder="ค้นหาจากชื่อสนาม">
+                            </div>
                         </div>
-                        <legend class="text-center">สิ่งอำนวยความสะดวก</legend>
-                        <dl class="dl-horizontal">
-                            <dt>
-                            <div class="checkbox" style="margin: -5px 0px 2px 0px;">
-                                <label>
-                                    <input  type="checkbox"  id='experience'  >       
-                                </label>
+                        <div class="form-group">
+                            <label for="select" class="col-lg-4 control-label">District</label>
+                            <div class="col-lg-8">
+                                <select class="form-control" id="select" name="value2">
+                                    <option value="all">เลือกทุกเขต</option>  
+                                    <?php foreach ($district as $row) { ?>
+                                        <option value="<?= $row->district ?>"><?= $row->district ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
-                            </dt>
-                            <dd style="margin-bottom: 2px">ที่จอดรถ</dd> 
-                            <dt>
-                            <div class="checkbox" style="margin: -5px 0px 2px 0px;">
-                                <label>
-                                    <input  type="checkbox"  id='experience'  >       
-                                </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="select" class="col-lg-4 control-label">Province</label>
+                            <div class="col-lg-8">
+                                <select class="form-control" id="select" name="value3">
+                                    <option value="all">เลือกทุกจังหวัด</option> 
+                                    <?php foreach ($province as $row) { ?>
+                                        <option value="<?= $row->province ?>"><?= $row->province ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
-                            </dt>
-                            <dd style="margin-bottom: 2px">ร้านอาหาร</dd> 
-                            <dt>
-                            <div class="checkbox" style="margin: -5px 0px 2px 0px;">
-                                <label>
-                                    <input  type="checkbox"  id='experience'  >       
-                                </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="select" class="col-lg-4 control-label">Floor</label>
+                            <div class="col-lg-8">
+                                <div class="checkbox pd" >
+                                    <label>
+                                        <input type="checkbox" name="floortype"  value="พื้นปูน"> พื้นปูน
+                                    </label>
+                                </div>
+                                <div class="checkbox pd" >
+                                    <label>
+                                        <input type="checkbox" name="floortype2"  value="พื้นยาง"> พื้นยาง
+                                    </label>
+                                </div>
+                                <div class="checkbox pd" >
+                                    <label>
+                                        <input type="checkbox" name="floortype3"  value="พื้นปาร์เก้"> พื้นปาร์เก้
+                                    </label> 
+                                </div>
                             </div>
-                            </dt>
-                            <dd style="margin-bottom: 2px">ห้องอาบน้ำ</dd> 
-                            <dt>
-                            <div class="checkbox" style="margin: -5px 0px 2px 0px;">
-                                <label>
-                                    <input  type="checkbox"  id='experience'  >       
-                                </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="select" class="col-lg-4 control-label">Facility</label>
+                            <div class="col-lg-8">
+                                <div class="checkbox pd" >
+                                    <label>
+                                        <input type="checkbox" name="f1"  value="1"> Parking
+                                    </label>
+                                </div>
+                                <div class="checkbox pd" >
+                                    <label>
+                                        <input type="checkbox" name="f2"  value="1"> Food Shop
+                                    </label>
+                                </div>
+                                <div class="checkbox pd" >
+                                    <label>
+                                        <input type="checkbox" name="f3"  value="1"> Bathroom
+                                    </label>
+                                </div>
+                                <div class="checkbox pd" >
+                                    <label>
+                                        <input type="checkbox" name="f4"  value="1"> Racket Repair
+                                    </label>
+                                </div>
+                                <div class="checkbox pd" >
+                                    <label>
+                                        <input type="checkbox" name="f5"  value="1"> Shop
+                                    </label>
+                                </div>
                             </div>
-                            </dt>
-                            <dd style="margin-bottom: 2px">ซ่อมอุปกรณ์แบตมินตัน</dd> 
-                            <dt>
-                            <div class="checkbox" style="margin: -5px 0px 2px 0px;">
-                                <label>
-                                    <input  type="checkbox"  id='experience'  >       
-                                </label>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-9 col-lg-offset-3">
+                                <button type="submit" class="btn btn-success">Search</button>
                             </div>
-                            </dt>
-                            <dd>ร้านค้า</dd> 
-
-
-
-                        </dl>
-                    </div>
+                        </div>
+                    </form>
 
                 </div>
             </div>
@@ -94,19 +117,19 @@
                                 <div class="thumbnail">
                                     <a href="<? echo base_url() ?>stadium/profile/<?= $row->stadium_id ?>"><img src="<?php echo base_url() ?>asset/images/stadiumpic/<?= $row->stadium_path ?>" alt="" style="width: 220px;height: 170px"></a>
                                     <div class="caption">
-                                        <h3><?= $row->stadium_name ?></h3>
+                                        <h3><a href="<? echo base_url() ?>stadium/profile/<?= $row->stadium_id ?>"><?= $row->stadium_name ?></a></h3>
                                         <p>ที่อยู่ : &nbsp;<?= $row->soi ?> <?= $row->district ?> <?= $row->province ?> </p>
                                         <p>ราคา: &nbsp;120/ชม.</p>
                                         <p>เบอโทร: &nbsp;<?= $row->tel != null ? $row->tel : '-'; ?></p>
                                         <p>
                                             <a href="<? echo base_url() ?>booking/reserve/<?= $row->stadium_id ?>" class="btn btn-primary">Book Now!</a> <a href="<? echo base_url() ?>stadium/profile/<?= $row->stadium_id ?>" class="btn btn-default">More Info</a>
-
+                                            <div class="checkbox pf pull-right" >
+                                                        <label>
+                                                            <input type="checkbox" value=" <?= $row->stadium_id ?>" name="compare[]">  compare
+                                                        </label>
+                                                    </div>
                                         </p>
-                                        <div class="checkbox ">
-                                            <label>
-                                                <input type="checkbox" value=" <?= $row->stadium_id ?>" name="compare[]">COMPARE
-                                            </label>
-                                        </div>
+                                        
 
 
 
@@ -123,21 +146,21 @@
 </div>
 </div>
 <script>
-    function checksubmit() {
-        var count = $('input[type=checkbox]:checked').length;
-        if (count == 0) {
-            alert("กรุณาเลือกสนามเพื่อเปรียบเทียบครับ");
-            return false;
-        } else if (count == 1) {
-            alert("กรุณาเลือกสนามมากกว่า 1 สนามครับ");
-            return false;
-        } else if (count > 4) {
-            alert("เลือกได้ไม่เกิน 4 สนามครับ");
-            return false;
-        } else {
-            return true;
+        function checksubmit() {
+            var count = $('input[type=checkbox]:checked').length;
+            if (count == 0) {
+                alert("กรุณาเลือกสนามเพื่อเปรียบเทียบครับ");
+                return false;
+            } else if (count == 1) {
+                alert("กรุณาเลือกสนามมากกว่า 1 สนามครับ");
+                return false;
+            } else if (count > 4) {
+                alert("เลือกได้ไม่เกิน 4 สนามครับ");
+                return false;
+            } else {
+                return true;
+            }
         }
-    }
 </script>
 <?php include 'template/modal.php'; ?>
 
