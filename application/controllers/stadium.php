@@ -576,10 +576,24 @@ class stadium extends CI_Controller {
     }
 
     function search() {
-        $data = array($this->input->post('optionsRadios'), $this->input->post('value2'), $this->input->post('value3'));
+        $data = array($this->input->post('optionsRadios'),$this->input->post('value2'), $this->input->post('value3'));
         $detail['result_search'] = $this->mystadium->showSearch($data);
-//       ////print_r($data);
+       // print_r($detail);
         $this->load->view('result_search', $detail);
+    } 
+    
+    function searchAdvance() {
+        $data = array($this->input->post('value1'), $this->input->post('value2'), $this->input->post('value3'),
+            $this->input->post('floortype'),$this->input->post('floortype2'),$this->input->post('floortype3'), 
+            $this->input->post('f1'),$this->input->post('f2'),$this->input->post('f3'),
+            $this->input->post('f4'),$this->input->post('f5'),);
+        $test = $this->input->post('value3');
+        //echo $test;
+     //print_r($data);
+//        echo $data['0'];
+        $detail['result_search'] = $this->mystadium->showSearchAdvance($data); 
+         //print_r($detail);
+         $this->load->view('result_search', $detail);
     }
 
     function allStadium() {

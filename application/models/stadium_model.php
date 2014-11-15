@@ -322,6 +322,34 @@ join User on User.user_id = owner.user_id
         
         }
     }
+    
+     public function showSearchAdvance($data) { 
+            $sql = "SELECT * 
+            FROM stadium join facility  join court
+            WHERE stadium.stadium_id = facility.stadium_id  and stadium.stadium_id = court.stadium_id";
+            if($data['0']!=null) $sql=$sql." and stadium_name like '%".$data['0']."%' ";
+            if($data['1']!="all") $sql=$sql." and district = '".$data['1']."' ";
+            if($data['2']!='all') $sql=$sql." and province = '".$data['2']. "' ";
+            if($data['3']!=null||$data['4']!=null||$data['5']!=NULL){
+                $sql=$sql." and type in (";
+                if($data['3']!=NULL) $sql=$sql."'พื้นปูน',";
+                if($data['4']!=NULL) $sql=$sql."'พื้นยาง',";
+                if($data['5']!=NULL) $sql=$sql."'พื้นปาร์เก้'";
+                $sql=$sql."'')";
+            }
+            if($data['6']!=null) {$sql=$sql." and parking ='".$data['6']. "'";}
+       
+            if($data['7']!=null) $sql=$sql." and food ='".$data['7']. "'";
+            if($data['8']!=null) $sql=$sql." and bathroom ='".$data['8']. "'";
+            if($data['9']!=null) $sql=$sql." and lockerroom ='".$data['9']. "'";
+            if($data['10']!=null) $sql=$sql." and shop ='".$data['10']. "'";
+            $sql = $sql." group by stadium.stadium_id";
+            
+            $query = $this->db->query($sql)->result();
+            return $query;
+        
+    }
+
 
     public function getLatLngAll() {
         $query = $this->db->query('SELECT stadium_name,lat,stadium.long,address_no,soi,road,district,province,tel,stadium_path
