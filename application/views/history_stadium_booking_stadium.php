@@ -12,14 +12,10 @@ $num = 1;
 ?>
 
 <div class="container">
-    <h4> <a href="#"></a> <span id="flashmsg"><font style="color: green"></font></span></h4> 
+    <h4> <a href="#"></a> HistoryBooking  <span id="flashmsg"><font style="color: green"></font></span></h4> 
     <div class="row">
-        <div class="panel panel-default"  style="margin-top: 20px">
-            <div class="panel-heading">
-            <ul class="breadcrumb" style="margin-bottom: 1px;">
-                    <li class="active"> History Booking Stadium</li>
-                </ul>
-            </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Account Settings</div>
             <div class="panel-body">
 
 
@@ -31,25 +27,27 @@ $num = 1;
                     <div class="col-md-9">
                         <div class="row">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="panel panel-success">
-                                        <div class="panel-heading">เลือกวัน</div>
-                                        <div id="datepicker" style="margin-left: 20px"></div>
+                                        <div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
                                     </div>
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-6">
                                     <div class="panel panel-info">
                                         <div class="panel-heading">สนามของฉัน</div>
                                         <div class="panel-body text-center">
                                             <div class="list-group">
                                                 <?php foreach($stadium as $st){ ?>
-                                                <div class="col-md-3">
-                                                    <a  href="<?php echo base_url() ?>stadium/historystadium/<?= $st->stadium_id ?>" ><img class="img-responsive circle thumbnail" src="<?php echo base_url() ?>asset/images/<?= $st->stadium_path != null ? 'stadiumpic/' . $st->stadium_path . '' : 'bad.png' ?>" /></a>
+                                                <div class="col-md-4">
+                                                    <a  href="<?php echo base_url() ?>stadium/profile/<?= $st->stadium_id ?>" ><img class="img-responsive circle thumbnail" src="<?php echo base_url() ?>asset/images/<?= $st->stadium_path != null ? 'stadiumpic/' . $st->stadium_path . '' : 'bad.png' ?>" /></a>
                                                     <small><?=$st->stadium_name?></small>
                                                     
                                                 </div>
                                                 <?php }?>
-                                          
+                                                <div class="col-md-4">
+                                                    <p>All booking : 
+                                                   <span class="label label-primary"> <?=count($allhis)?></span>  </p>
+                                                </div>
 
 
 
@@ -63,7 +61,7 @@ $num = 1;
                         </div>
                         <div class="row">
                             <table class="table table-bordered  table-condensedy" id="news-table">
-                                <thead><tr><th>ReserveID</th><th>Stadium</th><th>Court name</th><th>Date</th><th>Time reserve</th><th>Reserve by</th><th>Phone number</th><th>Total price</th><th>User Status</th><th>more</th></tr></thead>
+                                <thead><tr><th>ReserveID</th><th>Stadium</th><th>Court name</th><th>Date</th><th>Time reserve</th><th>Reserve by</th><th>Phone number</th><th>Total price</th><th>User Status</th></tr></thead>
                                 <tbody id="runtime">
                                     <?php foreach ($allhis as $a) { ?>
                                         <tr>
@@ -85,22 +83,7 @@ $num = 1;
                                                     
                                             </td>
 
-                                            <td>
-
-                                                <form class="form">
-                                                    <label>
-                                                        <input type="radio" class="options" name="optionsRadios" id="optionsRadios1" value="option1" <?= $a->iscome == 1 ? 'checked' : '' ?> data-bookid="<?= $a->reserve_id ?>" data-userid="<?= $a->user_id ?>" data-ch="1">
-                                                        Present
-                                                    </label>
-
-
-                                                    <label>
-                                                        <input type="radio" class="options" name="optionsRadios" id="optionsRadios2" value="option2" <?= $a->iscome == 2 ? 'checked' : '' ?> data-bookid="<?= $a->reserve_id ?>" data-ch="2" data-userid="<?= $a->user_id ?>">
-                                                        Absent
-                                                    </label>
-                                                </form>
-<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom">Bottom</button>
-                                            </td>
+                                           
 
 
                                         </tr>
@@ -193,7 +176,72 @@ when the page first loads -->
 <script src="<?= base_url() ?>asset/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" language="javascript" src="<?php echo base_url() . 'module/DataTables/js/jquery.dataTables.js'; ?>"></script>
 <script src="<?= base_url() ?>asset/js/jquery.notify.js" type="text/javascript"></script>
-
+<script src="<?= base_url() ?>asset/js/highchart/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<script>
+    var mS = ['','Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+ $(function () {
+      
+    $('#container').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Booking History Incomes'
+        },
+        subtitle: {
+            text: 'for your Stadium'
+        },
+        xAxis: {
+            categories: [
+                <?php foreach ($summonth as $s){?> mS['<?=$s->MONTH?>'],
+ <?php } ?>
+            ],
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'income (Baht)',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' Baht'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 100,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+            shadow: true
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 2014,
+            data: [<?php    foreach ($summonth as $s) {?>  <?=$s->sum?>, <?php } ?>]}
+             ]
+    });
+});
+</script>
 <script>
     myDate = new Date();
     var currentdate = (myDate.getMonth() + 1) + '/' + myDate.getDate() + '/' +
@@ -338,7 +386,7 @@ when the page first loads -->
         var t = rs.start_time.split(/[- :]/);
         var d = new Date(t[0], t[1] - 1, t[2], t[3], t[4], t[5]);
         if(daysBetween(myDate, d)>0){ //future 
-           htmlshow = htmlshow +'<button type="button" class="btn btn-warning" value="'+rs.reserve_id+'" onclick="del(this,false)"><span class="glyphicon glyphicon-remove"></span></button>';
+           htmlshow = htmlshow +'<button type="button" class="btn btn-warning " onclick="del()"><span class="glyphicon glyphicon-remove"></span></button>';
            
         }else{
             htmlshow = htmlshow +'<form class="form">'+
@@ -368,10 +416,10 @@ when the page first loads -->
         $('#runtime').html(htmlshow);
         
     }
-    function del(t) {
-   var reservid = $(t).attr('value');
-        confirm("Are you sure to Cancel"+ $(t).attr('value'));
-    
+    function del() {
+     $(document).on('change', '.form .options', function() {
+        confirm("Are you sure to Cancel"+$(this).data("bookid"));
+    });
     }
 
 

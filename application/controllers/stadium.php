@@ -224,8 +224,8 @@ class stadium extends CI_Controller {
     function facility($stId) {
         $data = array(
             'facility' => $this->mystadium->showfacility($stId),
-            'data' => $this->mystadium->setstadium($stId), //row
-             
+            'data' => $this->mystadium->setstadium($stId)
+            
         );
 
 //        ////////print_r($data['facility']);
@@ -659,14 +659,16 @@ class stadium extends CI_Controller {
 
     function gallery($id) {
         $data = array(
-            'img' => $this->img->getGallery($id)
+            'img' => $this->img->getGallery($id),
+            'data' => $this->mystadium->setstadium($id)
         );
         $this->load->view("gallery", $data);
     }
 
     function announcement($id) {
         $data = array(
-            'all_news' => $this->news->getallNews($id)
+            'all_news' => $this->news->getallNews($id),
+            'data' => $this->mystadium->setstadium($id)
         );
         $this->load->view("announcement", $data);
     }
@@ -674,8 +676,7 @@ class stadium extends CI_Controller {
     function blacklist($id) {
         $data = array(
             'blacklist' => $this->myusers->get_blacklist($id),
-            'data' => $this->mystadium->setstadium($id), //row
-                
+            'data' => $this->mystadium->setstadium($id)
         );
         $this->load->view("blacklist", $data);
     }
@@ -728,6 +729,25 @@ class stadium extends CI_Controller {
         $datasend = array(
         );
         echo json_encode($this->mystadium->getAVGpoint($stId));
+    }
+    
+    function historystadium($stId){
+        
+         $userid = $this->session->userdata('id');
+        $ownerid = $this->getOwnerid($userid);
+        $today = date('Y-m-d');
+        if ($userid != null) {
+
+            $datasend = array(
+                'ow' => $this->getOwner($userid),
+                'stadium' => $this->mystadium->getstadiumprofile($stId),
+                'allhis'=> $this->booking->getbookingDashboard_stadium($stId),
+                    'summonth'=>$this->mystadium->getSumpriceMonth($stId)
+            );
+//             print_r($datasend['summonth']);
+            $this->load->view('history_stadium_booking_stadium', $datasend);
+        } else
+            $this->load->view('index');
     }
 
 }

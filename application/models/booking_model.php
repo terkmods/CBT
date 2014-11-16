@@ -160,7 +160,18 @@ SELECT stadium_id
 FROM stadium
 WHERE owner_id = ' . $owner_id . '
 )
-AND DATE( start_time ) = CURDATE( ) ')->result();
+AND DATE( start_time ) = CURDATE( )
+order by reserve_id desc')->result();
+        return $query;
+    }
+        function getbookingDashboard_stadium($st) {
+        $query = $this->db->query('SELECT * 
+FROM  `reserve` 
+JOIN stadium ON reserve.stadium_id = stadium.stadium_id
+JOIN court ON reserve.court_id = court.court_id
+JOIN User ON User.user_id = reserve.user_id
+WHERE reserve.stadium_id = '.$st.' order by reserve_id desc
+')->result();
         return $query;
     }
 

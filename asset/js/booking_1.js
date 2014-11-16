@@ -96,6 +96,8 @@ function RowClick(currenttd, lock) {
             var daydiff = daysBetween(myDate,$('#datepicker').datepicker('getDate'));
             console.log(daydiff);
             console.log(timediff);
+            
+           
 
         
             if (daydiff<=0 && timediff <0 || (daydiff<0 && timediff<0) || daydiff<0 ) {
