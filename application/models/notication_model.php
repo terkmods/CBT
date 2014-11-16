@@ -32,15 +32,24 @@ WHERE seen_date IS NULL AND recive_noti.user_id =' . $userid . ' ORDER BY notifi
         $query = $this->db -> query($sql);
         return $query->result();
     }
-        function getnoti_all() {
+        function getnoti_all($perpage,$uri) {
         $userid = $this->session->userdata('id');
         $sql = 'SELECT * , TIMEDIFF( NOW( ) , notification.DATE ) AS time_diff, DATEDIFF( NOW( ) , notification.DATE ) AS day_diff
 FROM  `notification` 
 JOIN recive_noti ON notification.noti_id = recive_noti.recive_id
 join stadium on notification.stadium_id = stadium.stadium_id
-WHERE seen_date IS not NULL AND recive_noti.user_id =' . $userid . ' ORDER BY notification.date DESC ';
+join User on notification.user_id = User.user_id
+WHERE seen_date IS not NULL AND recive_noti.user_id =' . $userid . ' ORDER BY notification.date DESC  LIMIT '.$uri.','.$perpage.'';
         $query = $this->db -> query($sql);
         return $query->result();
     }
-
+    public function get_count() {
+       // return $this->db->count_all("announcement");
+//
+        $userid = $this->session->userdata('id');
+        $this->db->where('seen_date IS NOT NULL', null, false);
+        $this->db->where('user_id',  $userid );
+        $this->db->from('recive_noti'); 
+        return $this->db->count_all_results();
+    }
 }

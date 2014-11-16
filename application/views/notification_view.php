@@ -29,16 +29,18 @@ $num = 1;
                         <div class="list-group">
                             <div class="list-group-item">
                                 <div class="row-picture">
-                                    <img class="circle" src="http://lorempixel.com/56/56/people/1" alt="icon">
+                                    <img class="circle" src="http://cbt.backeyefinder.in.th/asset/images/<?=$n->profilepic_path != '' ? 'profilepic/'.$n->profilepic_path : 'profil.png'?>" alt="icon" >
                                 </div>
                                 <div class="row-content">
-                                    <h4 class="list-group-item-heading"><?=$n->stadium_name?></h4>
-                                    <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus</p>
+                                    <h4 class="list-group-item-heading"><?=$n->fname?></h4>
+                                    <p class="list-group-item-text"><?=$n->text?> ,<?=$n->stadium_name?></p>
+                                     <p class="list-group-item-text"><?=$n->date?> </p>
                                 </div>
                             </div>
                             <div class="list-group-separator"></div>
                         </div>
                         <?php } ?>
+                        <?php echo $this->pagination->create_links(); ?>
                     </div>
                 </div>
             </div>
