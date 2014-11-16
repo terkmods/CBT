@@ -5,6 +5,9 @@
  * and open the template in the editor.
  */
 ?>
+<?php $type = $this->uri->segment(1) ?>
+<?php $type2 = $this->uri->segment(2) ?>    
+<?php $type3 = $this->uri->segment(3) ?>
 <?php
 include 'template/head.php';
 $num = 1;
@@ -12,10 +15,21 @@ $num = 1;
 ?>
 
 <div class="container">
-    <h4> <a href="#"></a> Manage Stadium <font style="color: green"><?php echo $this->session->flashdata('msg'); ?></font></h4> 
+    <h4> <a href="#"></a>  <font style="color: green"><?php echo $this->session->flashdata('msg'); ?></font></h4> 
     <div class="row">
-        <div class="panel panel-default">
-            <div class="panel-heading">Account Settings </div>
+        <div class="panel panel-default"  style="margin-top: 20px">
+            <div class="panel-heading">
+            <ul class="breadcrumb" style="margin-bottom: 1px;">
+                    
+                <li><a href="<?= base_url() ?>stadium/managestadium">Manage Stadium</a></li>
+                <li><a href="<?= base_url() ?>stadium/updatestadium/<?=$data->stadium_id ?>"><?=$data->stadium_name ?></a></li>
+                    <li class="active">Announcement</li>
+                    
+                        
+                  
+                        
+                </ul>
+            </div>
             <div class="panel-body">
 
                 <!--
@@ -61,10 +75,13 @@ $num = 1;
 <div class="col-md-3 ">
                         <ul class="nav nav-pills nav-stacked" >  
                             <?php if ($this->session->userdata('role') == "owner") { ?>
+                            <li >
+                                  <a href="<?= base_url() ?>stadium">DashBoard </a>           
+                                </li>
                                 <li><a href="<?php echo base_url() ?>users/edituser/<?php echo $this->session->userdata('id'); ?>">Basic Setting</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url() ?>stadium/managestadium">Manage stadium </a>           
+                                    <a href="<?= base_url() ?>stadium/updatestadium/<?=$data->stadium_id ?>">Manage stadium </a>           
                                 </li>
 
                                 <li>
@@ -73,9 +90,7 @@ $num = 1;
                                 <li >
                                     <a href="<?= base_url() ?>stadium/facility/<?= $this->uri->segment(3) ?>">&nbsp;&nbsp;&nbsp;Facility </a>           
                                 </li>
-                                <li >
-                                    <a href="<?= base_url() ?>stadium/coach/<?= $this->uri->segment(3) ?>">&nbsp;&nbsp;&nbsp;Coach </a>           
-                                </li>
+                                
                                 <li >
                                     <a href="<?= base_url() ?>stadium/blacklist/<?= $this->uri->segment(3) ?>">&nbsp;&nbsp;&nbsp;Blacklist </a>           
                                 </li>
@@ -88,7 +103,7 @@ $num = 1;
 
 
                                 <li><a href="<?= base_url() ?>stadium/historyBooking">History Booking stadium </a></li>
-
+                                <li><a href="<?= base_url() ?>booking/historybooking">My Booking</a></li>
                             <?php } ?>
 
 

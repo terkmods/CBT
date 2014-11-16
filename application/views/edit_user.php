@@ -1,10 +1,14 @@
 
 <?php include 'template/head.php'; ?>
 <div class="container">
-    <h4> <a href="#"></a> Basic Setting </h4>
+    <h4> <a href="#"></a>  </h4>
     <div class="row">
-        <div class="panel panel-default">
-            <div class="panel-heading">Account Settings</div>
+        <div class="panel panel-default"  style="margin-top: 20px">
+            <div class="panel-heading">
+            <ul class="breadcrumb" style="margin-bottom: 1px;">
+                    <li class="active">Basic Setting</li>
+                </ul>
+            </div>
             <div class="panel-body">
                 <div class="container">
                     <?php include 'template/sideSetting.php'; ?>
@@ -52,12 +56,13 @@
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-2 control-label">Status</label>
                                         <div class="col-sm-2">
-                                            <?php if ($data['0']->status == 0) { ?>
-                                                    <span class="label label-success">Active</span>
-                                                <?php } else if ($data['0']->status == 1) { ?>
+                                            <?php if ($data['0']->status == 99) { ?>
+                                            <span class="label label-danger">Blacklist</span>
+                                                   
+                                                <?php } else if ($data['0']->status == 98) { ?>
                                                     <span class="label label-warning">Warning</span>
                                                 <?php } else { ?>
-                                                    <span class="label label-danger">Blacklist</span>
+                                                     <span class="label label-success">Active</span>
                                                 <?php } ?>
                                         </div>
                                     </div>

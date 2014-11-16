@@ -413,5 +413,13 @@ WHERE stadium_id = ' . $stId . '';
         return $avgprice;
     }
     
+    public function getpopular() {
+        $query = $this->db->query('select s.*,r.point from stadium s join(SELECT  stadium_id,sum(point) as point
+        FROM rating
+        group by stadium_id) r on s.stadium_id = r.stadium_id order by point desc limit 3')->result();
+        ;
+        return $query;
+    }
+    
     
 }

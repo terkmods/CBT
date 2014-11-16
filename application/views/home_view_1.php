@@ -312,52 +312,23 @@
                     <div class="row text-center">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Recommended Stadium</h3>
+                                <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Popular Stadium</h3>
                             </div>
                             <div class="panel-body">
-
-                                <div class="thumbnail">
-                                    <img src="<?php echo base_url() ?>asset/images/stadiumpic/p1.jpg" alt="">
-                                    <div class="caption">
-                                        <h3>Bangkok Badminton</h3>
-                                        <p>ที่อยู่ : &nbsp;33/45 ถนนบางบอน5 ซอย40 กรุงเทพฯ </p>
-                                        <p>ราคา: &nbsp;120/ชม.</p>
-                                        <p>เบอโทร: &nbsp;02-8997368</p>
-                                        <p>
-                                            <a href="<? echo base_url() ?>booking/reserve/30" class="btn btn-primary">Book Now!</a> <a href="<? echo base_url() ?>stadium/profile/30" class="btn btn-default">More Info</a>
-                                        </p>
+                                <?php foreach ($popular as $st) { ?>
+                                    <div class="thumbnail">
+                                        <a href="<?php echo base_url() ?>stadium/profile/<?= $st->stadium_id ?>"><img src="<?php echo base_url() ?>asset/images/<?= $st->stadium_path != null ? 'stadiumpic/' . $st->stadium_path . '' : 'bad.png' ?>" alt=""></a>
+                                        <div class="caption">
+                                            <h3><a href="<?php echo base_url() ?>stadium/profile/<?= $st->stadium_id ?>"><?= $st->stadium_name ?></a></h3>
+                                            <p>ที่อยู่ : &nbsp;<?= $st->soi ?> <?= $st->road ?> <?= $st->province ?> </p>
+                                             <p>เบอโทร: &nbsp;<?= $st->tel ?></p>
+                                            <p>
+                                                <a href="<? echo base_url() ?>booking/reserve/<?= $st->stadium_id ?>" class="btn btn-primary">Book Now!</a> <a href="<? echo base_url() ?>stadium/profile/<?= $st->stadium_id ?>" class="btn btn-default">More Info</a>
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
 
-
-
-                                <div class="thumbnail">
-                                    <img src="<?php echo base_url() ?>asset/images/stadiumpic/p2.jpg" alt="">
-                                    <div class="caption">
-                                        <h3>White House Club</h3>
-                                        <p>ที่อยู่ :&nbsp;ซอยเพชรเกษม 63/2 ถนนเพชรเกษม</p>
-                                        <p>ราคา:&nbsp;140/ชม.</p>
-                                        <p>เบอโทร:&nbsp;02-8113456</p>
-                                        <p>
-                                            <a href="<? echo base_url() ?>booking/reserve/29" class="btn btn-primary">Book Now!</a> <a href="<? echo base_url() ?>stadium/profile/28" class="btn btn-default">More Info</a>
-                                        </p>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="thumbnail">
-                                    <img src="<?php echo base_url() ?>asset/images/stadiumpic/p3.jpg" alt="">
-                                    <div class="caption">
-                                        <h3>Anunline</h3>
-                                        <p>ที่อยู่:&nbsp;13/31 หมู่ 9 ถ.เกษตร-นวมินทร์ เขตบึงกุ่ม</p>
-                                        <p>ราคา:&nbsp;140/ชม.</p>
-                                        <p>เบอโทร:&nbsp;02-5554487</p>
-                                        <p>
-                                            <a href="<? echo base_url() ?>booking/reserve/28" class="btn btn-primary">Book Now!</a> <a href="<? echo base_url() ?>stadium/profile/28" class="btn btn-default">More Info</a>
-                                        </p>
-                                    </div>
-                                </div>
+                                <? } ?>
 
                             </div>
                         </div>

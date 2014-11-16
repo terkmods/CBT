@@ -5,6 +5,9 @@
  * and open the template in the editor.
  */
 ?>
+<?php $type = $this->uri->segment(1) ?>
+<?php $type2 = $this->uri->segment(2) ?>    
+<?php $type3 = $this->uri->segment(3) ?>  
 <?php
 include 'template/head.php';
 $num = 1;
@@ -17,10 +20,20 @@ $isopen = null;
 ?>
 
 <div class="container">
-    <h4> <a href="#"></a> Manage Stadium </h4>
     <div class="row">
-        <div class="panel panel-default">
-            <div class="panel-heading">Account Settings</div>
+        
+        <div class="panel panel-default" style="margin-top: 20px">
+            <div class="panel-heading" >
+                <ul class="breadcrumb" style="margin-bottom: 1px;">
+                    
+                    <li class="active">Manage Stadium</li>
+                    
+                        
+                  
+                        
+                </ul>
+            
+            </div>
             <div class="panel-body">
 
                 <!--
