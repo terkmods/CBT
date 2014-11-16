@@ -15,6 +15,7 @@ class notification extends CI_Controller {
         $this->load->library('session');
         $this->load->library('form_validation');
         $this->load->helper(array('url', 'html', 'form'));
+             $this->load->helper('date');
     }
 
     function index() {
@@ -30,4 +31,27 @@ class notification extends CI_Controller {
                 
              echo "data: " .$total. "\n\n";
 	}
+        function getnotification(){
+            $result = $this->noti->getnoti();
+//            print_r($result);
+            echo json_encode($result);
+        }
+        function  mynotification()
+        {$result['noti'] = $this->noti->getnoti_all();
+print_r($result);
+         $today = date("Y-m-d");
+                  $userid = $this->session->userdata('id');
+            $this->db->update('recive_noti', array('seen_date'=>$today), array('user_id' => $userid));
+//            redirect('stadium/historyBooking');
+        $this->load->view('notification_view',$result);
+            
+        }
+        function seennoti($rId){
+            $today = date("Y-m-d");
+             $userid = $this->session->userdata('id');
+            $this->db->update('recive_noti', array('seen_date'=>$today), array('user_id' => $userid,'recive_id' => $rId));
+            redirect('stadium/historyBooking');
+            
+        }
+
 }

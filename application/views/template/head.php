@@ -69,7 +69,7 @@
                 width: 401px;
             }
             #directions-panel {
-/*                height: 100%;*/
+                /*                height: 100%;*/
                 float: right;
                 width: 390px;
                 overflow: auto;
@@ -99,69 +99,111 @@
                 <a class="navbar-brand" href="<?= base_url() ?>"><img src="../../../asset/images/logo-white.png"></a>
             </div>
             <div class="navbar-collapse collapse navbar-responsive-collapse">
-             
+
                 <ul class="nav navbar-nav navbar-left">
                     <li><a href="http://cbt.backeyefinder.in.th/home">Home</a></li>
                     <li><a href="http://cbt.backeyefinder.in.th/stadium/allStadium">Search</a></li>
                     <li><a href="http://cbt.backeyefinder.in.th/map/nearbystadium">Nearby Stadium</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                     
-        <?php if($this->session->userdata('role') ==null) { ?>
-                      <li><a href="<?php echo base_url()?>reg">Register</a></li>
-                                <li><a href="#" role="button" data-toggle="modal" data-target="#myModal">Sign in</a></li>
-                                <li><a href="#">Contact Us</a></li>
-        <?php } else { ?>
-                     <li><a href="#"><span class="mdi-social-notifications-on"></span><span class="badge" id="noti"> </span></a></li>
-        <?php if ($this->session->userdata('role') == "coach") { ?>
-                                                <li><a href="<?= base_url() ?>users/coachProfile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
-        <?php } else if ($this->session->userdata('role') == "user") { ?> 
-                                                <li><a href="<?= base_url() ?>users/profile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
-        <?php } else { ?>
-                                                <li><a href="<?= base_url() ?>stadium"><?php echo $this->session->userdata('profile_url') ?></a></li>
-        <?php } ?>
-                                            
-                    <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
-                                            <ul class="dropdown-menu" >
-        
-        <?php if ($this->session->userdata('role') == "owner") { ?>
-                                                        <li><a href="#">Dash board</a></li>
-                                                        <li><a href="#">My Booking</a></li>
-                                                        <li class="subdrop"><a href="#">Manage Stadium</a></li>
-                                                        <li class="divider"></li>
-            <?php foreach ($this->session->userdata('stadium') as $row) { ?>
-                                                            <li class="submenudrop"><a href="<?php echo base_url() ?>stadium/updatestadium/<?= $row->stadium_id ?>"><?= $row->stadium_name ?></a></li>
-            <?php } ?>
-                                                        <li class="submenudrop divider"></li>
-        <?php } else { ?>
-                                                        <li><a href="#">My Booking</a></li>   
-        <?php } ?>
-                                                <li><a href="#">Favorit Stadium</a></li>
-                                                <li><a href="#">Edit Profile</a></li>
-                                                <li><a href="<?php if ($this->session->userdata('role') == "owner") { ?><?= base_url() ?>stadium <?php } else { ?>  <?= base_url() ?>users/edituser/<?= $this->session->userdata('id') ?>  <?php } ?>" >
-        
-                                                        Settings</a></li>
-                                                        
-                                               
-        
-                                                <li class="divider"></li>
-                                                <li><a href="<?= base_url() ?>users/logout">Logout</a></li>
-        <?php } ?>
-                                            </ul>
-                                        </li>
+
+                    <?php if ($this->session->userdata('role') == null) { ?>
+                        <li><a href="<?php echo base_url() ?>reg">Register</a></li>
+                        <li><a href="#" role="button" data-toggle="modal" data-target="#myModal">Sign in</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    <?php } else { ?>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="mdi-social-notifications-on"></span><span class="badge" id="noti"> </span></a>
+                            <ul class="dropdown-menu" id="shownoti">
+                                
+                            </ul>
+                        </li>
+                        <?php if ($this->session->userdata('role') == "coach") { ?>
+                            <li><a href="<?= base_url() ?>users/coachProfile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
+                        <?php } else if ($this->session->userdata('role') == "user") { ?> 
+                            <li><a href="<?= base_url() ?>users/profile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
+                        <?php } else { ?>
+                            <li><a href="<?= base_url() ?>stadium"><?php echo $this->session->userdata('profile_url') ?></a></li>
+                        <?php } ?>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
+                            <ul class="dropdown-menu" >
+
+                                <?php if ($this->session->userdata('role') == "owner") { ?>
+                                    <li><a href="#">Dash board</a></li>
+                                    <li><a href="#">My Booking</a></li>
+                                    <li class="subdrop"><a href="#">Manage Stadium</a></li>
+                                    <li class="divider"></li>
+                                    <?php foreach ($this->session->userdata('stadium') as $row) { ?>
+                                        <li class="submenudrop"><a href="<?php echo base_url() ?>stadium/updatestadium/<?= $row->stadium_id ?>"><?= $row->stadium_name ?></a></li>
+                                    <?php } ?>
+                                    <li class="submenudrop divider"></li>
+                                <?php } else { ?>
+                                    <li><a href="#">My Booking</a></li>   
+                                <?php } ?>
+                                <li><a href="#">Favorit Stadium</a></li>
+                                <li><a href="#">Edit Profile</a></li>
+                                <li><a href="<?php if ($this->session->userdata('role') == "owner") { ?><?= base_url() ?>stadium <?php } else { ?>  <?= base_url() ?>users/edituser/<?= $this->session->userdata('id') ?>  <?php } ?>" >
+
+                                        Settings</a></li>
+
+
+
+                                <li class="divider"></li>
+                                <li><a href="<?= base_url() ?>users/logout">Logout</a></li>
+                            <?php } ?>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
 
         <div style="clear:both;"></div>
         <script>
-            if(window.EventSource){
-		var eventSource = new EventSource("<?php echo base_url('notification/total_noti');?>");
- 		eventSource.addEventListener('total_noti', function(event) {
+            var html='';
+            if (window.EventSource) {
+                var eventSource = new EventSource("<?php echo base_url('notification/total_noti'); ?>");
+                eventSource.addEventListener('total_noti', function (event) {
 // 				console.log(event.data);
-$("#noti").html(event.data);
-		   }, false);
-               }
-            </script> 
-           
+                    $("#noti").html(event.data);
+                    html=' ';
+                      $.getJSON('http://cbt.backeyefinder.in.th/notification/getnotification', function (json) {
+            console.log(json);
+            $(json).each(function (k, v) {
+                eachnoti(v);
+            });
+            
+       
+            html = html + '<li style="text-align : center"><a href="http://cbt.backeyefinder.in.th/notification/mynotification">Show all . . .</a></li>'
+            $('#shownoti').html(html);
+
+        });
+                }, false);
+            }
+                function eachnoti(rs) {
+        html = html + '<li class="mynotificationcss"><div class="list-group"><a href="http://cbt.backeyefinder.in.th/notification/seennoti/'+rs.recive_id+'">'+
+                                       ' <div class="list-group-item">'+
+                                        '    <div class="row-picture">'+
+                                         '       <img class="circle" src="http://cbt.backeyefinder.in.th/asset/images/' + (rs.profilepic_path != "" ? 'profilepic/' + rs.profilepic_path : 'profil.png') + '" alt="icon" >'+
+                                          '  </div>'+
+                                           ' <div class="row-content">'+
+                                            '    <h4 class="list-group-item-heading">'+rs.fname+'</h4>'+
+                                        
+                                             '   <p class="">'+rs.text+' : '+ rs.stadium_name+'</p>';
+                                             if(rs.day_diff==1){
+                                              html =html +  '   <p class="pull-right"> yesterday '+rs.time_diff.substring(0,2)+' hours ago</p>';
+                                         }else if(rs.day_diff==0 && rs.time_diff.substring(0,2)=="00" ){
+                                         html =html +  '   <p class="pull-right">'+rs.time_diff.substring(3,5)+' mins ago</p>';
+                                         }else if(rs.day_diff==0){
+                                          html =html +  '   <p class="pull-right">'+rs.time_diff.substring(0,2)+' hours'+rs.time_diff.substring(3,5)+' mins ago</p>';
+                                         }
+                                        html = html+   ' </div>'+
+                                        '</div></a></li>';
+                 
+         
+    }
+    
+
+        </script> 

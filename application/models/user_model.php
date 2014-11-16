@@ -92,7 +92,16 @@ where stadium.owner_id = owner.owner_id and owner.user_id = User.user_id  ')->re
         $sql = $this->db->query('SELECT DISTINCT blacklist.user_id,stadium_id,fname,profile_url,profilepic_path,User.reason FROM `blacklist` join User on User.user_id = blacklist.user_id  where stadium_id='.$stid.'')->result();
         return $sql;
     }
-    
+    function getUserIdstadium($ow){
+    $sql = $this->db->query('SELECT user_id
+FROM  `stadium` 
+JOIN owner ON owner.owner_id = stadium.owner_id
+WHERE owner.owner_id ='.$ow.'
+GROUP BY user_id')->row();
+     return $sql;
+    }
+   
+
 
 }
 

@@ -138,7 +138,52 @@
             }
         </style>
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+         <script>
+            var html='';
+            if (window.EventSource) {
+                var eventSource = new EventSource("<?php echo base_url('notification/total_noti'); ?>");
+                eventSource.addEventListener('total_noti', function (event) {
+// 				console.log(event.data);
+                    $("#noti").html(event.data);
+                    html=' ';
+                      $.getJSON('http://cbt.backeyefinder.in.th/notification/getnotification', function (json) {
+            console.log(json);
+            $(json).each(function (k, v) {
+                eachnoti(v);
+            });
+            
+       
+            html = html + '<li style="text-align : center"><a href="">Show all . . .</a></li>'
+            $('#shownoti').html(html);
 
+        });
+                }, false);
+            }
+                function eachnoti(rs) {
+        html = html + '<li class="mynotificationcss"><div class="list-group"><a href="http://cbt.backeyefinder.in.th/stadium/historyBooking">'+
+                                       ' <div class="list-group-item">'+
+                                        '    <div class="row-picture">'+
+                                         '       <img class="circle" src="http://cbt.backeyefinder.in.th/asset/images/' + (rs.profilepic_path != "" ? 'profilepic/' + rs.profilepic_path : 'profil.png') + '" alt="icon" >'+
+                                          '  </div>'+
+                                           ' <div class="row-content">'+
+                                            '    <h4 class="list-group-item-heading">'+rs.fname+'</h4>'+
+                                        
+                                             '   <p class="">'+rs.text+' : '+ rs.stadium_name+'</p>';
+                                             if(rs.day_diff==1){
+                                              html =html +  '   <p class="pull-right"> yesterday '+rs.time_diff.substring(0,2)+' hours ago</p>';
+                                         }else if(rs.day_diff==0 && rs.time_diff.substring(0,2)=="00" ){
+                                         html =html +  '   <p class="pull-right">'+rs.time_diff.substring(3,5)+' mins ago</p>';
+                                         }else if(rs.day_diff==0){
+                                          html =html +  '   <p class="pull-right">'+rs.time_diff.substring(0,2)+' hours'+rs.time_diff.substring(3,5)+' mins ago</p>';
+                                         }
+                                        html = html+   ' </div>'+
+                                        '</div></a></li>';
+                 
+         
+    }
+    
+
+        </script> 
     </head>
     <body>
         <div class="navbar navbar-default">
@@ -164,7 +209,12 @@
                                 <li><a href="#" role="button" data-toggle="modal" data-target="#myModal">Sign in</a></li>
                                 <li><a href="#">Contact Us</a></li>
         <?php } else { ?>
-                     <li><a href="#"><span class="mdi-social-notifications-on"></span><span class="badge" id="noti"> </span></a></li>
+                     <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="mdi-social-notifications-on"></span><span class="badge" id="noti"> </span></a>
+                            <ul class="dropdown-menu" id="shownoti">
+                                
+                            </ul>
+                        </li>
         <?php if ($this->session->userdata('role') == "coach") { ?>
                                                 <li><a href="<?= base_url() ?>users/coachProfile/<?php echo $this->session->userdata('id') ?>"><?php echo $this->session->userdata('profile_url') ?></a></li>
         <?php } else if ($this->session->userdata('role') == "user") { ?> 
@@ -516,7 +566,8 @@
                 </div>
                 </div>
             </div>
-        </div>
+        </div> 
+        
         
 
                 <?php include 'template/modal.php'; ?>
