@@ -6,10 +6,18 @@ $status = $ow->authenowner_status;
 ?>
 
 <div class="container">
-    <h4> <a href="#"></a> Manage Stadium </h4>
     <div class="row">
-        <div class="panel panel-default">
-            <div class="panel-heading">Account Settings</div>
+        <div class="panel panel-default"  style="margin-top: 20px">
+            <div class="panel-heading">
+            <ul class="breadcrumb" style="margin-bottom: 1px;">
+                    
+                <li><a href="<?= base_url() ?>stadium/managestadium">Manage Stadium</a></li>
+                    
+                        <li class="active">Add Stadium</li>
+                  
+                        
+                </ul>
+            </div>
             <div class="panel-body">
 
                 <!--
@@ -99,21 +107,52 @@ $status = $ow->authenowner_status;
 
                                         <fieldset>
                                             <legend>Address</legend>
-                                            <small style="color: gray">house no.*</small>
-                                            <input type="text" class=" form-control input-small " placeholder="No." name="no" required>
-                                            <small style="color: gray">alley*</small>
-                                            <input type="text" class=" form-control input-small top-mar " placeholder="Soi" name="soi" required>
-                                            <small style="color: gray">road*</small>
-                                            <input type="text" class=" form-control input-small top-mar " placeholder="Road" name="road" required>
-                                            <small style="color: gray">district*</small>
-                                            <input type="text" class=" form-control input-small top-mar" placeholder="District" name="district" required>
-                                            <small style="color: gray">subdistrict*</small>
-                                            <input type="text" class=" form-control input-small top-mar" placeholder="Subdistrict" name="subdistrict" required>
+                                            
+                                            
+                                            <select class="form-control" id="select" name="province">
+                                                <?php foreach ($province as $row) { ?>
+                                                    <option><?= $row->PROVINCE_NAME ?></option>
+                                                <?php } ?>
+                                            </select>
                                             <small style="color: gray">province*</small>
-                                            <input type="text" class=" form-control input-small top-mar" placeholder="PROVINCE" name="province" required>
-                                            <small style="color: gray">zip code*</small>
+                                            
+                                            <select class="form-control" id="select" name="district" >
+                                                <?php foreach ($kate as $row) { ?> 
+                                                    <option><?= $row->AMPHUR_NAME ?></option>
+                                                <?php } ?>
+                                            </select>
+                                            <small style="color: gray">district*</small>
+                                            
+                                            <select class="form-control" id="select" name="subdistrict" >
+                                                <?php foreach ($kwang as $row) { ?> 
+                                                    <option><?= $row->TUMBON_NAME ?></option>
+                                                <?php } ?>
+                                            </select>
+                                            <small style="color: gray">subdistrict*</small>
+                                            
+                                            <input type="text" class=" form-control input-small top-mar " placeholder="Road" name="road" required>
+                                            <small style="color: gray">road*</small>
+                                            
+                                             <input type="text" class=" form-control input-small top-mar " placeholder="Soi" name="soi" required>
+                                            <small style="color: gray">soi*</small>
+                                            
+                                            <input type="text" class=" form-control input-small " placeholder="No." name="no" required>
+                                            <small style="color: gray">house no.*</small>
+                                            
                                             <input type="text" class=" form-control input-small top-mar" placeholder="ZIP CODE" name="zip" required>
-
+                                            <small style="color: gray">zip code*</small>
+                                            
+                                            
+                                            
+                                            
+                                            
+                                           
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
                                         </fieldset>
 
                                     </div>

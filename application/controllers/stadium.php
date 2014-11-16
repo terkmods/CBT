@@ -12,6 +12,7 @@ class stadium extends CI_Controller {
         $this->load->model('coach_model', 'mycoach');
         $this->load->model('news_model', 'news');
         $this->load->model('gallery_model', 'img');
+        $this->load->model('Amphur', 'myamphur'); 
         $this->load->library('session');
         $this->load->model('booking_model', 'booking');
 
@@ -30,6 +31,7 @@ class stadium extends CI_Controller {
             $datasend = array(
                 'ow' => $this->getOwner($userid),
                 'stadium' => $this->mystadium->getstadium($ownerid)
+                    
             );
             
             $stID = null;
@@ -106,14 +108,17 @@ class stadium extends CI_Controller {
             $ownerid = $this->getOwnerid($userid);
 
 
-            $datasend = array(
+            $datasend = array( 
                 'ow' => $this->getOwner($userid),
-                'stadium' => $this->mystadium->getstadium($ownerid)
+                'stadium' => $this->mystadium->getstadium($ownerid),
+                'province'=>$this->myamphur->getprovince(),
+                'kate'=>$this->myamphur->getkate(),
+                'kwang'=>$this->myamphur->getkwang()
             );
 
 
 
-
+            //sprint_r($datasend[Province]);
             $this->load->view("add_stadium", $datasend);
         } else {
             $this->load->view('index');
