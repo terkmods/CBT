@@ -89,9 +89,7 @@ $num = 1;
                                     <a href="<?= base_url() ?>stadium/facility/<?= $this->uri->segment(3) ?>">&nbsp;&nbsp;&nbsp;Facility </a>           
                                 </li>
                               
-                                <li >
-                                    <a href="<?= base_url() ?>stadium/blacklist/<?= $this->uri->segment(3) ?>">&nbsp;&nbsp;&nbsp;Blacklist </a>           
-                                </li>
+                                
                                 <li>
                                     <a href="<?= base_url() ?>stadium/announcement/<?= $this->uri->segment(3) ?>">&nbsp;&nbsp;&nbsp;Announcement</a>
                                 </li>
@@ -99,7 +97,7 @@ $num = 1;
                                     <a href="<?= base_url() ?>stadium/gallery/<?= $this->uri->segment(3) ?>">&nbsp;&nbsp;&nbsp;Gallery </a>           
                                 </li>
 
-
+                                
                                 <li><a href="<?= base_url() ?>stadium/historyBooking">History Booking stadium </a></li>
                                 <li><a href="<?= base_url() ?>booking/historybooking">My Booking</a></li>
 
