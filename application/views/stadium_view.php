@@ -132,16 +132,7 @@
                 </div>
             </div>
 
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Stadium coach</h3>
-                </div>
-                <div class="panel-body">
-                    <ul>
-                        <li>-</li>
-                    </ul>
-                </div>
-            </div>
+            
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">Owner</h3>

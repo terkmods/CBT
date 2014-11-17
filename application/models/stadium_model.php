@@ -343,7 +343,7 @@ join User on User.user_id = owner.user_id
             if($data['8']!=null) $sql=$sql." and bathroom ='".$data['8']. "'";
             if($data['9']!=null) $sql=$sql." and lockerroom ='".$data['9']. "'";
             if($data['10']!=null) $sql=$sql." and shop ='".$data['10']. "'";
-            $sql = $sql." group by stadium.stadium_id";
+            $sql = $sql." and stadium_display = 1 group by stadium.stadium_id";
             
             $query = $this->db->query($sql)->result();
             return $query;

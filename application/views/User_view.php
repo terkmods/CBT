@@ -8,6 +8,7 @@
             <div class="col-md-8"><h3><?= $data['0']->fname; ?>&nbsp;<?= $data['0']->lname; ?></h3>
                 <hr>
                 <h3>About Me</h3>
+                <p><?= $data['0']->aboutme; ?></p>
             </div>
 
 

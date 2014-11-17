@@ -6,7 +6,6 @@
     
         <li><a href="http://cbt.backeyefinder.in.th/index.php/users/logout">logout</a></li>
 
-        <li ><a><img class="img-circle" src="<?php echo $this->session->userdata('path_pic'); ?>" width="30" alt=""></a></li>
 
     </ul>
 

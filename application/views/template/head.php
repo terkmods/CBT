@@ -132,19 +132,18 @@
                             <ul class="dropdown-menu" >
 
                                 <?php if ($this->session->userdata('role') == "owner") { ?>
-                                    <li><a href="#">Dash board</a></li>
-                                    <li><a href="#">My Booking</a></li>
-                                    <li class="subdrop"><a href="#">Manage Stadium</a></li>
+                                    <li><a href="<?= base_url() ?>stadium">Dash board</a></li>
+                                    <li><a href="<?= base_url() ?>booking/historybooking">My Booking</a></li>
+                                    <li class="subdrop"><a href="<?= base_url() ?>stadium/managestadium">Manage Stadium</a></li>
                                     <li class="divider"></li>
                                     <?php foreach ($this->session->userdata('stadium') as $row) { ?>
                                         <li class="submenudrop"><a href="<?php echo base_url() ?>stadium/updatestadium/<?= $row->stadium_id ?>"><?= $row->stadium_name ?></a></li>
                                     <?php } ?>
                                     <li class="submenudrop divider"></li>
                                 <?php } else { ?>
-                                    <li><a href="#">My Booking</a></li>   
+                                    <li><a href="<?= base_url() ?>booking/historybooking">My Booking</a></li>   
                                 <?php } ?>
-                                <li><a href="#">Favorit Stadium</a></li>
-                                <li><a href="#">Edit Profile</a></li>
+                                <li><a href="<?php echo base_url() ?>users/edituser/<?= $this->session->userdata('id') ?>">Edit Profile</a></li>
                                 <li><a href="<?php if ($this->session->userdata('role') == "owner") { ?><?= base_url() ?>stadium <?php } else { ?>  <?= base_url() ?>users/edituser/<?= $this->session->userdata('id') ?>  <?php } ?>" >
 
                                         Settings</a></li>

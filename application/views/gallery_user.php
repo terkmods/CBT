@@ -12,10 +12,14 @@ $num = 1;
 ?>
 
 <div class="container">
-    <h4> <a href="#"></a> User Setting <font style="color: green"><?php echo $this->session->flashdata('msg'); ?></font></h4> 
+    <h4> <a href="#"></a>  <font style="color: green"><?php echo $this->session->flashdata('msg'); ?></font></h4> 
     <div class="row">
-        <div class="panel panel-default">
-            <div class="panel-heading">Account Settings </div>
+        <div class="panel panel-default"  style="margin-top: 20px">
+            <div class="panel-heading">
+                <ul class="breadcrumb" style="margin-bottom: 1px;">
+                    <li class="active">Basic Setting</li>
+                </ul>
+            </div>
             <div class="panel-body">
 
                 <div class="container">

@@ -43,7 +43,7 @@ $num = 1;
         <li><a href="<?php echo base_url() ?>users/edituser/<?php echo $this->session->userdata('id'); ?>">Basic Setting</a>
         </li>
         <li>
-            <a href="<?= base_url() ?>stadium/updatestadium/<?=$data->stadium_id ?>">Manage stadium </a>           
+            <a href="<?= base_url() ?>stadium/managestadium">Manage stadium </a>           
         </li>
         
         <li >
@@ -61,8 +61,9 @@ $num = 1;
             <a href="<?= base_url() ?>stadium/gallery/<?=$this->uri->segment(3)?>">&nbsp;&nbsp;&nbsp;Gallery </a>           
         </li>
         
-        
+        <li ><a href="<?= base_url() ?>stadium/blacklist">Blacklist </a></li>
         <li><a href="<?= base_url() ?>stadium/historyBooking">History Booking stadium </a></li>
+        <li ><a href="<?= base_url() ?>notification/mynotification">Notification</a></li>
         <li><a href="<?= base_url() ?>booking/historybooking">My Booking</a></li>
         
             <?php }?>

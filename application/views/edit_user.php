@@ -112,9 +112,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-2 control-label">Club</label>
+                                        <label for="inputPassword3" class="col-sm-2 control-label" >Club</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="club" value="<?= $data['0']->club; ?>" >
+                                            <input type="text" class="form-control" name="club" placeholder="badminton court that you are usually play" value="<?= $data['0']->club; ?>" >
                                         </div>
                                     </div>
                                     <div class="form-group">

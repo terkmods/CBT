@@ -29,7 +29,9 @@
             <a href="<?= base_url() ?>stadium/gallery">&nbsp;&nbsp;&nbsp;Gallery </a>           
         </li>
         <?php } ?>
+        <li ><a href="<?= base_url() ?>stadium/blacklist">Blacklist </a></li>
         <li <?php if($type2 == "historyBooking" ){?><?="class = 'active'"; }?> ><a href="<?= base_url() ?>stadium/historyBooking">History Booking stadium </a></li>
+        <li <?php if($type == "notification" ){?><?="class = 'active'"; }?>><a href="<?= base_url() ?>notification/mynotification">Notification</a></li>
         <li <?php if($type == "booking"&& $type2 == "historybooking" ){?><?="class = 'active'"; }?> ><a href="<?= base_url() ?>booking/historybooking">My Booking </a></li>
         
             <?php }else if($this->session->userdata('role') == "user"){?>
@@ -37,6 +39,7 @@
         <li <?php if($type == "users" && $type2 =="edituser" ){?><?="class = 'active'"; }?> ><a href="<?php echo base_url() ?>users/edituser/<?php echo $this->session->userdata('id'); ?>">Basic Setting</a></li>
         
         <li <?php if($type == "booking" ){?><?="class = 'active'"; }?>><a href="<?= base_url() ?>booking/historybooking">My Booking</a></li>
+        <li <?php if($type == "notification" ){?><?="class = 'active'"; }?>><a href="<?= base_url() ?>notification/mynotification">Notification</a></li>
         <li <?php if($type2 == "gallery" ){?><?="class = 'active'"; }?>><a href="<?= base_url() ?>users/gallery">Gallery</a></li>
         <?php }else{?>
          <li <?php if($type == "users" && $type2 =="edituser" ){?><?="class = 'active'"; }?> ><a href="<?php echo base_url() ?>users/edituser/<?php echo $this->session->userdata('id'); ?>">Basic Setting</a></li>

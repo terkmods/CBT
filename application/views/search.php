@@ -113,7 +113,7 @@
                     </div>
                     <div class="panel-body">
                         <?php foreach ($stadium as $row) { ?>
-                            <div class="col-md-4 col-sm-6 hero-feature" >
+                            <div class="col-md-4 col-sm-6 hero-feature sc" >
                                 <div class="thumbnail">
                                     <a href="<? echo base_url() ?>stadium/profile/<?= $row->stadium_id ?>"><img src="<?php echo base_url() ?>asset/images/stadiumpic/<?= $row->stadium_path ?>" alt="" style="width: 220px;height: 170px"></a>
                                     <div class="caption">
