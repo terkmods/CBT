@@ -227,6 +227,7 @@ SELECT stadium_id
 FROM stadium
 WHERE owner_id = ' . $owner_id . '
 )
+and iscome  <> 100
 AND DATE( start_time ) = CURDATE( ) 
 
 AND CURRENT_TIMESTAMP < start_time ')->result();
@@ -260,5 +261,6 @@ WHERE owner_id = ' . $owner_id . '
 AND DATE( start_time ) = "'.$d.'"')->result();
         return $query;
     }
+   
 
 }

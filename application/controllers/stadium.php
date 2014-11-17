@@ -673,11 +673,15 @@ class stadium extends CI_Controller {
         $this->load->view("announcement", $data);
     }
 
-    function blacklist($id) {
-        $data = array(
-            'blacklist' => $this->myusers->get_blacklist($id),
-            'data' => $this->mystadium->setstadium($id)
-        );
+    function blacklist() {
+        $userid = $this->session->userdata('id');
+        $ownerid = $this->getOwnerid($userid);
+       $data['ch']= $this->mystadium->checkblacklist($ownerid);
+       print_r($data['ch']); 
+//        $data = array(
+////            'blacklist' => $this->myusers->get_blacklist($id),
+//            'data' => $this->mystadium->setstadium($id)
+//        );
         $this->load->view("blacklist", $data);
     }
 

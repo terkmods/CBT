@@ -407,8 +407,8 @@ function showTableBook() {
     weekday['Sun'] = "อาทิตย์";
     dayOfWeek = weekday[val[0]];
     //console.log('sssssss' + val[0]);
-    document.getElementById("dayOfWeek").innerHTML = dayOfWeek + ' ที่ ' + val[2] + ' พ.ศ. ' + val[3];
-    document.getElementById("datenaja").innerHTML = dayOfWeek + ' ที่ ' + val[2] + ' พ.ศ. ' + val[3];
+    document.getElementById("dayOfWeek").innerHTML = val[2]+' '+ val[1]+' ' + val[3];
+    document.getElementById("datenaja").innerHTML = val[2]+' '+ val[1] + ' '+val[3];
     //console.log(val);
 
     //console.log(id);

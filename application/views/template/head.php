@@ -182,7 +182,7 @@
                 }, false);
             }
                 function eachnoti(rs) {
-        html = html + '<li class="mynotificationcss"><div class="list-group"><a href="http://cbt.backeyefinder.in.th/notification/seennoti/'+rs.recive_id+'/'+rs.stadium_id+'">'+
+        html = html + '<li class="mynotificationcss"><div class="list-group"><a href="http://cbt.backeyefinder.in.th/notification/seennoti/'+rs.link+'/'+rs.recive_id+'/'+rs.stadium_id+'">'+
                                        ' <div class="list-group-item">'+
                                         '    <div class="row-picture">'+
                                          '       <img class="circle" src="http://cbt.backeyefinder.in.th/asset/images/' + (rs.profilepic_path != "" ? 'profilepic/' + rs.profilepic_path : 'profil.jpg') + '" alt="icon" >'+

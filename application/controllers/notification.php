@@ -84,11 +84,17 @@ class notification extends CI_Controller {
         $this->load->view('notification_view',$result);
             
         }
-        function seennoti($rId,$st){
+        function seennoti($link,$rId,$st){
             $today = date("Y-m-d");
+            
              $userid = $this->session->userdata('id');
             $this->db->update('recive_noti', array('seen_date'=>$today), array('user_id' => $userid,'recive_id' => $rId));
-            redirect('stadium/historystadium/'.$st);
+            
+            if($link == "book")
+            {            redirect('stadium/historystadium/'.$st);}
+        else if ($link == "come"){
+            redirect('booking/historybooking');
+        }
             
         }
         function test(){

@@ -365,7 +365,7 @@
                                 if (msg != null) {
                                     show = '<button type="button"  class="btn btn-primary btn-raised" role="button"  onclick="giverating()">VOTED</button>'
                                     $('#rat').html(show);
-                                    $('#apoint').html(obj.avgpoint);
+                                    $('#apoint').html(Math.round(obj.avgpoint * 100) / 100);
                                     $('#pepole').html(obj.count + ' people');
                                     $("#notija").notify({
                                         speed: 500,

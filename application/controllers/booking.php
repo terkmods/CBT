@@ -287,7 +287,7 @@ class booking extends CI_Controller {
             'user_id' => $this->session->userdata('user_idja'),
             'stadium_id' => $this->session->userdata('stadium_idja'),
             'text' => 'has booking you stadium',
-            'link' => ''
+            'link' => 'book'
         );
         //  print_r($datasession);
         $this->db->insert("reserve", $datasession);
@@ -402,12 +402,16 @@ class booking extends CI_Controller {
         $rId = $this->input->post('re_id');
         $check = $this->input->post('ch');
         $userId = $this->input->post('uid');
+        $useridsession = $this->session->userdata('id');
+        $st = $this->input->post('stid');
+        $stadiumprofile = $this->mystadium->getstadiumprofile($st);
         $iscome = 0;
         $noti = array(
             'user_id' => $userId,
-            'stadium_id' => $this->session->userdata('stadium_idja'),
-            'text' => 'has booking you stadium',
-            'link' => ''
+            'stadium_id' => $st,
+            'text' => 'You missed booking',
+            'link' => 'come'
+            
         );
         if ($check == 2) {
             $iscome = 2;
@@ -416,14 +420,15 @@ class booking extends CI_Controller {
             $this->db->update('User');
 
             //Notija//
-//            $this->db->insert("notification", $noti);
-//            $lastinsertid = $this->db->insert_id();
-//            $userid = $this->mystadium->getstadiumprofile($this->session->userdata('stadium_idja'));
-//
-//            $notirecive = array(
-//                'user_id' => $userid['0']->user_id,
-//            );
-//            $this->db->insert("recive_noti", $notirecive);
+            $this->db->insert("notification", $noti);
+            $lastinsertid = $this->db->insert_id();
+//            
+
+            $notirecive = array(
+             'recive_id' =>$lastinsertid,
+                'user_id' => $userId,
+            );
+            $this->db->insert("recive_noti", $notirecive);
         //
         } else {
             $iscome = 1;
@@ -465,8 +470,13 @@ class booking extends CI_Controller {
         echo json_encode($data);
     }
 
-    function cancelbook() {
+    function cancelbook($ri) {
         
+            $this->db->where('reserve_id', $ri);
+            $this->db->set('iscome', '100');
+            $this->db->update('reserve');
+            $this->session->set_flashdata('msg', 'Cancel booking is Complete');
+            redirect('http://cbt.backeyefinder.in.th/stadium/historyBooking');
     }
 
 }

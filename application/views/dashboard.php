@@ -131,7 +131,7 @@ $isopen = null;
                                                         <div class="row-content">
                                                             <div class="action-secondary">
                                                                 <button type="button" class="btn btn-primary btn-xs viewdetail" data-toggle="modal" data-target="#actionbooking" data-pic="<?= $b->stadium_path != null ? 'stadiumpic/' . $b->stadium_path . '' : 'bad.png' ?>" data-sname="<?= $b->stadium_name ?>"
-                                                                        data-court="<?= $b->court_name ?>" data-time="<?= $b->start_time ?> - <?= $b->end_time ?>"  data-jong="<?= $b->fname ?> <?= $b->lname ?>" data-tel="<?= $b->phone ?>" data-play=2>
+                                                                        data-court="<?= $b->court_name ?>" data-time="<?= $b->start_time ?> - <?= $b->end_time ?>"  data-jong="<?= $b->fname ?> <?= $b->lname ?>" data-tel="<?= $b->phone ?>" data-play=2 data-re="<?= $b->reserve_id ?>">
                                                                     more info
                                                                 </button>
                                                             </div>
@@ -305,8 +305,10 @@ $isopen = null;
         var etime = time.substr(32);
         var court = $(this).data("court");
         var play = $(this).data("play");
+        var reid = $(this).data("re");
         console.log(path);
         console.log(sname);
+//        alert(reid);
         var htmlmodal ='';
         var aaa='';
         
@@ -331,7 +333,7 @@ $isopen = null;
 //            $('#modalshow').hide();
 $('#modalshow').html("");
 //            alert('sss');
-             aaa = '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+'<button type="button" class="btn btn-warning ">Cancle Reserve</button>';
+             aaa = '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+'<a type="button" class="btn btn-warning" href="http://cbt.backeyefinder.in.th/booking/cancelbook/'+reid+'">Cancle Reserve</a>';
             $('#modalsubmit').html(aaa);
 
         }
