@@ -100,6 +100,15 @@ WHERE owner.owner_id ='.$ow.'
 GROUP BY user_id')->row();
      return $sql;
     }
+    
+    function searchBlacklist($text){
+        $sql=$this->db->query('SELECT * 
+    FROM `User` 
+    WHERE  fname like "%p%"
+    or lname like "%p%"')->result();
+        return $sql;
+        
+    }
    
 
 

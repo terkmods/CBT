@@ -79,24 +79,12 @@ $num = 1;
                                     <a href="<?= base_url() ?>stadium/updatestadium/">Manage stadium </a>           
                                 </li>
 
-                                <li >
-                                    <a  href="<?= base_url() ?>stadium/updatestadium/<?= $this->uri->segment(3) ?>" >&nbsp;&nbsp;&nbsp;Basic Infomation </a>           
-                                </li>
-                                <li >
-                                    <a href="<?= base_url() ?>stadium/facility/<?= $this->uri->segment(3) ?>">&nbsp;&nbsp;&nbsp;Facility </a>           
-                                </li>
-
-                                <li>
-                                    <a href="<?= base_url() ?>stadium/announcement/<?= $this->uri->segment(3) ?>">&nbsp;&nbsp;&nbsp;Announcement</a>
-                                </li>
-                                <li >
-                                    <a href="<?= base_url() ?>stadium/gallery/<?= $this->uri->segment(3) ?>">&nbsp;&nbsp;&nbsp;Gallery </a>           
-                                </li>
+                               
 
                                 <li><a href="<?= base_url() ?>stadium/historyBooking">History Booking stadium </a></li>
                                 <li><a href="<?= base_url() ?>booking/historybooking">My Booking</a></li>
                                 <li class="active">
-                                    <a href="<?= base_url() ?>stadium/blacklist/<?= $this->uri->segment(3) ?>">&nbsp;&nbsp;&nbsp;Blacklist </a>           
+                                    <a href="<?= base_url() ?>stadium/blacklist/<?= $this->uri->segment(3) ?>">Blacklist </a>           
                                 </li>
                             <?php } ?>
 
@@ -111,9 +99,9 @@ $num = 1;
                                     <div class="panel panel-success">
                                         <div class="panel-heading">Search</div>
                                         
-                                            <form class="navbar-form navbar-left" role="search">
+                                        <form class="navbar-form navbar-left" role="search" action="<?php echo base_url() ?>stadium/resultblacklist" method="post" >
                                                 <div class="form-group ">
-                                                    <input type="text" class="form-control" placeholder="Search">
+                                                    <input type="text" class="form-control" name="value1" placeholder="Search">
                                                 </div>
                                                 <button type="submit" class="btn btn-default form-control"><span class="glyphicon glyphicon-search"></span></button>
                                                 <!--<a href="#" class="btn btn-success" role="button" >Add Blacklist</a>-->

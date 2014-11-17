@@ -674,18 +674,25 @@ class stadium extends CI_Controller {
     }
 
     function blacklist() {
+        
         $userid = $this->session->userdata('id');
         $ownerid = $this->getOwnerid($userid);
-       $data['ch']= $this->mystadium->checkblacklist($ownerid);
-       print_r($data['ch']); 
+        $data['ch']= $this->mystadium->checkblacklist($ownerid);
+         
 //        $data = array(
 ////            'blacklist' => $this->myusers->get_blacklist($id),
 //            'data' => $this->mystadium->setstadium($id)
 //        );
         $this->load->view("blacklist", $data);
     }
-
-    function coach($id) {
+    function resultblacklist(){
+         $text = $this->input->post('value1');
+         $data['result']= $this->myusers->searchBlacklist($text);
+         print_r($data);
+//         $this->load->view("blacklist", $data);
+    }
+    
+                function coach($id) {
         $data = array(
             'data' => $this->mystadium->setstadium($id), //row
             'coach' => $this->mycoach->get_all_coach()
@@ -736,12 +743,10 @@ class stadium extends CI_Controller {
     }
     
     function historystadium($stId){
-        
-         $userid = $this->session->userdata('id');
+        $userid = $this->session->userdata('id');
         $ownerid = $this->getOwnerid($userid);
         $today = date('Y-m-d');
         if ($userid != null) {
-
             $datasend = array(
                 'ow' => $this->getOwner($userid),
                 'stadium' => $this->mystadium->getstadiumprofile($stId),
