@@ -428,6 +428,25 @@ LIMIT 0 , 30';
         group by stadium_id) r on s.stadium_id = r.stadium_id where stadium_display = 1  order by point desc limit 3')->result();
         ;
         return $query;
-    } 
+    }
+     function checkblacklist($owid){
+        $sql='SELECT *,count(reserve.user_id) as result
+FROM  `reserve` 
+JOIN stadium ON reserve.stadium_id = stadium.stadium_id
+JOIN court ON reserve.court_id = court.court_id
+JOIN User ON User.user_id = reserve.user_id
+WHERE reserve.stadium_id
+IN (
+
+SELECT stadium_id 
+FROM stadium
+WHERE owner_id = '.$owid.'
+) 
+and iscome = 2
+group by reserve.user_id
+order by result desc';
+        $query = $this->db->query($sql)->result();
+        return $query;
+    }
     
 }

@@ -94,7 +94,7 @@ class Users extends CI_Controller {
             redirect('home');
         } else {
             $this->session->set_flashdata('msg_error', 'รหัสผ่านหรืออีเมลไม่ถูกต้องกรุณาตรวจสอบ');
-            $this->load->view('index');
+            redirect('index.php');
         }
 
         //} else {

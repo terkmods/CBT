@@ -56,6 +56,11 @@ $num = 1;
                                             </div>
                                         </div>
                                     </div>
+                                         <?php
+                            echo'<font color=red>';
+                            echo $this->session->flashdata('msg');
+                            echo '</font>'
+                            ?>
                                 </div>
                             </div>
 
@@ -86,23 +91,28 @@ $num = 1;
                                             </td>
 
                                             <td>
-
+                                                <?php if($a->iscome < 99) { ?>
                                                 <form class="form">
                                                     <label>
-                                                        <input type="radio" class="options" name="optionsRadios" id="optionsRadios1" value="option1" <?= $a->iscome == 1 ? 'checked' : '' ?> data-bookid="<?= $a->reserve_id ?>" data-userid="<?= $a->user_id ?>" data-ch="1">
-                                                        Present
+                                                        <input type="radio" class="options" name="optionsRadios" id="optionsRadios1" value="option1" <?= $a->iscome == 1 ? 'checked' : '' ?> data-bookid="<?= $a->reserve_id ?>" data-userid="<?= $a->user_id ?>" data-ch="1"
+                                                               data-st="<?=$a->stadium_id?>">
+                                                        Present 
                                                     </label>
 
 
                                                     <label>
-                                                        <input type="radio" class="options" name="optionsRadios" id="optionsRadios2" value="option2" <?= $a->iscome == 2 ? 'checked' : '' ?> data-bookid="<?= $a->reserve_id ?>" data-ch="2" data-userid="<?= $a->user_id ?>">
+                                                        <input type="radio" class="options" name="optionsRadios" id="optionsRadios2" value="option2" <?= $a->iscome == 2 ? 'checked' : '' ?> data-bookid="<?= $a->reserve_id ?>" data-ch="2" data-userid="<?= $a->user_id ?>" 
+                                                               data-st="<?=$a->stadium_id?>">
                                                         Absent
                                                     </label>
                                                 </form>
-<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom">Bottom</button>
+                                                
+<button type="button" class="btn btn-warning btn-sm" value="<?=$a->reserve_id?>" onclick="del(this,false)"><span class="glyphicon glyphicon-remove"></span></button>
                                             </td>
 
-
+                                    <?php } else {?>
+                                            This booking <span class="glyphicon glyphicon-remove label label-danger"> Cancel</span>
+                                    <?php }?> 
                                         </tr>
                                     <?php } ?>
                                 </tbody>
@@ -283,11 +293,12 @@ when the page first loads -->
         re_id = $(this).data("bookid");
         checkselect = $(this).data("ch");
         uId = $(this).data("userid");
-//        alert(checkselect);
+        stadium = $(this).data("st");
+//        alert(stadium);
         $.ajax({
             type: "POST",
             url: "http://cbt.backeyefinder.in.th/booking/updatecome/",
-            data: {re_id: re_id, ch: checkselect, uid: uId}
+            data: {re_id: re_id, ch: checkselect, uid: uId,stid : stadium}
         }).done(function (msg) {
 
             console.log(msg);
@@ -337,10 +348,10 @@ when the page first loads -->
         
         var t = rs.start_time.split(/[- :]/);
         var d = new Date(t[0], t[1] - 1, t[2], t[3], t[4], t[5]);
-        if(daysBetween(myDate, d)>0){ //future 
+        if(daysBetween(myDate, d)>0 && rs.iscome<100){ //future 
            htmlshow = htmlshow +'<button type="button" class="btn btn-warning" value="'+rs.reserve_id+'" onclick="del(this,false)"><span class="glyphicon glyphicon-remove"></span></button>';
            
-        }else{
+        }if(daysBetween(myDate, d)<0 || daysBetween(myDate, d)==0){
             htmlshow = htmlshow +'<form class="form">'+
                                                    ' <label>'+
                                                       '  <input type="radio" class="options" name="optionsRadios" id="optionsRadios1" '+
@@ -356,6 +367,9 @@ when the page first loads -->
                                                       '  Absent'+
                                                    ' </label>'+
                                                 '</form>';
+        }if(rs.iscome==100){
+               htmlshow = htmlshow +'This booking <span class="glyphicon glyphicon-remove label label-danger"> Cancel</span>';
+           
         }
 
 
@@ -370,8 +384,9 @@ when the page first loads -->
     }
     function del(t) {
    var reservid = $(t).attr('value');
-        confirm("Are you sure to Cancel"+ $(t).attr('value'));
-    
+       c =  confirm("Are you sure to Cancel"+ $(t).attr('value'));
+       if(c)
+    window.location.href= 'http://cbt.backeyefinder.in.th/booking/cancelbook/'+reservid+'';
     }
 
 
