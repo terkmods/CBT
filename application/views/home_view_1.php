@@ -612,7 +612,8 @@
                 // setMarkers(map, beaches);
 
                 $.getJSON('http://cbt.backeyefinder.in.th/home/test', function(json) {
-
+                    console.log('333');
+        console.log(json);
                     $(json).each(function(k, v) {
                         eachmaker(v);
                     });
@@ -637,6 +638,7 @@
             function eachmaker(rs) {
                 console.log(rs.lat);
                 console.log(rs.long);
+                console.log(rs);
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(rs.lat, rs.long),
                     map: map,
@@ -656,6 +658,8 @@
                         ' ' + rs.road + '' + rs.district +
                         '</p>' +
                         ' <p>เบอโทร:' + (rs.tel != "" ? rs.tel : '-') + '</p>' +
+        
+                        
                         ' <p>' +
                         '  <a href="http://cbt.backeyefinder.in.th/booking/reserve/' + rs.stadium_id + '" class="btn btn-primary">Book Now!</a> <a href="<? echo base_url() ?>stadium/profile/' + rs.stadium_id + '" class="btn btn-default">More Info</a>' +
                         '</p>' +

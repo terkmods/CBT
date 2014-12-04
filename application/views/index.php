@@ -104,14 +104,7 @@
             </div>
         </div> <!-- Search -->
         <div class="clear"></div>
-        <div class="container line-foot">
-            <center>
-                <img src="../../asset/images/line-foot.png" width="100%"> </center>
-            <div class="row">
-                <div class="col-md-4">Created by IT-21 - 2014</div>
-                <div class="col-md-4 pull-right" style="text-align:right;">Copyright CBTonline 2014</div>
-            </div>
-        </div>
+     
     </div> <!--body home -->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -492,7 +492,7 @@ function showTableBook() {
             //console.log(td_end);
 
             for (var j = td_start; j < td_end; j++) {
-                $("#t" + j).find("td[value='" + court_id + "']").text("ไม่ว่าง").addClass('bookline').removeAttr("onclick");
+                $("#t" + j).find("td[value='" + court_id + "']").text("BOOKED").addClass('bookred').removeAttr("onclick");
             }
             //replace td in court id
         }

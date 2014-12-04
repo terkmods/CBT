@@ -276,20 +276,28 @@ class Users extends CI_Controller {
     }
 
     function addBlacklist() {
-        $userId = $this->input->post('idsend');
+       $userid = $this->session->userdata('id');
+            $ownerid = $this->getOwnerid($userid);
+       
         $reason = $this->input->post('reasonsend');
+        $uid_form = $this->input->post('userid');
+        
+        echo $uid_form;
+        echo $reason;
         $data = array(
-            'status' => 'blacklist',
+            'status' => 99,
             'reason' => $reason
         );
         $datasend = array(
-            'stadium_id' => $this->input->post('stsend'),
-            'user_id' => $this->input->post('idsend'),
+            'owner_id' => $ownerid,
+            'user_id' => $uid_form,
             'reason' => $reason
         );
-        $this->db->update('User', $data, array('user_id' => $userId));
+        $this->db->update('User', $data, array('user_id' => $userid));
         $this->db->insert('blacklist', $datasend);
-        echo 'complete';
+//        echo 'complete';
+                    $this->session->set_flashdata('msg', 'add blacklist complete');
+        redirect('stadium/blacklist');
     }
 
     function addWarning() {

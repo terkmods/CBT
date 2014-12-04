@@ -115,9 +115,12 @@ include 'template/head.php';
                                                 $date = (strtotime($r->end_time) - strtotime($r->start_time));
                                                 $today = date("H:i:s", $date);
                                                 ?>
-                                                <td><?= date("h", strtotime($r->end_time)) - date("h", strtotime($r->start_time)) ?>ชม. <?= date('i', $date) ?> นาที</td>
-                                                <td><a href="<?= base_url() ?>booking/cancelbooking/<?= $r->reserve_id ?>" class="form-control btn-danger btn-sm" onclick="del()"> cancel</a>
+                                                <td><?= date("H", strtotime($r->end_time)) - date("H", strtotime($r->start_time)) ?>ชม. <?= date('i', $date) ?> นาที</td>
+                                                <?php if($r->iscome<99){?>
+                                                <td><button type="button" class="btn-danger btn-sm btn" onclick="clbook(this,false)" value="<?=$r->reserve_id?>"> Cancel</button></td>
     <!--                                                    <input type="submit" value="cancel" class="form-control btn-danger btn-sm"></td>-->
+                                                <?php } else {?><td><span class="glyphicon glyphicon-remove label label-danger">This booking is Cancel</span></td>
+                                                <?php }?>
                                             </tr>
                                         <?php } ?>
                                     </tbody>    
@@ -227,6 +230,7 @@ include 'template/head.php';
     }
     function futuer() {
         var x = document.getElementById("futuer").value;
+//        alert(x);
         var fullpart = "http://cbt.backeyefinder.in.th/booking/historyBookingajax";
         $.ajax({
             type: "POST",
@@ -235,7 +239,7 @@ include 'template/head.php';
         }).done(function (msg) {
             var obj = JSON.parse(msg);
 
-//            console.log(obj[0].stadium_id);
+            console.log(obj);
             show = ' ';
             if (obj != null) {
                 for (i = 0; i < obj.length; i++) {
@@ -246,9 +250,16 @@ include 'template/head.php';
                             ' <td>' + obj[i].stadium_name + '</td>' +
                             '  <td>' + obj[i].court_name + '</td>' +
                             '   <td>' + obj[i].start_time.substring(10, 16) + '-' + obj[i].end_time.substring(10, 16) + '</td>' +
-                            '<td>' + (obj[i].end_time.substring(10, 13) - obj[i].start_time.substring(10, 13)) + 'ชม. ' + ((obj[i].end_time.substring(14, 16) - obj[i].start_time.substring(14, 16))< 0 ? '30':(obj[i].end_time.substring(14, 16) - obj[i].start_time.substring(14, 16))) + ' นาที</td>' +
-                            '  </tr>';
-                    console.log(obj[i].end_time.substring(14, 16));
+                            '<td>' + (obj[i].end_time.substring(10, 13) - obj[i].start_time.substring(10, 13)) + 'ชม. ' + ((obj[i].end_time.substring(14, 16) - obj[i].start_time.substring(14, 16))< 0 ? '30':(obj[i].end_time.substring(14, 16) - obj[i].start_time.substring(14, 16))) + ' นาที</td>' ;
+                          
+                        console.log(obj[i].iscome);
+                            if(obj[i].iscome<99){
+                               show = show+' <td><button type="button" class="btn-danger btn-sm btn" onclick="clbook(this,false)" value="'+obj[i].reserve_id+'"> Cancel</button></td>';
+                                    }else{
+                                    show = show+'<td><span class="glyphicon glyphicon-remove label label-danger">This booking is Cancel</span></td>';
+                                    }
+                        show = show+ '  </tr>';
+//                    console.log(obj[i].end_time.substring(14, 16));
                 }
             }
             showallbook =  '<h2>'+obj.length+'<small>booking</small></h2> Check your all booking down below';
@@ -261,7 +272,15 @@ include 'template/head.php';
             $('#headcr').addClass('panel-info');
         });
     }
+     function clbook(t) {
+   var reservid = $(t).attr('value');
+       c =  confirm("Are you sure to Cancel"+ $(t).attr('value'));
+       if(c){
+//           alert(reservid);
+    window.location.href= 'http://cbt.backeyefinder.in.th/booking/cancelmybook/'+reservid+'';}
+    }
 </script>
+
 
 <?php include 'template/footer_scrpit.php'; ?>
 

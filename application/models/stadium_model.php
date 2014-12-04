@@ -343,7 +343,7 @@ join User on User.user_id = owner.user_id
             if($data['8']!=null) $sql=$sql." and bathroom ='".$data['8']. "'";
             if($data['9']!=null) $sql=$sql." and lockerroom ='".$data['9']. "'";
             if($data['10']!=null) $sql=$sql." and shop ='".$data['10']. "'";
-            $sql = $sql." and stadium_display = 1 group by stadium.stadium_id";
+            $sql = $sql." and stadium_display = 1 group by stadium.stadium_id ";
             
             $query = $this->db->query($sql)->result();
             return $query;
@@ -352,7 +352,7 @@ join User on User.user_id = owner.user_id
 
 
     public function getLatLngAll() {
-        $query = $this->db->query('SELECT stadium_name,lat,stadium.long,address_no,soi,road,district,province,tel,stadium_path
+        $query = $this->db->query('SELECT stadium_id
 FROM  `stadium` 
 WHERE stadium.lat IS NOT NULL  ')->result_array();
 
@@ -360,7 +360,7 @@ WHERE stadium.lat IS NOT NULL  ')->result_array();
     }
 
     public function getLatLngAll_for_nbl() {
-        $query = $this->db->query('SELECT stadium_name, lat,stadium.long,address_no,soi,road,district,province,tel,stadium_path
+        $query = $this->db->query('SELECT *
 FROM  `stadium` 
 WHERE stadium.lat IS NOT NULL  ')->result_array();
 
@@ -445,6 +445,17 @@ WHERE owner_id = '.$owid.'
 and iscome = 2
 group by reserve.user_id
 order by result desc';
+        $query = $this->db->query($sql)->result();
+        return $query;
+    }
+    function getstadiumidfromuserid($uid){
+        $sql = 'SELECT * 
+FROM  `stadium` 
+WHERE owner_id = ( 
+SELECT owner.owner_id
+FROM owner
+JOIN User ON User.user_id = owner.user_id
+WHERE User.user_id ='.$uid.' ) ';
         $query = $this->db->query($sql)->result();
         return $query;
     }

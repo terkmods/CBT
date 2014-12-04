@@ -1,4 +1,31 @@
 <!-- Modal -->
+<div class="modal fade" id="addblacklist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Add blacklist</h4>
+                </div>
+                <form action="<?php echo base_url() ?>users/addBlacklist" method="post"> 
+                    <div class="modal-body" style="text-align: center">
+                        <h4>Reason</h4>
+                        <textarea class="form-control" rows="5" name='reasonsend'></textarea>
+                        <!--<input type="email" class="form-control input-lg top-mar" placeholder="Email" name="email" required="">-->
+                        
+                        <input type="hidden" name="userid" id="userid">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+                        <button type="submit" name="submit" class="btn btn-primary">submit</button>
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
 

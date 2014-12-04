@@ -68,7 +68,7 @@ $num = 1;
                         </div>
                         <div class="row">
                             <table class="table table-bordered  table-condensedy" id="news-table">
-                                <thead><tr><th>ReserveID</th><th>Stadium</th><th>Court name</th><th>Date</th><th>Time reserve</th><th>Reserve by</th><th>Phone number</th><th>Total price</th><th>User Status</th><th>more</th></tr></thead>
+                                <thead><tr><th>ReserveID</th><th>Stadium</th><th>Court name</th><th>Date</th><th>Time reserve</th><th>Reserve by</th><th>Phone number</th><th>Total price</th><th>User Status</th><th>status</th></tr></thead>
                                 <tbody id="runtime">
                                     <?php foreach ($allhis as $a) { ?>
                                         <tr>
@@ -76,7 +76,7 @@ $num = 1;
                                             <td><a href="http://cbt.backeyefinder.in.th/stadium/profile/<?= $a->stadium_id ?>"><?= $a->stadium_name ?></a></td>
                                             <td><?= $a->court_name ?></td>
                                             <td><?= substr("$a->start_time", 0, 10) ?></td>
-                                            <td><?= substr("$a->start_time", 10, 15) ?>-<?= substr("$a->end_time", 10, 15) ?></td>
+                                            <td><?= date("H:i", strtotime($a->start_time) )?> - <?= date("H:i", strtotime($a->end_time) )?></td>
                                             <td><a href="http://cbt.backeyefinder.in.th/users/profile/<?= $a->user_id ?>"><?= $a->fname ?></a></td>
                                             <td><?= $a->tel ?></td>
                                             <td><?= $a->sumprice ?></td>
@@ -107,11 +107,11 @@ $num = 1;
                                                     </label>
                                                 </form>
                                                 
-<button type="button" class="btn btn-warning btn-sm" value="<?=$a->reserve_id?>" onclick="del(this,false)"><span class="glyphicon glyphicon-remove"></span></button>
+<button type="button" class="btn btn-warning btn-sm" value="<?=$a->reserve_id?>" onclick="del(this,false)">Cancel Booking</button>
                                             </td>
 
                                     <?php } else {?>
-                                            This booking <span class="glyphicon glyphicon-remove label label-danger"> Cancel</span>
+                                             <span class="glyphicon glyphicon-remove label label-danger">This booking Cancel</span>
                                     <?php }?> 
                                         </tr>
                                     <?php } ?>
@@ -335,21 +335,18 @@ when the page first loads -->
                 '  <td><a href="http://cbt.backeyefinder.in.th/users/profile/' + rs.user_id + '">' + rs.fname + '</a></td>' +
                 ' <td>' + rs.tel + '</td>' +
                 '  <td>' + rs.sumprice + '</td><td>';
-        if (rs.status == 0) {
-        
-            htmlshow = htmlshow + '  <span class="label label-success">Active</span>';
-        } else if (rs.status == 1) {
+          if (rs.status == 98) {
             
             htmlshow = htmlshow + '  <span class="label label-warning">Warning</span>';
-        } else {
+        } else if(rs.status== 99){
             htmlshow = htmlshow + '<span class="label label-danger">Blacklist</span>';
-        }
+        }else htmlshow = htmlshow + '  <span class="label label-success">Active</span>';
         htmlshow = htmlshow + ' </td><td>';
         
         var t = rs.start_time.split(/[- :]/);
         var d = new Date(t[0], t[1] - 1, t[2], t[3], t[4], t[5]);
         if(daysBetween(myDate, d)>0 && rs.iscome<100){ //future 
-           htmlshow = htmlshow +'<button type="button" class="btn btn-warning" value="'+rs.reserve_id+'" onclick="del(this,false)"><span class="glyphicon glyphicon-remove"></span></button>';
+           htmlshow = htmlshow +'<button type="button" class="btn btn-warning btn-sm" value="'+rs.reserve_id+'" onclick="del(this,false)">Cancel Booking</button>';
            
         }if(daysBetween(myDate, d)<0 || daysBetween(myDate, d)==0){
             htmlshow = htmlshow +'<form class="form">'+
@@ -368,7 +365,7 @@ when the page first loads -->
                                                    ' </label>'+
                                                 '</form>';
         }if(rs.iscome==100){
-               htmlshow = htmlshow +'This booking <span class="glyphicon glyphicon-remove label label-danger"> Cancel</span>';
+               htmlshow = htmlshow +'<span class="glyphicon glyphicon-remove label label-danger"> This booking is Cancel</span>';
            
         }
 

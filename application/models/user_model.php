@@ -70,12 +70,7 @@ WHERE owner.authenowner_status =  "1" ')->result();
         return $sql;
     }
     
-    function getCoach($id) {
-       
-        $sql = $this->db->query('select * from User join coach where User.user_id = coach.user_id and User.user_id='.$id)->result();
-        return $sql;
-    }
-    
+
     function getUserAdmin(){
         $sql = $this->db->query('select * from User where type = "user"')->result();
         return $sql;
@@ -88,10 +83,7 @@ FROM stadium join owner join User
 where stadium.owner_id = owner.owner_id and owner.user_id = User.user_id  ')->result();
         return $sql;
     }
-    function get_blacklist($stid){
-        $sql = $this->db->query('SELECT DISTINCT blacklist.user_id,stadium_id,fname,profile_url,profilepic_path,User.reason FROM `blacklist` join User on User.user_id = blacklist.user_id  where stadium_id='.$stid.'')->result();
-        return $sql;
-    }
+
     function getUserIdstadium($ow){
     $sql = $this->db->query('SELECT user_id
 FROM  `stadium` 
@@ -101,13 +93,20 @@ GROUP BY user_id')->row();
      return $sql;
     }
     
-    function searchBlacklist($text){
+    function searchBlacklist($ow){
         $sql=$this->db->query('SELECT * 
-    FROM `User` 
-    WHERE  fname like "%p%"
-    or lname like "%p%"')->result();
+    FROM `User`,stadium
+    WHERE (fname like "%p%" 
+    or lname like "%p%") and stadium_id
+IN (
+SELECT stadium_id 
+FROM stadium
+WHERE owner_id = '.$ow.') ')->result();
         return $sql;
         
+    }
+    function get_blacklist($ow){
+        $sql = 'SELECT DISTINCT blacklist.user_id,fname,profile_url,profilepic_path,User.reason FROM `blacklist` join User on User.user_id = blacklist.user_id  where owner_id='.$ow.'';
     }
    
 

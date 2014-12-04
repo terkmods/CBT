@@ -188,6 +188,6 @@ $('.submenudrop').hide();
 
 <script>
     function del() {
-        alert("Are you sure to Delete");
+        alert("Are you sure to Deletesss");
     }
 </script>

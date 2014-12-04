@@ -15,7 +15,7 @@
             <?php if ($fav != null) { ?>
                 <p style="margin-top: -25px" id="fav" >  <button type="button"  class="btn btn-lg btn-warning btn-raised" role="button" onclick="unfav()">Unfavorite</button> </p>
             <?php } else { ?>
-                <p style="margin-top: -25px" id="fav" ><button type="button"  class="btn btn-success btn-lg " role="button" onclick="addfav()">Favorite</button></p>
+                <p style="margin-top: -25px" id="fav" ><button type="button"  class="btn btn-success btn-lg " role="button" onclick="addfav()">Add to Favorite</button></p>
             <?php } ?>
         </div>
         <div class="col-md-4 info" style="margin-top: -30px">
@@ -38,7 +38,7 @@
 
                     <div class="well well-sm text-center">
                         <h4>Result</h4>
-                        <h2 id='apoint'><?= $avgpoint->avgpoint ?></h2>
+                        <h2 id='apoint'><?= round($avgpoint->avgpoint,2) ?></h2>
                         <small>point</small>
                         <hr>
                         from 
@@ -421,7 +421,7 @@
                             }).done(function (msg) {
 
                                 console.log(msg);
-                                show = '<button type="button"  class="btn btn-success btn-lg  btn-raised" role="button" onclick="addfav() ">favorite</button>'
+                                show = '<button type="button"  class="btn btn-success btn-lg  btn-raised" role="button" onclick="addfav() ">add to favorite</button>'
                                 $('#fav').html(show);
                                 $("#notija").notify({
                                     speed: 500,

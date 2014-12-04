@@ -9,7 +9,7 @@ class stadium extends CI_Controller {
         parent::__construct();
         $this->load->model('stadium_model', 'mystadium');
         $this->load->model('user_model', 'myusers');
-        $this->load->model('coach_model', 'mycoach');
+//        $this->load->model('coach_model', 'mycoach');
         $this->load->model('news_model', 'news');
         $this->load->model('gallery_model', 'img');
         $this->load->model('Amphur', 'myamphur'); 
@@ -210,7 +210,7 @@ class stadium extends CI_Controller {
             'court' => $this->mystadium->gettableCourt($id), //result_array  getTotalcourt
             'total' => $this->mystadium->getTotalcourt($id), //result_array  getTotalcourt
             'blacklist' => $this->myusers->get_blacklist($id),
-            'coach' => $this->mycoach->get_all_coach(),
+//            'coach' => $this->mycoach->get_all_coach(),
             'all_news' => $this->news->getallNews($id),
             'img' => $this->img->getGallery($id),
         );
@@ -678,29 +678,22 @@ class stadium extends CI_Controller {
         $userid = $this->session->userdata('id');
         $ownerid = $this->getOwnerid($userid);
         $data['ch']= $this->mystadium->checkblacklist($ownerid);
-         
-//        $data = array(
-////            'blacklist' => $this->myusers->get_blacklist($id),
-//            'data' => $this->mystadium->setstadium($id)
-//        );
+//        print_r($data['ch']);
+        $data['blacklist']=  $this->myusers->get_blacklist($ownerid);
+                print_r($data['blacklist']);
+                
         $this->load->view("blacklist", $data);
     }
     function resultblacklist(){
+                $userid = $this->session->userdata('id');
+        $ownerid = $this->getOwnerid($userid);
          $text = $this->input->post('value1');
-         $data['result']= $this->myusers->searchBlacklist($text);
-         print_r($data);
-//         $this->load->view("blacklist", $data);
+         $data['ch']= $this->myusers->searchBlacklist($ownerid);
+//         print_r($data);
+         $this->load->view("blacklis_t1", $data);
     }
     
-                function coach($id) {
-        $data = array(
-            'data' => $this->mystadium->setstadium($id), //row
-            'coach' => $this->mycoach->get_all_coach()
-        );
-
-
-        $this->load->view("coach", $data);
-    }
+              
 
     function addfav() {
         $userid = $this->session->userdata('id');

@@ -120,10 +120,19 @@ $num = 1;
                                                 <?php foreach ($ch as $st) { ?>
                                                     <div class="col-md-3">
                                                         <a  href="<?php echo base_url() ?>stadium/historystadium/<?= $st->user_id ?>" ><img class="img-responsive circle thumbnail" src="<?php echo base_url() ?>asset/images/<?= $st->profilepic_path != null ? 'profilepic/' . $st->profilepic_path . '' : 'profil.jpg' ?>" /></a>
-                                                        <p><span class="label label-danger"><small><?= $st->result ?></small> Absent</span></p>
-                                                        <p> <a data-toggle="modal" href="#addblacklist" onclick="addblacklist(this,false)" data-uid="<?=$st->user_id?>"><span class="label label-warning">Add Blacklist</span></a></p> 
+                                                        <p><span class="label label-info"><small><?= $st->fname ?></small></span></p>
+                                                       <?php if ($st->status == 99) { ?>
+                                                        <p> <span class="label label-danger">Blacklist</span></p>
+                                                   
+                                                <?php } else if ($st->status == 98) { ?>
+                                                        <p>  <span class="label label-warning">Warning</span></p>
+                                                <?php } else { ?>
+                                                        <p> <span class="label label-success">Active</span></p>
+                                                <?php } ?>
+                                                        <p> <a  data-toggle="modal" href="#addblacklist" data-userid='<?$st->user_id?>'><span class="label label-warning">Add Blacklist</span></a></p> 
                                                     </div>
                                                 <?php } ?>
+                                                
 
 
 
@@ -284,12 +293,6 @@ function seblacklist(){
     var text = $("#se").val();
     alert(text);
     return false;
-}
-function addblacklist(uid){
-   
-    var x = $(uid).data("uid");
-    $('#userid').val(x);
-   
 }
 </script>
 

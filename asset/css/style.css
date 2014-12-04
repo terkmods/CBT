@@ -7,7 +7,7 @@ body{
 #body-home{
     background: url(../../asset/images/bg-home.png) no-repeat center center;
     background-size: 100%;
-    width: 100%;
+    /*width: 100%;*/
     height: 700px;
 }
 #regiseter{
@@ -236,6 +236,9 @@ footer a:hover{
 .bookline{
     background-color:rgba(255,135,38,0.5);
 } 
+.bookred{
+    background-color:#FFAAAA;
+} 
 .hover-bg {
     background-color: #B8E2EF;
 }
@@ -361,3 +364,22 @@ margin-top: 0;
 border-top-left-radius: 0;
 border-top-right-radius: 0;
 z-index: 2000;}
+@media all and (max-width: 768px) and (min-width: 320px){
+	.home-clear{
+		clear: both;
+	}
+	#body-home{
+    background: url(../../asset/images/bg-home.png) no-repeat top center;
+    /*background-size: 100%;*/
+}
+#regiseter{
+    background: url(../../asset/images/bg-home.png) no-repeat top center;
+    background-size: 100%;
+}
+.top-home{
+    background: url(../../asset/images/dark-top.png);
+    min-height: 50px;
+    padding: 5px 0px;
+}
+
+}

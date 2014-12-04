@@ -144,14 +144,14 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Court Price</h3>
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"> </span>  Court Price(Bath)</h3>
                 </div>
                 <div class="panel-body" style="overflow-x: scroll">
                 <table class=" table table-striped table-hover ">
                     <thead style="text-align: center">
 
                         <tr>
-                            <th style="text-align: center"></th>
+                            <th style="text-align: center">คอร์ด</th>
 <th style="text-align: center">Mon</th>
 <th style="text-align: center">Tue</th>
 <th style="text-align: center">Wed</th>
@@ -167,7 +167,7 @@
                     <tbody>
                                                     <?php foreach ($court as $c) { ?>
                         <tr>
-                                <td style="text-align: center">คอร์ด <?= $c['court_name'] ?><small><?= $c['type'] ?></small></td>
+                                <td style="text-align: center"><p><?= $c['court_name'] ?></p><small><?= $c['type'] ?></small></td>
                                        <?php
                         $i = 0;
                         $k = 0;
@@ -175,7 +175,7 @@
                         
                         for ($i; $i< 7 ;$i++) {
                            
-                            $html = $html . ' <td> ' . $courtprice[$i]['price'] . ' Bath</td>';
+                            $html = $html . ' <td> ' . $courtprice[$i]['price'] . '</td>';
                         } 
                         $html = $html . '</tr >';?>
                                 <?= $html ?> 

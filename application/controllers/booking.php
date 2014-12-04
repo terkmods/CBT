@@ -340,7 +340,7 @@ class booking extends CI_Controller {
             $datasend = $this->booking->getAllBookingna($userId, $today);
         } else if ($type == 3) {
 
-            $datasend = $this->booking->getAllBookingyo($userId, $today);
+            $datasend = $this->booking->getAllBookingyo($userId);
         }
 
 
@@ -477,6 +477,15 @@ class booking extends CI_Controller {
             $this->db->update('reserve');
             $this->session->set_flashdata('msg', 'Cancel booking is Complete');
             redirect('http://cbt.backeyefinder.in.th/stadium/historyBooking');
+    }
+    function cancelmybook($ri) {
+        
+            $this->db->where('reserve_id', $ri);
+            $this->db->set('iscome', '100');
+            echo $this->db->update('reserve');
+            echo 'hello';
+            $this->session->set_flashdata('msg', 'Cancel booking is Complete');
+            redirect('http://cbt.backeyefinder.in.th/booking/historybooking');
     }
 
 }

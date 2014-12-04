@@ -5,34 +5,32 @@ include 'template/head.php';
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12 text-center">
-
+        <div class="col-md-5  col-md-offset-3 text-center">
+                 Radius 
+                 <select class="form-control" id="rad">
+                     <option value="500">0.5 km</option>
+                      <option value="1000">1 km</option>
+                      <option value="2000">2 km</option>
+                       <option value="3000">3 km</option>
+                        <option value="4000">4 km</option>
+                         <option value="5000">5 km</option>
+                         <option value="10000">10 km</option>
+                 </select>
+<p id="around">Around 0.5 km. </p>
         </div>
+        
         <div id="map-canvas" class="col-md-5">
-
-        </div>
+       
+          </div>
+        
         <div class="col-md-7">
+            
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Result Stadium</h3>
+                    <h3 class="panel-title" id="sum">Result Stadium</h3>
                 </div>
-                <div class="panel-body">
-                   <div class="list-group-item">
-                                                        <div class="row-picture">
-                                                            <a href="http://cbt.backeyefinder.in.th/stadium/profile/41"><img class="circle img-responsive" src="http://cbt.backeyefinder.in.th/asset/images/stadiumpic/21.JPG" alt="icon"></a>
-                                                        </div>
-                                                        <div class="row-content">
-                                                            <div class="action-secondary">
-                                                                <button type="button" class="btn btn-primary btn-xs viewdetail" data-toggle="modal" data-target="#actionbooking" data-pic="stadiumpic/21.JPG" data-sname="ไดอาน่า" data-court="1" data-time="2014-11-16 13:30:00 - 2014-11-16 14:00:00" data-jong="Kanate Dheeravoravong" data-tel="0922766176" data-play="2">
-                                                                    more info
-                                                                </button>
-                                                            </div>
-                                                            <h4 class="list-group-item-heading">สนาม : <a href="http://cbt.backeyefinder.in.th/stadium/profile/41">ไดอาน่า</a> <small>คอร์ด : 1</small> </h4>
-                                                            <p class="list-group-item-text">เวลา   13:30:00 -  14:00:00</p>
-        <!--                                                        <p class="list-group-item-text">ผู้จอง Kanate Dheeravoravong โทร : 0922766176</p>
-                                                            <p class="list-group-item-text">โทร : 0922766176</p>-->
-                                                        </div>
-                                                    </div>
+                <div class="panel-body" id="showresult">
+                 
                 </div>
             </div>
         </div>
@@ -52,8 +50,9 @@ include 'template/head.php';
     var infowindow1;
     var mk;
     var cir;
-
+var htmlForlist = '';
     var markers = [];
+    var radius =document.getElementById("rad").value;
     var image = {
         url: 'http://cbt.backeyefinder.in.th/asset/images/markerbad.png',
         // This marker is 20 pixels wide by 32 pixels tall.
@@ -66,6 +65,12 @@ include 'template/head.php';
     var rad = function (x) {
         return x * Math.PI / 180;
     };
+    $(document).on('change', '#rad', function() {
+//    alert($(this).val());
+  radius = document.getElementById("rad").value;
+  $('#around').html((radius/1000)+' km.');
+   initialize();
+    });
 
 
     function initialize() {
@@ -88,7 +93,7 @@ include 'template/head.php';
                 map.setCenter(pos);
                 x = pos.lat();
                 y = pos.lng();
-                var r = 1000;
+                var r = radius;
                 setCircle(r);
             }, function () {
                 handleNoGeolocation(true);
@@ -99,12 +104,7 @@ include 'template/head.php';
         }
         // setMarkers(map, beaches);
 
-        $.getJSON('http://cbt.backeyefinder.in.th/home/test', function (json) {
-
-            $(json).each(function (k, v) {
-                eachmaker(v);
-            });
-        });
+    
 
 //                google.maps.event.addListener(mk, 'click', function () {
 //                    alert("hello");
@@ -122,7 +122,7 @@ include 'template/head.php';
         });
     }
 
-    function eachmaker(rs) {
+    function eachmaker(i,rs) {
         console.log(rs.lat);
         console.log(rs.long);
         var marker = new google.maps.Marker({
@@ -133,7 +133,7 @@ include 'template/head.php';
 
         });
 
-        var htmlForMap = '<div class="row">' +
+         htmlForMap = '<div class="row">' +
                 '<div class="col-md-6 col-sm-6">' +
                 ' <img src="http://cbt.backeyefinder.in.th/asset/images/' + (rs.stadium_path != "" ? 'stadiumpic/' + rs.stadium_path : 'bad.png') + '" width=200px alt="">' +
                 ' </div>' +
@@ -150,6 +150,24 @@ include 'template/head.php';
                 '</div>' +
                 ' </div>' +
                 '</div>';
+        
+        htmlForlist =htmlForlist+ '<div class="row">' +
+                '<div class="col-md-6 col-sm-6">' +
+                ' <img src="http://cbt.backeyefinder.in.th/asset/images/' + (rs.stadium_path != "" ? 'stadiumpic/' + rs.stadium_path : 'bad.png') + '" width=200px alt="">' +
+                ' </div>' +
+                '<div class="col-md-6 col-sm-6">' +
+                ' <div class="caption">' +
+                '<h3>' + rs.stadium_name + '</h3>' +
+                ' <p>ที่อยู่:' + rs.address_no + '' + rs.soi +
+                ' ' + rs.road + '' + rs.district +
+                '</p>' +
+                ' <p>เบอโทร:' + (rs.tel != "" ? rs.tel : '-') + '</p>' +
+                ' <p>' +
+                '  <a href="http://cbt.backeyefinder.in.th/booking/reserve/' + rs.stadium_id + '" class="btn btn-primary">Book Now!</a> <a href="<? echo base_url() ?>stadium/profile/' + rs.stadium_id + '" class="btn btn-default">More Info</a>' +
+                '</p>' +
+                '</div>' +
+                ' </div>' +
+                '</div><div class="list-group-separator"></div>';
 
 
         google.maps.event.addListener(marker, 'click', function () {
@@ -157,6 +175,9 @@ include 'template/head.php';
             infowindow1.open(map, marker);
         });
         markers.push(marker);
+        $('#showresult').html(htmlForlist);
+        $('#sum').html('Result Stadium : <span class="label label-success"> '+(i+1)+'</span>');
+       
 
     }
 
@@ -221,10 +242,11 @@ include 'template/head.php';
             var obj = JSON.parse(msg);
 //                                alert(obj.avgpoint);
             console.log(obj);
+            htmlForlist =' ';
             $(obj).each(function (k, v) {
-                eachmaker(v);
+                eachmaker(k,v);
             });
-
+//            
         });
 
     }
